@@ -123,8 +123,47 @@ public static int birthdayCakeCandles(List<int> candles)
         Console.WriteLine($"{aCount}\n{oCount}");
     }
 
-8.
-9.
+8. https://www.hackerrank.com/challenges/kangaroo/problem?isFullScreen=true
+
+public static string kangaroo(int x1, int v1, int x2, int v2)
+    {
+        if(v1==v2){
+            return x1==x2 ? "YES":"NO";
+        }
+        
+        // kangaroo1 pos : x1 + n*v1
+        // kangaroo2 pos : x2 + n*v2
+        // when x1 + n*v1 == x2 + n*v2 then both are in same position
+        // n = (x2-x1)/(v1-v2)
+        
+        if((x2-x1)%(v1-v2)==0 && (v1>v2)){
+            return "YES";
+        }
+        return "NO";
+        
+    }
+
+9. https://www.hackerrank.com/challenges/between-two-sets/problem?isFullScreen=true
+
+    public static int GCD(int a,int b){
+        return b==0 ? a:GCD(b,a%b);
+    }
+    public static int LCM(int a,int b){
+        return (a*b)/GCD(a,b);
+    }
+    public static int getTotalX(List<int> a, List<int> b)
+    {
+        int lcm = a.Aggregate((x,y)=>LCM(x,y));
+        int gcd = b.Aggregate((x,y)=>GCD(x,y));
+        int count = 0;
+        for(int i=lcm;i<=gcd;i+=lcm){
+            if(gcd%i ==0){
+                count++;
+            }
+        }
+        return count;
+    }
+
 10. https://www.hackerrank.com/challenges/breaking-best-and-worst-records/problem?isFullScreen=true
 
     public static List<int> breakingRecords(List<int> scores)
