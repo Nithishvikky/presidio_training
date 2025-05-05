@@ -1,0 +1,37 @@
+
+MemberStatusMaster
+	Id, StatusMessage
+
+RentStatusMaster
+	Id, StatusMessage(Ex-{Still, Expired})
+
+FormatMaster
+	Id, Name(Ex-{VHS, VCD, DVD})
+
+CategoryMaster
+	Id, Name(Ex-{action, adventure, comedy, ... })
+
+MemberTypeMaster
+	Id, Name(Ex-{gold,bronze})
+
+MovieMaster
+	Movie_Number, Title, Category_Id, Price(per day)
+
+
+
+Member
+	Id, Name, Phone, Status_Id, MemberType_Id, Category_Id
+
+Dependents
+	Id, Name, Member_Id
+
+Rents
+	Rent_Id, Member_Id, Rented_date, Total_Amount, Rent_status_Id, Payment_Id
+
+Rent_Details
+	Rent_Details_Id, Rent_Id, Movie_Number, Format_Id, Days_Rented
+
+Payment_Datails
+	Id, Rent_Id, Type, Amount, Status
+
+
