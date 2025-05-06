@@ -4,6 +4,19 @@ create database Tasks;
 use Tasks;
 
 
+create table Items(
+	Itemname varchar(50) primary key,
+	Itemtype varchar(1),
+	Itemcolor varchar(15)
+)
+
+create table Department(
+	Deptname varchar(20) primary key,
+	Deptfloor int,
+	Deptphone int,
+	ManagerId int not null,
+)
+
 create table Emp(
 	Empno int primary key,
 	Empname varchar(20),
@@ -14,14 +27,6 @@ create table Emp(
 	FOREIGN KEY (Bossno) REFERENCES Emp(Empno)
 )
 
-create table Department(
-	Deptname varchar(20) primary key,
-	Deptfloor int,
-	Deptphone int,
-	ManagerId int not null,
-)
-
-
 create table Sale(
 	Salesno int primary key,
 	Saleqty int,
@@ -30,13 +35,6 @@ create table Sale(
 	FOREIGN KEY (Itemname) REFERENCES Items(Itemname),
 	FOREIGN KEY (Deptname) REFERENCES Department(Deptname)
 )
-
-create table Items(
-	Itemname varchar(50) primary key,
-	Itemtype varchar(1),
-	Itemcolor varchar(15)
-)
-
 
 alter table Department
 add foreign key (ManagerId) references Emp(Empno);
@@ -147,6 +145,7 @@ INSERT INTO Sale (Salesno, Saleqty, Itemname, Deptname) VALUES
 (126, 1, 'Camel Saddle', 'Recreation');
 
 select * from sale;
+
 
 select * from emp;
 select * from department;
