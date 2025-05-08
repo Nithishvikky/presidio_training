@@ -80,7 +80,7 @@ select Top 5 * from Products
 order by UnitPrice desc;
 
 
--- 9) Return the total sales amount (quantity × unit price) per order.
+-- 9) Return the total sales amount (quantity ï¿½ unit price) per order.
 
 -- Use SUM(OrderDetails.Quantity * OrderDetails.UnitPrice) and GROUP BY
 
@@ -139,11 +139,13 @@ select * from cte_rankProducts;
 
 -- 14) Create a CTE to calculate total revenue per product and filter products with revenue > 10,000.
 
-with cte_revenue
-as
-(select ProductName, ((UnitsInStock + UnitsOnOrder) * UnitPrice) As TotalRevenue from Products
-where ((UnitsInStock + UnitsOnOrder) * UnitPrice) > 10000)
-select * from cte_revenue;
+with cte_TotalRevenue AS
+(select P.ProductID, SUM(Od.Quantity * Od.UnitPrice) Total_Revenue from Products P
+join [Order Details] Od on P.ProductID = Od.ProductID
+group by P.ProductID
+having SUM(Od.Quantity * Od.UnitPrice) > 10000)
+select * from cte_TotalRevenue
+
 
 -- 15) Use a CTE with recursion to display employee hierarchy.
 
