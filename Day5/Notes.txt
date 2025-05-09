@@ -1,0 +1,70 @@
+https://neon.tech/postgresql/postgresql-getting-started/postgresql-sample-database
+-----------------------------------------------------------------
+SELECT Queries
+List all films with their length and rental rate, sorted by length descending.
+Columns: title, length, rental_rate
+
+Find the top 5 customers who have rented the most films.
+Hint: Use the rental and customer tables.
+
+Display all films that have never been rented.
+Hint: Use LEFT JOIN between film and inventory → rental.
+
+JOIN Queries
+List all actors who appeared in the film ‘Academy Dinosaur’.
+Tables: film, film_actor, actor
+
+List each customer along with the total number of rentals they made and the total amount paid.
+Tables: customer, rental, payment
+
+CTE-Based Queries
+Using a CTE, show the top 3 rented movies by number of rentals.
+Columns: title, rental_count
+
+Find customers who have rented more than the average number of films.
+Use a CTE to compute the average rentals per customer, then filter.
+
+ Function Questions
+Write a function that returns the total number of rentals for a given customer ID.
+Function: get_total_rentals(customer_id INT)
+
+Stored Procedure Questions
+Write a stored procedure that updates the rental rate of a film by film ID and new rate.
+Procedure: update_rental_rate(film_id INT, new_rate NUMERIC)
+
+Write a procedure to list overdue rentals (return date is NULL and rental date older than 7 days).
+Procedure: get_overdue_rentals() that selects relevant columns.
+
+-------------------------------------------------------------------------------------------------------------------
+Cursor-Based Questions (5)
+Write a cursor that loops through all films and prints titles longer than 120 minutes.
+ 
+Create a cursor that iterates through all customers and counts how many rentals each made.
+ 
+Using a cursor, update rental rates: Increase rental rate by $1 for films with less than 5 rentals.
+ 
+Create a function using a cursor that collects titles of all films from a particular category.
+ 
+Loop through all stores and count how many distinct films are available in each store using a cursor.
+ 
+Trigger-Based Questions (5)
+Write a trigger that logs whenever a new customer is inserted.
+ 
+Create a trigger that prevents inserting a payment of amount 0.
+ 
+Set up a trigger to automatically set last_update on the film table before update.
+ 
+Create a trigger to log changes in the inventory table (insert/delete).
+ 
+Write a trigger that ensures a rental can’t be made for a customer who owes more than $50.
+ 
+Transaction-Based Questions (5)
+Write a transaction that inserts a customer and an initial rental in one atomic operation.
+ 
+Simulate a failure in a multi-step transaction (update film + insert into inventory) and roll back.
+ 
+Create a transaction that transfers an inventory item from one store to another.
+ 
+Demonstrate SAVEPOINT and ROLLBACK TO SAVEPOINT by updating payment amounts, then undoing one.
+ 
+Write a transaction that deletes a customer and all associated rentals and payments, ensuring atomicity.
