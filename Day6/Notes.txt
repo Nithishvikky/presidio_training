@@ -1,0 +1,399 @@
+Transaction
+
+-> If we wrap the sequence of commands with transaction, We can commit,rollback or make savepoints.
+-> Otherwise, it's just a dml commands, it'll will auto commit the commands
+
+begin or start transaction
+
+-> until we commit or rollback, the changes only affect the instance not on the database
+
+/*
+Transactions : Concurrency and Locking
+ACID Properties of Transactions:
+1. Atomicity
+2. Consistency
+3. Isolation
+4. Durability
+
+Why are Transactions Important?
+
+Basic Transaction Commands
+1. BEGIN
+2. COMMIT
+3. ROLLBACK
+4. SAVEPOINT
+*/
+
+CREATE TABLE tbl_bank_accounts
+(
+account_id SERIAL PRIMARY KEY,
+account_name VARCHAR(100),
+balance NUMERIC(10, 2)
+);
+
+INSERT INTO tbl_bank_accounts
+(account_name, balance)
+VALUES
+('Alice', 5000.00),
+('Bob', 3000.00);
+
+SELECT * FROM tbl_bank_accounts;
+
+-- Perform Transaction/Tran
+BEGIN;
+
+UPDATE tbl_bank_accounts
+SET balance = balance - 500
+WHERE account_name = 'Alice';
+
+UPDATE tbl_bank_accounts
+SET balance = balance + 500
+WHERE account_name = 'Bob';
+
+COMMIT;
+
+SELECT * FROM tbl_bank_accounts;
+
+-- Introducing Error (Rollback)
+BEGIN;
+
+UPDATE tbl_bank_accounts
+SET balance = balance - 500
+WHERE account_name = 'Alice';
+
+UPDATE tbl_bank_account
+SET balance = balance + 500
+WHERE account_name = 'Bob';
+
+ROLLBACK;
+
+SELECT * FROM tbl_bank_accounts;
+
+-- Savepoints: Partial Rollback
+-- Example 1
+BEGIN;
+
+UPDATE tbl_bank_accounts
+SET balance = balance - 100
+WHERE account_name = 'Alice';
+
+SAVEPOINT after_alice;
+
+UPDATE tbl_bank_account
+SET balance = balance + 100
+WHERE account_name = 'Bob';
+
+ROLLBACK TO after_alice;
+
+UPDATE tbl_bank_accounts
+SET balance = balance + 100
+WHERE account_name = 'Bob';
+
+COMMIT;
+
+SELECT * FROM tbl_bank_accounts;
+
+-- Example 2
+BEGIN;
+
+UPDATE tbl_bank_accounts
+SET balance = balance - 100
+WHERE account_name = 'Alice';
+
+SAVEPOINT after_alice;
+
+UPDATE tbl_bank_account
+SET balance = balance + 100
+WHERE account_name = 'Bob';
+
+ROLLBACK TO after_alice;
+
+-- Auto Commit without BEGIN
+UPDATE tbl_bank_accounts
+SET balance = balance + 100
+WHERE account_name = 'Bob';
+
+-- Errors -> Rollback or Commit
+
+COMMIT;
+
+SELECT * FROM tbl_bank_accounts;
+
+ABORT;
+
+-- Raising Notice
+BEGIN;
+DO $$
+DECLARE
+  current_balance NUMERIC;
+BEGIN
+SELECT balance INTO current_balance
+FROM tbl_bank_accounts
+WHERE account_name = 'Alice';
+
+IF current_balance >= 1500 THEN
+   UPDATE tbl_bank_accounts SET balance = balance - 4500 WHERE account_name = 'Alice';
+   UPDATE tbl_bank_accounts SET balance = balance + 4500 WHERE account_name = 'Bob';
+ELSE
+   RAISE NOTICE 'Insufficient Funds!';
+   ROLLBACK;
+END IF;
+END;
+$$;
+
+-- UPDATE inside BEGIN TRAN
+START/BEGIN TRANSACTION;
+UPDATE tbl_bank_accounts
+SET balance = balance + 500
+WHERE account_name = 'Alice';
+
+SELECT * FROM tbl_bank_accounts;
+-- At this point, change is not committed yet.
+COMMIT; -- Change is permanently saved.
+-- Open a different psql instance and check the table records.
+
+-- Inside BEGIN OR START TRANSACTION, nothing is auto-committed.
+
+-- BEGIN, UPDATES, NOT COMMIT -> changes are not saved unless you do a commit.
+
+-- This is auto-committed by default.
+UPDATE tbl_bank_accounts SET balance = balance - 4500 WHERE account_name = 'Alice';
+
+-- Auto-Commit
+/*
+In PSQL, autocommit is ON by default.
+MySQL -> SET autocommit = 1; //Enable
+
+Stage 1 - C1
+Stage 2 -> S1
+Stage 3 -> Rollback to S1, C2
+*/
+
+-- Best Practices for Transactions
+/*
+1. Keep transactions short -> Improve Concurreny and Reduce Locking
+2. Use savepoints for complex flows -> Safer partial rollbacks
+3. Log failed trans for audits -> Traceability and Degugging
+4. Avoid user inputs during transactions -> Prevent long trans
+5. In production code, always wrap db ops inside try-catch with explicit commit and rollback.
+*/
+
+/*
+Concurrency
+PostgreSQL handles concurrency using:
+1. MVCC (Multi-Version Concurrency Control):
+MVCC allows multiple versions of the same data (rows) to exist temporarily,
+so readers and writers don't block each other.
+
+Readers don't block writers and Writers don't block readers.
+
+Example 1: Read While Someone is Updating
+-- Trans A
+*/
+BEGIN;
+UPDATE products
+SET price = 500
+WHERE id = 1;
+
+-- Trans B
+BEGIN;
+SELECT price FROM products 
+WHERE id = 1;
+
+-- 450
+
+-- Examples for MVCC
+/*
+1. 
+User A: Reads
+User B: Updates
+
+2. 
+1000 users check balance (reads)
+10 users perform withdrawals (writes)
+
+Read Committed
+-- Trans A
+BEGIN;
+UPDATE products
+SET price = 500
+WHERE id = 1;
+
+-- Trans B
+BEGIN;
+SELECT price FROM products
+WHERE id = 1;
+-- 450
+
+Repeatable Read
+-- Trans A
+BEGIN ISOLATION LEVEL REPEATABLE READ;
+SELECT price FROM products
+WHERE id = 1; -- 450
+
+-- Trans B
+BEGIN;
+UPDATE products
+SET price = 500 WHERE id = 1;
+COMMIT;
+
+-- Trans A
+SELECT price FROM products
+WHERE id = 1; -- 450
+COMMIT;
+*/
+
+
+
+2. Isolation Levels : 4 --> Concurrency
+   1. READ UNCOMMITTED -> PSQL not supported
+   2. READ COMMITTED -> Default; MVCC
+   MVCC is ACID-Compliant.
+   Read Committed is powered by MVCC.
+   3. Repeatable Read -> Ensures repeatabe reads
+   4. Serializable -> Full isolation (safe but slow, no dirty reads, no lost updates, no repeatable reads, no phantom reads)
+   
+
+Problems without proper Concurrency Control:
+1. Inconsistent Reads/Dirty Reads: Reading Uncommitted data from another transaction, which might later disappear.
+Transaction A updates a row but doesn’t commit yet.
+Transaction B reads that updated row.
+Transaction A rolls back the update.
+Now Transaction B has read data that never officially existed — that’s a dirty read.
+
+Why Dirty Reads Happen:
+They occur in databases running at low isolation levels, particularly:
+Read Uncommitted isolation level → allows dirty reads.
+Higher isolation levels like Read Committed, Repeatable Read, or Serializable
+prevent dirty reads but come with performance trade-offs (like more locks or slower concurrency).
+
+2. Lost Update
+Transaction A reads a record.
+Transaction B reads the same record.
+Transaction A updates and writes it back.
+Transaction B (still holding the old value) writes back its version, overwriting A’s changes.
+
+-- Trans A
+*/
+BEGIN;
+SELECT balance FROM Accounts
+WHERE id = 1;  -- 100
+-- Thinks to add 50
+
+-- Trans B
+BEGIN;
+SELECT balance FROM Accounts
+WHERE id = 1; -- 100
+-- Thinks to sub 30
+UPDATE Accounts
+SET balance = 70
+WHERE id = 1;
+COMMIT;
+
+-- Trans A
+UPDATE Accounts
+SET balance = 150
+WHERE id = 1;
+COMMIT;
+
+/*
+Solutions to Avoid Lost Updates:
+1. Pessimistic Locking (Explicit Locks)
+Lock the record when someone reads it, so no one else can read or write until the lock is released.
+Example: SELECT ... FOR UPDATE in SQL.
+Prevents concurrency but can reduce performance due to blocking.
+2. Optimistic Locking (Versioning)
+Common and scalable solution.
+Each record has a version number or timestamp.
+When updating, you check that the version hasn’t changed since you read it.
+If it changed, you reject the update (user must retry).
+Example:
+UPDATE products
+SET price = 100, version = version + 1
+WHERE id = 1 AND version = 3; --3
+3. Serializable Isolation Level
+In database transactions, using the highest isolation level (SERIALIZABLE) can prevent lost updates.
+But it's heavier and can cause performance issues (due to more locks or transaction retries).
+
+Which Solution is Best?
+For web apps and APIs: Optimistic locking is often the best balance (fast reads + safe writes).
+For critical financial systems: Pessimistic locking may be safer.
+
+Inconsistent reads/read anomalies
+1. Dirty Read
+2. Non-Repeatable Read
+Transaction A reads a row, -- 100
+Transaction B updates and commits the row, then --90
+Transaction A reads the row again and sees different data.
+
+-- Trans A
+*/
+BEGIN;
+SELECT balance FROM Accounts
+WHERE id = 1; -- 1000
+
+-- Trans B
+UPDATE Accounts
+SET baalnce = balance - 200
+WHERE id = 1;
+COMMIT;
+
+-- Trans A
+BEGIN;
+SELECT balance FROM Accounts
+WHERE id = 1; -- 1000-200=800
+
+-- Phatom Read
+-- SELECT * FROM orders WHERE amount > 1000; returns 5 rows.
+-- Another transaction inserts a new order with amount 1200 and commits — now re-running the
+-- query returns 6 rows.
+
+-- Trans A
+BEGIN;
+SELECT * FROM Accounts
+WHERE balance > 500;
+-- 1 row
+
+-- Trans B
+BEGIN;
+INSERT INTO Accounts
+(id, balance)
+VALUES
+(2, 600);
+COMMIT;
+
+-- Trans A
+SELECT * FROM Accounts
+WHERE balance > 500;
+-- 2 rows
+-- A phatom new row appeared!
+
+
+-- Step 1: Set up a sample table
+CREATE TABLE Accounts
+(
+ID INT PRIMARY KEY,
+balance INT
+);
+
+INSERT INTO Accounts
+VALUES
+(1, 1000);
+
+-- Step 2 : Trans A
+BEGIN TRANSACTION;
+UPDATE Accounts
+SET balance = 0 
+WHERE id = 1;
+
+-- Step 3: Trans B
+-- Allow Dirty Read
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+BEGIN TRANSACTION;
+SELECT balance FROM Accounts
+WHERE id = 1; -- User B sees 0 as balance
+
+-- Step 4: Trans A decides to Rollback
+ROLLBACK;
+-- balance = 1000 for User A but 0 for User B
+
