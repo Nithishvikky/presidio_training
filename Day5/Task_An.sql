@@ -231,11 +231,11 @@ declare
     cust_id INT;
 begin
     insert into customer (first_name, last_name, email, address_id, active, create_date, store_id)
-    VALUES ('nithish', 'U', 'nithish@example.com', 1, 1, current_date(), 1)
+    VALUES ('nithish', 'U', 'nithish@example.com', 1, 1, current_date, 1)
     returning customer_id into cust_id;
  
     insert into rental (rental_date, inventory_id, customer_id, return_date, staff_id)
-    values (current_date(), 1, cust_id, NULL, 1);
+    values (current_date, 1, cust_id, NULL, 1);
 end
 $$;
 commit;
@@ -249,7 +249,7 @@ update film set rental_duration = 5
 where title = 'ACADEMY DINOSAUR';
  
 insert into inventory (film_id, store_id, last_update)
-VALUES (9990, 1, current_date());
+VALUES (9990, 1, current_date);
  
 commit;
 rollback
