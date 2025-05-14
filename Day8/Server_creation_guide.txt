@@ -1,0 +1,33 @@
+Admin cmd
+
+
+=> initdb -D "C:\Users\DELL\Documents\Testing_Postgre_Servers\Primary"
+
+=> pg_ctl -D C:\Users\DELL\Documents\Testing_Postgre_Servers\Primary -o "-p 5433" -l C:/Users/DELL/Documents/Testing_Postgre_Servers/Primary/logfile start
+
+=> psql -p 5433 -d postgres -c "CREATE ROLE replicator with REPLICATION LOGIN PASSWORD 'test';"
+
+=> pg_basebackup -D C:/Users/DELL/Documents/Testing_Postgre_Servers/Secondary -Fp -Xs -P -R -h 127.0.0.1 -U replicator -p 5433
+
+-- change the port number to 5434 in secondary\postgresql.config file
+
+=>pg_ctl -D C:\Users\DELL\Documents\Testing_Postgre_Servers\Secondary -o "-p 5434" -l C:\Users\DELL\Documents\Testing_Postgre_Servers\Secondary\logfile start
+
+=>psql -p 5433 -d postgres
+
+(In another cmd)
+
+=>psql -p 5434 -d postgres
+
+=> pg_ctl -D C:\Users\DELL\Documents\Testing_Postgre_Servers\Primary stop
+=> pg_ctl -D C:\Users\DELL\Documents\Testing_Postgre_Servers\Secondary stop
+=> net stop postgresql-x64-17 (it will stop whole postgres include pgadmin)
+--------------------------------------
+5433 - 
+select * from pg_stat_replication;
+5435 -
+select pg_is_in_recovery();
+-------------------------------------
+https://www.postgresql.org/docs/current/backup.html
+https://www.postgresql.org/docs/current/runtime-config-replication.html
+

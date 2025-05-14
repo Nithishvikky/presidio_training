@@ -1,0 +1,29 @@
+C:\Program Files\PostgreSQL\17\bin>pg_basebackup -D  C:\Users\DELL\Documents\Testing_Postgre_Servers\Secondary -Fp -Xs -P -R -h 127.0.0.1 -U replicator -p 5433
+24266/24266 kB (100%), 1/1 tablespace
+
+C:\Program Files\PostgreSQL\17\bin>pg_ctl -D C:\Users\DELL\Documents\Testing_Postgre_Servers\Secondary -o "-p 5434" -l C:\Users\DELL\Documents\Testing_Postgre_Servers\Secondary\logfile start
+waiting for server to start................................. done
+server started
+
+C:\Program Files\PostgreSQL\17\bin>psql -p 5434 -d postgres
+psql (17.4)
+postgres=# select * from rental_log;
+ log_id |        rental_time         | customer_id | film_id | amount |         logged_on
+--------+----------------------------+-------------+---------+--------+----------------------------
+      1 | 2025-05-14 16:51:48.860029 |           1 |     100 |   4.99 | 2025-05-14 16:51:48.860029
+(1 row)
+
+
+postgres=# select * from rental_log_update_log;
+ log_id | field_name | old_value | new_value |        logged_date
+--------+------------+-----------+-----------+----------------------------
+      1 | amount     | 4.99      | 5         | 2025-05-14 18:06:32.187881
+(1 row)
+
+
+postgres=# select * from rental_log;
+ log_id |        rental_time         | customer_id | film_id | amount |         logged_on
+--------+----------------------------+-------------+---------+--------+----------------------------
+      1 | 2025-05-14 16:51:48.860029 |           1 |     100 |      5 | 2025-05-14 16:51:48.860029
+(1 row)
+
