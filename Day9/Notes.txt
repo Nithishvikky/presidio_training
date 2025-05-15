@@ -1,3 +1,5 @@
 - Authentication
 - Encryption/Decryption
 - Authorization
+
+https://www.postgresql.org/docs/current/sql-grant.html
