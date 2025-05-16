@@ -1,0 +1,54 @@
+--------------------------Mine----------------------
+Student
+	id,
+	age
+
+Trainer
+	id,
+	name
+
+Course
+	id,
+	name
+
+Enrollment
+	id,
+	student_id,
+	Course_id
+
+TrainerAssignment
+	id,
+	Trainer_id,
+	Course_id
+
+Certificate
+	id,
+	Enrollment_id,
+	Date,
+	Grade
+--------------------------------------------------------------------
+Tables to Design (Normalized to 3NF):
+
+1. **students**
+
+   * `student_id (PK)`, `name`, `email`, `phone`
+
+2. **courses**
+
+   * `course_id (PK)`, `course_name`, `category`, `duration_days`
+
+3. **trainers**
+
+   * `trainer_id (PK)`, `trainer_name`, `expertise`
+
+4. **enrollments**
+
+   * `enrollment_id (PK)`, `student_id (FK)`, `course_id (FK)`, `enroll_date`
+
+5. **certificates**
+
+   * `certificate_id (PK)`, `enrollment_id (FK)`, `issue_date`, `serial_no`
+
+6. **course\_trainers** (Many-to-Many if needed)
+
+   * `course_id`, `trainer_id`
