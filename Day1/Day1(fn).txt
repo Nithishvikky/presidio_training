@@ -1,0 +1,62 @@
+Create a plan for the database(Tables and columns) for the following requirement
+It is for a shop that takes orders for custom tailoring
+It allows people to place order with measurement and gives a delivery date for the order
+The fabric will be picked up from the customer's place
+The pick-up date will be specified by the application
+Once the order is billed, we can see the billing details
+Bills have to be maintained
+Once fabric is picked up no cancellation is accepted( before that customer can cancel the order)
+
+CustomerStatusMaster
+ Id, StatusMessage(Example - {id-1,StatusMessage-"Available"})
+
+OrderStatusMaster
+ Id, StatusMessage(Example - {id-1,StatusMessage-"Order Confirmed"})
+
+ 
+CityMaster
+ Id, CityName, StateId
+
+StateMaster
+ Id, StateName
+
+TypeMaster
+ Id, Name, status
+
+Items_Mater
+ Id, Name
+
+FabricMater
+  Id, Name
+
+ITems_Fabric
+  Id, Fabric_Id, Item_Id, Price
+
+Address
+  Id, Doornumber, Street/Apartmnet Name, Area, Zip code, CityId
+
+Customer_Address
+  Id, Name, Address_Id, Customer_Id
+ 
+Customer
+ Id, Name, Phone, Email,  Status_Id 
+
+
+SizeChart
+ Id, Measurement(JSON)
+
+Order
+ OrerNumber, OrderDate, Customer_Id,  Amount, PicupId, Order_Status_Id, Remarks, Patmnet_Id
+
+Refund_Details
+ Refund_id, Order_Numebr, Refund_Initiated_Date, Refund_Date, Amount 
+
+Payment_Datails
+  Id, Order_Number, Type, Amount, Status
+
+Order_Details
+  Order_Details_Number, Order_Number, Item_Fabric_Id, quantity, Price,  Size_Id
+
+PickUp_And_Delivery_Details
+  Id, Date, Order_Numebr, Status, actual_Date, ScheduledDate, Address_Id, Item_Fabric_id
+
