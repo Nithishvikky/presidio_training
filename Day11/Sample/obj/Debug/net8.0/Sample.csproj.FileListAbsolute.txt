@@ -1,0 +1,15 @@
+C:\Users\DELL\Desktop\Work\Day11\Sample\bin\Debug\net8.0\Sample.exe
+C:\Users\DELL\Desktop\Work\Day11\Sample\bin\Debug\net8.0\Sample.deps.json
+C:\Users\DELL\Desktop\Work\Day11\Sample\bin\Debug\net8.0\Sample.runtimeconfig.json
+C:\Users\DELL\Desktop\Work\Day11\Sample\bin\Debug\net8.0\Sample.dll
+C:\Users\DELL\Desktop\Work\Day11\Sample\bin\Debug\net8.0\Sample.pdb
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.sourcelink.json
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.dll
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\refint\Sample.dll
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.pdb
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\Sample.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Work\Day11\Sample\obj\Debug\net8.0\ref\Sample.dll

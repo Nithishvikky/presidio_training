@@ -1,0 +1,250 @@
+1) create a program that will take name from user and greet the user
+	
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter your name : ");
+        string name = Console.ReadLine();
+
+        Console.WriteLine($"Hello, {name}! ");
+    }
+}
+
+2) Take 2 numbers from user and print the largest
+
+3) Take 2 numbers from user, check the operation user wants to perform (+,-,*,/). Do the operation and print the result
+
+4) Take username and password from user. Check if user name is "Admin" and password is "pass" if yes then print success message. Give 3 attempts to user. In the end of eh 3rd attempt if user still is unable to provide valid creds then exit the application after print the message "Invalid attempts for 3 times. Exiting...."
+
+5) Take 10 numbers from user and print the number of numbers that are divisible by 7
+
+
+using System;
+using System.Diagnostics;
+
+class Program
+{   
+    static int Largest(int a,int b)
+    {
+        return a>b ?a:b;
+    }
+    static void Calc(int a,int b)
+    {
+        Console.WriteLine("Enter the operation wants to do(*/+-) : ");
+        char op = Convert.ToChar(Console.ReadLine());
+            switch (op)
+            {
+                case '+':  Console.WriteLine($"Result : {a+b}");
+                    break;
+                case '-':  Console.WriteLine($"Result : {a - b}");
+                    break;
+                case '*':
+                    Console.WriteLine($"Result : {a * b}");
+                    break;
+                case '/':
+                    Console.WriteLine($"Result : {a / b}");
+                    break;
+                default: Console.WriteLine("Enter valid Operator");
+                    break;
+        }
+    }
+    static void userCheck()
+    {
+            int attempt = 3;
+    while(attempt > 0)
+    {
+        Console.WriteLine("Enter username : ");
+        string? username = Console.ReadLine();
+
+        if(!string.IsNullOrEmpty(username) && username == "Admin")
+        {
+            Console.WriteLine("Enter password : ");
+            string? password = Console.ReadLine();
+
+            if (!string.IsNullOrEmpty(password) && password == "pass")
+            {
+                Console.WriteLine("Successfully Logged in");
+                attempt = 0;
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Check credential...Password invalid");
+                attempt--;
+            }
+        }
+        else
+        {
+            Console.WriteLine("Check credential...Username invalid");
+            attempt--;
+        }
+
+        if(attempt == 0)
+        {
+            Console.WriteLine("You failed 3 attempts");
+        }
+    }
+}
+    }
+    static void CountingNumbers()
+    {
+        int count = 0;
+        for(int i = 0; i < 10; i++)
+        {
+            Console.WriteLine($"Enter Number {i + 1} : ");
+            int a = Convert.ToInt32( Console.ReadLine() );
+            if(a%7 == 0)
+            {
+                count++;
+            }
+        }
+        Console.WriteLine($"Count (divisible by 7) : {count}");
+    }
+    static void Main()
+    {
+        //Console.WriteLine("Enter num1 : ");
+        //int num1 = Convert.ToInt32(Console.ReadLine());
+        //Console.WriteLine("Enter num2 : ");
+        //int num2 = Convert.ToInt32(Console.ReadLine());
+
+        //int MaxNum = Largest(num1,num2);
+        //Console.WriteLine($"Largest number from {num1} & {num2} is {MaxNum}");
+        //Calc(num1,num2);
+
+        userCheck();
+
+        //CountingNumbers();
+
+
+    }
+}
+
+
+6) Count the Frequency of Each Element
+Given an array, count the frequency of each element and print the result.
+Input: {1, 2, 2, 3, 4, 4, 4}
+
+output
+1 occurs 1 times  
+2 occurs 2 times  
+3 occurs 1 times  
+4 occurs 3 times
+
+7) create a program to rotate the array to the left by one position.
+Input: {10, 20, 30, 40, 50}
+Output: {20, 30, 40, 50, 10}
+
+8) Given two integer arrays, merge them into a single array.
+Input: {1, 3, 5} and {2, 4, 6}
+Output: {1, 3, 5, 2, 4, 6}
+
+
+
+namespace FirstApp
+{
+    internal class Program
+    {
+        int num1, num2;
+        void GetNumbersFromUser()
+        {
+            Console.WriteLine("Please enter the first number");
+           //bool isConverted = int.TryParse(Console.ReadLine(), out num1);
+           // if(isConverted)
+           // {
+           //     Console.WriteLine($"The number is {num1}");
+           // }
+           // else
+           // {
+           //     Console.WriteLine("Invalid input");
+           // }
+            //Console.WriteLine($"The incremented number is {++num1}");
+            while(!int.TryParse(Console.ReadLine(), out num1))
+                Console.WriteLine("Invalid input. Please try again");
+            Console.WriteLine($"The incremented number is {++num1}");
+        }
+        static void Main(string[] args)
+        {
+            new Program().GetNumbersFromUser();
+        }
+    }
+}
+
+using System;
+using System.Diagnostics;
+
+class Program
+{
+    static void Print(int[] arr)
+    {
+        foreach (int i in arr)
+        {
+            Console.Write($"{i} ");
+        }
+        Console.WriteLine();
+    }
+    static void FrequencyChecker(int[] arr)
+    {
+        Dictionary<int,int> map = new Dictionary<int,int>(); // Key -> actual number Value -> count of number
+
+        foreach (int i in arr)
+        {
+            if (map.ContainsKey(i))
+            {
+                map[i]++;
+            }
+            else
+            {
+                map[i] = 1;
+            }
+        }
+        foreach (var item in map)
+        {
+            Console.WriteLine($"{item.Key} occurs {item.Value} times");
+        }
+    }
+    static void RotateArray(int[] arr)
+    {
+        int temp = arr[0];
+        for(int i = 1; i < arr.Length; i++)
+        {
+            arr[i - 1] = arr[i];
+        }
+        arr[arr.Length - 1] = temp;
+        Print(arr);
+    }
+    static void MergeArray(int[] arr1, int[] arr2)
+    {
+        int n = arr1.Length + arr2.Length;
+        int[] res = new int[n];
+
+        for(int i = 0; i < n; i++)
+        {
+            if(i< arr1.Length)
+            {
+                res[i] = arr1[i];
+            }
+            else
+            {
+                res[i] = arr2[i-arr1.Length];
+            }
+        }
+        Print(res);
+    }
+    static void Main()
+    {
+        //int[] numbers = { 1, 2, 2, 3, 4, 4, 4 };
+        //frequencyChecker(numbers);
+        //int[] arrayForRotation = { 10, 20, 30, 40, 50 };
+        //Print(arrayForRotation);
+        //RotateArray(arrayForRotation);
+        int[] array1 = { 1, 3, 5 };
+        int[] array2 = { 2, 4, 6 };
+        Print(array1);
+        Print(array2);
+        MergeArray(array1, array2);
+    }
+}
+
