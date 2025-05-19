@@ -62,9 +62,36 @@ namespace Sample
             }
             return true;
         }
+        static bool SubgridIterator(int[,] board)
+        {
+            for (int rowStart = 0; rowStart < 9; rowStart += 3)
+            {
+                for (int colStart = 0; colStart < 9; colStart += 3)
+                {
+                    int[] subgrid = new int[9];
+                    int index = 0;
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            subgrid[index] = board[rowStart + i, colStart + j];
+                            index++;
+                        }
+                    }
+
+                    if (!Checker(subgrid))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         public void Run()
         {
-            if (RowIterator(board) && ColIterator(board))
+            if (RowIterator(board) && ColIterator(board) && SubgridIterator(board))
             {
                 Console.WriteLine("Valid");
             }

@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Work\\Day11\\Sample\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\task12.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|solutionrelative:task12.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\sudoku9x9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|solutionrelative:sudoku9x9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\guessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|solutionrelative:guessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\task12.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|solutionrelative:task12.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\sudoku9x9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|solutionrelative:sudoku9x9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\guessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|solutionrelative:guessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DEEC555-1B56-4677-AD13-F2773C11A57B}|Sample.csproj|c:\\users\\dell\\desktop\\work\\day11\\sample\\sudoku.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,30 +38,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Task12.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day11\\Sample\\Task12.cs",
               "RelativeDocumentMoniker": "Task12.cs",
               "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day11\\Sample\\Task12.cs",
               "RelativeToolTip": "Task12.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAEsAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-19T14:51:31.384Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Sudoku9x9.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day11\\Sample\\Sudoku9x9.cs",
               "RelativeDocumentMoniker": "Sudoku9x9.cs",
               "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day11\\Sample\\Sudoku9x9.cs",
               "RelativeToolTip": "Sudoku9x9.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-19T11:20:05.436Z",
               "EditorCaption": ""
@@ -76,8 +76,7 @@
               "RelativeToolTip": "Sudoku.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T11:00:01.879Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T11:00:01.879Z"
             },
             {
               "$type": "Document",
@@ -89,8 +88,7 @@
               "RelativeToolTip": "Tasks6to8.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAgwEgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T10:39:20.064Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T10:39:20.064Z"
             },
             {
               "$type": "Document",
@@ -102,12 +100,11 @@
               "RelativeToolTip": "Tasks2to5.cs",
               "ViewState": "AgIAAE8AAAAAAAAAAAAkwGYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T10:32:24.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T10:32:24.243Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GuessGame.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day11\\Sample\\GuessGame.cs",
               "RelativeDocumentMoniker": "GuessGame.cs",
@@ -115,8 +112,7 @@
               "RelativeToolTip": "GuessGame.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAgwEEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T09:07:26.921Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-19T09:07:26.921Z"
             },
             {
               "$type": "Document",
@@ -126,7 +122,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day11\\Sample\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-19T04:23:15.777Z",
               "EditorCaption": ""
