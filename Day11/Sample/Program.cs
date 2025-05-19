@@ -7,20 +7,23 @@ class Program
 {
     static void Main()
     {
-        //Task9 g = new Task9();
-        //g.Run();
+        Task1 t1 = new Task1();
+        t1.Run();
 
-        //Task10 s = Task10 Sudoku();
-        //s.Run();
-
-        Task11 s = new Task11();
-        s.Run();
-
-        //Tasks2to5 t = new Tasks2to5();
-        //t.Run();
-
-        //Tasks6to8 t2 = new Tasks6to8();
+        //Tasks2to5 t2 = new Tasks2to5();
         //t2.Run();
+
+        //Tasks6to8 t6 = new Tasks6to8();
+        //t6.Run();
+
+        //Task9 t9 = new Task9();
+        //t9.Run();
+
+        //Task10 t10 = new Task10();
+        //t10.Run();
+
+        //Task11 t11 = new Task11();
+        //t11.Run();
 
         //Task12 t12 = new Task12();
         //t12.Run();
