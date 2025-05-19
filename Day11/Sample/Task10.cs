@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sample
 {
-    internal class Sudoku
+    internal class Task10
     {
         private HashSet<int>h = new HashSet<int>();
 

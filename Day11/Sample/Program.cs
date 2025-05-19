@@ -7,13 +7,13 @@ class Program
 {
     static void Main()
     {
-        //GuessGame g = new GuessGame();
+        //Task9 g = new Task9();
         //g.Run();
 
-        //Sudoku s = new Sudoku();
+        //Task10 s = Task10 Sudoku();
         //s.Run();
 
-        Sudoku9x9 s = new Sudoku9x9();
+        Task11 s = new Task11();
         s.Run();
 
         //Tasks2to5 t = new Tasks2to5();

@@ -93,13 +93,18 @@ namespace Sample
             Console.WriteLine("Enter num2 : ");
             int num2 = Convert.ToInt32(Console.ReadLine());
 
-            //int MaxNum = Largest(num1,num2);
-            //Console.WriteLine($"Largest number from {num1} & {num2} is {MaxNum}");
-            //Calc(num1,num2);
+            // Task2 input
+            int MaxNum = Largest(num1,num2);
+            Console.WriteLine($"Largest number from {num1} & {num2} is {MaxNum}");
 
-            //userCheck();
+            //Task3 input
+            Calc(num1,num2);
 
-            //CountingNumbers();
+            //Task4 input
+            userCheck();
+            
+            //Task5 input
+            CountingNumbers();
 
         }
     }

@@ -66,11 +66,16 @@ namespace Sample
         }
         public void Run()
         {
-            //int[] numbers = { 1, 2, 2, 3, 4, 4, 4 };
-            //frequencyChecker(numbers);
-            //int[] arrayForRotation = { 10, 20, 30, 40, 50 };
-            //Print(arrayForRotation);
-            //RotateArray(arrayForRotation);
+            // Task6 input
+            int[] numbers = { 1, 2, 2, 3, 4, 4, 4 };
+            FrequencyChecker(numbers);
+
+            // Task7 input
+            int[] arrayForRotation = { 10, 20, 30, 40, 50 };
+            Print(arrayForRotation);
+            RotateArray(arrayForRotation);
+
+            //Task8 input
             int[] array1 = { 1, 3, 5 };
             int[] array2 = { 2, 4, 6 };
             Print(array1);

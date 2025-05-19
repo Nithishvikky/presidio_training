@@ -2,7 +2,7 @@
 
 namespace Sample
 {
-    internal class GuessGame
+    internal class Task9
     {
         private const string guess = "GAME";
         static string UserInputValidation()

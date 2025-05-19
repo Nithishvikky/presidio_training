@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sample
 {
-    internal class Sudoku9x9
+    internal class Task11
     {
         int[,] board = {
                 { 2, 5, 7, 4, 9, 3, 1, 6, 8},
