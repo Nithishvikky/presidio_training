@@ -1,0 +1,15 @@
+C:\Users\DELL\Desktop\Work\Day_12\Day12\bin\Debug\net8.0\Day12.exe
+C:\Users\DELL\Desktop\Work\Day_12\Day12\bin\Debug\net8.0\Day12.deps.json
+C:\Users\DELL\Desktop\Work\Day_12\Day12\bin\Debug\net8.0\Day12.runtimeconfig.json
+C:\Users\DELL\Desktop\Work\Day_12\Day12\bin\Debug\net8.0\Day12.dll
+C:\Users\DELL\Desktop\Work\Day_12\Day12\bin\Debug\net8.0\Day12.pdb
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.sourcelink.json
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.dll
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\refint\Day12.dll
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.pdb
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\Day12.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Work\Day_12\Day12\obj\Debug\net8.0\ref\Day12.dll
