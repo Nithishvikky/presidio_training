@@ -248,3 +248,69 @@ class Program
     }
 }
 
+
+
+9) Write a program that:
+
+Has a predefined secret word (e.g., "GAME").
+
+Accepts user input as a 4-letter word guess.
+
+Compares the guess to the secret word and outputs:
+
+X Bulls: number of letters in the correct position.
+
+Y Cows: number of correct letters in the wrong position.
+
+Continues until the user gets 4 Bulls (i.e., correct guess).
+
+Displays the number of attempts.
+
+Bull = Correct letter in correct position.
+
+Cow = Correct letter in wrong position.
+
+Secret Word	User Guess	Output	Explanation
+GAME	GAME	4 Bulls, 0 Cows	Exact match
+GAME	MAGE	2 Bull, 2 Cows	AE in correct position, MG misplaced
+GAME	GUYS	1 Bull, 0 Cows	G in correct place, rest wrong
+GAME	AMGE	2 Bulls, 2 Cows	A, E right; M, G misplaced
+NOTE	TONE	2 Bulls, 2 Cows	O, E right; T, N misplaced
+
+10) write a program that accepts a 9-element array representing a Sudoku row.
+
+Validates if the row:
+
+Has all numbers from 1 to 9.
+
+Has no duplicates.
+
+Displays if the row is valid or invalid.
+
+11) In the question ten extend it to validate a sudoku game. 
+Validate all 9 rows (use int[,] board = new int[9,9])
+
+12) Write a program that:
+
+Takes a message string as input (only lowercase letters, no spaces or symbols).
+
+Encrypts it by shifting each character forward by 3 places in the alphabet.
+
+Decrypts it back to the original message by shifting backward by 3.
+
+Handles wrap-around, e.g., 'z' becomes 'c'.
+
+Examples
+Input:     hello
+Encrypted: khoor
+Decrypted: hello
+-------------
+Input:     xyz
+Encrypted: abc
+Test cases
+| Input | Shift | Encrypted | Decrypted |
+| ----- | ----- | --------- | --------- |
+| hello | 3     | khoor     | hello     |
+| world | 3     | zruog     | world     |
+| xyz   | 3     | abc       | xyz       |
+| apple | 1     | bqqmf     | apple     |
