@@ -1,0 +1,15 @@
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\bin\Debug\net8.0\Day13_App.exe
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\bin\Debug\net8.0\Day13_App.deps.json
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\bin\Debug\net8.0\Day13_App.runtimeconfig.json
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\bin\Debug\net8.0\Day13_App.dll
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\bin\Debug\net8.0\Day13_App.pdb
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.sourcelink.json
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.dll
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\refint\Day13_App.dll
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.pdb
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\Day13_App.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Work\Day_13\Day13_App\obj\Debug\net8.0\ref\Day13_App.dll

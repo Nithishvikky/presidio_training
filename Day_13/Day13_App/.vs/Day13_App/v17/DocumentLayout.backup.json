@@ -1,0 +1,207 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\manageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:manageemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\interfaces\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:interfaces\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\models\\searchmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:models\\searchmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\exceptions\\collectionemptyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:exceptions\\collectionemptyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\interfaces\\irepositor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:interfaces\\irepositor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\exceptions\\duplicateentityexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:exceptions\\duplicateentityexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_app\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{175BA92F-7040-4998-83D6-55FCB3D78333}|Day13_App.csproj|solutionrelative:models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ManageEmployee.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\ManageEmployee.cs",
+              "RelativeDocumentMoniker": "ManageEmployee.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\ManageEmployee.cs",
+              "RelativeToolTip": "ManageEmployee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T07:23:04.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SearchModel.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Models\\SearchModel.cs",
+              "RelativeDocumentMoniker": "Models\\SearchModel.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Models\\SearchModel.cs",
+              "RelativeToolTip": "Models\\SearchModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T06:32:14.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IEmployeeService.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Interfaces\\IEmployeeService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IEmployeeService.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Interfaces\\IEmployeeService.cs",
+              "RelativeToolTip": "Interfaces\\IEmployeeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T06:31:28.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Repositories\\EmployeeRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\EmployeeRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Repositories\\EmployeeRepository.cs",
+              "RelativeToolTip": "Repositories\\EmployeeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T06:07:53.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Repository.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Repositories\\Repository.cs",
+              "RelativeToolTip": "Repositories\\Repository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T04:44:54.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T04:16:48.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmployeeService.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Services\\EmployeeService.cs",
+              "RelativeDocumentMoniker": "Services\\EmployeeService.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Services\\EmployeeService.cs",
+              "RelativeToolTip": "Services\\EmployeeService.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAuwGQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T06:32:42.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CollectionEmptyException.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Exceptions\\CollectionEmptyException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\CollectionEmptyException.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Exceptions\\CollectionEmptyException.cs",
+              "RelativeToolTip": "Exceptions\\CollectionEmptyException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T06:00:31.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DuplicateEntityException.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Exceptions\\DuplicateEntityException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\DuplicateEntityException.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Exceptions\\DuplicateEntityException.cs",
+              "RelativeToolTip": "Exceptions\\DuplicateEntityException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T04:50:15.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IRepositor.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Interfaces\\IRepositor.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IRepositor.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Interfaces\\IRepositor.cs",
+              "RelativeToolTip": "Interfaces\\IRepositor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T04:43:47.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "Models\\Employee.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_App\\Models\\Employee.cs",
+              "RelativeToolTip": "Models\\Employee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T04:17:20.708Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
