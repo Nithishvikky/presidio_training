@@ -68,7 +68,7 @@ namespace Day13_Task.Services
             {
                 return appointments;
             }
-            // Will return sorted list by age
+            
             return appointments.Where(a => a.PatientAge >= age.MinVal && a.PatientAge <= age.MaxVal).ToList();
         }
 
