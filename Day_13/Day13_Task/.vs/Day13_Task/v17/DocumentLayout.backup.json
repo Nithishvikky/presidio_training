@@ -1,0 +1,173 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\appointmentui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:appointmentui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\models\\appointmentsearchmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:models\\appointmentsearchmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|c:\\users\\dell\\desktop\\work\\day_13\\day13_task\\interfaces\\irepositor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BDEC071-BE5B-4BBA-9E1B-D9A691A78412}|Day13_Task.csproj|solutionrelative:interfaces\\irepositor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppointmentUI.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\AppointmentUI.cs",
+              "RelativeDocumentMoniker": "AppointmentUI.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\AppointmentUI.cs",
+              "RelativeToolTip": "AppointmentUI.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAYwDoAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T14:51:13.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Services\\AppointmentService.cs",
+              "RelativeDocumentMoniker": "Services\\AppointmentService.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Services\\AppointmentService.cs",
+              "RelativeToolTip": "Services\\AppointmentService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwB0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:22:20.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAA8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:15:30.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Models\\Appointment.cs",
+              "RelativeDocumentMoniker": "Models\\Appointment.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Models\\Appointment.cs",
+              "RelativeToolTip": "Models\\Appointment.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACoAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:22:42.167Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IAppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Interfaces\\IAppointmentService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IAppointmentService.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Interfaces\\IAppointmentService.cs",
+              "RelativeToolTip": "Interfaces\\IAppointmentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:17:56.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppointmentSearchModel.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Models\\AppointmentSearchModel.cs",
+              "RelativeDocumentMoniker": "Models\\AppointmentSearchModel.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Models\\AppointmentSearchModel.cs",
+              "RelativeToolTip": "Models\\AppointmentSearchModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:01:36.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppointmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Repositories\\AppointmentRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\AppointmentRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Repositories\\AppointmentRepository.cs",
+              "RelativeToolTip": "Repositories\\AppointmentRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:12:44.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Repository.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Repositories\\Repository.cs",
+              "RelativeToolTip": "Repositories\\Repository.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwCoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:20:16.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IRepositor.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Interfaces\\IRepositor.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IRepositor.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_13\\Day13_Task\\Interfaces\\IRepositor.cs",
+              "RelativeToolTip": "Interfaces\\IRepositor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:19:39.081Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

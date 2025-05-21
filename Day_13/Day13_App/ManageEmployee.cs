@@ -49,7 +49,7 @@ namespace Day13_App
             Employee employee = new Employee();
             employee.TakeEmployeeDetailsFromUser();
             int id = _employeeService.AddEmployee(employee);
-            Console.WriteLine("The employee added. The Id is id");
+            Console.WriteLine($"The employee added. The Id is {id}");
         }
         public void SearchEmployee()
         {

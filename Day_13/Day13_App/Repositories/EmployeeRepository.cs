@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Day13_App.Exceptions;
+﻿using Day13_App.Exceptions;
 using Day13_App.Models;
+
 
 namespace Day13_App.Repositories
 {
