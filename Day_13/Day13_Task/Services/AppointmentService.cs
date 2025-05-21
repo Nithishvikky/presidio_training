@@ -47,7 +47,7 @@ namespace Day13_Task.Services
 
         private ICollection<Appointment>? SearchByName(ICollection<Appointment> appointments,string? name)
         {
-            if(name == null || appointments == null || appointments.Count == 0)
+            if(string.IsNullOrEmpty(name) || appointments == null || appointments.Count == 0)
             {
                 return appointments;
             }
@@ -74,16 +74,15 @@ namespace Day13_Task.Services
 
         public List<Appointment>? AllAppointments()
         {
-            // The exception handled in repository class itself
-            // No need for exception here
-            return _appointmentRepository.GetAll().ToList();
-        }
-
-        public void RemoveAppointment(int AppointmentId)
-        {
-            // The exception handled in repository class itself
-            // No need for exception here
-            _appointmentRepository.Delete(AppointmentId);
+            try
+            {
+                return _appointmentRepository.GetAll().ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return null;
         }
     }
 }

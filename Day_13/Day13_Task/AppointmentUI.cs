@@ -24,7 +24,8 @@ namespace Day13_Task
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("Choose from options...\n\t1. Add appointment\n\t2. Search Appointments\n\t3. List All appointments");
+                Console.WriteLine("Choose from options...\n\t1. Add appointment\n\t2. Search Appointments\n\t3. List All appointments\n\t4. Exit");
+                Console.Write("Enter the options from menu : ");
                 int op = UserInputNumValidation();
                 switch (op)
                 {
@@ -35,6 +36,9 @@ namespace Day13_Task
                         searchAppointments();
                         break;
                     case 3:
+                        PrintAppointments(_appointmentService.AllAppointments());
+                        break;
+                    case 4:
                         flag = false;
                         break;
                     default:
@@ -90,9 +94,11 @@ namespace Day13_Task
 
         private void PrintAppointments(List<Appointment>? appointments)
         {
-            foreach (var item in appointments)
-            {
-                Console.WriteLine(item);
+            if (appointments != null) {
+                foreach (var item in appointments)
+                {
+                    Console.WriteLine(item);
+                }
             }
         }
     }
