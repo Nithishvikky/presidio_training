@@ -1,0 +1,173 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\day14_task.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:day14_task.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\repository\\emailnotifiers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:repository\\emailnotifiers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\interface\\ionlinenotifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:interface\\ionlinenotifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\interface\\inotifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:interface\\inotifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\repository\\smsnotifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:repository\\smsnotifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|c:\\users\\dell\\desktop\\work\\day_14\\day14_task\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E20FFCC-FAC8-4AEB-A591-7A602884F1AC}|Day14_Task.csproj|solutionrelative:model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IOnlineNotifier.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Interface\\IOnlineNotifier.cs",
+              "RelativeDocumentMoniker": "Interface\\IOnlineNotifier.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Interface\\IOnlineNotifier.cs",
+              "RelativeToolTip": "Interface\\IOnlineNotifier.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T13:13:10.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Day14_Task",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Day14_Task.csproj",
+              "RelativeDocumentMoniker": "Day14_Task.csproj",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Day14_Task.csproj",
+              "RelativeToolTip": "Day14_Task.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-22T12:55:24.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SmsNotifier.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Repository\\SmsNotifier.cs",
+              "RelativeDocumentMoniker": "Repository\\SmsNotifier.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Repository\\SmsNotifier.cs",
+              "RelativeToolTip": "Repository\\SmsNotifier.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T12:53:07.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmailNotifiers.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Repository\\EmailNotifiers.cs",
+              "RelativeDocumentMoniker": "Repository\\EmailNotifiers.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Repository\\EmailNotifiers.cs",
+              "RelativeToolTip": "Repository\\EmailNotifiers.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T11:58:32.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Service\\UserService.cs",
+              "RelativeDocumentMoniker": "Service\\UserService.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Service\\UserService.cs",
+              "RelativeToolTip": "Service\\UserService.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T10:47:13.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "INotifier.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Interface\\INotifier.cs",
+              "RelativeDocumentMoniker": "Interface\\INotifier.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Interface\\INotifier.cs",
+              "RelativeToolTip": "Interface\\INotifier.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T10:44:55.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Repository\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Repository\\UserRepository.cs",
+              "RelativeToolTip": "Repository\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T10:40:35.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Model\\User.cs",
+              "RelativeDocumentMoniker": "Model\\User.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Model\\User.cs",
+              "RelativeToolTip": "Model\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T10:39:29.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_14\\Day14_Task\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBEAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T10:38:52.961Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
