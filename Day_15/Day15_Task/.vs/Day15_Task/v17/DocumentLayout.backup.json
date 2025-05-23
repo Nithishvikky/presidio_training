@@ -1,0 +1,135 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|c:\\users\\dell\\desktop\\work\\day_15\\day15_task\\proxydesign_task\\service\\file.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|solutionrelative:proxydesign_task\\service\\file.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|c:\\users\\dell\\desktop\\work\\day_15\\day15_task\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|c:\\users\\dell\\desktop\\work\\day_15\\day15_task\\file.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|solutionrelative:file.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|c:\\users\\dell\\desktop\\work\\day_15\\day15_task\\proxydesign_task\\service\\proxyfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|solutionrelative:proxydesign_task\\service\\proxyfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|c:\\users\\dell\\desktop\\work\\day_15\\day15_task\\proxydesign_task\\clientcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|solutionrelative:proxydesign_task\\clientcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|c:\\users\\dell\\desktop\\work\\day_15\\day15_task\\proxydesign_task\\interface\\ifile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|solutionrelative:proxydesign_task\\interface\\ifile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|c:\\users\\dell\\desktop\\work\\day_15\\day15_task\\proxydesign_task\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747659FD-567D-487C-BC11-7C4F7B79CE42}|Day15_Task.csproj|solutionrelative:proxydesign_task\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "file.txt",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\file.txt",
+              "RelativeDocumentMoniker": "file.txt",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\file.txt",
+              "RelativeToolTip": "file.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-05-23T12:26:22.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClientCode.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\ClientCode.cs",
+              "RelativeDocumentMoniker": "ProxyDesign_Task\\ClientCode.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\ClientCode.cs",
+              "RelativeToolTip": "ProxyDesign_Task\\ClientCode.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T12:11:40.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProxyFile.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Service\\ProxyFile.cs",
+              "RelativeDocumentMoniker": "ProxyDesign_Task\\Service\\ProxyFile.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Service\\ProxyFile.cs",
+              "RelativeToolTip": "ProxyDesign_Task\\Service\\ProxyFile.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:36:54.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "File.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Service\\File.cs",
+              "RelativeDocumentMoniker": "ProxyDesign_Task\\Service\\File.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Service\\File.cs",
+              "RelativeToolTip": "ProxyDesign_Task\\Service\\File.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwB4AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:36:22.695Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IFile.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Interface\\IFile.cs",
+              "RelativeDocumentMoniker": "ProxyDesign_Task\\Interface\\IFile.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Interface\\IFile.cs",
+              "RelativeToolTip": "ProxyDesign_Task\\Interface\\IFile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:34:44.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Model\\User.cs",
+              "RelativeDocumentMoniker": "ProxyDesign_Task\\Model\\User.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\ProxyDesign_Task\\Model\\User.cs",
+              "RelativeToolTip": "ProxyDesign_Task\\Model\\User.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowCUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:34:04.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T06:19:32.174Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.sourcelink.json
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\bin\Debug\net8.0\Singleton_Factory.exe
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\bin\Debug\net8.0\Singleton_Factory.deps.json
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\bin\Debug\net8.0\Singleton_Factory.runtimeconfig.json
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\bin\Debug\net8.0\Singleton_Factory.dll
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\bin\Debug\net8.0\Singleton_Factory.pdb
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.dll
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\refint\Singleton_Factory.dll
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.pdb
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\Singleton_Factory.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Work\Day_15\Singleton_Factory\obj\Debug\net8.0\ref\Singleton_Factory.dll

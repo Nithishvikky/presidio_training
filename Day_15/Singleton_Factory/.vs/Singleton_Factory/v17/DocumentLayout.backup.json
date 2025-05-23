@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C3B47F31-6363-4359-AE4F-16FD6CBF369D}|Singleton_Factory.csproj|c:\\users\\dell\\desktop\\work\\day_15\\singleton_factory\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3B47F31-6363-4359-AE4F-16FD6CBF369D}|Singleton_Factory.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3B47F31-6363-4359-AE4F-16FD6CBF369D}|Singleton_Factory.csproj|c:\\users\\dell\\desktop\\work\\day_15\\singleton_factory\\designpatterns\\factory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3B47F31-6363-4359-AE4F-16FD6CBF369D}|Singleton_Factory.csproj|solutionrelative:designpatterns\\factory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3B47F31-6363-4359-AE4F-16FD6CBF369D}|Singleton_Factory.csproj|c:\\users\\dell\\desktop\\work\\day_15\\singleton_factory\\designpatterns\\singleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3B47F31-6363-4359-AE4F-16FD6CBF369D}|Singleton_Factory.csproj|solutionrelative:designpatterns\\singleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Factory.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\DesignPatterns\\Factory.cs",
+              "RelativeDocumentMoniker": "DesignPatterns\\Factory.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\DesignPatterns\\Factory.cs",
+              "RelativeToolTip": "DesignPatterns\\Factory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T12:37:34.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Singleton.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\DesignPatterns\\Singleton.cs",
+              "RelativeDocumentMoniker": "DesignPatterns\\Singleton.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\DesignPatterns\\Singleton.cs",
+              "RelativeToolTip": "DesignPatterns\\Singleton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T12:36:05.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T12:33:54.721Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
