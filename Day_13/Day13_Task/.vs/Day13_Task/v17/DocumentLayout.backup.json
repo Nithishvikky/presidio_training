@@ -58,8 +58,7 @@
               "RelativeToolTip": "Services\\AppointmentService.cs",
               "ViewState": "AgIAAEEAAAAAAAAAAAAswFQAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T11:22:20.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T11:22:20.961Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "Models\\Appointment.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAACoAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T10:22:42.167Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T10:22:42.167Z"
             },
             {
               "$type": "Document",
@@ -84,8 +82,7 @@
               "RelativeToolTip": "Models\\AppointmentSearchModel.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAzwBMAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T11:01:36.667Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T11:01:36.667Z"
             },
             {
               "$type": "Document",
@@ -97,8 +94,7 @@
               "RelativeToolTip": "Repositories\\AppointmentRepository.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T11:12:44.86Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T11:12:44.86Z"
             },
             {
               "$type": "Document",
@@ -110,8 +106,7 @@
               "RelativeToolTip": "Repositories\\Repository.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAQwCoAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T10:20:16.241Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T10:20:16.241Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "Interfaces\\IRepositor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T10:19:39.081Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T10:19:39.081Z"
             },
             {
               "$type": "Document",
