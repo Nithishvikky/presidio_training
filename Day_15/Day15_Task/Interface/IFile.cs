@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day15_Task.ProxyDesign_Task.Interface
+namespace Day15_Task.Interface
 {
     public interface IFile
     {

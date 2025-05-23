@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day15_Task.ProxyDesign_Task.Model
+namespace Day15_Task.Model
 {
     public class User
     {

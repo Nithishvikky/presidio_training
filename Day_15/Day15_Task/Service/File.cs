@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Day15_Task.ProxyDesign_Task.Interface;
+using Day15_Task.Interface;
 
-namespace Day15_Task.ProxyDesign_Task.Service
+namespace Day15_Task.Service
 {
     public class File : IFile
     {

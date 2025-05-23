@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Day15_Task.ProxyDesign_Task.Interface;
-using Day15_Task.ProxyDesign_Task.Model;
+using Day15_Task.Interface;
+using Day15_Task.Model;
 
-namespace Day15_Task.ProxyDesign_Task.Service
+namespace Day15_Task.Service
 {
     public class ProxyFile : IFile
     {
