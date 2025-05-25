@@ -11,7 +11,7 @@ namespace Day15_Task.ProxyDesign_Task
 {
     public class ClientCode
     {
-        private static string path = "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\file.txt";
+        private static string path = "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_15/Day15_Task/file.txt";
         public void Start()
         {
 

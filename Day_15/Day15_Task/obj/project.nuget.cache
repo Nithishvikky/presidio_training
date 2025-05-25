@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "jmNUyxztTbM=",
+  "dgSpecHash": "bLftkzoTCMU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Day15_Task\\Day15_Task.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_15/Day15_Task/Day15_Task.csproj",
+  "expectedPackageFiles": [
+    "/Users/presidio/.nuget/packages/microsoft.netcore.app.ref/8.0.16/microsoft.netcore.app.ref.8.0.16.nupkg.sha512",
+    "/Users/presidio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.16/microsoft.aspnetcore.app.ref.8.0.16.nupkg.sha512",
+    "/Users/presidio/.nuget/packages/microsoft.netcore.app.host.osx-x64/8.0.16/microsoft.netcore.app.host.osx-x64.8.0.16.nupkg.sha512"
+  ],
   "logs": []
 }

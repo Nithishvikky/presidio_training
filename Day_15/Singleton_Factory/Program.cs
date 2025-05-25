@@ -6,7 +6,7 @@ namespace Singleton_Factory
 {
     public class Program
     {
-        public static string path = "C:\\Users\\DELL\\Desktop\\Work\\Day_15\\Singleton_Factory\\file.txt";
+        public static string path = "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_15/Day15_Task/file.txt";
         static void Main(string[] args)
         {
             Console.WriteLine("\n-------------Singleton Design-------------\n");
