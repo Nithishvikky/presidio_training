@@ -9,14 +9,16 @@ Patient
         body => {
                     "id": 101,
                     "name": "Nithish",
-                    "age": 20
+                    "age": 20,
+                    "gender": "male"
                 }
     Put     -   http://localhost:5035/api/patient/{id}
 
         body => {
                     "id": 101,
                     "name": "Nithish Vikky",
-                    "age": 22
+                    "age": 22,
+                    "gender": "male"
                 }
     Delete  -   http://localhost:5035/api/patient/{id}
 

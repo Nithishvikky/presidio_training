@@ -59,6 +59,7 @@ namespace FirstAPI.Controllers
             }
             patient.Name = p.Name;
             patient.Age = p.Age;
+            patient.Gender = p.Gender;
             return NoContent();
         }
     }

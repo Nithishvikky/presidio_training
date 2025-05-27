@@ -59,6 +59,8 @@ namespace FirstAPI.Controllers
                 return NotFound();
             }
             doc.Name = doctor.Name;
+            doc.Specialization = doctor.Specialization;
+            doc.Qualification = doctor.Qualification;
             return NoContent();
         }
     }
