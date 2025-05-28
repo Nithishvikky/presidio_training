@@ -6,3 +6,11 @@
 
 
 ![TwitterSchema](TwitterSchema.png)
+
+Commands and packages : 
+
+dotnet tool install --global dotnet-ef
+dotnet ef
+dotnet ef migrations add init
+
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.5
