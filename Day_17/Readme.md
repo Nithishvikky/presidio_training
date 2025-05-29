@@ -14,3 +14,8 @@ dotnet ef
 dotnet ef migrations add init
 
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.5
+dotnet add package Microsoft.AspNetCore.OpenApi --version 9.0.5
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 9.0.4
+dotnet add package Npgsql --version 9.0.3
+dotnet add package Swashbuckle.AspNetCore --version 8.1.2
+
