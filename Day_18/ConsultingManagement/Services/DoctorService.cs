@@ -1,11 +1,14 @@
 using ConsultingManagement.Interfaces;
 using ConsultingManagement.Models;
 using ConsultingManagement.Models.DTOs;
+using ConsultingManagement.Misc;
 
 namespace FirstAPI.Services
 {
     public class DoctorService : IDoctorService
     {
+        DoctorMapper doctorMapper ;
+        SpecialityMapper specialityMapper;
         private readonly IRepository<int, Doctor> _doctorRepository;
         private readonly IRepository<int, Speciality> _specialityRepository;
         private readonly IRepository<int, DoctorSpeciality> _doctorSpecialityRepository;
@@ -17,6 +20,8 @@ namespace FirstAPI.Services
             _doctorRepository = doctorRepository;
             _doctorSpecialityRepository = doctorSpecialityRepository;
             _specialityRepository = specialityRepository;
+            doctorMapper = new DoctorMapper();
+            specialityMapper = new SpecialityMapper();
         }
 
         public async Task<Doctor> AddDoctor(DoctorAddRequestDto doctor)

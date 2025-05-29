@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_17/ConsultingManagement/ConsultingManagement.csproj": {}
+    "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_18/ConsultingManagement/ConsultingManagement.csproj": {}
   },
   "projects": {
-    "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_17/ConsultingManagement/ConsultingManagement.csproj": {
+    "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_18/ConsultingManagement/ConsultingManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_17/ConsultingManagement/ConsultingManagement.csproj",
+        "projectUniqueName": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_18/ConsultingManagement/ConsultingManagement.csproj",
         "projectName": "ConsultingManagement",
-        "projectPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_17/ConsultingManagement/ConsultingManagement.csproj",
+        "projectPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_18/ConsultingManagement/ConsultingManagement.csproj",
         "packagesPath": "/Users/presidio/.nuget/packages/",
-        "outputPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_17/ConsultingManagement/obj/",
+        "outputPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_18/ConsultingManagement/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/presidio/.nuget/NuGet/NuGet.Config"
