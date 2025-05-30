@@ -6,6 +6,6 @@ namespace Bank.Models
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 
-        public ICollection<Account>? Accounts { get; set; }
+        public IEnumerable<Account>? Accounts { get; set; }
     }
 }

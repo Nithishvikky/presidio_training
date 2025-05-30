@@ -19,12 +19,13 @@ namespace Bank.Services
         public async Task<Account> CreateAccount(AccountAddRequestDto account)
         {
             var AddedAccount = new AccountMapper().MapAccount(account);
-            AddedAccount = await _accountRepository.Add(AddedAccount);
+            AddedAccount = await _accountRepository.Add(AddedAccount); // bal,userid
 
             AddedAccount.AccountNumber = GenerateAccountNumber(AddedAccount.Id);
             AddedAccount.User =await _userRepository.Get(AddedAccount.UserId);
             
             AddedAccount = await _accountRepository.Update(AddedAccount.Id, AddedAccount);
+        
 
             return AddedAccount;
         }

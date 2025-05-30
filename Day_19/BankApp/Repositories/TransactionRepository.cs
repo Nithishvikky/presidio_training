@@ -18,7 +18,7 @@ namespace Bank.Repositories
         {
             var transactions = _bankContext.Transactions;
             if (transactions.Count() == 0)
-                throw new Exception("No Accounts in the database");
+                throw new Exception("No transactions in the database");
             return (await transactions.ToListAsync());
         }
     }

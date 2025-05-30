@@ -11,6 +11,10 @@ namespace Bank.Repositories
         public async override Task<Account?> Get(int key)
         {
             var account = await _bankContext.Accounts.SingleOrDefaultAsync(a => a.Id == key);
+            if (account == null)
+            {
+                throw new Exception("No account found");
+            }
             return account;
         }
 
@@ -21,5 +25,15 @@ namespace Bank.Repositories
                 throw new Exception("No Accounts in the database");
             return (await accounts.ToListAsync());
         }
+
+        // public async Task<Account> GetAccountAsync(string AccNumber)
+        // {
+        //     var account = await _bankContext.Accounts.SingleOrDefault(a => a.AccountNumber.Equals(AccNumber));
+        //     if (account != null)
+        //     {
+        //         return account;
+        //     }
+        //     throw new Exception($"No account found {AccNumber}");
+        // }
     }
 }

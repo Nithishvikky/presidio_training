@@ -17,7 +17,7 @@ namespace Bank.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> AddUser([FromBody]UserAddRequestDto user)
+        public async Task<ActionResult<User>> AddUser([FromBody] UserAddRequestDto user)
         {
             try
             {
@@ -46,5 +46,11 @@ namespace Bank.Controllers
             return Ok(result);
         }
 
+        [HttpGet("userId")]
+        public async Task<ActionResult<ICollection<Account>>> GetAccountsByUserId(int Id)
+        {
+            var result = await _userService.GetAccounts(Id);
+            return Ok(result);
+        }
     }
 }

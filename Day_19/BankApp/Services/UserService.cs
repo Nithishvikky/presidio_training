@@ -9,9 +9,12 @@ namespace Bank.Services
     public class UserService : IUserService
     {
         private readonly IRepository<int, User> _userRepository;
-        public UserService(IRepository<int, User> userRepository)
+        private readonly IRepository<int, Account> _accountRepository;
+        public UserService(IRepository<int, User> userRepository,
+                            IRepository<int, Account> accountRepository)
         {
             _userRepository = userRepository;
+            _accountRepository = accountRepository;
         }
         public async Task<User> RegisterUser(UserAddRequestDto user)
         {
@@ -36,6 +39,14 @@ namespace Bank.Services
             var MatchedUsers = users.Where(u => u.FullName.Equals(name, StringComparison.OrdinalIgnoreCase));
 
             return MatchedUsers.ToList();
+        }
+
+        public async Task<ICollection<Account>> GetAccounts(int UserId)
+        {
+            var Allaccounts = await _accountRepository.GetAll();
+            var MatchAccounts = Allaccounts.Where(a => a.UserId == UserId);
+
+            return MatchAccounts.ToList();
         }
     }
 }

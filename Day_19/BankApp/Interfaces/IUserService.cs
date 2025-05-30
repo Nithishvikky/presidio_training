@@ -9,5 +9,7 @@ namespace Bank.Interfaces
         public Task<User> RegisterUser(UserAddRequestDto user);
         public Task<User> GetUserByEmail(string email);
         public Task<ICollection<User>> GetUserByName(string name);
+
+        public Task<ICollection<Account>> GetAccounts(int UserId); 
     }
 }

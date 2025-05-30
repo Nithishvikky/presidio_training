@@ -11,6 +11,10 @@ namespace Bank.Repositories
         public async override Task<User?> Get(int key)
         {
             var user = await _bankContext.Users.SingleOrDefaultAsync(a => a.Id == key);
+            if (user == null)
+            {
+                throw new Exception("No user found");
+            }
             return user;
         }
     
