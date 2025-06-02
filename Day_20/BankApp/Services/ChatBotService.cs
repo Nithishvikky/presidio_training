@@ -8,11 +8,12 @@ namespace Bank.Services
     public class ChatBotService
     {
         private readonly HttpClient _httpClient;
-        private const string _apiKey = "AIzaSyAtiyFA_YEjRorARL8wE9_oO3DsIbv7dZg";
+        private readonly string? _apiKey;
 
-        public ChatBotService(HttpClient httpClient)
+        public ChatBotService(HttpClient httpClient,IConfiguration configuration)
         {
             _httpClient = httpClient;
+            _apiKey = configuration["ApiSettings:ApiKey"];
         }
 
         public async Task<string> AskQuestion(string question)
