@@ -1,0 +1,195 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement.Test/ConsultingManagement.Test.csproj": {}
+  },
+  "projects": {
+    "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement.Test/ConsultingManagement.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement.Test/ConsultingManagement.Test.csproj",
+        "projectName": "ConsultingManagement.Test",
+        "projectPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement.Test/ConsultingManagement.Test.csproj",
+        "packagesPath": "/Users/presidio/.nuget/packages/",
+        "outputPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement.Test/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/presidio/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement/ConsultingManagement.csproj": {
+                "projectPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement/ConsultingManagement.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.12.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement/ConsultingManagement.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement/ConsultingManagement.csproj",
+        "projectName": "ConsultingManagement",
+        "projectPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement/ConsultingManagement.csproj",
+        "packagesPath": "/Users/presidio/.nuget/packages/",
+        "outputPath": "/Users/presidio/Library/CloudStorage/OneDrive-PresidioNetworkSolutions/Documents/Work/Day_22/ConsultingManagement/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/presidio/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[14.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[8.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
