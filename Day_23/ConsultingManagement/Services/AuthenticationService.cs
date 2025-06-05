@@ -1,7 +1,10 @@
 using ConsultingManagement.Interfaces;
 using ConsultingManagement.Models;
 using ConsultingManagement.Models.DTOs;
-
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace ConsultingManagement.Services
 {
@@ -51,22 +54,26 @@ namespace ConsultingManagement.Services
             };
         }
 
-    public async Task<UserLoginResponse> GoogleLogin(string email)
+    public async Task<UserLoginResponse>AuthenticateUser (AuthenticateResult result)
     {
-        var user = await _userRepository.Get(email);
-        if (user == null)
-        {
-            var newUser = new User{ Username = email };
-            await _userRepository.Add(newUser);
-            user = newUser;
-        }
-
-        var token = await _tokenService.GenerateToken(user);
-        return new UserLoginResponse
+        var name = result.Principal?.FindFirst(ClaimTypes.Name)?.Value;
+        var email = result.Principal?.FindFirst(ClaimTypes.Email)?.Value;
+ 
+ 
+        var user = new User()
         {
             Username = email,
-            Token = token,
+            Role = "Doctor"
         };
+ 
+        var token = await _tokenService.GenerateToken(user);
+ 
+        return new UserLoginResponse()
+        {
+            Username = name,
+            Token = token
+        };
+ 
     }
 
     }

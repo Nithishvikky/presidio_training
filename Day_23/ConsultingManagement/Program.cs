@@ -12,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using ConsultingManagement.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 
 
@@ -79,45 +81,35 @@ builder.Services.AddTransient<IAppointmentService, AppointmentService>();
 #endregion
 
 #region AuthenticationFilter
-builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
+                    };
+                });
+            
+builder.Services.AddAuthentication(opts =>
 {
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+    opts.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    opts.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
-    // Cookie scheme to store the JWT token or your app's main auth cookie
-    .AddCookie("AppCookie", options =>
-    {
-        options.Cookie.Name = "AppCookie";
-        options.Cookie.SameSite = SameSiteMode.Lax;  // Safari-friendly
-        options.Cookie.SecurePolicy = CookieSecurePolicy.None; // For localhost HTTP
-    })
-    // Cookie scheme specifically for external authentication correlation (Google)
-    .AddCookie("ExternalCookies", options =>
-    {
-        options.Cookie.Name = "ExternalCookies";
-        options.Cookie.SameSite = SameSiteMode.Lax;  // Crucial for Safari OAuth flow
-        options.Cookie.SecurePolicy = CookieSecurePolicy.None;
-    })
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateAudience = false,
-            ValidateIssuer = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
-        };
-    })
-    .AddGoogle(options =>
-    {
-        options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-        options.CallbackPath = "/signin-google";
-
-        // This line tells Google to store correlation cookie here during the OAuth flow
-        options.SignInScheme = "ExternalCookies";
-    });
+.AddCookie(options =>
+{
+    options.Cookie.SameSite = SameSiteMode.Lax; // Important for Safari
+    options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+})
+.AddGoogle(opts =>
+{
+    opts.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    opts.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    opts.CallbackPath = "/signin-google";
+});
 #endregion
 
 #region Authorization
