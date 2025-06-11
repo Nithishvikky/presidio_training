@@ -1,0 +1,21 @@
+.info{
+  margin: 32px;
+  border: 1px solid gray;
+  padding: 10px;
+  display: inline-block;
+  width: 200px;
+}
+.customer-details{
+  margin-bottom: 10px;
+}
+.customer-icons{
+  display: flex;
+  gap: 10px;
+}
+.card-btn{
+  font-size: 20px;
+  margin-right: 10px;
+}
+i{
+  margin-right: 4px;
+}
