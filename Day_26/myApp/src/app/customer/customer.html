@@ -1,0 +1,10 @@
+<div class="info">
+  <div class="customer-details">
+    <h3 class="customer-name">{{customers.Name}}</h3>
+    <p class="customer-email">{{customers.Email}}</p>
+  </div>
+  <div class="customer-icons">
+    <button class="card-btn" (click)="OnClickLike()"><i [class]="likeClass"></i><span>{{likes}}</span></button>
+    <button class="card-btn" (click)="OnClickDislike()"><i [class]="dislikeClass"></i><span>{{dislikes}}</span></button>
+  </div>
+</div>

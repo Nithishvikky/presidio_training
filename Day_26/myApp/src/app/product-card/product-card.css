@@ -1,0 +1,41 @@
+.Cart-logo{
+  display: inline-flex;
+  padding: 10px;
+  margin: 24px;
+}
+.bi-cart{
+  font-size: 40px;
+}
+#Cart-count{
+  background-color: red;
+  color: white;
+  height: fit-content;
+  padding: 2px 5px;
+  border-radius: 100%;
+}
+
+.card-container{
+  display: flex;
+  padding: 10px;
+}
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  width: 250px;
+  padding: 10px;
+  margin: 24px;
+}
+.card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.card-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

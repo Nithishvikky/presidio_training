@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('bootstrap-icons/font/bootstrap-icons.css');
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.card-btn{
+  padding: 10px;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.card-btn:hover{
+  opacity: 0.5;
+}
