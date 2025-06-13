@@ -1,0 +1,32 @@
+<html>
+    <body>
+        <h2>Document Sharing System</h2>
+        <div id="msgs">
+
+        </div>
+         <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+         <script>
+            const uploaderToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwMTk3Njg2ZS03YjFjLTcxMmYtODFmZC01ZDMzMTU4MzNhZGIiLCJlbWFpbCI6ImFydW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzQ5ODAzNzgyLCJleHAiOjE3NDk4MDQ2ODIsImlhdCI6MTc0OTgwMzc4Mn0.MdBQfFkjAz-XGarrIa1k70FoyFHt3VmS1aKH_Vq43JQ";
+                console.log(uploaderToken);
+                
+                const connection = new signalR.HubConnectionBuilder()
+                    .withUrl("http://localhost:5015/notificationhub", { 
+                        accessTokenFactory: () => uploaderToken
+                    })
+                    .withAutomaticReconnect()
+                    .build();
+
+                connection.on("DocumentViewed", (message) => {
+                    console.log(message);
+                    const placeHolder = document.getElementById("msgs");
+                    const content = document.createElement("p")
+                    content.innerHTML = message;
+                    placeHolder.append(content);
+                });
+
+                connection.start()
+                    .then(() => console.log("SignalR connected"))
+                    .catch(err => console.error("SignalR connection error: ", err));
+        </script>
+    </body>
+</html>
