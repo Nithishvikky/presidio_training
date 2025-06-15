@@ -1,13 +1,25 @@
 <html>
+    <link href="style.css" rel="stylesheet">
     <body>
         <h2>Document Sharing System</h2>
-        <div id="msgs">
 
-        </div>
+        <div id="loginFlag"></div>
+
+        <input id="inputbox" type="password" placeholder="Enter the token for login">
+        <button id="btn" onclick="UpdateToken()">Login</button>
+
+        <div id="msgs" style="padding: 1rem;"> </div>
          <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
          <script>
-            const uploaderToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwMTk3Njg2ZS03YjFjLTcxMmYtODFmZC01ZDMzMTU4MzNhZGIiLCJlbWFpbCI6ImFydW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzQ5ODAzNzgyLCJleHAiOjE3NDk4MDQ2ODIsImlhdCI6MTc0OTgwMzc4Mn0.MdBQfFkjAz-XGarrIa1k70FoyFHt3VmS1aKH_Vq43JQ";
+            function UpdateToken() {
+                console.log();
+                let uploaderToken = document.getElementById("inputbox").value;
                 console.log(uploaderToken);
+                document.getElementById("inputbox").value = "";
+
+                const LoginFlag = document.getElementById("loginFlag");
+                LoginFlag.className = "login-card";
+                LoginFlag.textContent = "Logged in";
                 
                 const connection = new signalR.HubConnectionBuilder()
                     .withUrl("http://localhost:5015/notificationhub", { 
@@ -19,14 +31,18 @@
                 connection.on("DocumentViewed", (message) => {
                     console.log(message);
                     const placeHolder = document.getElementById("msgs");
-                    const content = document.createElement("p")
-                    content.innerHTML = message;
-                    placeHolder.append(content);
+
+                    const card = document.createElement("div");
+                    card.className = "message-card";
+                    card.textContent = message;
+
+                    placeHolder.prepend(card);
                 });
 
                 connection.start()
                     .then(() => console.log("SignalR connected"))
                     .catch(err => console.error("SignalR connection error: ", err));
+            }
         </script>
     </body>
 </html>
