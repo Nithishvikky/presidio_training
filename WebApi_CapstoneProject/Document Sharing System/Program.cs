@@ -12,6 +12,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,6 +74,27 @@ builder.Services.AddDbContext<DssContext>(opts =>
     opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+    {
+        var user = httpContext.User;
+        var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
+                     ?? httpContext.Connection.RemoteIpAddress?.ToString() 
+                     ?? "anonymous";
+
+        return RateLimitPartition.GetFixedWindowLimiter(userId, _ => new FixedWindowRateLimiterOptions
+        {
+            PermitLimit = 3,
+            Window = TimeSpan.FromSeconds(10),
+            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+            QueueLimit = 0
+        });
+    });
+
+    options.RejectionStatusCode = 429;
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -97,6 +121,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         }
                     };
                 });
+
+
 
 #region Repositories
 builder.Services.AddTransient<IRepository<Guid, User>, UserRepository>();
@@ -147,6 +173,7 @@ app.UseAuthorization();
 app.UseCors();
 app.MapHub<NotificationHub>("/notificationhub");
 
+app.UseRateLimiter();
 app.MapControllers();
 
 app.Run();
