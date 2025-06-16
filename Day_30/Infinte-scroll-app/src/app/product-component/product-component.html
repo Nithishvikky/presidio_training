@@ -1,0 +1,9 @@
+@if(product){
+  <div class="card h-100" style="width: 18rem;">
+    <img class="card-img-top" [src]="product.thumbnail" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <button class="btn btn-primary">Buy for {{product.price | currency:'INR'}}</button>
+    </div>
+  </div>
+}
