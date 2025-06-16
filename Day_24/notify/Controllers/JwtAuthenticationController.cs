@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notify.Interfaces;
 using Notify.Models.DTOs;
@@ -9,11 +11,11 @@ namespace Notify.Controllers
 
     [ApiController]
     [Route("/api/[controller]")]
-    public class AuthenticationController : ControllerBase
+    public class JWtAuthenticationController : ControllerBase
     {
         private readonly IJwtAuthenticationService _authenticationService;
 
-        public AuthenticationController(IJwtAuthenticationService authenticationService)
+        public JWtAuthenticationController(IJwtAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
         }

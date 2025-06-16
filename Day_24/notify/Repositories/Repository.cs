@@ -17,7 +17,7 @@ namespace Notify.Repositories
         public async Task<T> Add(T item)
         {
             _notifyContext.Add(item);
-            await _notifyContext.SaveChangesAsync();//generate and execute the DML quries for the objects whse state is in ['added','modified','deleted'],
+            await _notifyContext.SaveChangesAsync();
             return item;
         }
 

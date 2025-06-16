@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -90,6 +92,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     };
                 });
 
+builder.Services.AddAuthentication(opts =>
+{
+    opts.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    opts.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddGoogle(opts =>
+{
+    opts.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    opts.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    opts.CallbackPath = "/signin-google";
+});
 
 builder.Services.AddCors(options =>
 {
@@ -102,6 +116,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthorization();
 builder.Services.AddSignalR();
 
 var app = builder.Build();
