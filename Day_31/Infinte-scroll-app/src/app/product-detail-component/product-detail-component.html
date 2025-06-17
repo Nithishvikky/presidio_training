@@ -1,0 +1,33 @@
+<app-menu-component></app-menu-component>
+<div class="container mt-4">
+  <div class="row">
+    <!-- Product Image -->
+    <div class="col-md-5 mb-3 text-center">
+      <img [src]="product.thumbnail" class="img-fluid rounded shadow-sm" alt="{{ product.title }}" style="max-height: 500px;">
+    </div>
+
+    <!-- Product Details -->
+    <div class="col-md-7">
+      <h2 class="fw-bold">{{ product.title }}</h2>
+      <p class="text-muted mb-2">{{ product.description }}</p>
+
+      <div class="mb-3">
+        <span class="fs-4 fw-semibold text-success">₹{{ product.price }}</span>
+        <span class="text-danger ms-3">-{{ product.discountPercentage }}% off</span>
+      </div>
+
+      <div class="mb-3">
+        <span class="badge bg-warning text-dark">⭐ {{ product.rating }}</span>
+      </div>
+
+      <div class="mb-3">
+        <strong>Brand:</strong> {{ product.brand }} <br>
+        <strong>Category:</strong> {{ product.category }} <br>
+        <strong>Stock:</strong> {{ product.stock }} <br>
+        <strong>Warranty:</strong> {{ product.warrantyInformation }}
+      </div>
+
+      <button class="btn btn-primary btn-lg mt-3">Buy Now</button>
+    </div>
+  </div>
+</div>

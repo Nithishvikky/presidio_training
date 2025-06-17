@@ -1,0 +1,26 @@
+<app-menu-component></app-menu-component>
+<div class="container">
+  <input type="text" class="inputBox" [(ngModel)]="searchString" (input)="searchProducts()" placeholder="Enter product name"/>
+   @if(IsProductNotAvailable){
+      <div class="box">Product not available</div>
+   }
+   @else{
+    <div class="row g-5 m-4">
+              @for (item of products; track item.id) {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+                  <app-product-component [product]="item" class="w-100 h-100"></app-product-component>
+                </div>
+              }
+    </div>
+   }
+   @if(loading){
+    <div>
+        <div class="spinner-border text-success" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+    }
+    @if(GoToTop){
+      <button class="btn btn-success rounded-circle position-fixed bottom-0 end-0 m-4 top" (click)="goToTop()">↑</button>
+    }
+</div>

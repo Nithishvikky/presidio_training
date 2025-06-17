@@ -1,0 +1,9 @@
+@if(product){
+  <div class="card h-100 d-flex flex-column align-items-center">
+    <img class="card-img-top img-fluid mb-3" [src]="product.thumbnail" alt="{{product.title}}">
+    <div class="card-body">
+      <h6 class="card-title text-center">{{product.title}}</h6>
+      <button class="btn btn-primary mt-auto" [routerLink]="['/products',product.id]">Buy for {{product.price | currency:'INR'}}</button>
+    </div>
+  </div>
+}
