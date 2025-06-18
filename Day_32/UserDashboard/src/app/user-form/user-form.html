@@ -1,0 +1,57 @@
+<form class="container mt-4" [formGroup]="registerForm" (ngSubmit)="handleSumbit()">
+  <div class="mb-3">
+    <label class="form-label">First Name</label>
+    <input type="text" class="form-control" formControlName="firstName" placeholder="example"/>
+  </div>
+  @if(registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid){
+    <div class="text-danger mt-1 mb-3">First Name is required.</div>
+  }
+
+  <div class="mb-3">
+    <label class="form-label">Last Name</label>
+    <input type="text" class="form-control"  formControlName="lastName" placeholder="example"/>
+  </div>
+  @if(registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid){
+    <div class="text-danger mt-1 mb-3">Last Name is required.</div>
+  }
+
+  <div class="mb-3">
+    <label class="form-label">Age</label>
+    <input type="number" class="form-control" formControlName="age" placeholder="18"/>
+  </div>
+  @if(registerForm.get('age')?.touched && registerForm.get('age')?.invalid){
+    <div class="text-danger mt-1 mb-3">Age should be greater than 0.</div>
+  }
+
+  <div class="mb-3">
+    <label class="form-label d-block">Gender</label>
+    <div class="form-check form-check-inline">
+      <input type="radio" class="form-check-input" formControlName="gender" id="male" value="Male"/>
+      <label for="male" class="form-check-label">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input type="radio" class="form-check-input" formControlName="gender" id="female" value="Female"  />
+      <label for="female" class="form-check-label">Female</label>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" formControlName="email" placeholder="example@gmail.com"/>
+  </div>
+  @if(registerForm.get('email')?.touched && registerForm.get('email')?.invalid){
+    <div class="text-danger mt-1 mb-3">Email is required.</div>
+  }
+
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" class="form-control" formControlName="password" placeholder="example123"/>
+  </div>
+  @if(registerForm.get('password')?.touched && registerForm.get('password')?.invalid){
+    <div class="text-danger mt-1 mb-3">Password is required.</div>
+  }
+
+  <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
+    Submit
+  </button>
+</form>

@@ -1,0 +1,25 @@
+<div class="container mt-4">
+
+  <h2 class="mb-4">User List</h2>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
+    @for (user of users; track user.email){
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+            <p class="card-text mb-1"><strong>Age:</strong> {{ user.age }}</p>
+            <p class="card-text mb-1"><strong>Gender:</strong> {{ user.gender }}</p>
+            <p class="card-text mb-1"><strong>Email:</strong> {{ user.email }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if(!users){
+    <div class="text-muted mt-4 text-center">
+      No users found.
+    </div>
+  }
+</div>
