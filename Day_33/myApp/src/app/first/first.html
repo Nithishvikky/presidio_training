@@ -1,0 +1,11 @@
+<p>Hello first work</p>
+<h2>Hello {{name}}</h2>
+
+<!-- property-binding -->
+<input type="text" #uname [value]="name"/>
+
+<input type="text" #uname [(ngModel)]="name"/>
+
+<button (click)="onButtonClick(uname.value)">Click Me</button>
+
+<i [class]="className" (click)="toggleLike()"></i>

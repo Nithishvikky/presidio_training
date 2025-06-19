@@ -1,0 +1,27 @@
+<button type="button" class="btn btn-primary">
+  Notifications <span class="badge badge-light">{{cartCount}}</span>
+</button>
+<input type="text" [(ngModel)]="searchString" (input)="handleSearchProducts()"/>
+  <div>
+        @if (cartCount>0) {
+            @for (item of cartItems; track item.Id) {
+            <li>{{item.Id}} -- {{item.Count}}</li>
+            }
+        }
+  </div>
+
+
+@if (!loading) {
+    <div class="fade-in">
+        @for (item of products; track item.id) {
+            <app-product (addToCart)="handleAddToCart($event)" [product]="item"></app-product>
+        }
+    </div>
+}
+@else {
+    <div>
+        <div class="spinner-border text-success" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+}
