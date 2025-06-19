@@ -1,7 +1,81 @@
-<div class="container mt-4" style="">
-  <canvas baseChart
-          [data]="pieChartData"
-          [options]="pieChartOptions"
-          [type]="pieChartType" class="pie">
-  </canvas>
+<div class="row g-4 align-items-center m-3">
+  <div class="col-md-3">
+    <input type="text" class="form-control"  placeholder="Search by name" [(ngModel)] = "selectedText" (ngModelChange)="updateChart()">
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" [(ngModel)] = "selectedGender" (ngModelChange)="updateChart()">
+      <option value="">All genders</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" [(ngModel)] = "selectedRole" (ngModelChange)="updateChart()">
+      <option value="">All Roles</option>
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+      <option value="moderator">Moderator</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" [(ngModel)] = "selectedState" (ngModelChange)="updateChart()">
+      <option value="">All States</option>
+      @for (state of availableStates; track state) {
+        <option [value]="state">{{ state }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+
+<div class="row g-3 align-items-center mt-5 mb-5">
+  <div class="col-md-5 m-2" style="height: 300px;">
+    <canvas baseChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="pieChartType" class="pie">
+    </canvas>
+  </div>
+  <div class="col-md-5 m-2" style="height: 200px;">
+    <canvas baseChart
+      [data]="barChartData"
+      [type]="barChartType"
+      [options]="barChartOptions">
+    </canvas>
+  </div>
+    <div class="col-md-11 m-5" style="height: 400px;">
+    <canvas baseChart
+      [data]="stateBarChartData"
+      [type]="stateBarChartType"
+      [options]="stateBarChartOptions">
+    </canvas>
+  </div>
+</div>
+
+
+<div class="container mt-4">
+
+  <h2 class="mb-4">User List</h2>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
+    @for (user of displayUsers; track user.email){
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+            <p class="card-text mb-1"><strong>Age:</strong> {{ user.age }}</p>
+            <p class="card-text mb-1"><strong>Gender:</strong> {{ user.gender }}</p>
+            <p class="card-text mb-1"><strong>Role:</strong> {{ user.role }}</p>
+            <p class="card-text mb-1"><strong>State:</strong> {{ user.state }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if(displayUsers.length == 0){
+    <div class="text-muted mt-4 text-center mb-4">
+      No users found.
+    </div>
+  }
 </div>

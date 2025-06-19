@@ -32,8 +32,9 @@ export class UserForm {
     this.userService.postUser(this.registerForm.value).subscribe({
       next:(res)=>{
         console.log("User created sucessfully",res);
+        alert("User registered sucessfully.");
         this.registerForm.reset();
-        
+
       },
       error:(err)=>{
         console.error("Erroe while creating user",err);
