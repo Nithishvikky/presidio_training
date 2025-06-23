@@ -1,0 +1,17 @@
+<h1 class="text-primary text-center mt-3">Recipes List</h1>
+@if (recipes().length>0) {
+    <div class="container mt-4 mb-4">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (item of recipes(); track item.id) {
+          <div class="col">
+            <app-recipe [recipe]="item"></app-recipe>
+          </div>
+        }
+      </div>
+    </div>
+}
+@else {
+    <h4 class="m-5 text-muted text-center">
+        No recipes available
+    </h4>
+}

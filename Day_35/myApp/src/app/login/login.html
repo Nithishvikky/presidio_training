@@ -1,0 +1,5 @@
+<form (submit)="OnSubmitClick($event)">
+  <label>UserName : </label><input type="text" [(ngModel)]="Crendential.Username" name="username" placeholder="Enter username">
+  <label>Password : </label><input type="password" [(ngModel)]="Crendential.Password" name="password" placeholder="Enter password">
+  <button type="submit">Login</button>
+</form>
