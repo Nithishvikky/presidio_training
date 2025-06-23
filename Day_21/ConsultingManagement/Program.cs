@@ -70,7 +70,8 @@ builder.Services.AddTransient<IOtherContextFunctionities, OtherFuncinalitiesImpl
 builder.Services.AddTransient<IEncryptionService, EncryptionService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
-builder.Services.AddTransient<IPatientService,PatientService> ();
+builder.Services.AddTransient<IPatientService, PatientService>();
+builder.Services.AddTransient<IFileProcessingService, FileProcessingService>();
 #endregion
 
 #region AuthenticationFilter
