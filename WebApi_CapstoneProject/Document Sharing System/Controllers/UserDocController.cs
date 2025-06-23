@@ -30,11 +30,22 @@ namespace DSS.Controllers
         public async Task<ActionResult<UserDocument>> UploadDocument(IFormFile file)
         {
             if (file == null || file.Length == 0)
+            {
                 return BadRequest(new ErrorObjectDto
                 {
                     ErrorNumber = 500,
                     ErrorMessage = "Invalid file"
                 });
+            }
+            
+            if (file.Length > 10 * 1024 * 1024) // 10MB
+            {
+                return BadRequest(new ErrorObjectDto
+                {
+                    ErrorNumber = 413,
+                    ErrorMessage = "File too large"
+                });
+            }
 
             var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
