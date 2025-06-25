@@ -1,0 +1,14 @@
+<div class="card h-100" >
+  <img [src]="recipe?.image" class="card-img-top" style="object-fit: cover; max-height: 100px;">
+  <div class="card-body">
+    <h5 class="card-title text-primary">{{recipe?.name}}</h5>
+    <h6 class="card-text mb-2 text-muted">Cuisine : {{recipe?.cuisine}}</h6>
+    <p class="card-text">Cook Time : {{recipe?.cookTimeMinutes}} mins</p>
+  </div>
+  <h6 class="ms-3">Ingredients : </h6>
+  <ul class="list ms-3">
+    <li class="list-group-item" *ngFor="let ingredient of recipe?.ingredients">
+      - {{ingredient}}
+    </li>
+  </ul>
+</div>
