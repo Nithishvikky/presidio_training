@@ -1,0 +1,113 @@
+<div class="container mt-4">
+  <div class="row">
+    <h4 class="fw-bold mb-4">{{filename}}<i class="bi bi-download mx-2 downloadIcon" title="click to download" (click)="onDownload()"></i></h4>
+    <!-- Left section -->
+  @if(!roleFlag){
+    <div class="col-lg-8">
+      <div class="mb-4">
+        <button class="btn btn-primary me-2" (click)="GrantPermissionForAll()">Grant Access for All</button>
+        <button class="btn border" id="revokeAll-btn" (click)="RevokePermissionForAll()">Revoke Access for All</button>
+      </div>
+
+      <div class="input-group mb-4">
+        <input type="email" class="form-control" placeholder="Enter email to grant access" [(ngModel)]="userEmailForGrant">
+        <button class="btn btn-primary" (click)="GrantPermissionToUser()">Grant</button>
+      </div>
+
+      <h5 class="fw-semibold mt-5">Users with Access</h5>
+      <div class="table-wrapper">
+      @if(fileSharedUsers && fileSharedUsers.length > 0){
+        <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
+          <caption>Users with access</caption>
+          <thead>
+            <tr>
+              <th class="ps-3 py-3">User</th>
+              <th class="py-3">Email</th>
+              <th class="py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(users of fileSharedUsers; track users.id){
+              <tr>
+                <td class="ps-3 py-3">{{users.userName}}</td>
+                <td class="text-primary py-3">{{users.email}}</td>
+                <td class="revoke fw-semibold py-3" (click)="RevokePermissionToUser(users.email)">Revoke</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+      @else{
+        <div class="text-secondary text-center small mt-3">No user have the Access for this document</div>
+      }
+      </div>
+      <h5 class="fw-semibold mt-5">View Logs</h5>
+      <div class="table-wrapper">
+      @if(fileViewers && fileViewers.length > 0){
+        <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
+          <caption>Views of document</caption>
+          <thead>
+            <tr>
+              <th class="ps-3 py-3">Viewer</th>
+              <th class="py-3">View Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(viewer of fileViewers; track viewer.docViewId){
+              <tr>
+                <td class="ps-3 py-3">{{viewer.viewerName}}</td>
+                <td class="py-3" style="color: #637387;">{{viewer.viewedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
+              </tr>
+            }
+            <!-- More logs -->
+          </tbody>
+        </table>
+      }
+      @else{
+        <div class="text-secondary text-center small mt-3">No user viewed this document</div>
+      }
+      </div>
+
+    </div>
+  }
+    <!-- Right section -->
+  @if(fileData){
+    <div class="col-lg-4">
+      <div class="border mb-3 shadow" style="width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;">
+        @if(fileData.contentType.includes("image")){
+          <img *ngIf="iframeSrc" [src]="iframeSrc" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;"/>
+        }
+        @else{
+          <iframe *ngIf="iframeSrc" [src]="iframeSrc" style="width: 90%; height: 90%; border: none;"></iframe>
+        }
+        <div *ngIf="!iframeSrc" class="text-center text-muted h5 fw-semibold">No Preview Available</div>
+      </div>
+      <div class="container">
+        <h5 class="fw-semibold">Metadata</h5>
+        <div class="text-secondary small">Uploaded at</div>
+        <div class="mt-1 mb-2">{{fileData.uploadedAt | date: 'yyyy-MM-dd'}}</div>
+        <div class="text-secondary small">Size</div>
+        <div>{{fileData.size}} KB</div>
+        <div class="text-secondary small">Type</div>
+        <div class="mt-1 mb-2">{{fileData.contentType}}</div>
+      </div>
+    </div>
+  }
+  </div>
+</div>
+
+
+<!-- Toast -->
+<div id="liveToast" class="toast align-items-center text-white position-fixed top-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Placeholder message
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+
+<!-- Watermark to indicate user/admin it's a secured file only thy can see -->
+<div class="page-watermark">
+  <i class="bi bi-shield-lock-fill"></i>
+</div>

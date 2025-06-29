@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h1 class="fw-semibold">All Documents</h1>
+  </div>
+  <form [formGroup]="filterForm" class="d-flex gap-3 align-items-center mt-2">
+    <div class="form-floating mt-3">
+      <input type="email" class="form-control" id="userEmailInput" placeholder="User Email" formControlName="userEmail">
+      <label for="userEmailInput">User Email</label>
+    </div>
+    <div class="form-floating mt-3">
+      <input type="text" class="form-control" id="filenameInput" placeholder="Filename" formControlName="filename">
+      <label for="filenameInput">Filename</label>
+    </div>
+    <div class="btn btn-secondary btn-sm mt-3" (click)="clearFilters()">Clear filters</div>
+  </form>
+  @if(documents && documents.length>0){
+    <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
+      <caption>List of Documents</caption>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="ps-4 py-4" (click)="onSortby($event)" id="username">Username
+            <i [ngClass]="sortBy != 'username' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
+          </th>
+          <th scope="col" class="py-4" id="email" (click)="onSortby($event)">Email
+            <i [ngClass]="sortBy != 'email' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
+          </th>
+          <th scope="col" class="py-4" id="filename" (click)="onSortby($event)">File Name
+            <i [ngClass]="sortBy != 'filename' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
+          </th>
+          <th scope="col" class="py-4" id="uploadedat" (click)="onSortby($event)">Uploaded at
+            <i [ngClass]="sortBy != 'uploadedat' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(document of documents; track document.docId){
+          <tr >
+            <td scope="row" class="ps-4 py-4">{{document.uploaderUsername}}</td>
+            <td scope="row" class="py-4" style="color: #637387;">{{document.uploaderEmail}}</td>
+            <td scope="row" class="py-4">{{document.fileName}}</td>
+            <td class="py-4" style="color: #637387;">{{document.uploadedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+  @else {
+    <div class="text-secondary text-center mt-3">No documents available</div>
+  }
+</div>
+

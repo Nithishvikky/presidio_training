@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h1 class="fw-semibold">My Documents</h1>
+    <button class="btn border px-3 py-1 fw-medium" data-bs-toggle="modal" data-bs-target="#uploadModal" id="upload-btn"><i class="bi bi-upload me-2"></i>Upload</button>
+  </div>
+  @if(documents && documents.length>0){
+    <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
+      <caption>List of Documents</caption>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="ps-4 py-4">File Name</th>
+          <th scope="col" class="py-4">Uploaded at</th>
+          <th scope="col" class="py-4">Last viewer</th>
+          <th scope="col" class="py-4">Delete</th>
+          <th scope="col" class="py-4">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(document of documents; track document.docId){
+          <tr >
+            <td scope="row" class="ps-4 py-4">{{document.fileName}}</td>
+            <td class="py-4" style="color: #637387;">{{document.uploadedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
+            <td class="py-4" style="color: #637387;">{{document.lastViewerName || '-'}}</td>
+            <td class="py-4 remove fw-semibold" (click)="onFileDelete(document.fileName)">Remove</td>
+            <td class="py-4 details fw-semibold" [routerLink]="['/main/document',document.fileName]" [queryParams]="{ue : document.uploaderEmail}">Details</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+  @else {
+    <div class="text-secondary text-center mt-3">No documents has been uploaded</div>
+  }
+</div>
+
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload Document</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+        <div class="modal-body">
+            <div class="mb-3">
+              <label for="fileInput" class="form-label">Select a file</label>
+              <input #fileInput class="form-control" type="file" id="fileInput" name="documentFile" (change)="onFileSelected($event)" value="selectedFile" required>
+            </div>
+            @if(fileSizeFlag){
+              <div class="text-danger mx-2 mb-2 small">File size should be less than 10MB</div>
+            }
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onUploadCancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!selectedFile"   [ngStyle]="!selectedFile ? {'cursor': 'not-allowed'} : {'cursor': 'pointer'}" (click)="onUpload()">Upload</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="liveToast" class="toast align-items-center text-white position-fixed top-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Placeholder message
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>

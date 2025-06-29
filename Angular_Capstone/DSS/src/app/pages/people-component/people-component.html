@@ -1,0 +1,63 @@
+<div class="container mt-2">
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h1 class="fw-semibold">Community</h1>
+  </div>
+  <form [formGroup]="filterForm" class="d-flex gap-3 align-items-center mt-2">
+    <div class="form-floating mt-3">
+      <input type="email" class="form-control" id="userEmailInput" placeholder="User Email" formControlName="userEmail">
+      <label for="userEmailInput">User Email</label>
+    </div>
+    <div class="form-floating mt-3">
+      <input type="text" class="form-control" id="usernameInput" placeholder="username" formControlName="userName">
+      <label for="usernameInput">Username</label>
+    </div>
+    <div class="form-floating mt-3" id="roleInput">
+            <select class="form-select" formControlName="filterBy">
+              <option selected value="">All</option>
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+            </select>
+            <label for="roleInput">Roles</label>
+    </div>
+    <div class="btn btn-secondary btn-sm mt-3" (click)="clearFilters()">Clear filters</div>
+  </form>
+  @if(users && users.length>0){
+    <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
+      <caption>List of Documents</caption>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="ps-4 py-4" (click)="onSortby($event)" id="username">Username
+            <i [ngClass]="sortBy != 'username' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
+          </th>
+          <th scope="col" class="py-4" id="email" (click)="onSortby($event)">Email
+            <i [ngClass]="sortBy != 'email' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
+          </th>
+          <th scope="col" class="py-4">Role</th>
+          <th scope="col" class="py-4" id="registeredat" (click)="onSortby($event)">Registered At
+            <i [ngClass]="sortBy != 'registeredat' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(user of users; track user.userId){
+          <tr >
+            <td scope="row" class="ps-4 py-4">{{user.username}}</td>
+            <td scope="row" class="py-4" style="color: #637387;">{{user.email}}</td>
+            <td scope="row" class="py-4" style="color: #637387;">{{user.role}}</td>
+            <td class="py-4" style="color: #637387;">{{user.registeredAt| date: 'yyyy-MM-dd HH:mm'}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <button [ngClass]="pageNumber === 1 ? 'btn btn-outline-secondary btn-sm disabled' : 'btn btn-secondary btn-sm' " (click)="prevPage()">‹ Prev</button>
+      <span class="border p-1 rounded">{{pageNumber}}</span>
+      <button [ngClass]="pageNumber == totalPages ? 'btn btn-outline-secondary btn-sm disabled' : 'btn btn-secondary btn-sm' " (click)="nextPage()">Next ›</button>
+
+    </div>
+
+  }
+  @else {
+    <div class="text-secondary text-center mt-3">No users available</div>
+  }
+</div>

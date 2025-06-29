@@ -1,0 +1,10 @@
+.details{
+  color: #6B7280;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.details:hover{
+  color: black;
+}

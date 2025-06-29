@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg p-3">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <span class="navbar-brand mb-0 h1 position-relative" data-bs-toggle="modal" data-bs-target="#notificationModal" style="cursor: pointer;" (click)="OnModalNotification()">
+    <i class="bi bi-folder-symlink-fill mx-1"></i>DSS
+    @if(UnseenNotification > 0){
+      <span  class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">
+        {{ UnseenNotification }}
+      </span>
+    }
+  </span>
+  <div #navbarCollapse class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link mx-2"  routerLink="/main/home" routerLinkActive="active" (click)="collapseNavbar()">Home</a>
+      @if(role === 'Admin'){
+        <a class="nav-item nav-link mx-2"  routerLink="/main/mydocuments" routerLinkActive="active" (click)="collapseNavbar()">My Documents</a>
+      }
+      @if(role === 'User'){
+        <a class="nav-item nav-link mx-2"  routerLink="/main/documentsforme" routerLinkActive="active" (click)="collapseNavbar()">My Documents</a>
+      }
+      <a class="nav-item nav-link mx-2"  routerLink="/main/alldocuments" (click)="collapseNavbar()" routerLinkActive="active">All Documents</a>
+      <a class="nav-item nav-link mx-2"  routerLink="/main/community" (click)="collapseNavbar()" routerLinkActive="active">Community</a>
+      @if(!collapsed){
+      <div class="nav-item dropdown mx-2 position-relative" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()" style="cursor: pointer;">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-person-circle fs-3" id="avatar"></i>
+          <div class="mx-1">{{username}}</div>
+        </div>
+        @if(isDropdownOpen){
+        <div
+          class="dropdown-menu dropdown-menu-end show mt-2"
+          style="position: absolute; z-index: 1050; right: 0;"
+        >
+          <a class="dropdown-item" routerLink="/main/profile" (click)="closeDropdown()" style="cursor: pointer;" routerLinkActive="active">Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-danger" (click)="OnSignOut()" style="cursor: pointer;">Sign Out</a>
+        </div>
+        }
+      </div>
+      }
+      @else {
+        <a class="nav-item nav-link mx-2"  routerLink="/main/profile" (click)="collapseNavbar()" routerLinkActive="active">Profile</a>
+        <a class="nav-item nav-link mx-2"  (click)="OnSignOut()">Sign Out</a>
+      }
+    </div>
+  </div>
+</nav>
+
+<app-notification-modal-component></app-notification-modal-component>

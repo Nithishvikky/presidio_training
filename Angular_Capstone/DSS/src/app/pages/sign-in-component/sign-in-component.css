@@ -1,0 +1,22 @@
+.fpass,.fsignup{
+  color: #6B7280;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.fpass:hover,.fsignup:hover{
+  color: black;
+}
+
+.signinContainer{
+  max-width: 500px;
+}
+
+#show-password{
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

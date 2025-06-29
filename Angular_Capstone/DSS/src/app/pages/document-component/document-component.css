@@ -1,0 +1,62 @@
+#revokeAll-btn{
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+#revokeAll-btn:hover{
+  border: none;
+  background-color: #000;
+  color: #ffff;
+}
+
+.revoke{
+  color: #6B7280;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.revoke:hover{
+  color: black;
+}
+
+#input-box{
+  width: 50%;
+}
+
+.table-wrapper {
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 6px;
+}
+
+.table-wrapper thead th {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.downloadIcon{
+  background-color: #6B7280;
+  padding: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 100%;
+  color: white;
+  cursor: pointer;
+}
+
+.downloadIcon:hover{
+  opacity: 0.75;
+}
+
+.page-watermark {
+  position: absolute;
+  font-size: 10rem;
+  opacity: 0.05;
+  right: 1rem;
+  bottom: 1rem;
+  pointer-events: none;
+}

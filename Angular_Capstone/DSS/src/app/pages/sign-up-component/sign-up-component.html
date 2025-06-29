@@ -1,0 +1,79 @@
+<div class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="container p-5 border shadow-md signupContainer">
+      <h4 class="fw-bold mb-4 text-center">Sign up to DSS</h4>
+      <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+        <div class="form-floating mt-3">
+          <input type="text" maxlength="7" class="form-control" id="usernameInput" formControlName="username" placeholder="Username" >
+          <label for="usernameInput">Username</label>
+        </div>
+          @if(registerForm.get('username')?.touched && registerForm.get('username')?.errors){
+            @if(registerForm.get('username')?.errors?.['required']){
+              <div class="text-danger mx-2 mb-2 small">User Name is required.</div>
+            }
+          }
+
+          <div class="form-floating mt-3" id="roleInput">
+            <select class="form-select" formControlName="role">
+              <option disabled selected value="">Select a role</option>
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+            </select>
+            <label for="roleInput">Roles</label>
+          </div>
+          @if(registerForm.get('role')?.touched && registerForm.get('role')?.errors){
+            @if(registerForm.get('role')?.errors?.['required']){
+              <div class="text-danger mx-2 mb-2 small">Role is required</div>
+            }
+          }
+
+        <div class="form-floating mt-3">
+          <input type="email" class="form-control" id="emailInput" formControlName="email" placeholder="Email">
+          <label for="emailInput">Email</label>
+        </div>
+        @if(registerForm.get('email')?.touched && registerForm.get('email')?.errors){
+          @if(registerForm.get('email')?.errors?.['required']){
+            <div class="text-danger mx-2 mb-2 small">Email is required.</div>
+          }
+          @else if(!registerForm.get('email')?.errors?.['invalidDomain']){
+            <div class="text-danger mx-2 mb-2 small">Email domain invalid</div>
+          }
+        }
+
+        <div class="form-floating mt-3">
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="passwordInput" formControlName="password" placeholder="Password">
+          <label for="passwordInput">Password</label>
+           <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'" (click)="togglePasswordVisibility()" id="show-password"></i>
+        </div>
+          @if(registerForm.get('password')?.touched && registerForm.get('password')?.errors){
+            @if(registerForm.get('password')?.errors?.['required']){
+              <div class="text-danger mx-2 mb-2 small">Password is required.</div>
+            }
+            @else if(registerForm.get('password')?.errors?.['passwordStrength']){
+              <div class="text-danger mx-2 mb-2 small">Password must be 8 character and should have symbol, numbers.</div>
+            }
+          }
+
+        <div class="form-floating mt-3">
+          <input type="password" class="form-control" formControlName="confirmPassword" id="cpasswordInput" placeholder="confirm password"/>
+          <label for="cpasswordInput">Confirm Password</label>
+        </div>
+
+        @if(registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched){
+          <div class="text-danger mx-2 mb-2 small">Password doesn't match</div>
+        }
+
+        <button class="btn btn-primary mt-3 w-100" [disabled]="registerForm.invalid">Sign up</button>
+      </form>
+      <div class="small text-center fsignin mt-2">Already have an account? <a class="fsignin" routerLink="/auth/signin">Sign in</a></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="liveToast" class="toast align-items-center text-white position-fixed top-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Placeholder message
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
