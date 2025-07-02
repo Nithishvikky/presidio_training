@@ -1,12 +1,16 @@
-<div class="container mt-2">
-  <div>
+<div class="container mt-5 mb-5">
+  <!-- Welcome Section -->
+  <div class="mb-4">
     <h2>Welcome, {{ User?.username }}!</h2>
-    <p class="text-muted">You’re logged in as a <strong>{{ User?.role }}</strong>. Let’s get you started.</p>
+    <p class="text-muted">
+      You’re logged in as a <strong>{{ User?.role }}</strong>. Let’s get you started. </p>
+    <div class="alert alert-info mt-3">
+      <i class="bi bi-lightbulb"></i>
+      {{ User?.role === 'Admin' ? 'You can manage access of each document in the Documents section.' :'Check your shared documents regularly for updates.' }}
+    </div>
   </div>
-  <div class="alert alert-info mt-4">
-  <i class="bi bi-lightbulb"></i> {{ User?.role === 'Admin' ? "You can manage access of each document in the Documents section." : "Check your shared documents regularly for updates." }}
-  </div>
-  <div class="d-flex flex-wrap gap-3 mt-4">
+
+  <div class="d-flex flex-wrap gap-3 mb-4">
     @if(User?.role === 'Admin'){
       <button class="btn btn-outline-secondary" routerLink="/main/community">Manage Users</button>
       <button class="btn btn-primary" routerLink="/main/mydocuments">Go to My Documents</button>
@@ -16,4 +20,79 @@
     }
   </div>
 
+  <div class="row mt-5">
+
+    <div class="col-md-7">
+      <div class="row g-3">
+        @if(data){
+          <div class="col-sm-6">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Total Users</h6>
+                <h4 class="fw-bold">{{ data.totalUsers }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Total Documents</h6>
+                <h4 class="fw-bold">{{ data.totalDocuments }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Users</h6>
+                <h4 class="fw-bold text-success">{{ data.totalUserRole }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Admins</h6>
+                <h4 class="fw-bold text-primary">{{ data.totalAdmin }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Total Shares</h6>
+                <h4 class="fw-bold text-warning">{{ data.totalShared }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Total Views</h6>
+                <h4 class="fw-bold text-danger">{{ data.totalViews }}</h4>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-md-5 mt-4 mt-md-0">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title">Community Stats</h6>
+          @if(data){
+            <div style="height: 250px;">
+              <canvas baseChart
+                [data]="pieChartData"
+                [options]="pieChartOptions"
+                [type]="pieChartType">
+              </canvas>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -31,10 +31,10 @@ export class PeopleComponent {
     })
 
     this.userService.users$.subscribe((user:any) =>{
-      console.log(user);
-      console.log(user.items.$values);
-      this.totalPages = user.totalPages;
-      this.users = user.items.$values;
+      if(user){
+        this.totalPages = user.totalPages;
+        this.users = user.items.$values;
+      }
     })
 
     const values = this.filterForm.value;

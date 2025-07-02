@@ -31,10 +31,11 @@ export class MydocumentComponent {
   loadDocuments(){
     this.documentService.GetAllDocuments().subscribe({
       next:(res:any)=>{
+        console.log(res);
         this.documents = res.data.$values;
       },
       error:(err)=> {
-        console.error(err);
+        console.log(err);
       },
     })
   }
@@ -56,7 +57,7 @@ export class MydocumentComponent {
   onFileDelete(filename:string){
     this.documentService.DeleteDocument(filename).subscribe({
       next:(res) =>{
-        console.log(res);
+        console.log(filename);
         this.showToast("File Deleted Succefully","danger");
       },
       error:(err)=>{
@@ -75,28 +76,15 @@ export class MydocumentComponent {
     this.documentService.PostDocument(formData).subscribe({
       next:(res) =>{
         console.log(res);
-        this.modalCloseFunc();
+        this.onUploadCancel();
         this.showToast("File Uploaded Succefully","success");
       },
       error:(err)=>{
         console.error(err);
-        this.modalCloseFunc();
+        this.onUploadCancel();
         this.showToast(err.error.error.errorMessage,"danger");
       }
     })
-  }
-  modalCloseFunc(){
-    const modalEl = document.getElementById('uploadModal')!;
-    let modal = Modal.getInstance(modalEl) || new Modal(modalEl);
-    modal.hide();
-
-    document.body.classList.remove('modal-open');
-    document.querySelectorAll('.modal-backdrop')?.forEach(el => el.remove());
-
-    this.selectedFile = null;
-    if (this.fileInput) {
-      this.fileInput.nativeElement.value = '';
-    }
   }
 
   onUploadCancel():void{

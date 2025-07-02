@@ -33,13 +33,13 @@ export const routes: Routes = [
     canActivate:[AuthGuard],
     data:{roles:['Admin','User']},
     children:[
-      {path:'home',component:HomeComponent},
+      {path:'home',component:HomeComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
       {path:'mydocuments',component:MydocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin']}},
       {path:'documentsforme',component:DocumentSharedComponent,canActivate:[AuthGuard],data:{roles:['User']}},
-      {path:'document/:filename',component:DocumentComponent},
-      {path:'alldocuments',component:AllDocumentsComponent},
-      {path:'community',component:PeopleComponent},
-      {path:'profile',component:ProfileComponent}
+      {path:'document/:filename',component:DocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
+      {path:'alldocuments',component:AllDocumentsComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
+      {path:'community',component:PeopleComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
+      {path:'profile',component:ProfileComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}}
     ],
   },
   { path: '**', redirectTo: '' }

@@ -18,6 +18,11 @@
         <p><strong>Documents Uploaded : </strong>{{ user.documentCount}}</p>
       </div>
       }
+      @else {
+      <div class="col-md-6 mb-3 text-center">
+        <p><strong>Documents Shared with me : </strong>{{ documentShared}}</p>
+      </div>
+      }
       <div class="col-md-6 mb-3 text-center">
         <p><strong>Updated At : </strong>{{ user.updatedAt | date: 'yyyy-MM-dd hh:mm' }}</p>
       </div>
@@ -63,7 +68,7 @@
               <div class="text-danger mx-2 mb-2 small">Password must be 8 character and should have symbol, numbers.</div>
             }
           }
-          <button class="btn btn-primary mt-3 w-100" [disabled]="passwordChangeForm.invalid">Change Password</button>
+          <button class="btn btn-primary mt-3 w-100" data-bs-dismiss="modal" [disabled]="passwordChangeForm.invalid">Change Password</button>
           </form>
       </div>
     </div>

@@ -55,6 +55,7 @@ export class DocumentComponent implements OnInit{
         }})
 
       this.documentAccesService.sharedUsers$.subscribe(users =>{
+        console.log(users);
         this.fileSharedUsers = users;
       })
       this.documentAccesService.GetSharedUsers(this.filename).subscribe();
@@ -151,7 +152,7 @@ export class DocumentComponent implements OnInit{
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
-    
+
     this.showToast("File downloaded sucessfully!","success");
   }
 

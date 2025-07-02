@@ -9,5 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './loader-component.css'
 })
 export class LoaderComponent {
+
   constructor(public loaderService:LoaderService){}
 }

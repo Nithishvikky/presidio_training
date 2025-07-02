@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from '../../validators/PasswordValidator';
 import { Modal, Toast } from 'bootstrap';
+import { NotificationService } from '../../services/notification.service';
+import { DocumentService } from '../../services/document.service';
+import { DocumentAccessService } from '../../services/documentAccess.service';
 
 @Component({
   selector: 'app-profile-component',
@@ -16,11 +19,14 @@ import { Modal, Toast } from 'bootstrap';
 export class ProfileComponent {
   user:UserResponseDto | null = null;
   passwordChangeForm!:FormGroup;
+  refreshToken:string="";
   userEmail:string="";
+  documentShared:number = 0;
 
   @ViewChild('PasswordInput') PasswordInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private userService:UserService,private route:Router){
+  constructor(private userService:UserService,private route:Router,private notifyService:NotificationService,
+    private documentService:DocumentService,private documentAccessService:DocumentAccessService){
     this.passwordChangeForm = new FormGroup({
       OldPassword:new FormControl(null,[Validators.required,Validators.minLength(8)]),
       NewPassword:new FormControl(null,[Validators.required,Validators.minLength(8),passwordValidator()])
@@ -32,6 +38,13 @@ export class ProfileComponent {
     if(auth_data){
       this.userEmail = JSON.parse(auth_data).email;
       this.userService.GetUser(JSON.parse(auth_data).email).subscribe();
+
+      if(JSON.parse(auth_data).role === "User"){
+        this.documentAccessService.GetDocumentShared().subscribe();
+        this.documentAccessService.sharedFiles$.subscribe(documents=>{
+          if(documents) this.documentShared = documents.length;
+        })
+      }
     }
     this.userService.CurrentUser$.subscribe(user=>{
       this.user = user;
@@ -40,15 +53,29 @@ export class ProfileComponent {
   }
 
   OnSignOut(){
-    localStorage.clear();
-    this.route.navigateByUrl('/auth/signin');
+    let auth_data = localStorage.getItem("authData");
+    if(auth_data){
+      this.refreshToken = JSON.parse(auth_data).refreshToken;
+    }
+    this.userService.LogoutUser(this.refreshToken).subscribe({
+      next:(res:any)=>{
+        localStorage.clear();
+        this.userService.clearUserCache();
+        this.notifyService.clearNotification();
+        this.documentService.clearDocumentCaches();
+        this.showToast(res.data,"success");
+        setTimeout(()=>{
+          this.route.navigateByUrl('/auth/signin');
+        },2000)
+      }
+    })
   }
+
   handleSubmit() {
     if(this.passwordChangeForm.invalid) return;
     this.userService.ChangePassword(this.passwordChangeForm.value,this.userEmail).subscribe({
       next:(res:any)=>{
         this.showToast("Password updated successfully","success");
-        this.modalCloseFunc();
         this.clearInput();
         setTimeout(()=>{
           localStorage.clear();
@@ -56,7 +83,6 @@ export class ProfileComponent {
         },2000)
       },
       error:(err)=>{
-        this.modalCloseFunc();
         this.passwordChangeForm.reset({
           OldPassword: null,
           NewPassword: null
@@ -65,15 +91,6 @@ export class ProfileComponent {
         this.showToast(err.error.error.errorMessage,"danger");
       }
     })
-  }
-
-  modalCloseFunc(){
-    const modalEl = document.getElementById('passwordModal')!;
-    let modal = Modal.getInstance(modalEl) || new Modal(modalEl);
-    modal.hide();
-
-    document.body.classList.remove('modal-open');
-    document.querySelectorAll('.modal-backdrop')?.forEach(el => el.remove());
   }
 
   clearInput() {

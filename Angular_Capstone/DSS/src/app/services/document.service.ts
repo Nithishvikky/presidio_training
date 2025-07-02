@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { UserLoginDto } from "../models/userLoginDto";
 import { Injectable } from "@angular/core";
 import { UserRegisterDto } from "../models/userRegisterDto";
@@ -38,11 +38,13 @@ export class DocumentService{
   }
 
   OwnerDocumentPreview(filename:string){
-    return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetMyDocument?filename=${filename}`)
+    const params = new HttpParams().set('filename',filename);
+    return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetMyDocument`,{params})
     .pipe(tap(()=> this.GetAllDocuments().subscribe()));
   }
   DownloadSharedDocument(filename:string,email:string){
-    return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetDocument?filename=${filename}&UploaderEmail=${email}`)
+    const params = new HttpParams().set('filename',filename).set('UploaderEmail',email);
+    return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetDocument`,{params})
     .pipe(
       tap((res:any)=> {
         this.DocumentDetailSubject.next(res.data);
@@ -54,7 +56,8 @@ export class DocumentService{
     );
   }
   DeleteDocument(filename:string){
-    return this.http.delete(`http://localhost:5015/api/v1/UserDoc/DeleteMyDocument?fileName=${filename}`)
+    const params = new HttpParams().set('filename',filename);
+    return this.http.delete(`http://localhost:5015/api/v1/UserDoc/DeleteMyDocument`,{params})
     .pipe(switchMap(()=> this.GetAllDocuments()));
   }
 
@@ -89,4 +92,9 @@ export class DocumentService{
     );
   }
 
+  clearDocumentCaches(){
+    this.allDocuments.next([]);
+    this.DocumentDetailSubject.next(null);
+    this.documentsSubject.next(null);
+  }
 }

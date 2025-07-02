@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { UserLoginDto } from "../models/userLoginDto";
 import { Injectable } from "@angular/core";
 import { UserRegisterDto } from "../models/userRegisterDto";
@@ -13,7 +13,8 @@ export class DocumentViewerService{
   constructor(private http:HttpClient){}
 
   GetViewerofFile(filename:string): Observable<any>{
-    return this.http.get(`http://localhost:5015/api/v1/DocumentView/MyFileViewers?FileName=${filename}`)
+    const params = new HttpParams().set('Filename',filename);
+    return this.http.get(`http://localhost:5015/api/v1/DocumentView/MyFileViewers`,{params})
     .pipe(
       tap((res:any) =>{
         this.viewerSubject.next(res.data.$values);

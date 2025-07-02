@@ -31,6 +31,7 @@ export class SignInComponent {
       if(this.loginForm.invalid) return;
       this.userService.Loginuser(this.loginForm.value).subscribe({
         next:(res:any)=>{
+          localStorage.clear();
           const user = {
             accessToken: res.data.accessToken,
             refreshToken : res.data.refreshToken,
@@ -38,10 +39,13 @@ export class SignInComponent {
             email : res.data.user.email,
             role : res.data.user.role
           };
-
+          console.log(res);
           localStorage.setItem('authData',JSON.stringify(user));
           this.loginForm.reset();
-          this.router.navigateByUrl('/main/home');
+          this.showToast("Signed in succesfully","success");
+          setTimeout(()=>{
+            this.router.navigateByUrl('/main/home');
+          },2000)
         },
         error:(err)=>{
           this.showToast(err.error.error.errorMessage,'danger');

@@ -5,8 +5,8 @@ export class UserResponseDto{
     public email:string="",
     public username:string="",
     public role:string="",
-    public registeredAt:Date,
-    public updatedAt:Date,
+    public registeredAt?:Date,
+    public updatedAt?:Date,
     public documentCount:number = 0,
   ){}
 }

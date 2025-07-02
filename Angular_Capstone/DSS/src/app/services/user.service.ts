@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { UserLoginDto } from "../models/userLoginDto";
 import { Injectable } from "@angular/core";
 import { UserRegisterDto } from "../models/userRegisterDto";
@@ -6,6 +6,7 @@ import { BehaviorSubject, catchError, Observable, of, tap } from "rxjs";
 import { UserResponseDto } from "../models/userResponseDto";
 import { PagedResponseDto } from "../models/pagedResponseDto";
 import { PasswordChangeDto } from "../models/passwordChangeDto";
+
 
 @Injectable()
 export class UserService{
@@ -25,6 +26,14 @@ export class UserService{
     return this.http.post(`http://localhost:5015/api/v1/Auth/login`,user);
   }
 
+  RefreshAccessToken(RToken:string):Observable<any>{
+    return this.http.post(`http://localhost:5015/api/v1/Auth/refresh`,{RToken});
+  }
+
+  LogoutUser(RToken:string):Observable<any>{
+    return this.http.post(`http://localhost:5015/api/v1/Auth/logout`,{RToken});
+  }
+
   ChangePassword(dto:PasswordChangeDto,email:string): Observable<any>{
     console.log(dto);
     return this.http.put(`http://localhost:5015/api/v1/User/ChangePassword`,dto)
@@ -34,7 +43,8 @@ export class UserService{
   }
 
   GetUser(email:string): Observable<any>{
-    return this.http.get(`http://localhost:5015/api/v1/User/GetUser?email=${email}`)
+    const params = new HttpParams().set('email',email);
+    return this.http.get(`http://localhost:5015/api/v1/User/GetUser`,{params})
     .pipe(
       tap((res:any) =>{
         console.log(res);
@@ -77,5 +87,10 @@ export class UserService{
         return of(null);
       })
     )
+  }
+
+  clearUserCache(){
+    this.curUser.next(null);
+    this.userSubject.next(null);
   }
 }

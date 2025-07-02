@@ -6,18 +6,18 @@ export class LoaderService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   loading$ = this.loadingSubject.asObservable();
 
-  private timerRef: any;
+  private requestCount = 0;
 
   show():void {
-    console.log('LOADER ON');
-    this.timerRef = setTimeout(() => {
-      this.loadingSubject.next(true);
-    }, 200);
+   this.requestCount++;
+   this.loadingSubject.next(true);
   }
 
   hide():void {
-     console.log('LOADER OFF');
-    clearTimeout(this.timerRef);
-    this.loadingSubject.next(false);
+     this.requestCount--;
+     if(this.requestCount <= 0){
+      this.requestCount = 0;
+      this.loadingSubject.next(false);
+     }
   }
 }

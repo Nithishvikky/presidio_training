@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { NotificationResponseDto } from '../models/notificationResponseDto';
+import { UserService } from './user.service';
+import { DocumentService } from './document.service';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
   private hubConnection!: signalR.HubConnection;
+  private documentService = inject(DocumentService);
 
   private notifications:NotificationResponseDto[] = [];
   private messageSubject = new BehaviorSubject<NotificationResponseDto[]|null>(null);
@@ -15,15 +18,16 @@ export class NotificationService {
   public seenNotification = new BehaviorSubject<number|null>(0);
   SeenNotifi$ = this.seenNotification.asObservable();
 
-  private accessToken:string = "";
+
 
   startConnection(): void {
     const authdata = localStorage.getItem("authData");
-    if(authdata) this.accessToken = JSON.parse(authdata).accessToken;
-
+    var accessToken:string = "";
+    if(authdata) accessToken = JSON.parse(authdata).accessToken;
+    console.log(accessToken);
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:5015/notificationhub', {
-        accessTokenFactory: () => this.accessToken
+        accessTokenFactory: () => accessToken
       })  // 🔁 adjust your backend URL
       .withAutomaticReconnect()
       .build();
@@ -37,16 +41,31 @@ export class NotificationService {
   addNotification(){
     this.startConnection();
     this.hubConnection.on('DocumentViewed', (messageResponse) => {
+      console.log('DocumentViewed received:', messageResponse);
       this.notifications.unshift(messageResponse);
       if(this.notifications.length == 1) {
         this.seenNotification.next(0);
       }
       this.messageSubject.next(this.notifications);
+      this.documentService.GetAllDocuments().subscribe();
     });
   }
 
-  clearNotification(){
+  disconnect(){
+    if(this.hubConnection){
+      this.hubConnection.stop();
+      this.hubConnection.off('DocumentViewed');
+    }
+  }
+
+  clearCurrentNotification(){
     this.notifications = [];
-    this.messageSubject.next(this.notifications);
+    this.messageSubject.next([]);
+    this.seenNotification.next(0);
+  }
+
+  clearNotification(){
+    this.clearCurrentNotification();
+    this.disconnect();
   }
 }

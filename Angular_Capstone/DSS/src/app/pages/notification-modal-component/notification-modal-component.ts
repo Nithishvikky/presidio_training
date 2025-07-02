@@ -25,6 +25,6 @@ export class NotificationModalComponent {
   }
 
   clear(){
-    this.notifyService.clearNotification();
+    this.notifyService.clearCurrentNotification();
   }
 }

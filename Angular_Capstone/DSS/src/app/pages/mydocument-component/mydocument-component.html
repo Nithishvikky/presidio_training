@@ -20,7 +20,7 @@
           <tr >
             <td scope="row" class="ps-4 py-4">{{document.fileName}}</td>
             <td class="py-4" style="color: #637387;">{{document.uploadedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
-            <td class="py-4" style="color: #637387;">{{document.lastViewerName || '-'}}</td>
+            <td class="py-4">{{document.lastViewerName || '-'}}</td>
             <td class="py-4 remove fw-semibold" (click)="onFileDelete(document.fileName)">Remove</td>
             <td class="py-4 details fw-semibold" [routerLink]="['/main/document',document.fileName]" [queryParams]="{ue : document.uploaderEmail}">Details</td>
           </tr>
@@ -34,13 +34,12 @@
 </div>
 
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModal" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="uploadModalLabel">Upload Document</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
         <div class="modal-body">
             <div class="mb-3">
               <label for="fileInput" class="form-label">Select a file</label>
@@ -52,7 +51,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onUploadCancel()">Cancel</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!selectedFile"   [ngStyle]="!selectedFile ? {'cursor': 'not-allowed'} : {'cursor': 'pointer'}" (click)="onUpload()">Upload</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!selectedFile"   [ngStyle]="!selectedFile ? {'cursor': 'not-allowed'} : {'cursor': 'pointer'}" (click)="onUpload()">Upload</button>
         </div>
     </div>
   </div>
