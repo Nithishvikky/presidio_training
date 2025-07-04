@@ -14,15 +14,18 @@ namespace DSS.Controllers
     public class UserDocController : ControllerBase
     {
         private readonly IUserDocService _userDocService;
+        private readonly IUserService _userService;
         private readonly IDocumentViewService _documentViewService;
         private readonly IDocumentShareService _documentShareService;
         public UserDocController(IUserDocService userDocService,
                                 IDocumentViewService documentViewService,
-                                IDocumentShareService documentShareService)
+                                IDocumentShareService documentShareService,
+                                IUserService userService)
         {
             _userDocService = userDocService;
             _documentViewService = documentViewService;
             _documentShareService = documentShareService;
+            _userService = userService;
         }
 
         [HttpPost("UploadDocument")]
@@ -37,7 +40,7 @@ namespace DSS.Controllers
                     ErrorMessage = "Invalid file"
                 });
             }
-            
+
             if (file.Length > 10 * 1024 * 1024) // 10MB
             {
                 return BadRequest(new ErrorObjectDto
@@ -69,12 +72,16 @@ namespace DSS.Controllers
 
             userDocument = await _userDocService.UploadDoc(userDocument);
 
-            return Created("", userDocument);
+            return Ok(new ApiResponse<UserDocument>
+            {
+                Success = true,
+                Data = userDocument
+            });
         }
 
         [HttpGet("GetDocument")]
         [Authorize]
-        public async Task<ActionResult> DownloadFile(string filename, string UploaderEmail)
+        public async Task<ActionResult<UserDocDetailDto>> DownloadFile(string filename, string UploaderEmail)
         {
             var userDocument = await _userDocService.GetByFileName(filename, UploaderEmail);
 
@@ -96,13 +103,20 @@ namespace DSS.Controllers
                 });
             }
             await _documentViewService.LogDocumentView(userDocument.Id, Guid.Parse(UserId)); // added in audit table
+            var mapper = new UserDocMapper();
+            var docDetails = mapper.MapUserDoc(userDocument);
+            docDetails.FileData = userDocument.FileData;
 
-            return File(userDocument.FileData!, userDocument.ContentType, userDocument.FileName);
+            return Ok(new ApiResponse<UserDocDetailDto>
+            {
+                Success = true,
+                Data = docDetails
+            });
         }
 
         [HttpGet("GetMyDocument")]
         [Authorize]
-        public async Task<ActionResult> DownloadMyFile(string filename)
+        public async Task<ActionResult<UserDocDetailDto>> DownloadMyFile(string filename)
         {
             var UserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
 
@@ -115,7 +129,15 @@ namespace DSS.Controllers
 
             var userDocument = await _userDocService.GetByFileName(filename, UserEmail);
 
-            return File(userDocument.FileData!, userDocument.ContentType, userDocument.FileName);
+            var mapper = new UserDocMapper();
+            var docDetails = mapper.MapUserDoc(userDocument);
+            docDetails.FileData = userDocument.FileData;
+
+            return Ok(new ApiResponse<UserDocDetailDto>
+            {
+                Success = true,
+                Data = docDetails
+            });
         }
 
         [HttpGet("GetAllMyDocumentDetails")]
@@ -132,12 +154,61 @@ namespace DSS.Controllers
                 });
 
             var userDocuments = await _userDocService.GetAllUserDocs(Guid.Parse(UserId));
+            var viewHistory = await _documentViewService.GetUserViewHistory(Guid.Parse(UserId));
+
+            var lastViewers = viewHistory
+                            .GroupBy(v => v.FileName)
+                            .ToDictionary(
+                                g => g.Key,
+                                g => g.OrderByDescending(v => v.ViewedAt).FirstOrDefault()?.ViewerName
+                            );
             var mapper = new UserDocMapper();
             var userDocDetails = userDocuments
-                        .Select(doc => mapper.MapUserDoc(doc))
-                        .ToList();
+                        .Select(doc =>
+                        {
+                            var dto = mapper.MapUserDoc(doc);
+                            if (lastViewers.Any())
+                            {
+                                lastViewers.TryGetValue(doc.FileName, out var lastViewer);
+                                dto.LastViewerName = lastViewer;
+                            }
+                            return dto;
+                        }).ToList();
 
-            return Ok(userDocDetails);
+            return Ok(new ApiResponse<ICollection<UserDocDetailDto>>
+            {
+                Success = true,
+                Data = userDocDetails
+            });
+        }
+
+        [HttpGet("GetAllDocumentDetails")]
+        public async Task<ActionResult<ICollection<UserDocDetailDto>>> AllDocumentDetails(
+            string? userEmail = null,
+            string? Filename = null,
+            string? sortBy = null,
+            bool ascending = true,
+            int pageNumber = 1,
+            int pageSize = 10
+        )
+        {
+            var userDocuments = await _userDocService.GetAllDocs(userEmail, Filename, sortBy, ascending, pageNumber, pageSize);
+
+            var mapper = new UserDocMapper();
+            var userDocDetails = userDocuments
+                        .Select(doc =>
+                        {
+                            var dto = mapper.MapUserDoc(doc);
+                            dto.UploaderUsername = doc.UploadedByUser?.Username ?? "Unknown";
+                            dto.UploaderEmail = doc.UploadedByUser?.Email ?? "Unknown";
+                            return dto;
+                        }).ToList();
+
+            return Ok(new ApiResponse<ICollection<UserDocDetailDto>>
+            {
+                Success = true,
+                Data = userDocDetails
+            });
         }
 
         [HttpDelete("DeleteMyDocument")]
@@ -145,7 +216,7 @@ namespace DSS.Controllers
         public async Task<ActionResult> DeleteMyDocument(string fileName)
         {
             var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-           if (string.IsNullOrEmpty(UserId))
+            if (string.IsNullOrEmpty(UserId))
                 return Unauthorized(new ErrorObjectDto
                 {
                     ErrorNumber = 401,
@@ -153,8 +224,12 @@ namespace DSS.Controllers
                 });
 
             var userDocument = await _userDocService.DeleteByFileName(fileName, Guid.Parse(UserId));
-            
-            return Ok("Document Deleted");
+
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Data = "Document Deleted sucessfully"
+            });
         }
     }
 }

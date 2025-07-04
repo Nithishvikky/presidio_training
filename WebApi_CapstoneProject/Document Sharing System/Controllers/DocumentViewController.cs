@@ -54,8 +54,12 @@ namespace DSS.Controllers
             var userId = Guid.Parse(userIdStr);
 
             var views = await _documentViewService.GetViewerHistoryByFileName(userId,FileName);
-
-            return Ok(views);
+            
+            return Ok(new ApiResponse<IEnumerable<ViewerResponseDto>>
+            {
+                Success = true,
+                Data = views
+            });
         }
     }
 }

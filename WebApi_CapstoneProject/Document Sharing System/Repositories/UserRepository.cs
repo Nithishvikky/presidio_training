@@ -1,5 +1,6 @@
 using DSS.Contexts;
 using DSS.Models;
+using DSS.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DSS.Repositories
@@ -10,7 +11,7 @@ namespace DSS.Repositories
         public UserRepository(DssContext context, ILogger<UserRepository> logger) : base(context)
         {
             _logger = logger;
-            
+
         }
         public override async Task<User> Get(Guid key)
         {
@@ -47,6 +48,23 @@ namespace DSS.Repositories
                 _logger.LogError(ex, "Error while fetching all users");
                 throw;
             }
+        }
+
+        public async Task<DashboardDto> GetDashboardAsync()
+        {
+            var TotalUsers = (await _dssContext.Users.ToListAsync()).Count;
+            var TotalDocs = (await _dssContext.UserDocuments.ToListAsync()).Count;
+            var TotalShared = (await _dssContext.DocumentShares.Where(d => !d.IsRevoked).ToListAsync()).Count;
+            var TotalViews = (await _dssContext.DocumentViews.ToListAsync()).Count;
+
+            var dto = new DashboardDto
+            {
+                TotalUsers = TotalUsers,
+                TotalDocuments = TotalDocs,
+                TotalShared = TotalShared,
+                TotalViews = TotalViews
+            };
+            return dto;
         }
     }
 }

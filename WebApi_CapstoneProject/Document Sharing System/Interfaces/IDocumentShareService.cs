@@ -12,6 +12,8 @@ namespace DSS.Interfaces
         public Task RevokeAllPermission(string fileName, string UploaderEmail);
 
         public Task<ICollection<SharedResponseeDto>> GetSharedUsersByFileName(string fileName, string UploaderEmail);
-        public Task<ICollection<SharedResponseeDto>> GetFilesSharedWithUser(Guid userId);
+        public Task<ICollection<UserDocDetailDto>> GetFilesSharedWithUser(Guid userId);
+
+        public Task<DashboardDto> GetDashboard();
     }
 }

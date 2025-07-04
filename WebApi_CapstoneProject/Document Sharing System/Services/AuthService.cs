@@ -46,7 +46,13 @@ public class AuthService : IAuthService
         var tokens = new AuthResponse
         {
             AccessToken = await _tokenService.GenerateAccessToken(user),
-            RefreshToken = await _tokenService.GenerateRefreshToken()
+            RefreshToken = await _tokenService.GenerateRefreshToken(),
+            User = new UserResponse
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Role = user.Role
+            }
         };
 
         session.RefreshToken = tokens.RefreshToken;
@@ -73,7 +79,13 @@ public class AuthService : IAuthService
         var tokens = new AuthResponse
         {
             AccessToken = await _tokenService.GenerateAccessToken(user),
-            RefreshToken = await _tokenService.GenerateRefreshToken()
+            RefreshToken = await _tokenService.GenerateRefreshToken(),
+            User = new UserResponse
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Role = user.Role
+            }
         };
 
         var session = new AuthSession

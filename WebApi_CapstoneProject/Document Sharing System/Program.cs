@@ -85,7 +85,7 @@ builder.Services.AddRateLimiter(options =>
 
         return RateLimitPartition.GetFixedWindowLimiter(userId, _ => new FixedWindowRateLimiterOptions
         {
-            PermitLimit = 3,
+            PermitLimit = 10,
             Window = TimeSpan.FromSeconds(10),
             QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
             QueueLimit = 0
@@ -147,7 +147,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:4200","http://localhost:4300")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -165,12 +165,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors();
 
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors();
+
 app.MapHub<NotificationHub>("/notificationhub");
 
 app.UseRateLimiter();

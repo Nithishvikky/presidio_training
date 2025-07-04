@@ -33,7 +33,11 @@ namespace DSS.Controllers
                     ErrorMessage = "Authentication required"
                 });
             var newShare = await _documentShareService.GrantPermission(fileName, UserEmail, ShareUserEmail);
-            return Created("", newShare);
+            return Ok(new ApiResponse<DocumentShare>
+            {
+                Success = true,
+                Data = newShare
+            });
         }
 
         [HttpPost("GrantPermissionToUsers")]
@@ -51,7 +55,11 @@ namespace DSS.Controllers
                     ErrorMessage = "Authentication required"
                 });
             var newShares = await _documentShareService.GrantAllPermission(fileName, UserEmail);
-            return Created("", newShares);
+            return Ok(new ApiResponse<ICollection<DocumentShare>>
+            {
+                Success = true,
+                Data = newShares
+            });
         }
 
         [HttpDelete("RevokePermission")]
@@ -66,7 +74,11 @@ namespace DSS.Controllers
                     ErrorMessage = "Authentication required"
                 });
             await _documentShareService.RevokePermission(fileName, UserEmail, ShareUserEmail);
-            return Ok("Permission Revoked");
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Data = "Permission revoked"
+            });
         }
 
         [HttpDelete("RevokePermissionToAll")]
@@ -81,12 +93,16 @@ namespace DSS.Controllers
                     ErrorMessage = "Authentication required"
                 });
             await _documentShareService.RevokeAllPermission(fileName, UserEmail);
-            return Ok("Permissions Revoked for all");
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Data = "Permission revoked for all"
+            });
         }
 
         [HttpGet("GetFilesShared")]
         [Authorize]
-        public async Task<ActionResult<ICollection<SharedResponseeDto>>> FilesSharedUser()
+        public async Task<ActionResult<ICollection<UserDocDetailDto>>> FilesSharedUser()
         {
             var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(UserId))
@@ -96,8 +112,11 @@ namespace DSS.Controllers
                     ErrorMessage = "Authentication required"
                 });
             var shares = await _documentShareService.GetFilesSharedWithUser(Guid.Parse(UserId));
-
-            return Ok(shares);
+            return Ok(new ApiResponse<ICollection<UserDocDetailDto>>
+            {
+                Success = true,
+                Data = shares
+            });
         }
 
         [HttpGet("GetSharedUsers")]
@@ -112,9 +131,26 @@ namespace DSS.Controllers
                     ErrorMessage = "Authentication required"
                 });
 
-            var shares = await _documentShareService.GetSharedUsersByFileName(fileName,UserEmail);
+            var shares = await _documentShareService.GetSharedUsersByFileName(fileName, UserEmail);
 
-            return Ok(shares);
+            return Ok(new ApiResponse<ICollection<SharedResponseeDto>>
+            {
+                Success = true,
+                Data = shares
+            });
+        }
+        
+        [HttpGet("GetDashboard")]
+        public async Task<ActionResult<DashboardDto>> GetDashBoard()
+        {
+
+            var data = await _documentShareService.GetDashboard();
+
+            return Ok(new ApiResponse<DashboardDto>
+            {
+                Success = true,
+                Data = data
+            });
         }
     }
 }

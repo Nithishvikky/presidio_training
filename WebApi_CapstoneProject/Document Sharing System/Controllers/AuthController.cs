@@ -32,21 +32,33 @@ namespace DSS.Controllers
             }
             
             var auth = await _authService.LoginAsync(user);
-            return Ok(auth);
+            return Ok(new ApiResponse<AuthResponse>
+            {
+                Success = true,
+                Data = auth
+            });
         }
 
         [HttpPost("refresh")]
-        public async Task<ActionResult<AuthResponse>> Refresh([FromBody]string RToken)
+        public async Task<ActionResult<AuthResponse>> Refresh([FromBody]RefreshRequestDto refreshRequest)
         {
-            var auth = await _authService.RefreshAsync(RToken);
-            return Ok(auth);
+            var auth = await _authService.RefreshAsync(refreshRequest.RToken);
+            return Ok(new ApiResponse<AuthResponse>
+            {
+                Success = true,
+                Data = auth
+            });
         }
 
         [HttpPost("logout")]
-        public async Task<ActionResult> Logout([FromBody]string RToken)
+        public async Task<ActionResult> Logout([FromBody]RefreshRequestDto refreshRequest)
         {
-            await _authService.LogoutAsync(RToken);
-            return Ok("Logged out sucessfully");
+            await _authService.LogoutAsync(refreshRequest.RToken);
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Data = "Logged out sucessfully"
+            });
         }
     }
 }

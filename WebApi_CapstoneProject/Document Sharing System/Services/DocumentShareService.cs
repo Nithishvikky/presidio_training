@@ -1,40 +1,74 @@
+using System.Reflection.Metadata.Ecma335;
 using DSS.Interfaces;
+using DSS.Misc;
 using DSS.Models;
 using DSS.Models.DTOs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DSS.Services
 {
     public class DocumentShareService : IDocumentShareService
     {
         private readonly IRepository<Guid, DocumentShare> _shareRepo;
+        private readonly IHubContext<NotificationHub> _hub;
         private readonly ILogger<DocumentShareService> _logger;
         private readonly IUserService _userService;
         private readonly IUserDocService _userDocService;
+
+        private readonly IRepository<Guid, DocumentView> _documentViewRepository;
         private IRepository<Guid, UserDocument> _userDocRepository;
+        private IRepository<Guid, User> _userRepository;
 
         public DocumentShareService(IRepository<Guid, DocumentShare> shareRepo,
                                     ILogger<DocumentShareService> logger,
                                     IUserService userService,
                                     IUserDocService userDocService,
-                                    IRepository<Guid, UserDocument> userDocRepository)
+                                    IRepository<Guid, UserDocument> userDocRepository,
+                                    IRepository<Guid, User> userRepository,
+                                    IRepository<Guid, DocumentView> documentViewRepository,
+                                    IHubContext<NotificationHub> hub)
         {
             _shareRepo = shareRepo;
             _logger = logger;
             _userService = userService;
             _userDocService = userDocService;
             _userDocRepository = userDocRepository;
+            _userRepository = userRepository;
+            _documentViewRepository = documentViewRepository;
+            _hub = hub;
         }
 
-        public async Task<DocumentShare> GrantPermission(string fileName,string UploaderEmail, string SharedWithUserEmail)
+        public async Task<DocumentShare> GrantPermission(string fileName, string UploaderEmail, string SharedWithUserEmail)
         {
-            var document = await _userDocService.GetByFileName(fileName,UploaderEmail); // to check user has this file and also get file
+            var document = await _userDocService.GetByFileName(fileName, UploaderEmail); // to check user has this file and also get file
+            var fileOwner = await _userService.GetUserByEmail(UploaderEmail);
             var user = await _userService.GetUserByEmail(SharedWithUserEmail);
 
+            var existingShares = await _shareRepo.GetAll();
+            var existing = existingShares.SingleOrDefault(s =>
+                    s.DocumentId == document.Id &&
+                    s.SharedWithUserId == user.Id &&
+                    !s.IsRevoked);
+
+            if (existing != null)
+            {
+                throw new Exception("Already gave permission");
+            }
             var share = new DocumentShare
             {
                 DocumentId = document.Id,
                 SharedWithUserId = user.Id
             };
+
+            var sharedRespose = new SharedResponseeDto
+            {
+                FileName = document.FileName,
+                Email = fileOwner.Email,
+                UserName = fileOwner.Username,
+                GrantedAt = DateTime.Now
+            };
+
+            await _hub.Clients.Group(SharedWithUserEmail).SendAsync("DocumentGiven",sharedRespose);
 
             return await _shareRepo.Add(share);
         }
@@ -67,14 +101,14 @@ namespace DSS.Services
             }
             if (grantedShares == null || grantedShares.Count == 0)
             {
-                throw new ArgumentNullException("No users granted");
+                throw new Exception("All users already granted");
             }
             return grantedShares;
         }
-        
-        public async Task<DocumentShare> RevokePermission(string fileName,string UploaderEmail, string SharedWithUserEmail)
+
+        public async Task<DocumentShare> RevokePermission(string fileName, string UploaderEmail, string SharedWithUserEmail)
         {
-            var document = await _userDocService.GetByFileName(fileName,UploaderEmail); // to check user has this file and also get file
+            var document = await _userDocService.GetByFileName(fileName, UploaderEmail); // to check user has this file and also get file
             var user = await _userService.GetUserByEmail(SharedWithUserEmail);
 
             var shares = await _shareRepo.GetAll();
@@ -94,11 +128,11 @@ namespace DSS.Services
         {
             var document = await _userDocService.GetByFileName(fileName, UploaderEmail); // to check user has this file and also get file
 
-            var shares = (await _shareRepo.GetAll()).Where(s => s.DocumentId == document.Id);
+            var shares = (await _shareRepo.GetAll()).Where(s => s.DocumentId == document.Id && !s.IsRevoked).ToList();
 
-            if (shares == null)
+            if (shares == null || shares.Count == 0)
             {
-                throw new ArgumentNullException("No users has been granted for this file");
+                throw new Exception("No users has been granted for this file");
             }
 
             foreach (var share in shares)
@@ -141,6 +175,7 @@ namespace DSS.Services
                 sharedUsers.Add(new SharedResponseeDto
                 {
                     FileName = document.FileName,
+                    Email = user.Email,
                     UserName = user.Username
                 });
             }
@@ -152,31 +187,65 @@ namespace DSS.Services
             return sharedUsers;
         }
 
-        public async Task<ICollection<SharedResponseeDto>> GetFilesSharedWithUser(Guid userId)
+        public async Task<ICollection<UserDocDetailDto>> GetFilesSharedWithUser(Guid userId)
         {
             var user = await _userService.GetUserById(userId);
-            var shares = (await _shareRepo.GetAll()).Where(s => s.SharedWithUserId == userId);
+            var shares = (await _shareRepo.GetAll()).Where(s => s.SharedWithUserId == userId && !s.IsRevoked);
             if (shares == null)
             {
                 _logger.LogInformation("Permission not found or already revoked.{userId}", userId);
                 throw new ArgumentNullException("No files has been granted for this user");
             }
 
-            var sharedFiles = new List<SharedResponseeDto>();
+            var sharedFiles = new List<UserDocDetailDto>();
             foreach (var share in shares)
             {
                 var document = await _userDocRepository.Get(share.DocumentId);
-                sharedFiles.Add(new SharedResponseeDto
+                if (!document.IsDeleted)
                 {
-                    FileName = document.FileName,
-                    UserName = user.Username
-                });
+                    var mapper = new UserDocMapper();
+                    var documentDetails = mapper.MapUserDoc(document);
+                    documentDetails.UploaderEmail = document.UploadedByUser.Email;
+                    documentDetails.UploaderUsername = document.UploadedByUser.Username;
+                    sharedFiles.Add(documentDetails);
+                }
             }
             if (sharedFiles == null || sharedFiles.Count == 0)
             {
                 throw new ArgumentNullException("User has no permission for any files");
             }
+            sharedFiles = sharedFiles.OrderByDescending(d => d.UploadedAt).ToList();
             return sharedFiles;
         }
+
+        public async Task<DashboardDto> GetDashboard()
+        {
+            var totalUsers = (await _userRepository.GetAll()).ToList().Count;
+            var totalAdmin = (await _userRepository.GetAll()).Where(u => u.Role == "Admin").ToList().Count;
+            var totalusers = (await _userRepository.GetAll()).Where(u => u.Role == "User").ToList().Count;
+
+            var allDocs = await _userDocRepository.GetAll();
+            var totalDocs = allDocs.Where(d => !d.IsDeleted).ToList().Count;
+
+            var docDict = allDocs.Where(d => !d.IsDeleted).ToDictionary(d => d.Id);
+
+            var shares = await _shareRepo.GetAll();
+            var totalShares = shares.Where(s => !s.IsRevoked && docDict.ContainsKey(s.DocumentId)).Count();
+
+            var totalViews = (await _documentViewRepository.GetAll()).ToList().Count;
+
+            var data = new DashboardDto
+            {
+                TotalUsers = totalUsers,
+                TotalAdmin = totalAdmin,
+                TotalUserRole = totalusers,
+                TotalDocuments = totalDocs,
+                TotalShared = totalShares,
+                TotalViews = totalViews
+            };
+
+            return data;
+        }
+
     }
 }

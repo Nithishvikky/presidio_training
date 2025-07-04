@@ -12,6 +12,8 @@ namespace DSS.Misc
             userDocDetail.DocId = doc.Id;
             userDocDetail.ContentType = doc.ContentType;
             userDocDetail.UploadedAt = doc.UploadedAt;
+            if(doc.FileData != null)
+                userDocDetail.Size = doc.FileData.Length;
 
             return userDocDetail;
         }

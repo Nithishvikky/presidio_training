@@ -47,8 +47,15 @@ namespace DSS.Services
 
                 _logger.LogInformation("Sending notification to group: {UploaderEmail}", uploader.Email);
 
-                await _hub.Clients.Group(uploader.Email).SendAsync("DocumentViewed",
-                                    $"{viewer.Username} viewed {document.FileName} at {documentView.ViewedAt.ToString("MMMM dd h:mm tt")}");
+                var viewerResponse = new ViewerResponseDto
+                {
+                    DocViewId = documentView.Id,
+                    ViewerName = viewer.Username,
+                    ViewerEmail = viewer.Email,
+                    FileName = document.FileName,
+                    ViewedAt = documentView.ViewedAt
+                };
+                await _hub.Clients.Group(uploader.Email).SendAsync("DocumentViewed",viewerResponse);
 
                 return documentView;
             }
@@ -76,11 +83,11 @@ namespace DSS.Services
                 var views = await _documentViewRepo.GetAll();
                 views = views.Where(v => userDocIds.Contains(v.DocumentId));
 
-                if (!views.Any())
-                {
-                    _logger.LogWarning("No views by {UserId}", userId);
-                    throw new ArgumentNullException("No views by the UserId");
-                }
+                // if (!views.Any())
+                // {
+                //     _logger.LogWarning("No views by {UserId}", userId);
+                //     throw new ArgumentNullException("No views by the UserId");
+                // }
 
                 var viewerDtos = new List<ViewerResponseDto>();
                 foreach (var v in views)
@@ -126,9 +133,12 @@ namespace DSS.Services
                     _logger.LogWarning("No views for the {file}", FileName);
                     throw new ArgumentNullException("No views for the {file}",FileName);
                 }
-
+                var groupedViews = views.GroupBy(v => v.ViewedByUserId)
+                                        .Select(g => g.OrderByDescending(v => v.ViewedAt).First())
+                                        .ToList();
+                                        
                 var viewerDtos = new List<ViewerResponseDto>();
-                foreach (var v in views)
+                foreach (var v in groupedViews)
                 {
                     var viewer = await _userService.GetUserById(v.ViewedByUserId);
 
@@ -140,6 +150,7 @@ namespace DSS.Services
                         ViewedAt = v.ViewedAt
                     });
                 }
+                viewerDtos = viewerDtos.OrderByDescending(v => v.ViewedAt).ToList();
                 return viewerDtos;
             }
             catch (Exception e)

@@ -16,12 +16,13 @@ namespace DSS.Repositories
             try
             {
                 var doc = await _dssContext.UserDocuments.SingleOrDefaultAsync(u => u.Id == key);
+                
                 if (doc == null)
                 {
-                    _logger.LogWarning("Document not found with ID: {DocumentId}",key);
+                    _logger.LogWarning("Document not found with ID: {DocumentId}", key);
                     throw new KeyNotFoundException("No document found");
                 }
-
+                doc.UploadedByUser = await _dssContext.Users.SingleOrDefaultAsync(u => u.Id == doc.UploadedById);
                 _logger.LogInformation("Fetched document with ID: {DocumentId}",key);
                 return doc;
             }

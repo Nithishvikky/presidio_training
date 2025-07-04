@@ -1,8 +1,8 @@
 using DSS.Interfaces;
-using DSS.Intrefaces;
 using DSS.Misc;
 using DSS.Models;
 using DSS.Models.DTOs;
+using DSS.Repositories;
 
 namespace DSS.Services
 {
@@ -54,9 +54,89 @@ namespace DSS.Services
             }
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersOnly()
+        public async Task<PagedResultDto<User>> GetAllUsers(
+            string? searchByEmail = null,
+            string? searchByUsername = null,
+            string? filterBy = null,
+            string? sortBy = null,
+            bool ascending = true,
+            int pageNumber = 1,
+            int pageSize = 10
+        )
         {
             try
+            {
+                var allUsers = (await _userRepository.GetAll()).AsQueryable();
+                if (!allUsers.Any())
+                {
+                    _logger.LogWarning("No one registered yet");
+                    throw new ArgumentNullException("No one registered yet");
+                }
+                if (!string.IsNullOrEmpty(searchByEmail))
+                {
+                    allUsers = allUsers.Where(d => d.Email.Contains(searchByEmail));
+                }
+                
+                if (!string.IsNullOrEmpty(searchByUsername))
+                {
+                    allUsers = allUsers.Where(d => d.Username.Contains(searchByUsername));
+                }
+
+                if (!string.IsNullOrEmpty(filterBy))
+                {
+                    if (filterBy == "User")
+                    {
+                        allUsers = allUsers.Where(u => u.Role.Equals("User"));
+                    }
+                    else
+                    {
+                        allUsers = allUsers.Where(u => u.Role.Equals("Admin"));
+                    }
+                }
+                allUsers = (sortBy?.ToLower()) switch
+                {
+                    "username" => ascending
+                            ? allUsers.OrderBy(u => u.Username)
+                            : allUsers.OrderByDescending(u => u.Username),
+                    "email" => ascending
+                            ? allUsers.OrderBy(u => u.Email)
+                            : allUsers.OrderByDescending(u => u.Email),
+                    "registeredat" => ascending
+                            ? allUsers.OrderBy(u => u.RegisteredAt)
+                            : allUsers.OrderByDescending(u => u.RegisteredAt),
+
+                    _ => allUsers
+                };
+
+                if (!allUsers.Any())
+                {
+                    _logger.LogWarning("No one registered");
+                    throw new ArgumentNullException("No one registered");
+                }
+
+
+
+                var pagedDocs = new PagedResultDto<User>
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalCount = allUsers.Count(),
+                    Items = allUsers.Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize).ToList()
+                };
+
+                return pagedDocs;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to get all users");
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersOnly()
+        {
+           try
             {
                 var allUsers = await _userRepository.GetAll();
                 if (!allUsers.Any())
@@ -64,14 +144,14 @@ namespace DSS.Services
                     _logger.LogWarning("No one registered yet");
                     throw new ArgumentNullException("No one registered yet");
                 }
-
-                var userOnly = allUsers.Where(u => u.Role.Equals("User"));
-                if (!userOnly.Any())
+                var users = allUsers.Where(u => u.Role.Equals("User"));
+                if (!users.Any())
                 {
-                    _logger.LogWarning("No one registered as user");
-                    throw new ArgumentNullException("No one registered as user");
+                    _logger.LogWarning("No one registered");
+                    throw new ArgumentNullException("No one registered");
                 }
-                return userOnly;
+
+                return users;
             }
             catch (Exception e)
             {
@@ -87,13 +167,11 @@ namespace DSS.Services
                 _logger.LogInformation("Fetching user by email: {Email}", Email);
                 var users = await _userRepository.GetAll();
                 var user = users.SingleOrDefault(u => u.Email.Equals(Email));
-
                 if (user == null)
                 {
                     _logger.LogWarning("User not found for email: {Email}", Email);
                     throw new KeyNotFoundException("User not found");
                 }
-
                 _logger.LogInformation("User found for email: {Email}", Email);
                 return user;
             }

@@ -26,10 +26,14 @@ namespace DSS.Misc
                     statusCode = 409;
                     break;
             }
-            context.Result = new ObjectResult(new ErrorObjectDto
+            context.Result = new ObjectResult(new ApiResponse<object>
             {
-                ErrorNumber = statusCode,
-                ErrorMessage = context.Exception.Message
+                Success = false,
+                Error = new ErrorObjectDto
+                {
+                    ErrorNumber = statusCode,
+                    ErrorMessage = message
+                }
             })
             {
                 StatusCode = statusCode
