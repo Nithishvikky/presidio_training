@@ -2,7 +2,7 @@ version: "3.8"
  
 services:
   db:
-    image: postgres:9.5
+    image: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: nithish123
@@ -19,10 +19,10 @@ services:
       dockerfile: Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=nithish123;Host=localhost;Port=5432;Database=consultancy;
-      
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=nithish123;Host=db;Port=5432;Database=consultancy;   
     ports:
       - "5001:8080"
+      - "5002:8081"
     depends_on:
       - db
  
