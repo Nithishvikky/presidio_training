@@ -1,0 +1,83 @@
+<div class="container mt-5">
+  <form [formGroup]="paymentForm" (ngSubmit)="handleSubmit()">
+
+    <div class="form-floating mt-3">
+      <input type="number" class="form-control" id="amountInput" formControlName="amount" placeholder="Amount">
+      <label for="amountInput">Amount</label>
+    </div>
+    @if (paymentForm.get('amount')?.touched && paymentForm.get('amount')?.errors) {
+      @if (paymentForm.get('amount')?.errors?.['required']) {
+        <div class="text-danger mx-2 mb-2 small">Amount is required.</div>
+      }
+      @else if (paymentForm.get('amount')?.errors?.['min']) {
+        <div class="text-danger mx-2 mb-2 small">Amount must be greater than 0.</div>
+      }
+    }
+
+    <div class="form-floating mt-3">
+      <input type="text" class="form-control" id="nameInput" formControlName="customerName" placeholder="Customer Name">
+      <label for="nameInput">Customer Name</label>
+    </div>
+    @if (paymentForm.get('customerName')?.touched && paymentForm.get('customerName')?.errors?.['required']) {
+      <div class="text-danger mx-2 mb-2 small">Customer name is required.</div>
+    }
+
+    <div class="form-floating mt-3">
+      <input type="email" class="form-control" id="emailInput" formControlName="email" placeholder="Email">
+      <label for="emailInput">Email</label>
+    </div>
+    @if (paymentForm.get('email')?.touched && paymentForm.get('email')?.errors) {
+      @if (paymentForm.get('email')?.errors?.['required']) {
+        <div class="text-danger mx-2 mb-2 small">Email is required.</div>
+      }
+      @else if (paymentForm.get('email')?.errors?.['email']) {
+        <div class="text-danger mx-2 mb-2 small">Invalid email address.</div>
+      }
+    }
+
+    <div class="form-floating mt-3">
+      <input type="text" class="form-control" id="contactInput" formControlName="contactNumber" placeholder="Contact Number">
+      <label for="contactInput">Contact Number</label>
+    </div>
+    @if (paymentForm.get('contactNumber')?.touched && paymentForm.get('contactNumber')?.errors) {
+      @if (paymentForm.get('contactNumber')?.errors?.['required']) {
+        <div class="text-danger mx-2 mb-2 small">Contact number is required.</div>
+      }
+      @else if (paymentForm.get('contactNumber')?.errors?.['pattern']) {
+        <div class="text-danger mx-2 mb-2 small">Contact number must be exactly 10 digits.</div>
+      }
+    }
+
+    <button class="btn btn-primary mt-3 w-100" [disabled]="paymentForm.invalid">Submit Payment</button>
+  </form>
+</div>
+
+  @if(paymentHistory && paymentHistory.length>0){
+    <table class="table table-hover mt-5 shadow-sm custom-bordered-table">
+      <caption>List of Documents</caption>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="ps-4 py-4">File Name</th>
+          <th scope="col" class="py-4">Uploaded at</th>
+          <th scope="col" class="py-4">Last viewer</th>
+          <th scope="col" class="py-4">Delete</th>
+          <th scope="col" class="py-4">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(payment of paymentHistory; track payment.paymentId){
+          <tr >
+            <td scope="row" class="ps-4 py-4">{{payment.paymentId}}</td>
+            <td class="py-4 fw-semibold" style="color: #637387;">{{payment.Name}}</td>
+            <td class="py-4" style="color: #637387;">{{payment.Email}}</td>
+            <td class="py-4" style="color: #637387;">{{payment.Number}}</td>
+            <td class="py-4 fw-bold">{{payment.Amount}}</td>
+            <td class="py-4" style="color: #637387;">{{payment.PaymentDate| date: 'yyyy-MM-dd HH:mm'}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+  <!-- @else {
+    <div class="text-secondary text-center mt-5 fw-bold">No payments in history</div>
+  } -->
