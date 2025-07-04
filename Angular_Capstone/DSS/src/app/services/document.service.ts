@@ -42,6 +42,7 @@ export class DocumentService{
     return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetMyDocument`,{params})
     .pipe(tap(()=> this.GetAllDocuments().subscribe()));
   }
+
   DownloadSharedDocument(filename:string,email:string){
     const params = new HttpParams().set('filename',filename).set('UploaderEmail',email);
     return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetDocument`,{params})
@@ -55,6 +56,7 @@ export class DocumentService{
       })
     );
   }
+  
   DeleteDocument(filename:string){
     const params = new HttpParams().set('filename',filename);
     return this.http.delete(`http://localhost:5015/api/v1/UserDoc/DeleteMyDocument`,{params})

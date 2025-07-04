@@ -4,20 +4,22 @@ import { BehaviorSubject } from 'rxjs';
 import { NotificationResponseDto } from '../models/notificationResponseDto';
 import { UserService } from './user.service';
 import { DocumentService } from './document.service';
+import { DocumentAccessService } from './documentAccess.service';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
   private hubConnection!: signalR.HubConnection;
   private documentService = inject(DocumentService);
 
-  private notifications:NotificationResponseDto[] = [];
-  private messageSubject = new BehaviorSubject<NotificationResponseDto[]|null>(null);
+  private documentAccessService = inject(DocumentAccessService);
+
+  private notifications:any[] = [];
+  private messageSubject = new BehaviorSubject<any[]|null>(null);
   notification$ = this.messageSubject.asObservable();
 
   seenNoitify:number = 0;
   public seenNotification = new BehaviorSubject<number|null>(0);
   SeenNotifi$ = this.seenNotification.asObservable();
-
 
 
   startConnection(): void {
@@ -51,10 +53,24 @@ export class NotificationService {
     });
   }
 
+  addUserNotification(){
+    this.startConnection();
+    this.hubConnection.on('DocumentGiven',(messageResponse)=>{
+      console.log(messageResponse);
+      this.notifications.unshift(messageResponse);
+      if(this.notifications.length == 1){
+        this.seenNotification.next(0);
+      }
+      this.messageSubject.next(this.notifications);
+      this.documentAccessService.GetDocumentShared().subscribe();
+    });
+  }
+
   disconnect(){
     if(this.hubConnection){
       this.hubConnection.stop();
       this.hubConnection.off('DocumentViewed');
+      this.hubConnection.off('DocumentGiven');
     }
   }
 
