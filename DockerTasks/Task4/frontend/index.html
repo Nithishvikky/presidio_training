@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Frontend</title></head>
+  <body>
+    <h1>Frontend</h1>
+    <p id="data">Loading...</p>
+    <script>
+      fetch('http://backend:5015/api')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('data').innerText = data.message;
+        })
+        .catch(err => console.error(err));
+    </script>
+  </body>
+</html>
