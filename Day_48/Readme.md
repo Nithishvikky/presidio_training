@@ -32,6 +32,7 @@ User Story
 User Story
 - `Delete Document`'s Tasks
 - `Current User`'s Tasks
+- `View Users`'s Tasks
 
 ##### Sprint 2
 ![Sprint 2](Screenshots/Sprint2.png)
