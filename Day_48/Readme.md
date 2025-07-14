@@ -50,8 +50,4 @@ User Story
 
 #### Sequence Diagram
 
-### Sequnce Diagram for Auth
-![SDiaAuth](Screenshots/SDiagram2.png)
-
-### Sequnce Diagram for Features
-![SDiaFeature](Screenshots/SDiagram1.png)
+![SeqDiagram](Screenshots/SequenceDiagram.png)
