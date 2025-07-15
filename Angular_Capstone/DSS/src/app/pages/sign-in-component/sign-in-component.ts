@@ -7,6 +7,9 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { passwordValidator } from '../../validators/PasswordValidator';
+import { NotificationResponseDto } from '../../models/notificationResponseDto';
+import { NotificationSharedResponseDto } from '../../models/notificationSharedResponse';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-sign-in-component',
@@ -19,8 +22,11 @@ export class SignInComponent {
   loginForm:FormGroup
   private router = inject(Router);
   showPassword:boolean = false;
+  notificationMessage:NotificationResponseDto[]=[];
+  notificationSharedMessage:NotificationSharedResponseDto[]=[];
+  role:string = "";
 
-  constructor(private userService:UserService){
+  constructor(private userService:UserService,public notifyService:NotificationService){
     this.loginForm = new FormGroup({
       email:new FormControl(null,[Validators.required,Validators.email]),
       password:new FormControl(null,[Validators.required,Validators.minLength(8),passwordValidator()])
@@ -45,6 +51,7 @@ export class SignInComponent {
           this.showToast("Signed in succesfully","success");
           setTimeout(()=>{
             this.router.navigateByUrl('/main/home');
+            this.EnableNotification();
           },2000)
         },
         error:(err)=>{
@@ -52,6 +59,35 @@ export class SignInComponent {
         }
       })
   }
+    EnableNotification(){
+      const authData = localStorage.getItem('authData');
+      if(authData){
+        this.role = JSON.parse(authData).role;
+        this.notifyService.startConnection();
+        if(this.role === 'Admin'){
+          this.notifyService.addNotification();
+          this.notifyService.notification$.subscribe(msg =>{
+            if(msg){
+              this.notificationMessage = msg;
+              const notification = this.notificationMessage[0];
+              this.showToast(`${notification.viewerName} viewed ${notification.fileName}`,"success");
+            }
+          })
+      }
+      else{
+        this.notifyService.addUserNotification();
+        this.notifyService.notification$.subscribe(msg =>{
+          if(msg){
+            this.notificationSharedMessage = msg;
+            const notification = this.notificationSharedMessage[0];
+            this.showToast(`${notification.userName} granted access for ${notification.fileName}`,"success");
+          }
+        })
+      }
+      }
+
+      console.log("Notification enabling");
+    }
 
   togglePasswordVisibility(){
     this.showPassword = !this.showPassword;

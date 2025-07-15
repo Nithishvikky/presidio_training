@@ -14,39 +14,6 @@ import { NotificationSharedResponseDto } from './models/notificationSharedRespon
 })
 export class App {
   protected title = 'DSS';
-  notificationMessage:NotificationResponseDto[]=[];
-  notificationSharedMessage:NotificationSharedResponseDto[]=[];
-
-  role:string = "";
-
-  constructor(public notifyService:NotificationService){}
-
-  ngOnInit():void{
-    const authData = localStorage.getItem('authData');
-    if(authData){
-      this.role = JSON.parse(authData).role;
-      if(this.role === 'Admin'){
-      this.notifyService.addNotification();
-        this.notifyService.notification$.subscribe(msg =>{
-          if(msg){
-            this.notificationMessage = msg;
-            const notification = this.notificationMessage[0];
-            this.showToast(`${notification.viewerName} viewed ${notification.fileName}`,"success");
-          }
-        })
-     }
-     else{
-      this.notifyService.addUserNotification();
-      this.notifyService.notification$.subscribe(msg =>{
-        if(msg){
-          this.notificationSharedMessage = msg;
-          const notification = this.notificationSharedMessage[0];
-          this.showToast(`${notification.userName} granted access for ${notification.fileName}`,"success");
-        }
-      })
-     }
-    }
-  }
 
   showToast(message: string, type: 'success' | 'danger') {
     const toastEl = document.getElementById('liveToast');
