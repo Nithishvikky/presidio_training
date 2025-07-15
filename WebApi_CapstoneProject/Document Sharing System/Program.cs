@@ -15,8 +15,21 @@ using Serilog.Events;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
 using System.Security.Claims;
+using Azure.Storage.Blobs;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+// var AzureLogConnectionString = builder.Configuration["AzureStorage:LogsConnectionString"];
+
+// var keyVaultUrl = builder.Configuration["AzureStorage:AccessUrl"];
+// var SecretClient = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+
+// KeyVaultSecret azureStorage = SecretClient.GetSecret("BlobConnectionString").Value;
+// string blobConnectionString = azureStorage.Value;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -26,6 +39,13 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
+
+// .WriteTo.AzureBlobStorage(
+//             connectionString:blobConnectionString,
+//             storageContainerName: "logs",
+//             outputTemplate:"{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}"
+//         )
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
@@ -69,10 +89,24 @@ builder.Services.AddControllers(options =>
                     opts.JsonSerializerOptions.WriteIndented = true;
                 });
 
+
+// KeyVaultSecret dbSecret = SecretClient.GetSecret("DBConnectionString").Value;
+// string dbConnectionString = dbSecret.Value;
+
+// // Console.WriteLine(dbSecret.Value);
+// // Console.WriteLine("Raw DB connection string:");
+// // Console.WriteLine($"---START---\n{dbConnectionString}\n---END---");
+
+// builder.Services.AddDbContext<DssContext>(opts =>
+// {
+//     opts.UseNpgsql(dbConnectionString);
+// });
+
 builder.Services.AddDbContext<DssContext>(opts =>
 {
     opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 
 builder.Services.AddRateLimiter(options =>
 {
@@ -141,6 +175,8 @@ builder.Services.AddTransient<IAuthSessionService, AuthSessionService>();
 builder.Services.AddTransient<IUserDocService, UserDocService>();
 builder.Services.AddTransient<IDocumentViewService, DocumentViewService>();
 builder.Services.AddTransient<IDocumentShareService, DocumentShareService>();
+builder.Services.AddTransient<IAzureBlobStorageService, AzureBlobStorageService>();
+
 #endregion
 
 builder.Services.AddCors(options =>

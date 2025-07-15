@@ -14,9 +14,7 @@ namespace DSS.Interfaces
             string? userEmail,
             string? Filename,
             string? sortBy,
-            bool ascending,
-            int pageNumber,
-            int pageSize
+            bool ascending
         );
         
     }

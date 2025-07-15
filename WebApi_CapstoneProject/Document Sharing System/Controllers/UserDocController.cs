@@ -187,12 +187,10 @@ namespace DSS.Controllers
             string? userEmail = null,
             string? Filename = null,
             string? sortBy = null,
-            bool ascending = true,
-            int pageNumber = 1,
-            int pageSize = 10
+            bool ascending = true
         )
         {
-            var userDocuments = await _userDocService.GetAllDocs(userEmail, Filename, sortBy, ascending, pageNumber, pageSize);
+            var userDocuments = await _userDocService.GetAllDocs(userEmail, Filename, sortBy, ascending);
 
             var mapper = new UserDocMapper();
             var userDocDetails = userDocuments

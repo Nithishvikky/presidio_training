@@ -1,8 +1,11 @@
+using Azure.Storage.Blobs;
 using DSS.Interfaces;
 using DSS.Intrefaces;
 using DSS.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Azure.Identity;
+using Azure.Storage.Blobs;
 
 namespace DSS.Services
 {
@@ -12,16 +15,18 @@ namespace DSS.Services
         private readonly IUserService _userService;
         // private readonly IDocumentShareService _documentShareService;
         private readonly ILogger<UserDocService> _logger;
+        // private readonly IAzureBlobStorageService _azureBlobStorageService;
 
         public UserDocService(IRepository<Guid, UserDocument> userDocRepository,
                               IUserService userService,
-                              ILogger<UserDocService> logger
-                              )
+                              ILogger<UserDocService> logger)
+                            //   IAzureBlobStorageService azureBlobStorageService)
         {
             _userDocRepository = userDocRepository;
             _userService = userService;
             // _documentShareService = documentShareService;
             _logger = logger;
+            // _azureBlobStorageService = azureBlobStorageService;
         }
 
         public async Task<UserDocument> UploadDoc(UserDocument doc)
@@ -35,6 +40,10 @@ namespace DSS.Services
                     throw new InvalidOperationException("Document already Exists");
                 }
                 var added = await _userDocRepository.Add(doc);
+
+                // Azure
+                // await _azureBlobStorageService.UploadAsync(doc.FileName, doc.FileData);
+
                 _logger.LogInformation("Document {FileName} uploaded by user {UserId}", added.FileName, added.UploadedById);
                 return added;
             }
@@ -82,7 +91,11 @@ namespace DSS.Services
                     throw new KeyNotFoundException("Document not found");
                 }
 
+                // // Azure
+                // doc.FileData = await _azureBlobStorageService.DownloadAsync(filename);
+
                 _logger.LogInformation("Document {FileName} fetched for uploader {Email}", filename, email);
+
                 return doc;
             }
             catch (Exception ex)
@@ -109,6 +122,9 @@ namespace DSS.Services
                 doc.IsDeleted = true;
                 var updated = await _userDocRepository.Update(doc.Id, doc);
 
+                // Azure
+                // await _azureBlobStorageService.DeleteAsync(filename);
+
                 _logger.LogInformation("Document {FileName} soft-deleted by user {UserId}", filename, userId);
                 return updated;
             }
@@ -123,9 +139,7 @@ namespace DSS.Services
             string? searchByEmail = null,
             string? searchFilename = null,
             string? sortBy = null,
-            bool ascending = true,
-            int pageNumber = 1,
-            int pageSize = 10
+            bool ascending = true
         )
         {
             try
@@ -167,10 +181,7 @@ namespace DSS.Services
                     _ => Alldoc 
                 };
 
-                var pagedDocs = Alldoc.Skip((pageNumber - 1) * pageSize)
-                                    .Take(pageSize).ToList();
-                
-                return pagedDocs;
+                return Alldoc.ToList();
             }
             catch (Exception ex)
             {
