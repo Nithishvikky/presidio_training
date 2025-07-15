@@ -1,4 +1,121 @@
-<div class="container mt-2">
+<h1 class="fw-semibold ms-4 mt-4">Community</h1>
+
+<div class="container mt-4">
+  <form [formGroup]="filterForm" class="row g-3 align-items-center mb-4">
+    <div class="col-md-4 position-relative">
+      <div class="form-floating">
+        <input type="email" class="form-control" id="userEmailInput" placeholder="User Email" formControlName="userEmail">
+        <label for="userEmailInput">User Email</label>
+        <button *ngIf="filterForm.get('userEmail')?.value" type="button" class="position-absolute top-50 end-0 translate-middle-y me-2 btn p-0"
+          style="width: 20px; height: 20px; border-radius: 50%; background-color: #dc3545; color: #fff; font-weight: bold; font-size: 10px;"
+          (click)="clearControl('userEmail')">
+          ✕
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4 position-relative">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="usernameInput" placeholder="Username" formControlName="userName">
+        <label for="usernameInput">Username</label>
+        <button *ngIf="filterForm.get('userName')?.value" type="button" class="position-absolute top-50 end-0 translate-middle-y me-2 btn p-0"
+          style="width: 20px; height: 20px; border-radius: 50%; background-color: #dc3545; color: #fff; font-weight: bold; font-size: 10px;"
+          (click)="clearControl('userName')">
+          ✕
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4 d-flex align-items-center justify-content-end gap-3">
+      <button class="btn btn-outline-primary" type="button" (click)="toggleSidebar()">
+        <i class="bi bi-filter"></i> Filter
+      </button>
+      <button class="btn btn-outline-dark" type="button" (click)="clearFilters()">Clear Filters</button>
+    </div>
+  </form>
+
+  <!-- Sidebar -->
+  <form [formGroup]="filterForm" class="position-fixed bg-white shadow p-4"
+       [ngClass]="{ 'd-block': showSidebar, 'd-none': !showSidebar }"
+       style="width: 300px; height: 350px; top: 80px; right:0; z-index: 1050; transition: transform 0.3s ease;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="mb-0">Filters</h5>
+      <button class="btn-close" (click)="toggleSidebar()"></button>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Role</label>
+      <select class="form-select" formControlName="filterBy">
+        <option value="">All</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Sort by</label>
+      <select class="form-select" formControlName="sortBy">
+        <option value="">None</option>
+        <option value="username">Username</option>
+        <option value="email">Email</option>
+        <option value="registeredat">Joined Date</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Sort Order</label>
+      <select class="form-select" formControlName="ascending">
+        <option value="true">Ascending</option>
+        <option value="false">Descending</option>
+      </select>
+    </div>
+  </form>
+
+  <!-- Cards -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+    <div class="col" *ngFor="let user of users">
+      <div class="card shadow-sm border-0 px-3 py-3 mt-4" style="min-height: 140px;">
+        <div class="d-flex align-items-center gap-3">
+          <!-- User Icon -->
+          <img
+            [src]="user.role === 'Admin' ? 'assets/icons/admin-icon.png' : 'assets/icons/user-icon.png'"
+            width="60"
+            height="60"
+            class="rounded-circle"
+            alt="role icon"
+          />
+
+          <!-- User Info -->
+          <div class="flex-grow-1">
+            <h6 class="card-title mb-1">{{ user.username }}</h6>
+            <strong><p class="text-muted mb-1 small">{{ user.email }}</p></strong>
+            <span class="badge" [ngClass]="user.role === 'Admin' ? 'bg-dark' : 'bg-info'">
+              {{ user.role }}
+            </span>
+            <div class="text-muted small mt-1">
+              Joined on <strong>{{ user.registeredAt | date: 'yyyy-MM-dd' }}</strong>
+            </div>
+          </div>
+
+          <!-- User Details Button -->
+          <div class="text-end">
+            <button class="btn btn-sm btn-outline-dark" (click)="openUserDetails(user.email)">
+              <i class="bi bi-person-lines-fill me-1"></i>
+              Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="!showScrollTop" class="text-secondary text-end"><i class="bi bi-chevron-double-down"></i> Scroll to see more users </div>
+  <div *ngIf="users.length === 0 && !loading" class="text-secondary text-center mt-4">No users available</div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button class="btn btn-secondary rounded-circle position-fixed" (click)="scrollToTop()"
+        *ngIf="showScrollTop"
+        style="bottom: 100px; right: 50px; z-index: 1051; width: 60px; height: 60px;">
+  ↑
+</button>
+<!-- <div class="container mt-2">
   <div class="d-flex justify-content-between align-items-center mt-4">
     <h1 class="fw-semibold">Community</h1>
   </div>
@@ -23,7 +140,7 @@
   </form>
   @if(users && users.length>0){
     <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
-      <caption>List of Documents</caption>
+      <caption>Community people</caption>
       <thead class="thead-light">
         <tr>
           <th scope="col" class="ps-4 py-4" (click)="onSortby($event)" id="username">Username
@@ -60,4 +177,7 @@
   @else {
     <div class="text-secondary text-center mt-3">No users available</div>
   }
-</div>
+</div> -->
+
+<!-- Inside people.component.html -->
+<app-user-modal-component [user]="selectedUser" [show]="showUserModal" (closed)="showUserModal = false"></app-user-modal-component>

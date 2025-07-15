@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserResponseDto } from '../../models/userResponseDto';
 import { RouterLink, RouterModule } from '@angular/router';
@@ -18,7 +18,7 @@ Chart.register(ChartDataLabels);
   templateUrl: './home-component.html',
   styleUrl: './home-component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   User:UserResponseDto|null =null;
   data:DashBoardResponseDto|null = null;
 
@@ -42,7 +42,7 @@ export class HomeComponent {
     })
     this.documentAccessService.GetDashBoardData().subscribe();
   }
-  
+
   pieChartType: ChartType = 'pie';
   pieChartOptions: ChartOptions = {
     responsive: true,

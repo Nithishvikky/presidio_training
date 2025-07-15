@@ -4,6 +4,7 @@ import { DocumentAccessService } from '../../services/documentAccess.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DocumentService } from '../../services/document.service';
+import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
 
 @Component({
   selector: 'app-document-shared-component',
@@ -12,6 +13,7 @@ import { DocumentService } from '../../services/document.service';
   styleUrl: './document-shared-component.css'
 })
 export class DocumentSharedComponent {
+  getFileTypeIcon = getFileTypeIcon;
   documents: DocumentDetailsResponseDto[] | null = null;
 
   constructor(

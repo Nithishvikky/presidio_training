@@ -1,7 +1,14 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-between align-items-center mt-4">
     <h1 class="fw-semibold">My Documents</h1>
-    <button class="btn border px-3 py-1 fw-medium" data-bs-toggle="modal" data-bs-target="#uploadModal" id="upload-btn"><i class="bi bi-upload me-2"></i>Upload</button>
+    <button
+      class="btn btn-primary border px-3 py-1 fw-medium"
+      data-bs-toggle="modal"
+      data-bs-target="#uploadModal"
+      id="upload-btn"
+      >
+      <i class="bi bi-upload me-2"></i>Upload
+    </button>
   </div>
   @if(documents && documents.length>0){
     <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
@@ -18,10 +25,14 @@
       <tbody>
         @for(document of documents; track document.docId){
           <tr >
-            <td scope="row" class="ps-4 py-4">{{document.fileName}}</td>
+            <td scope="row" class="ps-4 py-4"><img [src]="getFileTypeIcon(document.contentType)" alt="file icon" width="24" height="24" class="me-2" />{{document.fileName}}</td>
             <td class="py-4" style="color: #637387;">{{document.uploadedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
             <td class="py-4">{{document.lastViewerName || '-'}}</td>
-            <td class="py-4 remove fw-semibold" (click)="onFileDelete(document.fileName)">Remove</td>
+            <td class="py-4 remove fw-semibold" (click)="openDeleteConfirm()">Remove</td>
+            <app-delete-modal-component *ngIf="showDeleteModal"
+              [message]="'Are you sure you want to delete this document?'"
+              (confirmed)="handleDeleteConfirm($event,document.fileName)">
+            </app-delete-modal-component>
             <td class="py-4 details fw-semibold" [routerLink]="['/main/document',document.fileName]" [queryParams]="{ue : document.uploaderEmail}">Details</td>
           </tr>
         }

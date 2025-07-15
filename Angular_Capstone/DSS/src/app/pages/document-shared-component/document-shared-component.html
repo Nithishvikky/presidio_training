@@ -19,7 +19,7 @@
           <tr >
             <td scope="row" class="ps-4 py-4">{{document.uploaderUsername}}</td>
             <td class="py-4" style="color: #637387;">{{document.uploaderEmail}}</td>
-            <td class="py-4">{{document.fileName}}</td>
+            <td class="py-4"><img [src]="getFileTypeIcon(document.contentType)" alt="file icon" width="24" height="24" class="me-2" />{{document.fileName}}</td>
             <td class="py-4" style="color: #637387;">{{document.uploadedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
             <td class="py-4 details fw-semibold" (click)="onDetails(document)">Details</td>
           </tr>

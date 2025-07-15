@@ -96,21 +96,6 @@ describe('DocumentService', () => {
     getReq.flush({ data: { $values: dummyDocs } });
   });
 
-  it('should fetch all document details and update allDocuments$', (done) => {
-    service.GetAllDocumentDetails('user@example.com').subscribe();
-
-    const req = httpMock.expectOne(
-      'http://localhost:5015/api/v1/UserDoc/GetAllDocumentDetails?userEmail=user@example.com&ascending=true&pageNumber=1&pageSize=10'
-    );
-    expect(req.request.method).toBe('GET');
-    req.flush({ data: { $values: dummyDocs } });
-
-    service.allDocuments$.subscribe(docs => {
-      expect(docs?.length).toBe(2);
-      done();
-    });
-  });
-
   it('should clear all caches', (done) => {
     service.clearDocumentCaches();
 

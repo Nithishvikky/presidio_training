@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { DocumentViewersDto } from '../../models/documentViewersDto';
 import { DocumentViewerService } from '../../services/documentView.service';
 import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponseDto';
+import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
 
 @Component({
   selector: 'app-document-component',
@@ -18,6 +19,7 @@ import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponse
   styleUrl: './document-component.css'
 })
 export class DocumentComponent implements OnInit{
+  getFileTypeIcon = getFileTypeIcon;
   filename!:string;
   fileSharedUsers:DocumentSharedUsersDto[] | null = null;
   fileViewers:DocumentViewersDto[]| null = null;
@@ -133,6 +135,7 @@ export class DocumentComponent implements OnInit{
     this.file = blob;
     const fileURL = URL.createObjectURL(blob);
     this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+    console.log(`${this.filename}:${this.iframeSrc}`);
   }
 
   onDownload(){

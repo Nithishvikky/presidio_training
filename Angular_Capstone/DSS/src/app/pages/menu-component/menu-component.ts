@@ -7,10 +7,12 @@ import { NotificationModalComponent } from "../notification-modal-component/noti
 import { NotificationService } from '../../services/notification.service';
 import { NotificationResponseDto } from '../../models/notificationResponseDto';
 import { DocumentService } from '../../services/document.service';
+import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-menu-component',
-  imports: [RouterModule, NotificationModalComponent],
+  imports: [RouterModule, NotificationModalComponent,DeleteModalComponent,CommonModule],
   templateUrl: './menu-component.html',
   styleUrl: './menu-component.css'
 })
@@ -23,6 +25,7 @@ export class MenuComponent implements OnInit{
   collapsed:boolean = false;
   UnseenNotification:number = 0;
   notification:NotificationResponseDto[] = [];
+  showConfirmModal = false;
 
 
   constructor(private userService:UserService,private breakpointObserver: BreakpointObserver,
@@ -72,7 +75,19 @@ export class MenuComponent implements OnInit{
     }
   }
 
-  // Should call logout api here
+  openConfirmModal(){
+    this.showConfirmModal = true;
+    console.log("clicked");
+  }
+
+  handleConfirm(result: boolean) {
+    this.showConfirmModal = false;
+    if (result) {
+      console.log("check");
+      this.OnSignOut();
+    }
+  }
+
   OnSignOut(){
     let auth_data = localStorage.getItem("authData");
     if(auth_data){

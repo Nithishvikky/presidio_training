@@ -1,0 +1,21 @@
+<div class="modal-backdrop fade show"></div>
+
+<div class="modal fade show d-block" tabindex="-1" style="background-color:transparent ; z-index: 1050;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger shadow">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmation</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="cancel()"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <p class="fs-6">{{ message }}</p>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <button class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
+        <button class="btn btn-danger" (click)="confirm()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

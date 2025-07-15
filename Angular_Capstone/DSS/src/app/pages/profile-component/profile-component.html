@@ -30,7 +30,7 @@
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</button>
       </div>
       <div class="col-md-6 mb-3 text-start">
-        <button class="btn btn-danger" (click)="OnSignOut()">Sign out</button>
+        <button class="btn btn-danger" (click)="openConfirmModal()">Sign out</button>
       </div>
     </div>
   </div>
@@ -84,3 +84,10 @@
     <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
 </div>
+
+
+<app-delete-modal-component
+  *ngIf="showConfirmModal"
+  [message]="'Are you sure you want to sign out?'"
+  (confirmed)="handleConfirm($event)"
+></app-delete-modal-component>

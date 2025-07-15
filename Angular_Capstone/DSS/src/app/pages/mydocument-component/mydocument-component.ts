@@ -5,18 +5,23 @@ import { RouterModule } from '@angular/router';
 import { Modal, Toast } from 'bootstrap';
 import { DocumentService } from '../../services/document.service';
 import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponseDto';
+import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
+import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
+
 
 
 @Component({
   selector: 'app-mydocument-component',
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [CommonModule,FormsModule,RouterModule,DeleteModalComponent],
   templateUrl: './mydocument-component.html',
   styleUrl: './mydocument-component.css'
 })
 export class MydocumentComponent {
+  getFileTypeIcon = getFileTypeIcon;
   documents: DocumentDetailsResponseDto[] | null = null;
   selectedFile: File|null = null;
   fileSizeFlag:boolean = false;
+  showDeleteModal = false;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor(private documentService:DocumentService){}
@@ -51,6 +56,17 @@ export class MydocumentComponent {
       else{
         this.fileSizeFlag = true;
       }
+    }
+  }
+
+  openDeleteConfirm(){
+    this.showDeleteModal = true;
+  }
+  
+  handleDeleteConfirm(result: boolean,filename:string) {
+    this.showDeleteModal = false;
+    if (result) {
+      this.onFileDelete(filename);
     }
   }
 
@@ -105,4 +121,5 @@ export class MydocumentComponent {
       const toast = new Toast(toastEl!);
       toast.show();
   }
+
 }

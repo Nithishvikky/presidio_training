@@ -1,51 +1,78 @@
-<div class="container mt-5">
-  <div class="d-flex justify-content-between align-items-center mt-4">
-    <h1 class="fw-semibold">All Documents</h1>
-  </div>
-  <form [formGroup]="filterForm" class="d-flex gap-3 align-items-center mt-2">
-    <div class="form-floating mt-3">
-      <input type="email" class="form-control" id="userEmailInput" placeholder="User Email" formControlName="userEmail">
-      <label for="userEmailInput">User Email</label>
+<h1 class="fw-semibold ms-5 mt-4">All Documents</h1>
+
+<div class="container mt-3">
+  <form [formGroup]="filterForm" class="row g-3 align-items-center mb-4">
+    <div class="col-md-4 position-relative">
+      <div class="form-floating">
+        <input type="email" class="form-control" id="userEmailInput" placeholder="User Email" formControlName="userEmail">
+        <label for="userEmailInput">User Email</label>
+        <button
+          *ngIf="filterForm.get('userEmail')?.value"
+          type="button"
+          class="position-absolute top-50 end-0 translate-middle-y me-2 btn p-0"
+          style="width: 20px; height: 20px; border-radius: 50%; background-color: #dc3545; color: #fff; font-weight: bold; font-size: 10px;"
+          (click)="clearControl('userEmail')">
+          ✕
+        </button>
+      </div>
     </div>
-    <div class="form-floating mt-3">
-      <input type="text" class="form-control" id="filenameInput" placeholder="Filename" formControlName="filename">
-      <label for="filenameInput">Filename</label>
+    <div class="col-md-4 position-relative">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="filenameInput" placeholder="Filename" formControlName="filename">
+        <label for="filenameInput">Filename</label>
+        <button
+          *ngIf="filterForm.get('filename')?.value"
+          type="button"
+          class="position-absolute top-50 end-0 translate-middle-y me-2 btn p-0"
+          style="width: 26px; height: 26px; border-radius: 50%; background-color: #dc3545; color: #fff; font-weight: bold; font-size: 14px;"
+          (click)="clearControl('filename')">
+          ✕
+        </button>
+      </div>
     </div>
-    <div class="btn btn-secondary btn-sm mt-3" (click)="clearFilters()">Clear filters</div>
+    <div class="col-md-4 d-flex align-items-center gap-3">
+      <div class="form-floating w-100">
+        <select class="form-select" id="sortBy" formControlName="sortBy">
+          <option value="">Sort by</option>
+          <option value="username">Username</option>
+          <option value="email">Email</option>
+          <option value="filename">Filename</option>
+          <option value="uploadedat">Uploaded At</option>
+        </select>
+        <label for="sortBy">Sort by</label>
+      </div>
+      <div class="form-floating">
+        <select class="form-select" id="ascending" formControlName="ascending">
+          <option value="true">Ascending</option>
+          <option value="false">Descending</option>
+        </select>
+        <label for="ascending">Order</label>
+      </div>
+    </div>
   </form>
-  @if(documents && documents.length>0){
-    <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
-      <caption>List of Documents</caption>
-      <thead class="thead-light">
-        <tr>
-          <th scope="col" class="ps-4 py-4" (click)="onSortby($event)" id="username">Username
-            <i [ngClass]="sortBy != 'username' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
-          </th>
-          <th scope="col" class="py-4" id="email" (click)="onSortby($event)">Email
-            <i [ngClass]="sortBy != 'email' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
-          </th>
-          <th scope="col" class="py-4" id="filename" (click)="onSortby($event)">File Name
-            <i [ngClass]="sortBy != 'filename' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
-          </th>
-          <th scope="col" class="py-4" id="uploadedat" (click)="onSortby($event)">Uploaded at
-            <i [ngClass]="sortBy != 'uploadedat' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(document of documents; track document.docId){
-          <tr >
-            <td scope="row" class="ps-4 py-4">{{document.uploaderUsername}}</td>
-            <td scope="row" class="py-4" style="color: #637387;">{{document.uploaderEmail}}</td>
-            <td scope="row" class="py-4">{{document.fileName}}</td>
-            <td class="py-4" style="color: #637387;">{{document.uploadedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  }
-  @else {
-    <div class="text-secondary text-center mt-3">No documents available</div>
-  }
+
+  <div class="mt-4">
+    <div *ngIf="documents && documents.length > 0; else noDocs" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let document of documents;">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body d-flex align-items-start">
+            <img [src]="getFileTypeIcon(document.contentType)" width="40" height="40" class="me-3" alt="icon" />
+            <div>
+              <h6 class="card-title mb-1">{{ document.fileName }}</h6>
+              <p class="mb-0 text-muted small">
+                <strong>{{ document.uploaderUsername }}</strong><br />
+                <span>{{ document.uploaderEmail }}</span><br />
+                <span>{{ document.uploadedAt | date: 'yyyy-MM-dd HH:mm' }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noDocs>
+      <div class="text-secondary text-center mt-4">No documents available</div>
+    </ng-template>
+  </div>
 </div>
 

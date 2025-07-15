@@ -4,47 +4,47 @@ import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponse
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
 
 @Component({
   selector: 'app-all-documents-component',
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './all-documents-component.html',
   styleUrl: './all-documents-component.css'
 })
 export class AllDocumentsComponent {
+  getFileTypeIcon = getFileTypeIcon;
   documents: DocumentDetailsResponseDto[] | null = null;
-  filterForm!:FormGroup;
-  ascending:boolean = true;
-  sortBy:string = "";
+  filterForm!: FormGroup;
+  ascending: boolean = true;
+  sortBy: string = '';
+  showFilterSidebar: boolean = false;
 
-  constructor(private fb:FormBuilder,private documentService:DocumentService){}
+  constructor(private fb: FormBuilder, private documentService: DocumentService) {}
 
-  ngOnInit():void{
+  ngOnInit(): void {
     this.filterForm = this.fb.group({
-      userEmail:[''],
+      userEmail: [''],
       filename: [''],
       sortBy: [''],
-      ascending:[true]
-    })
+      ascending: [true]
+    });
 
-    this.documentService.allDocuments$.subscribe(doc =>{
+    this.documentService.allDocuments$.subscribe(doc => {
       this.documents = doc;
-      console.log(this.documents);
-    })
+    });
 
     const values = this.filterForm.value;
     this.documentService
-        .GetAllDocumentDetails(values.userEmail,values.filename,values.sortBy,values.ascending)
+      .GetAllDocumentDetails(values.userEmail, values.filename, values.sortBy, values.ascending)
+      .subscribe();
+
+    this.filterForm.valueChanges.pipe(debounceTime(500)).subscribe(values => {
+      this.documentService
+        .GetAllDocumentDetails(values.userEmail, values.filename, values.sortBy, values.ascending)
         .subscribe();
-
-    this.filterForm.valueChanges
-      .pipe(debounceTime(300))
-      .subscribe(values => {
-        this.documentService
-          .GetAllDocumentDetails(values.userEmail, values.filename, values.sortBy, values.ascending)
-          .subscribe();
-      });
-
+    });
   }
 
   clearFilters() {
@@ -58,15 +58,15 @@ export class AllDocumentsComponent {
     this.sortBy = '';
   }
 
-  onSortby(event:Event){
-    const value = (event.currentTarget as HTMLElement).id;
-
-    this.filterForm.get('sortBy')?.setValue(value);
-    this.sortBy = value;
-
-
+  toggleSortDirection() {
     this.ascending = !this.ascending;
     this.filterForm.get('ascending')?.setValue(this.ascending);
+  }
 
+  toggleSidebar() {
+    this.showFilterSidebar = !this.showFilterSidebar;
+  }
+  clearControl(controlName: string): void {
+    this.filterForm.get(controlName)?.setValue('');
   }
 }

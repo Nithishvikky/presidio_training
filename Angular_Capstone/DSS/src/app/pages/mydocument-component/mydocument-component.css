@@ -1,13 +1,16 @@
 #upload-btn{
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease, transform 0.15s ease;
   cursor: pointer;
+  color: #fff;
+  border: 1px solid #0d6efd;
 }
 
 #upload-btn:hover{
-  border: none;
-  background-color: #000;
-  color: #ffff;
+  background-color: #0b5ed7;
+  color: #fff;
+  border: 1px solid #0a58ca;
+  transform: scale(1.03);
 }
 
 .details,.remove{

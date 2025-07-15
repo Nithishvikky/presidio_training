@@ -41,6 +41,7 @@ export class NotificationService {
   }
 
   addNotification(){
+    console.log("Notification trigger");
     this.startConnection();
     this.hubConnection.on('DocumentViewed', (messageResponse) => {
       console.log('DocumentViewed received:', messageResponse);
@@ -54,6 +55,7 @@ export class NotificationService {
   }
 
   addUserNotification(){
+    console.log("Notification trigger");
     this.startConnection();
     this.hubConnection.on('DocumentGiven',(messageResponse)=>{
       console.log(messageResponse);

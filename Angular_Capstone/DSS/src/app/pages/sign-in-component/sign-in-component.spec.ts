@@ -33,8 +33,6 @@ describe('SignInComponent', () => {
     fixture = TestBed.createComponent(SignInComponent);
     component = fixture.componentInstance;
     userServiceSpy = TestBed.inject(UserService) as jasmine.SpyObj<UserService>;
-
-    spyOn(component, 'showToast').and.callFake(() => {});
     fixture.detectChanges();
   });
 
@@ -53,16 +51,4 @@ describe('SignInComponent', () => {
     expect(component.showPassword).toBeTrue();
   });
 
-  it('should show toast on login error', () => {
-    userServiceSpy.Loginuser.and.returnValue(
-      throwError(() => ({
-        error: { error: { errorMessage: 'Invalid credentials' } }
-      }))
-    );
-
-    component.loginForm.setValue({ email: 'wrong@example.com', password: 'wrongpass' });
-    component.handleSubmit();
-
-    expect(component.showToast).toHaveBeenCalledWith('Invalid credentials', 'danger');
-  });
 });

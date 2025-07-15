@@ -54,6 +54,11 @@ export class UserService{
     )
   }
 
+  GetUserDetails(email:string):Observable<any>{
+    const params = new HttpParams().set('email',email);
+    return this.http.get(`http://localhost:5015/api/v1/User/GetUser`,{params});
+  }
+
   GetAllUsers(
     searchByEmail?: string,
     searchByUsername?: string,

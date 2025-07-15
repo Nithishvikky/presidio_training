@@ -1,0 +1,45 @@
+<div class="modal-backdrop fade show" *ngIf="show"></div>
+
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show" style="background: rgba(0,0,0,0.3); z-index: 1050;">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content shadow">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title"><i class="bi bi-person-circle me-2"></i>User Details</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div *ngIf="user" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label text-muted">User ID</label>
+            <div class="border p-2 bg-light">{{ user.userId }}</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Email</label>
+            <div class="border p-2 bg-light">{{ user.email }}</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Username</label>
+            <div class="border p-2 bg-light">{{ user.username }}</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Role</label>
+            <div class="border p-2 bg-light">{{ user.role }}</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Joined On</label>
+            <div class="border p-2 bg-light">{{ user.registeredAt | date:'yyyy-MM-dd' }}</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Last Updated</label>
+            <div class="border p-2 bg-light">{{ user.updatedAt | date:'yyyy-MM-dd' }}</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Total Documents</label>
+            <div class="border p-2 bg-light text-dark fw-bold fs-5">{{ user.documentCount }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

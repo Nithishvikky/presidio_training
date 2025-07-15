@@ -1,0 +1,23 @@
+.info{
+  transform: scaleX(0.9);
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.info:hover{
+  transform: scaleX(1.0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-banner {
+  background: linear-gradient(to right, #f1f3f4, #e3f2fd); /* light gray to light blue */
+  border: 1px solid #cfd8dc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+}
+
+.bi-emoji-smile {
+  color: #fbc02d;
+  font-size: 1.5rem;
+}

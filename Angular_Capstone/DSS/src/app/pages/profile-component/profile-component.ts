@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserResponseDto } from '../../models/userResponseDto';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
@@ -9,19 +9,22 @@ import { Modal, Toast } from 'bootstrap';
 import { NotificationService } from '../../services/notification.service';
 import { DocumentService } from '../../services/document.service';
 import { DocumentAccessService } from '../../services/documentAccess.service';
+import { UserModalComponent } from "../user-modal-component/user-modal-component";
+import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
 
 @Component({
   selector: 'app-profile-component',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,DeleteModalComponent],
   templateUrl: './profile-component.html',
   styleUrl: './profile-component.css'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   user:UserResponseDto | null = null;
   passwordChangeForm!:FormGroup;
   refreshToken:string="";
   userEmail:string="";
   documentShared:number = 0;
+  showConfirmModal = false;
 
   @ViewChild('PasswordInput') PasswordInput!: ElementRef<HTMLInputElement>;
 
@@ -50,6 +53,17 @@ export class ProfileComponent {
       this.user = user;
     })
     console.log(this.user);
+  }
+
+  openConfirmModal(){
+    this.showConfirmModal = true;
+  }
+
+  handleConfirm(result: boolean) {
+    this.showConfirmModal = false;
+    if (result) {
+      this.OnSignOut();
+    }
   }
 
   OnSignOut(){

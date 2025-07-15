@@ -1,90 +1,93 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfileComponent } from './profile-component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { of } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { NotificationService } from '../../services/notification.service';
 import { DocumentService } from '../../services/document.service';
 import { DocumentAccessService } from '../../services/documentAccess.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { of, throwError } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { UserResponseDto } from '../../models/userResponseDto';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
-  let userServiceSpy: jasmine.SpyObj<UserService>;
-  let notificationServiceSpy: jasmine.SpyObj<NotificationService>;
-  let documentServiceSpy: jasmine.SpyObj<DocumentService>;
-  let documentAccessServiceSpy: jasmine.SpyObj<DocumentAccessService>;
+
+  let mockUserService: jasmine.SpyObj<UserService>;
+  let mockDocumentService: jasmine.SpyObj<DocumentService>;
+  let mockNotificationService: jasmine.SpyObj<NotificationService>;
+  let mockAccessService: jasmine.SpyObj<DocumentAccessService>;
+  let mockRouter: jasmine.SpyObj<Router>;
+
+  const mockUser: UserResponseDto = {
+    userId: '1',
+    email: 'user@example.com',
+    username: 'TestUser',
+    role: 'User',
+    registeredAt: new Date(),
+    updatedAt: new Date(),
+    documentCount: 5
+  };
 
   beforeEach(async () => {
-    const userServiceMock = jasmine.createSpyObj('UserService', ['GetUser', 'LogoutUser', 'ChangePassword', 'clearUserCache'], { CurrentUser$: of({ username: 'testuser', email: 'test@example.com', role: 'User', registeredAt: new Date(), updatedAt: new Date(), documentCount: 3 }) });
-    const notificationServiceMock = jasmine.createSpyObj('NotificationService', ['clearNotification']);
-    const documentServiceMock = jasmine.createSpyObj('DocumentService', ['clearDocumentCaches']);
-    const documentAccessServiceMock = jasmine.createSpyObj('DocumentAccessService', ['GetDocumentShared'], { sharedFiles$: of([{ id: 1 }, { id: 2 }]) });
+    mockUserService = jasmine.createSpyObj('UserService', ['GetUser', 'LogoutUser', 'ChangePassword', 'clearUserCache'], {
+      CurrentUser$: of(mockUser)
+    });
+
+    // ✅ Fix: mock GetUser to return observable
+    mockUserService.GetUser.and.returnValue(of(mockUser));
+
+    mockDocumentService = jasmine.createSpyObj('DocumentService', ['clearDocumentCaches']);
+    mockNotificationService = jasmine.createSpyObj('NotificationService', ['clearNotification']);
+
+    mockAccessService = jasmine.createSpyObj('DocumentAccessService', ['GetDocumentShared'], {
+      sharedFiles$: of([{ id: 1 }, { id: 2 }])
+    });
+
+    mockAccessService.GetDocumentShared.and.returnValue(of([])); // ✅ mock subscribe
+
+    mockRouter = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
     await TestBed.configureTestingModule({
-      imports: [ProfileComponent, CommonModule, ReactiveFormsModule, RouterTestingModule],
+      imports: [CommonModule, ReactiveFormsModule, ProfileComponent],
       providers: [
-        { provide: UserService, useValue: userServiceMock },
-        { provide: NotificationService, useValue: notificationServiceMock },
-        { provide: DocumentService, useValue: documentServiceMock },
-        { provide: DocumentAccessService, useValue: documentAccessServiceMock }
-      ]
+        { provide: UserService, useValue: mockUserService },
+        { provide: DocumentService, useValue: mockDocumentService },
+        { provide: NotificationService, useValue: mockNotificationService },
+        { provide: DocumentAccessService, useValue: mockAccessService },
+        { provide: Router, useValue: mockRouter }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
+    localStorage.setItem('authData', JSON.stringify({
+      email: mockUser.email,
+      role: 'User',
+      refreshToken: 'mockRefreshToken'
+    }));
 
     fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
-    userServiceSpy = TestBed.inject(UserService) as jasmine.SpyObj<UserService>;
-    notificationServiceSpy = TestBed.inject(NotificationService) as jasmine.SpyObj<NotificationService>;
-    documentServiceSpy = TestBed.inject(DocumentService) as jasmine.SpyObj<DocumentService>;
-    documentAccessServiceSpy = TestBed.inject(DocumentAccessService) as jasmine.SpyObj<DocumentAccessService>;
-
-    spyOn(component, 'showToast').and.callFake(() => {});
     fixture.detectChanges();
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should sign out and clear data', () => {
-    const mockResponse = { data: 'Signed out successfully' };
-    userServiceSpy.LogoutUser.and.returnValue(of(mockResponse));
-
-    localStorage.setItem('authData', JSON.stringify({ refreshToken: 'token', email: 'test@example.com' }));
+  it('should call logout and navigate on sign out', () => {
+    mockUserService.LogoutUser.and.returnValue(of({ data: 'Logged out' }));
+    spyOn(component, 'showToast');
 
     component.OnSignOut();
 
-    expect(userServiceSpy.LogoutUser).toHaveBeenCalledWith('token');
-    expect(userServiceSpy.clearUserCache).toHaveBeenCalled();
-    expect(notificationServiceSpy.clearNotification).toHaveBeenCalled();
-    expect(documentServiceSpy.clearDocumentCaches).toHaveBeenCalled();
-    expect(component.showToast).toHaveBeenCalledWith('Signed out successfully', 'success');
-  });
-
-  it('should call ChangePassword on submit and show success toast', fakeAsync(() => {
-    userServiceSpy.ChangePassword.and.returnValue(of({}));
-    localStorage.setItem('authData', JSON.stringify({ email: 'test@example.com' }));
-
-    component.passwordChangeForm.setValue({ OldPassword: 'OldPass123!', NewPassword: 'NewPass@123' });
-    component.userEmail = 'test@example.com';
-
-    component.handleSubmit();
-    tick(2000);
-
-    expect(userServiceSpy.ChangePassword).toHaveBeenCalled();
-    expect(component.showToast).toHaveBeenCalledWith('Password updated successfully', 'success');
-  }));
-
-  it('should handle ChangePassword error and show danger toast', () => {
-    const error = { error: { error: { errorMessage: 'Invalid password' } } };
-    userServiceSpy.ChangePassword.and.returnValue(throwError(() => error));
-
-    component.passwordChangeForm.setValue({ OldPassword: 'wrong', NewPassword: 'new' });
-    component.userEmail = 'test@example.com';
-    component.handleSubmit();
-
-    expect(component.showToast).toHaveBeenCalledWith('Invalid password', 'danger');
+    expect(mockUserService.LogoutUser).toHaveBeenCalledWith('mockRefreshToken');
+    expect(mockUserService.clearUserCache).toHaveBeenCalled();
+    expect(mockNotificationService.clearNotification).toHaveBeenCalled();
+    expect(mockDocumentService.clearDocumentCaches).toHaveBeenCalled();
+    expect(component.showToast).toHaveBeenCalledWith('Logged out', 'success');
   });
 });

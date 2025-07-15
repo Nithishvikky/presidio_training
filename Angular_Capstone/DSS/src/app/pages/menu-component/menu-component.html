@@ -26,7 +26,7 @@
       <div class="nav-item dropdown mx-2 position-relative" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()" style="cursor: pointer;">
         <div class="d-flex align-items-center">
           <i class="bi bi-person-circle fs-3" id="avatar"></i>
-          <div class="mx-1">{{username}}</div>
+          <div class="mx-1">{{username.toUpperCase()}}</div>
         </div>
         @if(isDropdownOpen){
         <div
@@ -35,7 +35,7 @@
         >
           <a class="dropdown-item" routerLink="/main/profile" (click)="closeDropdown()" style="cursor: pointer;" routerLinkActive="active">Profile</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-danger" (click)="OnSignOut()" style="cursor: pointer;">Sign Out</a>
+          <a class="dropdown-item text-danger" (click)="openConfirmModal()" style="cursor: pointer;">Sign Out</a>
         </div>
         }
       </div>
@@ -49,3 +49,8 @@
 </nav>
 
 <app-notification-modal-component></app-notification-modal-component>
+<app-delete-modal-component
+  *ngIf="showConfirmModal"
+  [message]="'Are you sure you want to sign out?'"
+  (confirmed)="handleConfirm($event)"
+></app-delete-modal-component>

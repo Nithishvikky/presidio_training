@@ -56,7 +56,7 @@ export class DocumentService{
       })
     );
   }
-  
+
   DeleteDocument(filename:string){
     const params = new HttpParams().set('filename',filename);
     return this.http.delete(`http://localhost:5015/api/v1/UserDoc/DeleteMyDocument`,{params})
@@ -67,9 +67,7 @@ export class DocumentService{
     userEmail?: string,
     filename?: string,
     sortBy?: string,
-    ascending: boolean = true,
-    pageNumber: number = 1,
-    pageSize: number = 10
+    ascending: boolean = true
   ): Observable<any> {
     const params: any = {};
 
@@ -77,8 +75,6 @@ export class DocumentService{
     if (filename) params.Filename = filename;
     if (sortBy) params.sortBy = sortBy;
     params.ascending = ascending;
-    params.pageNumber = pageNumber;
-    params.pageSize = pageSize;
 
     return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetAllDocumentDetails`, {
       params: params
