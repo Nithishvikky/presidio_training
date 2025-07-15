@@ -91,6 +91,8 @@ namespace DSS.Services
                     throw new KeyNotFoundException("Document not found");
                 }
 
+                doc.UploadedByUser = user;
+
                 // // Azure
                 // doc.FileData = await _azureBlobStorageService.DownloadAsync(filename);
 

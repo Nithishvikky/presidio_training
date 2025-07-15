@@ -54,6 +54,12 @@ namespace DSS.Services
             {
                 throw new Exception("Already gave permission");
             }
+            
+            if (fileOwner.Id == user.Id)
+            {
+                throw new Exception("It's your document");
+            }
+
             var share = new DocumentShare
             {
                 DocumentId = document.Id,
@@ -82,6 +88,11 @@ namespace DSS.Services
 
             foreach (var user in users)
             {
+                if (user.Email == UploaderEmail)
+                {
+                    continue;
+                }
+                
                 var existingShares = await _shareRepo.GetAll();
                 var existing = existingShares.SingleOrDefault(s =>
                     s.DocumentId == document.Id &&

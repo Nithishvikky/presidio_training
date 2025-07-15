@@ -29,7 +29,6 @@ namespace DSS.Controllers
         }
 
         [HttpPost("UploadDocument")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserDocument>> UploadDocument(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -86,6 +85,8 @@ namespace DSS.Controllers
             var userDocument = await _userDocService.GetByFileName(filename, UploaderEmail);
 
             var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
             if (string.IsNullOrEmpty(UserId))
                 return Unauthorized(new ErrorObjectDto
                 {
@@ -94,13 +95,15 @@ namespace DSS.Controllers
                 });
 
 
-            if (!await _documentShareService.IsDocumentSharedWithUser(userDocument.Id, Guid.Parse(UserId)))
-            {
-                return Unauthorized(new ErrorObjectDto
+            if (role == "User") {
+                if (!await _documentShareService.IsDocumentSharedWithUser(userDocument.Id, Guid.Parse(UserId)))
                 {
-                    ErrorNumber = 401,
-                    ErrorMessage = "File is not shared with you"
-                });
+                    return Unauthorized(new ErrorObjectDto
+                    {
+                        ErrorNumber = 401,
+                        ErrorMessage = "File is not shared with you"
+                    });
+                }
             }
             await _documentViewService.LogDocumentView(userDocument.Id, Guid.Parse(UserId)); // added in audit table
             var mapper = new UserDocMapper();

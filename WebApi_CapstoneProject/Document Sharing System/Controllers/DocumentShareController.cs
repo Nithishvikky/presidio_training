@@ -20,7 +20,6 @@ namespace DSS.Controllers
         }
 
         [HttpPost("GrantPermission")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<DocumentShare>> PostShare(string fileName, string ShareUserEmail)
         {
 
@@ -41,7 +40,6 @@ namespace DSS.Controllers
         }
 
         [HttpPost("GrantPermissionToUsers")]
-        [Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<DocumentShare>> PostShares(string fileName)
         {
@@ -63,7 +61,6 @@ namespace DSS.Controllers
         }
 
         [HttpDelete("RevokePermission")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteShare(string fileName, string ShareUserEmail)
         {
             var UserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
@@ -82,7 +79,6 @@ namespace DSS.Controllers
         }
 
         [HttpDelete("RevokePermissionToAll")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteShares(string fileName)
         {
             var UserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
@@ -132,6 +128,27 @@ namespace DSS.Controllers
                 });
 
             var shares = await _documentShareService.GetSharedUsersByFileName(fileName, UserEmail);
+
+            return Ok(new ApiResponse<ICollection<SharedResponseeDto>>
+            {
+                Success = true,
+                Data = shares
+            });
+        }
+
+        [HttpGet("GetSharedUsersForAdmin")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ICollection<SharedResponseeDto>>> FilesSharedUserView(string fileName,string UploaderEmail)
+        {
+            var UserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (string.IsNullOrEmpty(UserEmail))
+                return Unauthorized(new ErrorObjectDto
+                {
+                    ErrorNumber = 401,
+                    ErrorMessage = "Authentication required"
+                });
+
+            var shares = await _documentShareService.GetSharedUsersByFileName(fileName, UploaderEmail);
 
             return Ok(new ApiResponse<ICollection<SharedResponseeDto>>
             {

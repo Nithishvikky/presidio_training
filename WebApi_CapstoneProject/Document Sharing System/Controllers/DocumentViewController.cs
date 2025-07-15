@@ -12,10 +12,12 @@ namespace DSS.Controllers
     public class DocumentViewController : ControllerBase
     {
         private readonly IDocumentViewService _documentViewService;
+        private readonly IUserService _userService;
 
-        public DocumentViewController(IDocumentViewService documentViewService)
+        public DocumentViewController(IDocumentViewService documentViewService, IUserService userService)
         {
             _documentViewService = documentViewService;
+            _userService = userService;
         }
 
         [HttpGet("MyViewedDocs")]
@@ -52,6 +54,30 @@ namespace DSS.Controllers
                 });
 
             var userId = Guid.Parse(userIdStr);
+
+            var views = await _documentViewService.GetViewerHistoryByFileName(userId, FileName);
+
+            return Ok(new ApiResponse<IEnumerable<ViewerResponseDto>>
+            {
+                Success = true,
+                Data = views
+            });
+        }
+
+        [HttpGet("FileViewersForAdmin")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<IEnumerable<ViewerResponseDto>>> GetFileViewHistory(string FileName,string UploaderEmail)
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userIdStr))
+                return Unauthorized(new ErrorObjectDto
+                {
+                    ErrorNumber = 401,
+                    ErrorMessage = "Authentication required"
+                });
+
+            var userId = (await _userService.GetUserByEmail(UploaderEmail)).Id;
 
             var views = await _documentViewService.GetViewerHistoryByFileName(userId,FileName);
             
