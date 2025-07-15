@@ -12,6 +12,8 @@ import { AllDocumentsComponent } from './pages/all-documents-component/all-docum
 import { DocumentSharedComponent } from './pages/document-shared-component/document-shared-component';
 import { PeopleComponent } from './pages/people-component/people-component';
 import { ProfileComponent } from './pages/profile-component/profile-component';
+import { SharedDocumentComponent } from './pages/shared-document-component/shared-document-component';
+import { AdminDocumentPreview } from './pages/admin-document-preview/admin-document-preview';
 
 
 export const routes: Routes = [
@@ -34,12 +36,14 @@ export const routes: Routes = [
     data:{roles:['Admin','User']},
     children:[
       {path:'home',component:HomeComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
-      {path:'mydocuments',component:MydocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin']}},
+      {path:'mydocuments',component:MydocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
       {path:'documentsforme',component:DocumentSharedComponent,canActivate:[AuthGuard],data:{roles:['User']}},
       {path:'document/:filename',component:DocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
-      {path:'alldocuments',component:AllDocumentsComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
+      {path:'alldocuments',component:AllDocumentsComponent,canActivate:[AuthGuard],data:{roles:['Admin']}},
       {path:'community',component:PeopleComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
-      {path:'profile',component:ProfileComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}}
+      {path:'profile',component:ProfileComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
+      {path:'shareddocument/:filename',component:SharedDocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
+      {path:'documentadmin/:filename',component:AdminDocumentPreview,canActivate:[AuthGuard],data:{roles:['Admin']}},
     ],
   },
   { path: '**', redirectTo: '' }

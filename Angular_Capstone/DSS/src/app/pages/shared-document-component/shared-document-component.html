@@ -1,0 +1,49 @@
+@if(fileData){
+<div class="container py-4">
+  <div class="row">
+    <!-- Left Column: Preview -->
+    <div class="col-lg-7 mb-4">
+      <div class="card shadow border-0">
+        <div class="card-header bg-transparent">
+          <h5 class="mb-0">
+            <img *ngIf="fileData" [src]="getFileTypeIcon(fileData.contentType)" alt="file icon" width="24" class="me-2" />
+            {{ fileData.fileName }}
+          </h5>
+        </div>
+        <div class="card-body" style="height: 400px; display: flex; align-items: center; justify-content: center;">
+          <ng-container *ngIf="fileData.contentType.includes('image'); else nonImage">
+            <img *ngIf="iframeSrc" [src]="iframeSrc" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;" />
+          </ng-container>
+          <ng-template #nonImage>
+            <iframe *ngIf="iframeSrc" [src]="iframeSrc" style="width: 100%; height: 100%; border: none;"></iframe>
+            <div *ngIf="!iframeSrc" class="text-muted fw-semibold">No Preview Available</div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Metadata -->
+    <div class="col-lg-5">
+      <div class="card shadow border-0">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold">File Details</h5>
+          <ul class="list-unstyled small mt-3">
+            <li class="mb-2">
+              <strong>Uploaded at:</strong> {{ fileData.uploadedAt | date: 'yyyy-MM-dd HH:mm' }}
+            </li>
+            <li class="mb-2">
+              <strong>Size:</strong> {{ fileData.size }} KB
+            </li>
+            <li class="mb-2">
+              <strong>Type:</strong> {{ fileData.contentType }}
+            </li>
+          </ul>
+          <button class="btn btn-success w-100 mt-3" (click)="onDownload()">
+            <i class="bi bi-download me-2"></i>Download File
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}

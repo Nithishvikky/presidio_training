@@ -1,0 +1,95 @@
+@if(fileData){
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+      <h4 class="fw-bold">
+        <img *ngIf="fileData" [src]="getFileTypeIcon(fileData.contentType)" alt="file icon" width="30" height="30" class="me-2"/>
+        {{ filename }}
+        <span class="badge bg-info ms-3">Admin View</span>
+      </h4>
+      <button class="btn btn-success" (click)="onDownload()">
+        <i class="bi bi-download"></i> Download
+      </button>
+    </div>
+
+    <!-- Left section -->
+    <div class="col-lg-8">
+      <!-- <div class="mb-4 alert alert-info" *ngIf="!isOwner">
+        <i class="bi bi-eye-fill"></i> You are viewing this document as an <strong>admin</strong>. You do not have permission to manage access unless you are the uploader.
+      </div> -->
+
+      <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="access-tab" data-bs-toggle="tab" data-bs-target="#access" type="button" role="tab">Users with Access</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="logs-tab" data-bs-toggle="tab" data-bs-target="#logs" type="button" role="tab">View Logs</button>
+        </li>
+      </ul>
+      <div class="tab-content border p-3 shadow-sm" id="adminTabsContent">
+        <div class="tab-pane fade show active" id="access" role="tabpanel">
+          <h6 class="fw-semibold">Users with Access</h6>
+          @if(fileSharedUsers && fileSharedUsers.length > 0){
+            <ul class="list-group list-group-flush mt-3">
+              @for(users of fileSharedUsers; track users.id){
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <div class="fw-semibold">{{ users.userName }}</div>
+                    <div class="text-muted small">{{ users.email }}</div>
+                  </div>
+                  <span class="badge bg-secondary align-self-center">Access Granted</span>
+                </li>
+              }
+            </ul>
+          }
+          @else{
+            <div class="text-secondary text-center mt-3 small">No user has access to this document.</div>
+          }
+        </div>
+
+        <div class="tab-pane fade" id="logs" role="tabpanel">
+          <h6 class="fw-semibold">View Logs</h6>
+          @if(fileViewers && fileViewers.length > 0){
+            <ul class="list-group list-group-flush mt-3">
+              @for(viewer of fileViewers; track viewer.docViewId){
+                <li class="list-group-item">
+                  <div class="fw-semibold">{{ viewer.viewerName }}</div>
+                  <div class="text-muted small">{{ viewer.viewedAt | date: 'yyyy-MM-dd HH:mm' }}</div>
+                </li>
+              }
+            </ul>
+          }
+          @else{
+            <div class="text-secondary text-center mt-3 small">No view logs for this document yet.</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Right section -->
+    <div class="col-lg-4">
+      <div class="border mb-3 shadow-sm bg-light p-3 text-center" style="width: 100%; aspect-ratio: 1 / 1;">
+        @if(fileData.contentType.includes("image")){
+          <img *ngIf="iframeSrc" [src]="iframeSrc" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;"/>
+        }
+        @else{
+          <iframe *ngIf="iframeSrc" [src]="iframeSrc" style="width: 100%; height: 100%; border: none;"></iframe>
+        }
+        <div *ngIf="!iframeSrc" class="text-muted h5 fw-semibold mt-4">No Preview Available</div>
+      </div>
+
+      <div class="bg-white p-3 border shadow-sm">
+        <h6 class="fw-semibold">Metadata</h6>
+        <div class="text-secondary small">Uploaded by</div>
+        <div class="mb-2">{{ fileData.uploaderUsername }} ({{ fileData.uploaderEmail }})</div>
+        <div class="text-secondary small">Uploaded at</div>
+        <div class="mb-2">{{ fileData.uploadedAt | date: 'yyyy-MM-dd HH:mm' }}</div>
+        <div class="text-secondary small">Size</div>
+        <div class="mb-2">{{ fileData.size }} KB</div>
+        <div class="text-secondary small">Type</div>
+        <div class="mb-2">{{ fileData.contentType }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+}

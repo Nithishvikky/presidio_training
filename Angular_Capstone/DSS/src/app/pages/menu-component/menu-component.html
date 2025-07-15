@@ -14,13 +14,13 @@
   <div #navbarCollapse class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link mx-2"  routerLink="/main/home" routerLinkActive="active" (click)="collapseNavbar()">Home</a>
-      @if(role === 'Admin'){
-        <a class="nav-item nav-link mx-2"  routerLink="/main/mydocuments" routerLinkActive="active" (click)="collapseNavbar()">My Documents</a>
-      }
       @if(role === 'User'){
-        <a class="nav-item nav-link mx-2"  routerLink="/main/documentsforme" routerLinkActive="active" (click)="collapseNavbar()">My Documents</a>
+        <a class="nav-item nav-link mx-2"  routerLink="/main/mydocuments" routerLinkActive="active" (click)="collapseNavbar()">My Documents</a>
+        <a class="nav-item nav-link mx-2"  routerLink="/main/documentsforme" routerLinkActive="active" (click)="collapseNavbar()">Documents Shared</a>
       }
-      <a class="nav-item nav-link mx-2"  routerLink="/main/alldocuments" (click)="collapseNavbar()" routerLinkActive="active">All Documents</a>
+      @if(role === 'Admin'){
+        <a class="nav-item nav-link mx-2"  routerLink="/main/alldocuments" (click)="collapseNavbar()" routerLinkActive="active">All Documents</a>
+      }
       <a class="nav-item nav-link mx-2"  routerLink="/main/community" (click)="collapseNavbar()" routerLinkActive="active">Community</a>
       @if(!collapsed){
       <div class="nav-item dropdown mx-2 position-relative" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()" style="cursor: pointer;">

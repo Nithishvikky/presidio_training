@@ -7,24 +7,20 @@
       <p class="text-muted">{{ user.role }}</p>
     </div>
     <div class="row">
-      <div class="col-md-6 mb-3 text-center">
+      <div class="col-md-4 mb-3 text-center">
         <p><strong>Email : </strong>{{ user.email }}</p>
       </div>
-      <div class="col-md-6 mb-3 text-center">
+      <div class="col-md-4 mb-3 text-center">
         <p><strong>Registered At : </strong>{{ user.registeredAt | date: 'yyyy-MM-dd hh:mm' }}</p>
       </div>
-      @if(user.role === 'Admin'){
+      <div class="col-md-4 mb-3 text-center">
+        <p><strong>Updated At : </strong>{{ user.updatedAt | date: 'yyyy-MM-dd hh:mm' }}</p>
+      </div>
       <div class="col-md-6 mb-3 text-center">
         <p><strong>Documents Uploaded : </strong>{{ user.documentCount}}</p>
       </div>
-      }
-      @else {
       <div class="col-md-6 mb-3 text-center">
         <p><strong>Documents Shared with me : </strong>{{ documentShared}}</p>
-      </div>
-      }
-      <div class="col-md-6 mb-3 text-center">
-        <p><strong>Updated At : </strong>{{ user.updatedAt | date: 'yyyy-MM-dd hh:mm' }}</p>
       </div>
       <div class="col-md-6 mb-3 text-end">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</button>

@@ -45,7 +45,8 @@ export class NotificationService {
     // this.startConnection();
     this.hubConnection.on('DocumentViewed', (messageResponse) => {
       console.log('DocumentViewed received:', messageResponse);
-      this.notifications.unshift(messageResponse);
+      const viewNotification = { ...messageResponse, type: 'view' };
+      this.notifications.unshift(viewNotification);
       if(this.notifications.length == 1) {
         this.seenNotification.next(0);
       }
@@ -59,7 +60,8 @@ export class NotificationService {
     // this.startConnection();
     this.hubConnection.on('DocumentGiven',(messageResponse)=>{
       console.log(messageResponse);
-      this.notifications.unshift(messageResponse);
+       const sharedNotification = { ...messageResponse, type: 'shared' };
+      this.notifications.unshift(sharedNotification);
       if(this.notifications.length == 1){
         this.seenNotification.next(0);
       }

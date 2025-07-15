@@ -51,7 +51,7 @@
     </div>
   </form>
 
-  <div class="mt-4">
+  <div class="mt-4 mb-4">
     <div *ngIf="documents && documents.length > 0; else noDocs" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       <div class="col" *ngFor="let document of documents;">
         <div class="card h-100 shadow-sm border-0">
@@ -64,6 +64,7 @@
                 <span>{{ document.uploaderEmail }}</span><br />
                 <span>{{ document.uploadedAt | date: 'yyyy-MM-dd HH:mm' }}</span>
               </p>
+              <div class="mt-1 text-primary details fw-semibold" (click)="onDetails(document)">Details</div>
             </div>
           </div>
         </div>

@@ -48,6 +48,7 @@ export class DocumentService{
     return this.http.get(`http://localhost:5015/api/v1/UserDoc/GetDocument`,{params})
     .pipe(
       tap((res:any)=> {
+        console.log(res);
         this.DocumentDetailSubject.next(res.data);
       }),
       catchError((err) => {

@@ -13,13 +13,13 @@ import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponse
 import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
 
 @Component({
-  selector: 'app-document-component',
-  imports: [CommonModule,FormsModule],
-  templateUrl: './document-component.html',
-  styleUrl: './document-component.css'
+  selector: 'app-admin-document-preview',
+  imports: [CommonModule],
+  templateUrl: './admin-document-preview.html',
+  styleUrl: './admin-document-preview.css'
 })
-export class DocumentComponent implements OnInit{
-  getFileTypeIcon = getFileTypeIcon;
+export class AdminDocumentPreview {
+getFileTypeIcon = getFileTypeIcon;
   filename!:string;
   fileOwner:string = "";
   fileSharedUsers:DocumentSharedUsersDto[] | null = null;
@@ -44,80 +44,25 @@ export class DocumentComponent implements OnInit{
       this.filename = name;
     }
 
-    const authdata = localStorage.getItem("authData");
-    if(authdata){
-      if(JSON.parse(authdata).role === "User"){
-        this.roleFlag = true;
+    this.documentService.documentDetail$.subscribe({
+      next:(res:any)=>{
+        this.loadPreview(res);
+        console.log(res);
       }
-    }
-
-      this.documentService.OwnerDocumentPreview(this.filename).subscribe({
-        next:(res:any)=>{
-          this.fileData = res.data;
-          console.log(res.data);
-          this.loadPreview(res.data);
-          this.documentAccesService.GetSharedUsers(this.filename).subscribe();
-        }})
-
-      this.documentAccesService.sharedUsers$.subscribe(users =>{
+    })
+    
+    this.documentAccesService.sharedUsers$.subscribe(users =>{
         console.log(users);
         this.fileSharedUsers = users;
-      })
-      this.documentAccesService.GetSharedUsers(this.filename).subscribe();
-
-      this.documentViewerService.viewer$.subscribe(viewers =>{
+    })
+    this.documentViewerService.viewer$.subscribe(viewers =>{
+        console.log(viewers);
         this.fileViewers = viewers;
-      })
-      this.documentViewerService.GetViewerofFile(this.filename).subscribe();
-  }
-
-  GrantPermissionToUser(){
-    if(!this.userEmailForGrant) return this.showToast("Enter valid Email","danger");
-    this.documentAccesService.GrantPermissionToUser(this.filename,this.userEmailForGrant).subscribe({
-      next:(res:any)=>{
-        this.showToast("Permission Granted","success");
-      },
-      error:(err)=>{
-        this.showToast(err.error.error.errorMessage,"danger");
-      }
-    })
-    this.userEmailForGrant = "";
-  }
-
-  RevokePermissionToUser(email:string){
-    this.documentAccesService.RevokePermissionToUser(this.filename,email).subscribe({
-      next:(res:any)=>{
-        this.showToast(`Permission Revoked for ${email}`,"danger");
-      },
-      error:(err)=>{
-        this.showToast(err.error.error.errorMessage,"danger");
-      }
-    })
-  }
-
-  GrantPermissionForAll(){
-    this.documentAccesService.GrantPermissionToAll(this.filename).subscribe({
-      next:(res:any)=>{
-        this.showToast("Permission Granted for all","success");
-      },
-      error:(err)=>{
-        this.showToast(err.error.error.errorMessage,"danger");
-      }
-    })
-  }
-
-  RevokePermissionForAll(){
-    this.documentAccesService.RevokePermissionToAll(this.filename).subscribe({
-      next:(res:any)=>{
-        this.showToast("Permission Revoked for all","danger");
-      },
-      error:(err)=>{
-        this.showToast(err.error.error.errorMessage,"danger");
-      }
     })
   }
 
   loadPreview(res:any){
+    console.log(res);
     this.fileData = res;
     const byteCharacters = atob(res.fileData);
     const byteNumbers = new Array(byteCharacters.length);

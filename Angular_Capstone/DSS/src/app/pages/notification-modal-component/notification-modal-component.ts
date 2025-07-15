@@ -19,24 +19,15 @@ export class NotificationModalComponent {
   constructor(public notifyService:NotificationService){}
 
   ngOnInit():void{
-    const authData = localStorage.getItem('authData');
-    if(authData){
-      this.role = JSON.parse(authData).role;
-     if(this.role === 'Admin'){
-        this.notifyService.notification$.subscribe(msg =>{
-          if(msg){
-            this.notificationMessage = msg;
-          }
-        })
-     }
-     else{
-      this.notifyService.notification$.subscribe(msg =>{
-        if(msg){
-          this.notificationSharedMessage = msg;
+    this.notifyService.notification$.subscribe(msgList => {
+    if (!msgList) return;
+     const msg = msgList[0];
+        if (msg.type === 'view') {
+          this.notificationMessage.unshift(msg);
+        } else if (msg.type === 'shared') {
+          this.notificationSharedMessage.unshift(msg);
         }
-      })
-     }
-    }
+    });
   }
 
   clear(){

@@ -5,19 +5,16 @@
       {{filename}}
     </h4>
     <!-- Left section -->
-  @if(!roleFlag){
     <div class="col-lg-8">
       <div class="mb-4">
         <button class="btn btn-success me-2" (click)="onDownload()">Download<i class="bi bi-download mx-2"></i></button>
         <button class="btn btn-primary me-2" (click)="GrantPermissionForAll()">Grant Access for All</button>
         <button class="btn btn-danger me-2" (click)="RevokePermissionForAll()">Revoke Access for All</button>
       </div>
-
-      <div class="input-group mb-4">
-        <input type="email" class="form-control" placeholder="Enter email to grant access" [(ngModel)]="userEmailForGrant">
-        <button class="btn btn-primary" (click)="GrantPermissionToUser()">Grant</button>
-      </div>
-
+        <div class="input-group mb-4">
+          <input type="email" class="form-control" placeholder="Enter email to grant access" [(ngModel)]="userEmailForGrant">
+          <button class="btn btn-primary" (click)="GrantPermissionToUser()">Grant</button>
+        </div>
       <h5 class="fw-semibold mt-5">Users with Access</h5>
       <div class="table-wrapper">
       @if(fileSharedUsers && fileSharedUsers.length > 0){
@@ -73,13 +70,9 @@
       </div>
 
     </div>
-  }
     <!-- Right section -->
   @if(fileData){
     <div class="col-lg-4">
-      @if(roleFlag){
-          <button class="btn btn-success mb-2" (click)="onDownload()">Download<i class="bi bi-download mx-2"></i></button>
-      }
       <div class="border mb-3 shadow" style="width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;">
         @if(fileData.contentType.includes("image")){
           <img *ngIf="iframeSrc" [src]="iframeSrc" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;"/>

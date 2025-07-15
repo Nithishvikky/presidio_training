@@ -43,6 +43,21 @@ export class DocumentAccessService{
         })
       )
   }
+
+  GetSharedUsersAdmin(filename:string,email:string): Observable<any>{
+    const params = new HttpParams().set('filename',filename).set('UploaderEmail',email);
+    return this.http.get(`http://localhost:5015/api/v1/DocumentShare/GetSharedUsersForAdmin`,{params})
+      .pipe(
+        tap((res:any) =>{
+          this.sharedUserSubject.next(res.data.$values);
+        }),
+        catchError((err) => {
+          this.sharedUserSubject.next([]);
+          return of(null);
+        })
+      )
+  }
+
   GrantPermissionToUser(filename:string,email:string): Observable<any>{
     const params = new HttpParams().set('fileName',filename).set('ShareUserEmail',email);
     return this.http.post(`http://localhost:5015/api/v1/DocumentShare/GrantPermission`,'',{params})

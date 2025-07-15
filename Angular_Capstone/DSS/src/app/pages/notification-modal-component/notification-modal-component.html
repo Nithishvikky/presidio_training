@@ -18,7 +18,7 @@
             }
           </ul>
         }
-        @else if(notificationSharedMessage.length > 0){
+        @if(notificationSharedMessage.length > 0){
           <ul class="list-group">
             @for(notification of notificationSharedMessage; track notification.fileName){
               <li class="list-group-item d-flex justify-content-between align-items-center">

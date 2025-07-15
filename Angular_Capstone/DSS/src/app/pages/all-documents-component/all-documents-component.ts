@@ -5,11 +5,14 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
+import { Router, RouterModule } from '@angular/router';
+import { DocumentAccessService } from '../../services/documentAccess.service';
+import { DocumentViewerService } from '../../services/documentView.service';
 
 @Component({
   selector: 'app-all-documents-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,RouterModule],
   templateUrl: './all-documents-component.html',
   styleUrl: './all-documents-component.css'
 })
@@ -21,7 +24,10 @@ export class AllDocumentsComponent {
   sortBy: string = '';
   showFilterSidebar: boolean = false;
 
-  constructor(private fb: FormBuilder, private documentService: DocumentService) {}
+  constructor(private fb: FormBuilder, private documentService: DocumentService,private route:Router,
+    private documentAccesService:DocumentAccessService,
+    private documentViewerService:DocumentViewerService
+  ) {}
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
@@ -68,5 +74,14 @@ export class AllDocumentsComponent {
   }
   clearControl(controlName: string): void {
     this.filterForm.get(controlName)?.setValue('');
+  }
+
+  onDetails(dto:DocumentDetailsResponseDto){
+    this.documentService.DownloadSharedDocument(dto.fileName,dto.uploaderEmail).subscribe((res:any)=>{
+      console.log(res);
+    });
+    this.documentAccesService.GetSharedUsersAdmin(dto.fileName,dto.uploaderEmail).subscribe();
+    this.documentViewerService.GetViewerofFileAdmin(dto.fileName,dto.uploaderEmail).subscribe();
+    this.route.navigate(['/main/documentadmin',dto.fileName]);
   }
 }

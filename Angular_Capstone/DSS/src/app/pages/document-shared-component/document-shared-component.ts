@@ -32,6 +32,6 @@ export class DocumentSharedComponent {
 
   onDetails(dto:DocumentDetailsResponseDto){
     this.documentService.DownloadSharedDocument(dto.fileName,dto.uploaderEmail).subscribe();
-    this.route.navigate(['/main/document',dto.fileName]);
+    this.route.navigate(['/main/shareddocument',dto.fileName]);
   }
 }

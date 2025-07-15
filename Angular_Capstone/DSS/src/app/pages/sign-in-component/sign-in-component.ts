@@ -59,35 +59,26 @@ export class SignInComponent {
         }
       })
   }
-    EnableNotification(){
-      const authData = localStorage.getItem('authData');
-      if(authData){
-        this.role = JSON.parse(authData).role;
-        this.notifyService.startConnection();
-        if(this.role === 'Admin'){
-          this.notifyService.addNotification();
-          this.notifyService.notification$.subscribe(msg =>{
-            if(msg){
-              this.notificationMessage = msg;
-              const notification = this.notificationMessage[0];
-              this.showToast(`${notification.viewerName} viewed ${notification.fileName}`,"success");
-            }
-          })
-      }
-      else{
-        this.notifyService.addUserNotification();
-        this.notifyService.notification$.subscribe(msg =>{
-          if(msg){
-            this.notificationSharedMessage = msg;
-            const notification = this.notificationSharedMessage[0];
-            this.showToast(`${notification.userName} granted access for ${notification.fileName}`,"success");
-          }
-        })
-      }
-      }
 
-      console.log("Notification enabling");
-    }
+  EnableNotification(){
+    this.notifyService.startConnection();
+    this.notifyService.addUserNotification();
+    this.notifyService.addNotification();
+
+    this.notifyService.notification$.subscribe(msgList => {
+    if (!msgList) return;
+     const msg = msgList[0];
+        if (msg.type === 'view') {
+          this.notificationMessage.unshift(msg);
+          this.showToast(`${msg.viewerName} viewed ${msg.fileName}`, "success");
+        } else if (msg.type === 'shared') {
+          this.notificationSharedMessage.unshift(msg);
+          this.showToast(`${msg.userName} granted access for ${msg.fileName}`, "success");
+        }
+    });
+
+    console.log("Notification enabling");
+  }
 
   togglePasswordVisibility(){
     this.showPassword = !this.showPassword;
