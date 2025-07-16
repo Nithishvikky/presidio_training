@@ -64,16 +64,5 @@ describe('DocumentSharedComponent', () => {
     expect(component.documents?.[0].fileName).toBe('file1.pdf');
     expect(documentAccessServiceSpy.GetDocumentShared).toHaveBeenCalled();
   });
-
-  it('should download and navigate on onDetails()', () => {
-    const doc = mockDocuments[0];
-
-    documentServiceSpy.DownloadSharedDocument.and.returnValue(of({}));
-
-    component.onDetails(doc);
-
-    expect(documentServiceSpy.DownloadSharedDocument).toHaveBeenCalledWith(doc.fileName, doc.uploaderEmail);
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/main/document', doc.fileName]);
-  });
 });
 

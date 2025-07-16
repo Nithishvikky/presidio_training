@@ -1,11 +1,13 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SignInComponent } from './sign-in-component';
 import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NotificationService } from '../../services/notification.service';
+import { DocumentService } from '../../services/document.service';
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
@@ -14,21 +16,32 @@ describe('SignInComponent', () => {
 
   beforeEach(async () => {
     const userServiceMock = jasmine.createSpyObj('UserService', ['Loginuser']);
+    const notificationServiceMock = jasmine.createSpyObj('NotificationService', [
+      'startConnection',
+      'addUserNotification',
+      'addNotification',
+      'notification$'
+    ], {
+      notification$: of([])
+    });
+
+    const documentServiceMock = jasmine.createSpyObj('DocumentService', ['']);
 
     await TestBed.configureTestingModule({
       imports: [
         SignInComponent,
         FormsModule,
-        CommonModule,
         ReactiveFormsModule,
+        CommonModule,
         RouterTestingModule.withRoutes([])
       ],
-      providers:[
+      providers: [
         { provide: UserService, useValue: userServiceMock },
+        { provide: NotificationService, useValue: notificationServiceMock },
+        { provide: DocumentService, useValue: documentServiceMock },
         { provide: ActivatedRoute, useValue: { queryParams: of({}) } }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SignInComponent);
     component = fixture.componentInstance;
@@ -50,5 +63,4 @@ describe('SignInComponent', () => {
     component.togglePasswordVisibility();
     expect(component.showPassword).toBeTrue();
   });
-
 });

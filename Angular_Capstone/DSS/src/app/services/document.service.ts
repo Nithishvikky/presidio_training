@@ -64,6 +64,12 @@ export class DocumentService{
     .pipe(switchMap(()=> this.GetAllDocuments()));
   }
 
+  AdminDeleteDocument(filename:string,email:string){
+    const params = new HttpParams().set('filename',filename).set('uploaderEmail',email);
+    return this.http.delete(`http://localhost:5015/api/v1/UserDoc/DeleteDocumentByAdmin`,{params})
+    .pipe(switchMap(()=> this.GetAllDocumentDetails()));
+  }
+
   GetAllDocumentDetails(
     userEmail?: string,
     filename?: string,

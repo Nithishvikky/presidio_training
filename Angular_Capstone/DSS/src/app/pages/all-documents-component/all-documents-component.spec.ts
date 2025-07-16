@@ -1,36 +1,48 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AllDocumentsComponent } from './all-documents-component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { of } from 'rxjs';
-import { DocumentService } from '../../services/document.service';
+
+import { Router } from '@angular/router';
 import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponseDto';
+import { DocumentViewerService } from '../../services/documentView.service';
+import { DocumentAccessService } from '../../services/documentAccess.service';
+import { DocumentService } from '../../services/document.service';
 
 describe('AllDocumentsComponent', () => {
   let component: AllDocumentsComponent;
   let fixture: ComponentFixture<AllDocumentsComponent>;
+
   let mockDocumentService: jasmine.SpyObj<DocumentService>;
+  let mockAccessService: jasmine.SpyObj<DocumentAccessService>;
+  let mockViewerService: jasmine.SpyObj<DocumentViewerService>;
+  let mockRouter: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    const documentServiceSpy = jasmine.createSpyObj('DocumentService', ['GetAllDocumentDetails'], {
-      allDocuments$: of([]), // Mock observable here
+    mockDocumentService = jasmine.createSpyObj('DocumentService', ['GetAllDocumentDetails', 'AdminDeleteDocument', 'DownloadSharedDocument'], {
+      allDocuments$: of([])
     });
+    mockAccessService = jasmine.createSpyObj('DocumentAccessService', ['GetSharedUsersAdmin']);
+    mockViewerService = jasmine.createSpyObj('DocumentViewerService', ['GetViewerofFileAdmin']);
+    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
-      imports: [AllDocumentsComponent, CommonModule, ReactiveFormsModule],
+      imports: [AllDocumentsComponent, CommonModule, FormsModule, ReactiveFormsModule],
       providers: [
-        { provide: DocumentService, useValue: documentServiceSpy }
+        { provide: DocumentService, useValue: mockDocumentService },
+        { provide: DocumentAccessService, useValue: mockAccessService },
+        { provide: DocumentViewerService, useValue: mockViewerService },
+        { provide: Router, useValue: mockRouter }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AllDocumentsComponent);
     component = fixture.componentInstance;
-    mockDocumentService = TestBed.inject(DocumentService) as jasmine.SpyObj<DocumentService>;
 
-    // default mock return value
     mockDocumentService.GetAllDocumentDetails.and.returnValue(of([]));
 
-    fixture.detectChanges(); // triggers ngOnInit
+    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService } from '../../services/document.service';
 import { DocumentAccessService } from '../../services/documentAccess.service';
 import { DocumentSharedUsersDto } from '../../models/documentSharedUsersDto';
@@ -35,7 +35,8 @@ getFileTypeIcon = getFileTypeIcon;
     private documentService:DocumentService,
     private documentAccesService:DocumentAccessService,
     private documentViewerService:DocumentViewerService,
-    private sanitizer:DomSanitizer
+    private sanitizer:DomSanitizer,
+    private router:Router
   ){}
 
   ngOnInit(): void {
@@ -50,7 +51,7 @@ getFileTypeIcon = getFileTypeIcon;
         console.log(res);
       }
     })
-    
+
     this.documentAccesService.sharedUsers$.subscribe(users =>{
         console.log(users);
         this.fileSharedUsers = users;
@@ -96,6 +97,22 @@ getFileTypeIcon = getFileTypeIcon;
     URL.revokeObjectURL(url);
 
     this.showToast("File downloaded sucessfully!","success");
+  }
+
+  onDelete(){
+    if(this.fileData){
+      this.documentService.AdminDeleteDocument(this.fileData.fileName,this.fileData.uploaderEmail).subscribe({
+        next:(res) =>{
+          console.log(res);
+          this.showToast("File Deleted Succefully","danger");
+        },
+        error:(err)=>{
+          console.error(err);
+          this.showToast(err.error.error.errorMessage,"danger");
+        }
+      })
+      this.router.navigate(['/main/alldocuments']);
+    }
   }
 
   showToast(message: string, type: 'success' | 'danger') {

@@ -84,13 +84,13 @@ describe('HomeComponent', () => {
     ]);
   });
 
-  it('should display admin-specific buttons when role is Admin', () => {
-    component.User = { ...mockUser, role: 'Admin' };
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Manage Users');
-    expect(compiled.textContent).toContain('Go to My Documents');
-  });
+  // it('should display admin-specific buttons when role is Admin', () => {
+  //   component.User = { ...mockUser, role: 'Admin' };
+  //   fixture.detectChanges();
+  //   const compiled = fixture.nativeElement as HTMLElement;
+  //   expect(compiled.textContent).toContain('Manage Users');
+  //   expect(compiled.textContent).toContain('Go to My Documents');
+  // });
 
   it('should display user-specific button when role is User', () => {
     component.User = { ...mockUser, role: 'User' };

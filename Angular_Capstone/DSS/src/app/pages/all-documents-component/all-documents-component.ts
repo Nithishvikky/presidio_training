@@ -8,11 +8,13 @@ import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
 import { Router, RouterModule } from '@angular/router';
 import { DocumentAccessService } from '../../services/documentAccess.service';
 import { DocumentViewerService } from '../../services/documentView.service';
+import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
+import { Toast } from 'bootstrap';
 
 @Component({
   selector: 'app-all-documents-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,RouterModule,DeleteModalComponent],
   templateUrl: './all-documents-component.html',
   styleUrl: './all-documents-component.css'
 })
@@ -23,6 +25,7 @@ export class AllDocumentsComponent {
   ascending: boolean = true;
   sortBy: string = '';
   showFilterSidebar: boolean = false;
+  showDeleteModal = false;
 
   constructor(private fb: FormBuilder, private documentService: DocumentService,private route:Router,
     private documentAccesService:DocumentAccessService,
@@ -76,6 +79,32 @@ export class AllDocumentsComponent {
     this.filterForm.get(controlName)?.setValue('');
   }
 
+  onDelete(dto:DocumentDetailsResponseDto){
+    this.documentService.AdminDeleteDocument(dto.fileName,dto.uploaderEmail).subscribe({
+      next:(res) =>{
+        console.log(res);
+        this.showToast("File Deleted Succefully","danger");
+      },
+      error:(err)=>{
+        console.error(err);
+        this.showToast(err.error.error.errorMessage,"danger");
+      }
+    })
+  }
+
+  // openDeleteConfirm(){
+  //   this.showDeleteModal = true;
+  // }
+
+  // handleDeleteConfirm(result: boolean,dto:DocumentDetailsResponseDto) {
+  //   this.showDeleteModal = false;
+  //   console.log(dto);
+  //   if (result) {
+  //     console.log(dto);
+  //     this.onDelete(dto);
+  //   }
+  // }
+
   onDetails(dto:DocumentDetailsResponseDto){
     this.documentService.DownloadSharedDocument(dto.fileName,dto.uploaderEmail).subscribe((res:any)=>{
       console.log(res);
@@ -83,5 +112,17 @@ export class AllDocumentsComponent {
     this.documentAccesService.GetSharedUsersAdmin(dto.fileName,dto.uploaderEmail).subscribe();
     this.documentViewerService.GetViewerofFileAdmin(dto.fileName,dto.uploaderEmail).subscribe();
     this.route.navigate(['/main/documentadmin',dto.fileName]);
+  }
+
+  showToast(message: string, type: 'success' | 'danger') {
+    const toastEl = document.getElementById('liveToast');
+    const toastBody = document.querySelector('.toast-body');
+
+    toastBody!.textContent = message;
+    toastEl!.classList.remove('bg-success', 'bg-danger');
+    toastEl!.classList.add(type === 'success' ? 'bg-success' : 'bg-danger');
+
+    const toast = new Toast(toastEl!);
+    toast.show();
   }
 }

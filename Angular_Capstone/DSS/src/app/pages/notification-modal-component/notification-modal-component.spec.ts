@@ -4,6 +4,19 @@ import { NotificationService } from '../../services/notification.service';
 import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
+
+interface NotificationResponseDto {
+  viewerName: string;
+  fileName: string;
+  type: 'view' | 'shared';
+}
+
+interface NotificationSharedResponseDto {
+  userName: string;
+  fileName: string;
+  type: 'view' | 'shared';
+}
+
 describe('NotificationModalComponent', () => {
   let component: NotificationModalComponent;
   let fixture: ComponentFixture<NotificationModalComponent>;
@@ -12,7 +25,11 @@ describe('NotificationModalComponent', () => {
   beforeEach(async () => {
     mockNotificationService = jasmine.createSpyObj('NotificationService', ['clearCurrentNotification'], {
       notification$: of([
-        { viewerName: 'Alice', fileName: 'report.pdf' } // mock one of the two types
+        {
+          viewerName: 'Alice',
+          fileName: 'report.pdf',
+          type: 'view'
+        } as NotificationResponseDto
       ])
     });
 
@@ -23,19 +40,19 @@ describe('NotificationModalComponent', () => {
       ]
     }).compileComponents();
 
-    // Set mock auth data for the role
+    // Set mock auth data for Admin
     localStorage.setItem('authData', JSON.stringify({ role: 'Admin' }));
 
     fixture = TestBed.createComponent(NotificationModalComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges(); // triggers ngOnInit
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should assign notification messages for Admin', () => {
+  it('should assign notification messages for Admin role', () => {
     expect(component.notificationMessage.length).toBeGreaterThan(0);
     expect(component.notificationSharedMessage.length).toBe(0);
   });

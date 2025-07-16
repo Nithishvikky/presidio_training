@@ -7,9 +7,14 @@
         {{ filename }}
         <span class="badge bg-info ms-3">Admin View</span>
       </h4>
-      <button class="btn btn-success" (click)="onDownload()">
-        <i class="bi bi-download"></i> Download
-      </button>
+      <div class="d-flex align-items-center justify-content-between" style="width: 30%;">
+        <button class="btn btn-success" (click)="onDownload()">
+          <i class="bi bi-download"></i> Download
+        </button>
+         <button class="btn btn-danger" (click)="onDelete()">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </div>
     </div>
 
     <!-- Left section -->

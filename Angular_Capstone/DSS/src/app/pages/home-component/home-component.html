@@ -17,10 +17,10 @@
   <div class="col-12 d-flex flex-wrap gap-3">
     @if(User?.role === 'Admin'){
       <button class="btn btn-outline-secondary" routerLink="/main/community">Manage Users</button>
-      <button class="btn btn-primary" routerLink="/main/mydocuments">Go to My Documents</button>
+      <button class="btn btn-primary" routerLink="/main/alldocuments">Go to All Documents</button>
     }
     @else {
-      <button class="btn btn-primary" routerLink="/main/documentsforme">Go to My Documents</button>
+      <button class="btn btn-primary" routerLink="/main/mydocuments">Go to My Documents</button>
     }
   </div>
   </div>
