@@ -70,47 +70,49 @@ namespace DSS.Services
         {
             try
             {
+                var documents = await _userDocRepo.GetAll() ?? new List<UserDocument>();
+                var userDocIds = documents
+                                    .Where(d => d != null && d.UploadedById == userId && !d.IsDeleted)
+                                    .Select(d => d.Id)
+                                    .ToList();
 
-                var documents = await _userDocRepo.GetAll();
-                var userDocIds = documents.Where(d => d.UploadedById == userId && !d.IsDeleted)
-                                          .Select(d => d.Id).ToList();
                 if (!userDocIds.Any())
                 {
-                    _logger.LogWarning("User {UserId} has no uploaded documents", userId);
-                    throw new ArgumentNullException("No documents uploaded by this user.");
+                    _logger.LogInformation("User {UserId} has no uploaded documents", userId);
+                    return new List<ViewerResponseDto>();
                 }
 
-                var views = await _documentViewRepo.GetAll();
-                views = views.Where(v => userDocIds.Contains(v.DocumentId));
-
-                // if (!views.Any())
-                // {
-                //     _logger.LogWarning("No views by {UserId}", userId);
-                //     throw new ArgumentNullException("No views by the UserId");
-                // }
+                var views = ((await _documentViewRepo.GetAll())
+                            .Where(v => v != null && userDocIds.Contains(v.DocumentId))
+                            .ToList()) ?? new List<DocumentView>();
 
                 var viewerDtos = new List<ViewerResponseDto>();
-                foreach (var v in views)
+                if (views.Any())
                 {
-                    var viewer = await _userService.GetUserById(v.ViewedByUserId);
-                    var document = await _userDocRepo.Get(v.DocumentId);
-
-                    viewerDtos.Add(new ViewerResponseDto
+                    foreach (var v in views)
                     {
-                        DocViewId = v.Id,
-                        ViewerName = viewer?.Username ?? "Unknown",
-                        FileName = document?.FileName ?? "Unknown",
-                        ViewedAt = v.ViewedAt
-                    });
+                        var viewer = await _userService.GetUserById(v.ViewedByUserId);
+                        var document = await _userDocRepo.Get(v.DocumentId);
+
+                        viewerDtos.Add(new ViewerResponseDto
+                        {
+                            DocViewId = v.Id,
+                            ViewerName = viewer?.Username ?? "Unknown",
+                            FileName = document?.FileName ?? "Unknown",
+                            ViewedAt = v.ViewedAt
+                        });
+                    }
                 }
+
                 return viewerDtos;
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error in LogDocumentView for {UserId}", userId);
+                _logger.LogError(e, "Error in GetUserViewHistory for {UserId}", userId);
                 throw;
             }
         }
+
 
         public async Task<IEnumerable<ViewerResponseDto>> GetViewerHistoryByFileName(Guid userId, string FileName)
         {

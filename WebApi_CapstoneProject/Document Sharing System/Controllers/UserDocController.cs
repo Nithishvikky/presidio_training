@@ -17,15 +17,18 @@ namespace DSS.Controllers
         private readonly IUserService _userService;
         private readonly IDocumentViewService _documentViewService;
         private readonly IDocumentShareService _documentShareService;
+        private readonly ILogger<UserDocController> _logger;
         public UserDocController(IUserDocService userDocService,
                                 IDocumentViewService documentViewService,
                                 IDocumentShareService documentShareService,
-                                IUserService userService)
+                                IUserService userService,
+                                ILogger<UserDocController> logger)
         {
             _userDocService = userDocService;
             _documentViewService = documentViewService;
             _documentShareService = documentShareService;
             _userService = userService;
+            _logger = logger;
         }
 
         [HttpPost("UploadDocument")]
@@ -95,7 +98,8 @@ namespace DSS.Controllers
                 });
 
 
-            if (role == "User") {
+            if (role == "User")
+            {
                 if (!await _documentShareService.IsDocumentSharedWithUser(userDocument.Id, Guid.Parse(UserId)))
                 {
                     return Unauthorized(new ErrorObjectDto
@@ -143,6 +147,7 @@ namespace DSS.Controllers
             });
         }
 
+
         [HttpGet("GetAllMyDocumentDetails")]
         [Authorize]
         public async Task<ActionResult<ICollection<UserDocDetailDto>>> MyDocumentDetails()
@@ -159,30 +164,49 @@ namespace DSS.Controllers
             var userDocuments = await _userDocService.GetAllUserDocs(Guid.Parse(UserId));
             var viewHistory = await _documentViewService.GetUserViewHistory(Guid.Parse(UserId));
 
-            var lastViewers = viewHistory
-                            .GroupBy(v => v.FileName)
-                            .ToDictionary(
-                                g => g.Key,
-                                g => g.OrderByDescending(v => v.ViewedAt).FirstOrDefault()?.ViewerName
-                            );
-            var mapper = new UserDocMapper();
-            var userDocDetails = userDocuments
-                        .Select(doc =>
-                        {
-                            var dto = mapper.MapUserDoc(doc);
-                            if (lastViewers.Any())
-                            {
-                                lastViewers.TryGetValue(doc.FileName, out var lastViewer);
-                                dto.LastViewerName = lastViewer;
-                            }
-                            return dto;
-                        }).ToList();
-
-            return Ok(new ApiResponse<ICollection<UserDocDetailDto>>
+            if (viewHistory.Any())
             {
-                Success = true,
-                Data = userDocDetails
-            });
+                var lastViewers = viewHistory
+                                .GroupBy(v => v.FileName)
+                                .ToDictionary(
+                                    g => g.Key,
+                                    g => g.OrderByDescending(v => v.ViewedAt).FirstOrDefault()?.ViewerName
+                                );
+                var mapper = new UserDocMapper();
+                var userDocDetails = userDocuments
+                            .Select(doc =>
+                            {
+                                var dto = mapper.MapUserDoc(doc);
+                                if (lastViewers.Any())
+                                {
+                                    lastViewers.TryGetValue(doc.FileName, out var lastViewer);
+                                    dto.LastViewerName = lastViewer;
+                                }
+                                return dto;
+                            }).ToList();
+
+                return Ok(new ApiResponse<ICollection<UserDocDetailDto>>
+                {
+                    Success = true,
+                    Data = userDocDetails
+                });
+            }
+            else
+            {
+                var mapper = new UserDocMapper();
+                var userDocDetails = userDocuments
+                            .Select(doc =>
+                            {
+                                var dto = mapper.MapUserDoc(doc);
+                                return dto;
+                            }).ToList();
+
+                return Ok(new ApiResponse<ICollection<UserDocDetailDto>>
+                {
+                    Success = true,
+                    Data = userDocDetails
+                });
+            }
         }
 
         [HttpGet("GetAllDocumentDetails")]
@@ -225,6 +249,39 @@ namespace DSS.Controllers
                 });
 
             var userDocument = await _userDocService.DeleteByFileName(fileName, Guid.Parse(UserId));
+
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Data = "Document Deleted sucessfully"
+            });
+        }
+
+        [HttpDelete("DeleteDocumentByAdmin")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> DeleteDocument(string fileName,string uploaderEmail)
+        {
+            var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(UserId))
+                return Unauthorized(new ErrorObjectDto
+                {
+                    ErrorNumber = 401,
+                    ErrorMessage = "Authentication required"
+                });
+
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (role != "Admin")
+            {
+                return Unauthorized(new ErrorObjectDto
+                {
+                    ErrorNumber = 401,
+                    ErrorMessage = "Only admin can delete"
+                });
+            }
+
+            var user = await _userService.GetUserByEmail(uploaderEmail);
+
+            var userDocument = await _userDocService.DeleteByFileName(fileName, user.Id);
 
             return Ok(new ApiResponse<string>
             {
