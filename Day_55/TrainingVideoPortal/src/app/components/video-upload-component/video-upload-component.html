@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h3>Upload Training Video</h3>
+
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label>Title</label>
+      <input type="text" class="form-control" formControlName="title" />
+    </div>
+
+    <div class="mb-3">
+      <label>Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label>Video File</label>
+      <input type="file" class="form-control" (change)="onFileChange($event)" />
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="uploadForm.invalid">Upload</button>
+  </form>
+
+  <div *ngIf="uploadSuccess" class="alert alert-success mt-3">
+    Video uploaded successfully!
+  </div>
+  <div *ngIf="uploadError" class="alert alert-danger mt-3">
+    Upload failed. Try again.
+  </div>
+</div>
