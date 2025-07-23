@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit{
       next:(res:any)=>{
         localStorage.clear();
         this.userService.clearUserCache();
-        this.notifyService.clearNotification();
         this.documentService.clearDocumentCaches();
         this.showToast(res.data,"success");
         setTimeout(()=>{

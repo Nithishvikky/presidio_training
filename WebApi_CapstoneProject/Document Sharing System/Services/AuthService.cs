@@ -2,6 +2,8 @@ using DSS.Interfaces;
 using DSS.Intrefaces;
 using DSS.Models;
 using DSS.Models.DTOs;
+using DSS.Services;
+using Microsoft.AspNetCore.Http;
 
 public class AuthService : IAuthService
 {
@@ -10,19 +12,25 @@ public class AuthService : IAuthService
     private readonly IAuthSessionService _authSessionService;
     private readonly IRepository<Guid, AuthSession> _authSessionRepository;
     private readonly IBcryptionService _bcryptionService;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IUserActivityLogService _userActivityLogService;
 
     public AuthService(
         IUserService userService,
         ITokenService tokenService,
         IAuthSessionService authSessionService,
         IRepository<Guid, AuthSession> authSessionRepository,
-        IBcryptionService bcryptionService)
+        IBcryptionService bcryptionService,
+        IHttpContextAccessor httpContextAccessor,
+        IUserActivityLogService userActivityLogService)
     {
         _userService = userService;
         _tokenService = tokenService;
         _authSessionService = authSessionService;
         _authSessionRepository = authSessionRepository;
         _bcryptionService = bcryptionService;
+        _httpContextAccessor = httpContextAccessor;
+        _userActivityLogService = userActivityLogService;
     }
 
     public async Task<AuthResponse> LoginAsync(LoginRequestDto dto)
@@ -30,6 +38,27 @@ public class AuthService : IAuthService
         var user = await _userService.GetUserByEmail(dto.Email);
         if (user == null || !_bcryptionService.VerifyPassword(dto.Password, user.PasswordHash))
             throw new UnauthorizedAccessException("Invalid credentials");
+
+        // Update last login time
+        user.LastLogin = DateTime.UtcNow;
+        await _userService.UpdateUserLastLogin(user.Id, user.LastLogin.Value);
+
+        // Log user activity for login
+        try
+        {
+            var activityDto = new CreateActivityLogDto
+            {
+                UserId = user.Id,
+                ActivityType = "Login",
+                Description = $"User logged in successfully from {GetClientIPAddress()}"
+            };
+            await _userActivityLogService.LogActivityAsync(activityDto);
+        }
+        catch (Exception ex)
+        {
+            // Log warning but don't fail the login process
+            Console.WriteLine($"Failed to log login activity for user {user.Id}: {ex.Message}");
+        }
 
         return await GenerateSessionTokensAsync(user);
     }
@@ -71,6 +100,23 @@ public class AuthService : IAuthService
         {
             session.IsRevoked = true;
             await _authSessionRepository.Update(session.Id,session);
+
+            // Log user activity for logout
+            try
+            {
+                var activityDto = new CreateActivityLogDto
+                {
+                    UserId = session.UserId,
+                    ActivityType = "Logout",
+                    Description = $"User logged out successfully from {GetClientIPAddress()}"
+                };
+                await _userActivityLogService.LogActivityAsync(activityDto);
+            }
+            catch (Exception ex)
+            {
+                // Log warning but don't fail the logout process
+                Console.WriteLine($"Failed to log logout activity for user {session.UserId}: {ex.Message}");
+            }
         }
     }
 
@@ -99,5 +145,35 @@ public class AuthService : IAuthService
 
         await _authSessionRepository.Add(session);
         return tokens;
+    }
+
+    private string GetClientIPAddress()
+    {
+        try
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+            if (httpContext != null)
+            {
+                // Try to get the real IP address from various headers
+                var forwardedHeader = httpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+                if (!string.IsNullOrEmpty(forwardedHeader))
+                {
+                    return forwardedHeader.Split(',')[0].Trim();
+                }
+
+                var realIPHeader = httpContext.Request.Headers["X-Real-IP"].FirstOrDefault();
+                if (!string.IsNullOrEmpty(realIPHeader))
+                {
+                    return realIPHeader;
+                }
+
+                return httpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
+            }
+        }
+        catch
+        {
+            // If we can't get the IP address, return a default value
+        }
+        return "Unknown";
     }
 }

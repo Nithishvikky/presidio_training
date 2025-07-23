@@ -35,7 +35,7 @@
   <!-- Sidebar -->
   <form [formGroup]="filterForm" class="position-fixed bg-white shadow p-4"
        [ngClass]="{ 'd-block': showSidebar, 'd-none': !showSidebar }"
-       style="width: 300px; height: 350px; top: 80px; right:0; z-index: 1050; transition: transform 0.3s ease;">
+       style="width: 350px; height: 500px; top: 80px; right:0; z-index: 1050; transition: transform 0.3s ease; overflow-y: auto;">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h5 class="mb-0">Filters</h5>
       <button class="btn-close" (click)="toggleSidebar()"></button>
@@ -64,11 +64,46 @@
         <option value="false">Descending</option>
       </select>
     </div>
+    
+    <!-- Admin Actions Section -->
+    <hr class="my-4">
+    <h6 class="mb-3">Admin Actions</h6>
+    <div class="d-grid gap-2">
+      <button class="btn btn-warning btn-sm" type="button" (click)="getInactiveUsers()" >
+        <i class="bi bi-clock-history me-1"></i>
+        Get Inactive Users (30+ days)
+      </button>
+      <button class="btn btn-info btn-sm" type="button" (click)="notifyInactiveUsers()" [disabled]="loading || inactiveUserIds.length === 0">
+        <i class="bi bi-bell me-1"></i>
+        Notify Inactive Users
+      </button>
+      <button class="btn btn-danger btn-sm" type="button" (click)="archiveInactiveUserFiles()" [disabled]="loading || inactiveUserIds.length === 0">
+        <i class="bi bi-archive me-1"></i>
+        Archive User Files
+      </button>
+    </div>
+    
+    <!-- Inactive Users Count -->
+    <div *ngIf="inactiveUserIds.length > 0" class="mt-3 p-2 bg-light rounded">
+      <small class="text-muted">
+        <i class="bi bi-info-circle me-1"></i>
+        {{ inactiveUserIds.length }} inactive user(s) found
+      </small>
+    </div>
   </form>
+
+  <!-- Header for current view -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 *ngIf="!showInactiveUsers">All Users</h4>
+    <h4 *ngIf="showInactiveUsers">Inactive Users (30+ days)</h4>
+    <button *ngIf="showInactiveUsers" class="btn btn-outline-secondary btn-sm" (click)="backToAllUsers()">
+      <i class="bi bi-arrow-left me-1"></i> Back to All Users
+    </button>
+  </div>
 
   <!-- Cards -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
-    <div class="col" *ngFor="let user of users">
+    <div class="col" *ngFor="let user of showInactiveUsers ? inactiveUsers : users">
       <div class="card shadow-sm border-0 px-3 py-3 mt-4" style="min-height: 140px;">
         <div class="d-flex align-items-center gap-3">
           <!-- User Icon -->
@@ -90,6 +125,10 @@
             <div class="text-muted small mt-1">
               Joined on <strong>{{ user.registeredAt | date: 'yyyy-MM-dd' }}</strong>
             </div>
+            <div *ngIf="showInactiveUsers" class="text-warning small mt-1">
+              <i class="bi bi-exclamation-triangle me-1"></i>
+              Inactive for 30+ days
+            </div>
           </div>
 
           <!-- User Details Button -->
@@ -105,8 +144,10 @@
     </div>
   </div>
 
-  <div *ngIf="!showScrollTop" class="text-secondary text-end"><i class="bi bi-chevron-double-down"></i> Scroll to see more users </div>
-  <div *ngIf="users.length === 0 && !loading" class="text-secondary text-center mt-4">No users available</div>
+  <div *ngIf="!showScrollTop && !showInactiveUsers" class="text-secondary text-end"><i class="bi bi-chevron-double-down"></i> Scroll to see more users </div>
+  <div *ngIf="(showInactiveUsers ? inactiveUsers.length : users.length) === 0 && !loading" class="text-secondary text-center mt-4">
+    {{ showInactiveUsers ? 'No inactive users found' : 'No users available' }}
+  </div>
 </div>
 
 <!-- Scroll to Top Button -->
@@ -115,69 +156,6 @@
         style="bottom: 100px; right: 50px; z-index: 1051; width: 60px; height: 60px;">
   ↑
 </button>
-<!-- <div class="container mt-2">
-  <div class="d-flex justify-content-between align-items-center mt-4">
-    <h1 class="fw-semibold">Community</h1>
-  </div>
-  <form [formGroup]="filterForm" class="d-flex gap-3 align-items-center mt-2">
-    <div class="form-floating mt-3">
-      <input type="email" class="form-control" id="userEmailInput" placeholder="User Email" formControlName="userEmail">
-      <label for="userEmailInput">User Email</label>
-    </div>
-    <div class="form-floating mt-3">
-      <input type="text" class="form-control" id="usernameInput" placeholder="username" formControlName="userName">
-      <label for="usernameInput">Username</label>
-    </div>
-    <div class="form-floating mt-3" id="roleInput">
-            <select class="form-select" formControlName="filterBy">
-              <option selected value="">All</option>
-              <option value="Admin">Admin</option>
-              <option value="User">User</option>
-            </select>
-            <label for="roleInput">Roles</label>
-    </div>
-    <div class="btn btn-secondary btn-sm mt-3" (click)="clearFilters()">Clear filters</div>
-  </form>
-  @if(users && users.length>0){
-    <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
-      <caption>Community people</caption>
-      <thead class="thead-light">
-        <tr>
-          <th scope="col" class="ps-4 py-4" (click)="onSortby($event)" id="username">Username
-            <i [ngClass]="sortBy != 'username' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
-          </th>
-          <th scope="col" class="py-4" id="email" (click)="onSortby($event)">Email
-            <i [ngClass]="sortBy != 'email' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
-          </th>
-          <th scope="col" class="py-4">Role</th>
-          <th scope="col" class="py-4" id="registeredat" (click)="onSortby($event)">Registered At
-            <i [ngClass]="sortBy != 'registeredat' ? 'd-none' : ascending ? 'bi bi-arrow-up' : 'bi bi-arrow-down' "></i>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(user of users; track user.userId){
-          <tr >
-            <td scope="row" class="ps-4 py-4">{{user.username}}</td>
-            <td scope="row" class="py-4" style="color: #637387;">{{user.email}}</td>
-            <td scope="row" class="py-4" >{{user.role}}</td>
-            <td class="py-4" style="color: #637387;">{{user.registeredAt| date: 'yyyy-MM-dd HH:mm'}}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-between align-items-center mt-3">
-      <button [ngClass]="pageNumber === 1 ? 'btn btn-outline-secondary btn-sm disabled' : 'btn btn-secondary btn-sm' " (click)="prevPage()">‹ Prev</button>
-      <span class="border p-1 rounded">{{pageNumber}}</span>
-      <button [ngClass]="pageNumber == totalPages ? 'btn btn-outline-secondary btn-sm disabled' : 'btn btn-secondary btn-sm' " (click)="nextPage()">Next ›</button>
-
-    </div>
-
-  }
-  @else {
-    <div class="text-secondary text-center mt-3">No users available</div>
-  }
-</div> -->
 
 <!-- Inside people.component.html -->
 <app-user-modal-component [user]="selectedUser" [show]="showUserModal" (closed)="showUserModal = false"></app-user-modal-component>

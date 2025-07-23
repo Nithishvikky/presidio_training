@@ -4,7 +4,7 @@
     <div class="col-12">
     <div class="hero-banner p-4 rounded">
       <h2 class="mb-1">Welcome, {{ User?.username?.toUpperCase() }}!</h2>
-      <p class="text-muted mb-3">You’re logged in as a <strong>{{ User?.role }}</strong>. Let’s get you started. </p>
+      <p class="text-muted mb-3">You're logged in as a <strong>{{ User?.role }}</strong>. Let's get you started. </p>
     </div>
     <div class="alert alert-primary mt-3 mb-0">
       <i class="bi bi-lightbulb me-2"></i>
@@ -99,4 +99,39 @@
       </div>
     </div>
   </div>
+
+  <!-- Activity Log Section -->
+  <div class="row g-4 mt-4">
+    <div class="col-12">
+      <h3 class="mb-4">Your Activity Dashboard</h3>
+    </div>
+    
+    <!-- Activity Summary -->
+    <div class="col-lg-4 col-md-6">
+      <app-user-activity-summary 
+        [activitySummary]="activitySummary">
+      </app-user-activity-summary>
+    </div>
+
+    <!-- Activity Log -->
+    <div class="col-lg-8 col-md-6">
+      <app-activity-log
+        [showLoadMore]="false"
+        (activityClick)="onActivityClick($event)"
+        (loadMore)="onLoadMoreActivities()">
+      </app-activity-log>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if(loading){
+    <div class="row mt-4">
+      <div class="col-12 text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Loading your activity data...</p>
+      </div>
+    </div>
+  }
 </div>

@@ -15,10 +15,12 @@ namespace DSS.Controllers
         private readonly IUserService _userService;
         private readonly IUserDocService _userDocService;
 
+
         public UserController(IUserService userService, IUserDocService userDocService)
         {
             _userService = userService;
             _userDocService = userDocService;
+
         }
 
         [HttpPost("RegisterUser")]
@@ -30,11 +32,11 @@ namespace DSS.Controllers
                     .SelectMany(v => v.Errors)
                     .Select(e => e.ErrorMessage);
 
-                 return BadRequest(new ErrorObjectDto
-                 {
-                        ErrorNumber = 400,
-                        ErrorMessage = string.Join(" | ", errorMessages)
-                 });
+                return BadRequest(new ErrorObjectDto
+                {
+                    ErrorNumber = 400,
+                    ErrorMessage = string.Join(" | ", errorMessages)
+                });
             }
             var newUser = await _userService.AddUser(user);
             return Ok(new ApiResponse<User>
@@ -64,7 +66,7 @@ namespace DSS.Controllers
             int pageSize = 10
         )
         {
-            var users = await _userService.GetAllUsers(searchByEmail,searchByUsername,filterBy,sortBy,ascending,pageNumber,pageSize);
+            var users = await _userService.GetAllUsers(searchByEmail, searchByUsername, filterBy, sortBy, ascending, pageNumber, pageSize);
             return Ok(new ApiResponse<PagedResultDto<User>>
             {
                 Success = true,
@@ -103,5 +105,21 @@ namespace DSS.Controllers
                 Data = "Password updated sucessfully"
             });
         }
+
+
+        [HttpGet("GetInactiveUsers")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<IEnumerable<User>>> GetInactiveUsers([FromQuery] int days = 30)
+        {
+            var threshold = TimeSpan.FromDays(days);
+            var users = await _userService.GetInactiveUsers(threshold);
+            return Ok(new ApiResponse<IEnumerable<User>>
+            {
+                Success = true,
+                Data = users
+            });
+        }
+
+        
     }
 }

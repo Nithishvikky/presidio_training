@@ -9,22 +9,33 @@ import { Chart } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 import { DocumentAccessService } from '../../services/documentAccess.service';
 import { DashBoardResponseDto } from '../../models/dashboardResponseDto';
+import { UserActivityLogService } from '../../services/user-activity-log.service';
+import { UserActivityLogDto, UserActivitySummaryDto } from '../../models/userActivityLogDto';
+import { ActivityLogComponent } from '../activity-log-component/activity-log-component';
+import { UserActivitySummaryComponent } from '../user-activity-summary-component/user-activity-summary-component';
+import { CommonModule } from '@angular/common';
 
 Chart.register(ChartDataLabels);
 
 @Component({
   selector: 'app-home-component',
-  imports: [RouterModule,RouterLink,NgChartsModule],
+  imports: [RouterModule, RouterLink, NgChartsModule, CommonModule, ActivityLogComponent, UserActivitySummaryComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.css'
 })
 export class HomeComponent implements OnInit{
-  User:UserResponseDto|null =null;
-  data:DashBoardResponseDto|null = null;
+  User: UserResponseDto | null = null;
+  data: DashBoardResponseDto | null = null;
+  activitySummary: UserActivitySummaryDto | null = null;
+  loading = true;
 
-  constructor(private userService:UserService,private documentAccessService:DocumentAccessService){}
+  constructor(
+    private userService: UserService,
+    private documentAccessService: DocumentAccessService,
+    private userActivityLogService: UserActivityLogService
+  ){}
 
-  ngOnInit():void{
+  ngOnInit(): void {
     const authData = localStorage.getItem('authData');
     if(authData){
       console.log(authData);
@@ -33,6 +44,7 @@ export class HomeComponent implements OnInit{
       })
       this.userService.GetUser(JSON.parse(authData).email).subscribe();
     }
+    
     this.documentAccessService.dashboard$.subscribe({
       next:(res:any)=>{
         this.data = res;
@@ -41,12 +53,43 @@ export class HomeComponent implements OnInit{
       }
     })
     this.documentAccessService.GetDashBoardData().subscribe();
+
+    // Load user activity data
+    this.loadUserActivityData();
+  }
+
+  private loadUserActivityData() {
+    this.loading = true;
+    
+    // Load activity summary
+    this.userActivityLogService.getUserDashboardActivity().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.activitySummary = response.data;
+        }
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading activity summary:', error);
+        this.loading = false;
+      }
+    });
+  }
+
+  onActivityClick(activity: UserActivityLogDto) {
+    console.log('Activity clicked:', activity);
+    // Handle activity click - could navigate to related content or show details
+  }
+
+  onLoadMoreActivities() {
+    // Load more activities if needed
+    console.log('Loading more activities...');
   }
 
   pieChartType: ChartType = 'pie';
   pieChartOptions: ChartOptions = {
     responsive: true,
-    maintainAspectRatio:false,
+    maintainAspectRatio: false,
     plugins: {
       datalabels: {
         formatter: (value: number, ctx: any) => {
@@ -85,7 +128,6 @@ export class HomeComponent implements OnInit{
     ]
   };
 
-
   updateChart(){
     if(this.data){
       console.log(this.data.totalUserRole);
@@ -100,6 +142,5 @@ export class HomeComponent implements OnInit{
       };
     }
   }
-
 }
 
