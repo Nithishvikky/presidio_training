@@ -14,7 +14,7 @@ import { PeopleComponent } from './pages/people-component/people-component';
 import { ProfileComponent } from './pages/profile-component/profile-component';
 import { SharedDocumentComponent } from './pages/shared-document-component/shared-document-component';
 import { AdminDocumentPreview } from './pages/admin-document-preview/admin-document-preview';
-
+import { NotificationComponent } from './pages/notification-component/notification-component';
 
 export const routes: Routes = [
   {
@@ -44,6 +44,7 @@ export const routes: Routes = [
       {path:'profile',component:ProfileComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
       {path:'shareddocument/:filename',component:SharedDocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
       {path:'documentadmin/:filename',component:AdminDocumentPreview,canActivate:[AuthGuard],data:{roles:['Admin']}},
+      {path:'notifications',component:NotificationComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
     ],
   },
   { path: '**', redirectTo: '' }

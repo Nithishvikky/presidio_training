@@ -99,6 +99,31 @@ namespace Document_Sharing_System.Migrations
                     b.ToTable("DocumentViews");
                 });
 
+            modelBuilder.Entity("DSS.Models.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("DSS.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -108,6 +133,9 @@ namespace Document_Sharing_System.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -132,11 +160,41 @@ namespace Document_Sharing_System.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DSS.Models.UserActivityLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserActivityLogs");
+                });
+
             modelBuilder.Entity("DSS.Models.UserDocument", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ArchivedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ContentType")
                         .IsRequired()
@@ -152,6 +210,16 @@ namespace Document_Sharing_System.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<DateTime?>("ScheduledRearchiveAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("TemporarilyUnarchivedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("UploadedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -163,6 +231,81 @@ namespace Document_Sharing_System.Migrations
                     b.HasIndex("UploadedById");
 
                     b.ToTable("UserDocuments");
+                });
+
+            modelBuilder.Entity("DSS.Models.UserNotifications", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("NotificationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ReadAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotificationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserNotifications");
+                });
+
+            modelBuilder.Entity("DSS.Models.UserRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("AccessDurationHours")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("AccessExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("AccessGrantedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ProcessedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RequestType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RequestedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRequests");
                 });
 
             modelBuilder.Entity("DSS.Models.AuthSession", b =>
@@ -215,6 +358,18 @@ namespace Document_Sharing_System.Migrations
                     b.Navigation("ViewedBy");
                 });
 
+            modelBuilder.Entity("DSS.Models.UserActivityLog", b =>
+                {
+                    b.HasOne("DSS.Models.User", "User")
+                        .WithMany("ActivityLogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_UserActivityLog_User");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DSS.Models.UserDocument", b =>
                 {
                     b.HasOne("DSS.Models.User", "UploadedByUser")
@@ -227,11 +382,64 @@ namespace Document_Sharing_System.Migrations
                     b.Navigation("UploadedByUser");
                 });
 
+            modelBuilder.Entity("DSS.Models.UserNotifications", b =>
+                {
+                    b.HasOne("DSS.Models.Notification", "Notification")
+                        .WithMany("NotificationUsers")
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_UserNotification_Notification");
+
+                    b.HasOne("DSS.Models.User", "User")
+                        .WithMany("UserNotifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_UserNotification_User");
+
+                    b.Navigation("Notification");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DSS.Models.UserRequest", b =>
+                {
+                    b.HasOne("DSS.Models.UserDocument", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_UserRequest_Document");
+
+                    b.HasOne("DSS.Models.User", "User")
+                        .WithMany("Requests")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_UserRequest_User");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DSS.Models.Notification", b =>
+                {
+                    b.Navigation("NotificationUsers");
+                });
+
             modelBuilder.Entity("DSS.Models.User", b =>
                 {
+                    b.Navigation("ActivityLogs");
+
+                    b.Navigation("Requests");
+
                     b.Navigation("Sessions");
 
                     b.Navigation("UploadedDocuments");
+
+                    b.Navigation("UserNotifications");
                 });
 #pragma warning restore 612, 618
         }

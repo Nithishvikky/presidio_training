@@ -98,4 +98,9 @@ export class UserService{
     this.curUser.next(null);
     this.userSubject.next(null);
   }
+
+  GetInactiveUsers(days: number = 30): Observable<any> {
+    const params = new HttpParams().set('days', days.toString());
+    return this.http.get(`http://localhost:5015/api/v1/User/GetInactiveUsers`, { params });
+  }
 }

@@ -164,6 +164,12 @@ builder.Services.AddTransient<IRepository<Guid, AuthSession>, AuthSessionReposit
 builder.Services.AddTransient<IRepository<Guid, UserDocument>, UserDocRepository>();
 builder.Services.AddTransient<IRepository<Guid, DocumentView>, DocumentViewRepository>();
 builder.Services.AddTransient<IRepository<Guid, DocumentShare>, DocumentShareRepository>();
+builder.Services.AddTransient<IRepository<Guid, Notification>, NotificationRepository>();
+builder.Services.AddTransient<UserNotificationRepository, UserNotificationRepository>();
+builder.Services.AddTransient<IRepository<Guid, UserActivityLog>, UserActivityLogRepository>();
+builder.Services.AddTransient<UserActivityLogRepository, UserActivityLogRepository>();
+builder.Services.AddTransient<IRepository<Guid, UserRequest>, UserRequestRepository>();
+builder.Services.AddTransient<UserRequestRepository, UserRequestRepository>();
 #endregion
 
 #region Services
@@ -176,6 +182,13 @@ builder.Services.AddTransient<IUserDocService, UserDocService>();
 builder.Services.AddTransient<IDocumentViewService, DocumentViewService>();
 builder.Services.AddTransient<IDocumentShareService, DocumentShareService>();
 builder.Services.AddTransient<IAzureBlobStorageService, AzureBlobStorageService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
+builder.Services.AddTransient<IInactiveUserNotificationService, InactiveUserNotificationService>();
+builder.Services.AddHostedService<InactiveUserNotificationBackgroundService>();
+builder.Services.AddTransient<IUserActivityLogService, UserActivityLogService>();
+builder.Services.AddTransient<IUserRequestService, UserRequestService>();
+builder.Services.AddTransient<IDocumentRearchiveService, DocumentRearchiveService>();
+builder.Services.AddHostedService<DocumentRearchiveBackgroundService>();
 
 #endregion
 
@@ -192,6 +205,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddAuthorization();
 builder.Services.AddSignalR();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

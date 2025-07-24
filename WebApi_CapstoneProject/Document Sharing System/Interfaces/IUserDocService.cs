@@ -16,6 +16,9 @@ namespace DSS.Interfaces
             string? sortBy,
             bool ascending
         );
+
+        Task ArchiveAllFilesOfUser(Guid userId);
+        Task ArchiveAllFilesOfUsers(List<Guid> userIds);
         
     }
 }

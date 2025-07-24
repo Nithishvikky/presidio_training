@@ -102,4 +102,12 @@ export class DocumentService{
     this.DocumentDetailSubject.next(null);
     this.documentsSubject.next(null);
   }
+
+  ArchiveUserFiles(userIds: string[]): Observable<any> {
+    return this.http.post(`http://localhost:5015/api/v1/UserDoc/ArchiveUserFiles`, userIds);
+  }
+
+  ArchiveUserFilesById(userId: string): Observable<any> {
+    return this.http.post(`http://localhost:5015/api/v1/UserDoc/ArchiveUserFiles/${userId}`, {});
+  }
 }
