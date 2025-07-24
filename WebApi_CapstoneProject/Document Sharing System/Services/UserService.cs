@@ -23,7 +23,7 @@ namespace DSS.Services
 
         public async Task<User> AddUser(UserAddRequestDto user)
         {
-            try
+            try()
             {
                 _logger.LogInformation("Attempting to add new user with email: {Email}", user.Email);
 

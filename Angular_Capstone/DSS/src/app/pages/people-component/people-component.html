@@ -69,10 +69,7 @@
     <hr class="my-4">
     <h6 class="mb-3">Admin Actions</h6>
     <div class="d-grid gap-2">
-      <button class="btn btn-warning btn-sm" type="button" (click)="getInactiveUsers()" >
-        <i class="bi bi-clock-history me-1"></i>
-        Get Inactive Users (30+ days)
-      </button>
+      
       <button class="btn btn-info btn-sm" type="button" (click)="notifyInactiveUsers()" [disabled]="loading || inactiveUserIds.length === 0">
         <i class="bi bi-bell me-1"></i>
         Notify Inactive Users
@@ -95,6 +92,12 @@
   <!-- Header for current view -->
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 *ngIf="!showInactiveUsers">All Users</h4>
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-warning btn-sm" type="button" (click)="getInactiveUsers()" >
+        <i class="bi bi-clock-history me-1"></i>
+        Get Inactive Users (30+ days)
+      </button>
+    </div>
     <h4 *ngIf="showInactiveUsers">Inactive Users (30+ days)</h4>
     <button *ngIf="showInactiveUsers" class="btn btn-outline-secondary btn-sm" (click)="backToAllUsers()">
       <i class="bi bi-arrow-left me-1"></i> Back to All Users

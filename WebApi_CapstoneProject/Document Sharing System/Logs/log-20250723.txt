@@ -13675,3 +13675,183 @@ WHERE u."UserId" = @__userId_0 AND NOT (u."IsRead")
 2025-07-23 09:53:24.383 +05:30 [DBG] Connection id "0HNE9K0MUB3RM" sending FIN because: "The Socket transport's send loop completed gracefully."
 2025-07-23 09:53:24.385 +05:30 [DBG] Connection id "0HNE9K0MUB3RM" disconnecting.
 2025-07-23 09:53:24.386 +05:30 [DBG] Connection id "0HNE9K0MUB3RM" stopped.
+2025-07-23 10:22:45.839 +05:30 [DBG] Connection id "0HNE9K0MUB3RK" received FIN.
+2025-07-23 10:22:45.839 +05:30 [DBG] Connection id "0HNE9K0MUB3RL" received FIN.
+2025-07-23 10:22:45.839 +05:30 [DBG] Connection id "0HNE9K0MUB3RB" received FIN.
+2025-07-23 10:22:45.847 +05:30 [DBG] Waiting for the application to finish sending data.
+2025-07-23 10:22:45.847 +05:30 [DBG] Waiting for the application to finish sending data.
+2025-07-23 10:22:45.847 +05:30 [DBG] Waiting for the application to finish sending data.
+2025-07-23 10:22:45.853 +05:30 [DBG] Connection id "0HNE9K0MUB3RB" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-23 10:22:45.853 +05:30 [DBG] Connection id "0HNE9K0MUB3RL" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-23 10:22:45.853 +05:30 [DBG] Connection id "0HNE9K0MUB3RK" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-23 10:22:45.857 +05:30 [DBG] Connection id "0HNE9K0MUB3RB" disconnecting.
+2025-07-23 10:22:45.857 +05:30 [DBG] Connection id "0HNE9K0MUB3RL" disconnecting.
+2025-07-23 10:22:45.859 +05:30 [DBG] Connection id "0HNE9K0MUB3RK" disconnecting.
+2025-07-23 10:22:45.865 +05:30 [DBG] Socket closed.
+2025-07-23 10:22:45.865 +05:30 [DBG] Socket closed.
+2025-07-23 10:22:45.865 +05:30 [DBG] Socket closed.
+2025-07-23 10:22:45.892 +05:30 [DBG] OnConnectedAsync ending.
+2025-07-23 10:22:45.892 +05:30 [DBG] OnConnectedAsync ending.
+2025-07-23 10:22:45.892 +05:30 [DBG] OnConnectedAsync ending.
+2025-07-23 10:22:45.898 +05:30 [DBG] Removing connection tFq7qjbEYii4i6PEpMfaBQ from the list of connections.
+2025-07-23 10:22:45.898 +05:30 [DBG] Removing connection gtYWnvFY3UT4l6iT7gxQUQ from the list of connections.
+2025-07-23 10:22:45.901 +05:30 [INF] Executed endpoint '/notificationhub'
+2025-07-23 10:22:45.901 +05:30 [INF] Executed endpoint '/notificationhub'
+2025-07-23 10:22:45.898 +05:30 [DBG] Removing connection yvseKI3ogfBjydgK247ytw from the list of connections.
+2025-07-23 10:22:45.906 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5015/notificationHub?id=gtYWnvFY3UT4l6iT7gxQUQ - 101 null null 1834379.1154ms
+2025-07-23 10:22:45.906 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5015/notificationHub?id=tFq7qjbEYii4i6PEpMfaBQ - 101 null null 1967770.3787ms
+2025-07-23 10:22:45.907 +05:30 [INF] Executed endpoint '/notificationhub'
+2025-07-23 10:22:45.913 +05:30 [DBG] Connection id "0HNE9K0MUB3RK" stopped.
+2025-07-23 10:22:45.915 +05:30 [DBG] Connection id "0HNE9K0MUB3RB" stopped.
+2025-07-23 10:22:45.916 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5015/notificationHub?id=yvseKI3ogfBjydgK247ytw - 101 null null 1832422.5464ms
+2025-07-23 10:22:45.921 +05:30 [DBG] Connection id "0HNE9K0MUB3RL" stopped.
+2025-07-23 10:49:44.247 +05:30 [INF] Running hourly document rearchive check at "2025-07-23T05:19:44.2309743Z"
+2025-07-23 10:49:44.383 +05:30 [INF] Starting document rearchive check
+2025-07-23 10:49:44.453 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-23 10:49:44.483 +05:30 [DBG] Creating DbConnection.
+2025-07-23 10:49:44.489 +05:30 [DBG] Created DbConnection. (5ms).
+2025-07-23 10:49:44.495 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 10:49:44.605 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 10:49:44.615 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-23 10:49:44.620 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (10ms).
+2025-07-23 10:49:44.630 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (21ms).
+2025-07-23 10:49:44.637 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 10:49:44.730 +05:30 [INF] Executed DbCommand (93ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 10:49:44.736 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 10:49:44.761 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 10:49:44.765 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 10:49:44.788 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 10:49:44.799 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 10:49:44.810 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 77ms reading results.
+2025-07-23 10:49:44.816 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 10:49:44.821 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (4ms).
+2025-07-23 10:49:44.824 +05:30 [INF] Fetched all documents Count: 4
+2025-07-23 10:49:44.829 +05:30 [INF] No documents to rearchive
+2025-07-23 10:49:44.832 +05:30 [INF] Hourly document rearchive check completed successfully
+2025-07-23 10:49:44.834 +05:30 [DBG] 'DssContext' disposed.
+2025-07-23 10:49:44.835 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 10:49:44.837 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (2ms).
+2025-07-23 11:49:44.890 +05:30 [INF] Running hourly document rearchive check at "2025-07-23T06:19:44.8635766Z"
+2025-07-23 11:49:44.958 +05:30 [INF] Starting document rearchive check
+2025-07-23 11:49:44.989 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-23 11:49:45.004 +05:30 [DBG] Creating DbConnection.
+2025-07-23 11:49:45.009 +05:30 [DBG] Created DbConnection. (4ms).
+2025-07-23 11:49:45.011 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 11:49:45.084 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 11:49:45.095 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-23 11:49:45.098 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (9ms).
+2025-07-23 11:49:45.101 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (12ms).
+2025-07-23 11:49:45.104 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 11:49:45.180 +05:30 [INF] Executed DbCommand (77ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 11:49:45.194 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 11:49:45.216 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 11:49:45.220 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 11:49:45.237 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 11:49:45.242 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 11:49:45.250 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 64ms reading results.
+2025-07-23 11:49:45.259 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 11:49:45.263 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (4ms).
+2025-07-23 11:49:45.269 +05:30 [INF] Fetched all documents Count: 4
+2025-07-23 11:49:45.272 +05:30 [INF] No documents to rearchive
+2025-07-23 11:49:45.275 +05:30 [INF] Hourly document rearchive check completed successfully
+2025-07-23 11:49:45.278 +05:30 [DBG] 'DssContext' disposed.
+2025-07-23 11:49:45.280 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 11:49:45.284 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (3ms).
+2025-07-23 16:55:57.622 +05:30 [INF] Running hourly document rearchive check at "2025-07-23T11:25:57.6129617Z"
+2025-07-23 16:55:57.686 +05:30 [INF] Starting document rearchive check
+2025-07-23 16:55:57.728 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-23 16:55:57.739 +05:30 [DBG] Creating DbConnection.
+2025-07-23 16:55:57.742 +05:30 [DBG] Created DbConnection. (2ms).
+2025-07-23 16:55:57.745 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 16:55:57.929 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 16:55:57.937 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-23 16:55:57.940 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (8ms).
+2025-07-23 16:55:57.941 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (9ms).
+2025-07-23 16:55:57.943 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 16:55:58.052 +05:30 [INF] Executed DbCommand (109ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 16:55:58.056 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 16:55:58.151 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 16:55:58.153 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 16:55:58.166 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 16:55:58.169 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 16:55:58.170 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 115ms reading results.
+2025-07-23 16:55:58.172 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 16:55:58.174 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (2ms).
+2025-07-23 16:55:58.177 +05:30 [INF] Fetched all documents Count: 4
+2025-07-23 16:55:58.178 +05:30 [INF] No documents to rearchive
+2025-07-23 16:55:58.180 +05:30 [INF] Hourly document rearchive check completed successfully
+2025-07-23 16:55:58.181 +05:30 [DBG] 'DssContext' disposed.
+2025-07-23 16:55:58.183 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 16:55:58.185 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (1ms).
+2025-07-23 17:55:58.272 +05:30 [INF] Running hourly document rearchive check at "2025-07-23T12:25:58.2599168Z"
+2025-07-23 17:55:58.339 +05:30 [INF] Starting document rearchive check
+2025-07-23 17:55:58.385 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-23 17:55:58.396 +05:30 [DBG] Creating DbConnection.
+2025-07-23 17:55:58.400 +05:30 [DBG] Created DbConnection. (3ms).
+2025-07-23 17:55:58.404 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 17:55:58.498 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 17:55:58.513 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-23 17:55:58.515 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (13ms).
+2025-07-23 17:55:58.518 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (16ms).
+2025-07-23 17:55:58.522 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 17:55:58.640 +05:30 [INF] Executed DbCommand (117ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 17:55:58.648 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 17:55:58.677 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 17:55:58.685 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 17:55:58.693 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 17:55:58.701 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 17:55:58.707 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 62ms reading results.
+2025-07-23 17:55:58.713 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 17:55:58.718 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (4ms).
+2025-07-23 17:55:58.725 +05:30 [INF] Fetched all documents Count: 4
+2025-07-23 17:55:58.727 +05:30 [INF] No documents to rearchive
+2025-07-23 17:55:58.729 +05:30 [INF] Hourly document rearchive check completed successfully
+2025-07-23 17:55:58.731 +05:30 [DBG] 'DssContext' disposed.
+2025-07-23 17:55:58.733 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 17:55:58.735 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (2ms).
+2025-07-23 18:55:58.763 +05:30 [INF] Running hourly document rearchive check at "2025-07-23T13:25:58.7555225Z"
+2025-07-23 18:55:58.822 +05:30 [INF] Starting document rearchive check
+2025-07-23 18:55:58.878 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-23 18:55:58.888 +05:30 [DBG] Creating DbConnection.
+2025-07-23 18:55:58.891 +05:30 [DBG] Created DbConnection. (2ms).
+2025-07-23 18:55:58.894 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 18:55:58.971 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 18:55:58.991 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-23 18:55:58.995 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (11ms).
+2025-07-23 18:55:58.999 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (15ms).
+2025-07-23 18:55:59.002 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 18:55:59.085 +05:30 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-23 18:55:59.093 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 18:55:59.164 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 18:55:59.165 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 18:55:59.171 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-23 18:55:59.174 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 18:55:59.175 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 86ms reading results.
+2025-07-23 18:55:59.176 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 18:55:59.177 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (0ms).
+2025-07-23 18:55:59.178 +05:30 [INF] Fetched all documents Count: 4
+2025-07-23 18:55:59.179 +05:30 [INF] No documents to rearchive
+2025-07-23 18:55:59.179 +05:30 [INF] Hourly document rearchive check completed successfully
+2025-07-23 18:55:59.180 +05:30 [DBG] 'DssContext' disposed.
+2025-07-23 18:55:59.180 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-23 18:55:59.181 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (0ms).

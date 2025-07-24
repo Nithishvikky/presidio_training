@@ -50,7 +50,7 @@ public class AuthService : IAuthService
             {
                 UserId = user.Id,
                 ActivityType = "Login",
-                Description = $"User logged in successfully from {GetClientIPAddress()}"
+                Description = $"User logged in successfully on {DateTime.UtcNow}"
             };
             await _userActivityLogService.LogActivityAsync(activityDto);
         }
@@ -108,7 +108,7 @@ public class AuthService : IAuthService
                 {
                     UserId = session.UserId,
                     ActivityType = "Logout",
-                    Description = $"User logged out successfully from {GetClientIPAddress()}"
+                    Description = $"User logged out successfully on {DateTime.UtcNow}"
                 };
                 await _userActivityLogService.LogActivityAsync(activityDto);
             }
@@ -139,7 +139,7 @@ public class AuthService : IAuthService
             UserId = user.Id,
             RefreshToken = tokens.RefreshToken,
             CreatedAt = DateTime.UtcNow,
-            ExpiresAt = DateTime.UtcNow.AddDays(7), // 7 days for refresh token
+            ExpiresAt = DateTime.UtcNow.AddDays(7),
             IsRevoked = false
         };
 
@@ -147,33 +147,5 @@ public class AuthService : IAuthService
         return tokens;
     }
 
-    private string GetClientIPAddress()
-    {
-        try
-        {
-            var httpContext = _httpContextAccessor.HttpContext;
-            if (httpContext != null)
-            {
-                // Try to get the real IP address from various headers
-                var forwardedHeader = httpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
-                if (!string.IsNullOrEmpty(forwardedHeader))
-                {
-                    return forwardedHeader.Split(',')[0].Trim();
-                }
-
-                var realIPHeader = httpContext.Request.Headers["X-Real-IP"].FirstOrDefault();
-                if (!string.IsNullOrEmpty(realIPHeader))
-                {
-                    return realIPHeader;
-                }
-
-                return httpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
-            }
-        }
-        catch
-        {
-            // If we can't get the IP address, return a default value
-        }
-        return "Unknown";
-    }
+    
 }
