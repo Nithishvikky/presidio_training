@@ -1,0 +1,331 @@
+2025-07-29 23:23:50.229 +05:30 [DBG] Registered SignalR Protocol: json, implemented by Microsoft.AspNetCore.SignalR.Protocol.JsonHubProtocol.
+2025-07-29 23:23:50.370 +05:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-29 23:23:51.077 +05:30 [DBG] Hosting starting
+2025-07-29 23:23:51.097 +05:30 [INF] User profile is available. Using 'C:\Users\imkis\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-29 23:23:51.113 +05:30 [DBG] Reading data from file 'C:\Users\imkis\AppData\Local\ASP.NET\DataProtection-Keys\key-7f30fa5b-8eea-4c71-b7f2-f728424c4338.xml'.
+2025-07-29 23:23:51.145 +05:30 [DBG] Found key {7f30fa5b-8eea-4c71-b7f2-f728424c4338}.
+2025-07-29 23:23:51.159 +05:30 [DBG] Considering key {7f30fa5b-8eea-4c71-b7f2-f728424c4338} with expiration date 2025-09-14 13:15:25Z as default key.
+2025-07-29 23:23:51.166 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-07-29 23:23:51.170 +05:30 [DBG] Decrypting secret element using Windows DPAPI.
+2025-07-29 23:23:51.174 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-07-29 23:23:51.183 +05:30 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2025-07-29 23:23:51.188 +05:30 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2025-07-29 23:23:51.192 +05:30 [DBG] Using key {7f30fa5b-8eea-4c71-b7f2-f728424c4338} as the default key.
+2025-07-29 23:23:51.195 +05:30 [DBG] Key ring with default key {7f30fa5b-8eea-4c71-b7f2-f728424c4338} was loaded during application startup.
+2025-07-29 23:23:51.199 +05:30 [INF] Inactive User Notification Background Service started
+2025-07-29 23:23:51.200 +05:30 [INF] Running daily inactive user check at "2025-07-29T17:53:51.2002810Z"
+2025-07-29 23:23:51.830 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-29 23:23:51.863 +05:30 [INF] Starting inactive user notification check
+2025-07-29 23:23:51.866 +05:30 [INF] Fetching users inactive for more than 30 days
+2025-07-29 23:23:52.470 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-29 23:23:52.490 +05:30 [DBG] Compiling query expression: 
+'DbSet<User>()'
+2025-07-29 23:23:52.671 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<User>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: User.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: User.Email (string) Required, 1], [Property: User.LastLogin (DateTime?), 2], [Property: User.PasswordHash (string) Required, 3], [Property: User.RegisteredAt (DateTime) Required, 4], [Property: User.Role (string) Required, 5], [Property: User.UpdatedAt (DateTime) Required, 6], [Property: User.Username (string) Required, 7] }
+        SELECT u.Id, u.Email, u.LastLogin, u.PasswordHash, u.RegisteredAt, u.Role, u.UpdatedAt, u.Username
+        FROM Users AS u) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: User.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: User.Email (string) Required, 1], [Property: User.LastLogin (DateTime?), 2], [Property: User.PasswordHash (string) Required, 3], [Property: User.RegisteredAt (DateTime) Required, 4], [Property: User.Role (string) Required, 5], [Property: User.UpdatedAt (DateTime) Required, 6], [Property: User.Username (string) Required, 7] }
+        SELECT u.Id, u.Email, u.LastLogin, u.PasswordHash, u.RegisteredAt, u.Role, u.UpdatedAt, u.Username
+        FROM Users AS u, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        User entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            User instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(User);
+            entry1 = queryContext.TryGetEntry(
+                key: [LIFTABLE Constant: Key: User.Id PK | Resolver: c => c.Dependencies.Model.FindEntityType("DSS.Models.User").FindPrimaryKey()], 
+                keyValues: new object[]{ (object)dataReader.GetGuid(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (User)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                entityType1 = [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("DSS.Models.User")];
+                instance1 = switch (entityType1)
+                {
+                    case [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("DSS.Models.User")]: 
+                        {
+                            return 
+                            {
+                                User instance;
+                                instance = new User();
+                                instance.<Id>k__BackingField = dataReader.GetGuid(0);
+                                instance.<Email>k__BackingField = dataReader.GetString(1);
+                                instance.<LastLogin>k__BackingField = dataReader.IsDBNull(2) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(2);
+                                instance.<PasswordHash>k__BackingField = dataReader.GetString(3);
+                                instance.<RegisteredAt>k__BackingField = dataReader.GetDateTime(4);
+                                instance.<Role>k__BackingField = dataReader.GetString(5);
+                                instance.<UpdatedAt>k__BackingField = dataReader.GetDateTime(6);
+                                instance.<Username>k__BackingField = dataReader.GetString(7);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("DSS.Models.User")]) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(User)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        return entity;
+    }, 
+    contextType: DSS.Contexts.DssContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-07-29 23:23:52.693 +05:30 [DBG] Creating DbConnection.
+2025-07-29 23:23:52.742 +05:30 [DBG] Created DbConnection. (46ms).
+2025-07-29 23:23:52.746 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:52.799 +05:30 [INF] Document Rearchive Background Service started
+2025-07-29 23:23:52.800 +05:30 [INF] Running hourly document rearchive check at "2025-07-29T17:53:52.8004971Z"
+2025-07-29 23:23:52.804 +05:30 [INF] Starting document rearchive check
+2025-07-29 23:23:52.821 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-29 23:23:52.827 +05:30 [DBG] Compiling query expression: 
+'DbSet<UserDocument>()'
+2025-07-29 23:23:52.841 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<UserDocument>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: UserDocument.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: UserDocument.ArchivedAt (DateTime?), 1], [Property: UserDocument.ContentType (string) Required, 2], [Property: UserDocument.FileData (byte[]), 3], [Property: UserDocument.FileName (string) Required, 4], [Property: UserDocument.IsDeleted (bool) Required, 5], [Property: UserDocument.ScheduledRearchiveAt (DateTime?), 6], [Property: UserDocument.Status (string) Required, 7], [Property: UserDocument.TemporarilyUnarchivedAt (DateTime?), 8], [Property: UserDocument.UploadedAt (DateTime) Required, 9], [Property: UserDocument.UploadedById (Guid) Required FK Index, 10] }
+        SELECT u.Id, u.ArchivedAt, u.ContentType, u.FileData, u.FileName, u.IsDeleted, u.ScheduledRearchiveAt, u.Status, u.TemporarilyUnarchivedAt, u.UploadedAt, u.UploadedById
+        FROM UserDocuments AS u) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: UserDocument.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: UserDocument.ArchivedAt (DateTime?), 1], [Property: UserDocument.ContentType (string) Required, 2], [Property: UserDocument.FileData (byte[]), 3], [Property: UserDocument.FileName (string) Required, 4], [Property: UserDocument.IsDeleted (bool) Required, 5], [Property: UserDocument.ScheduledRearchiveAt (DateTime?), 6], [Property: UserDocument.Status (string) Required, 7], [Property: UserDocument.TemporarilyUnarchivedAt (DateTime?), 8], [Property: UserDocument.UploadedAt (DateTime) Required, 9], [Property: UserDocument.UploadedById (Guid) Required FK Index, 10] }
+        SELECT u.Id, u.ArchivedAt, u.ContentType, u.FileData, u.FileName, u.IsDeleted, u.ScheduledRearchiveAt, u.Status, u.TemporarilyUnarchivedAt, u.UploadedAt, u.UploadedById
+        FROM UserDocuments AS u, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        UserDocument entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            UserDocument instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(UserDocument);
+            entry1 = queryContext.TryGetEntry(
+                key: [LIFTABLE Constant: Key: UserDocument.Id PK | Resolver: c => c.Dependencies.Model.FindEntityType("DSS.Models.UserDocument").FindPrimaryKey()], 
+                keyValues: new object[]{ (object)dataReader.GetGuid(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (UserDocument)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                entityType1 = [LIFTABLE Constant: EntityType: UserDocument | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("DSS.Models.UserDocument")];
+                instance1 = switch (entityType1)
+                {
+                    case [LIFTABLE Constant: EntityType: UserDocument | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("DSS.Models.UserDocument")]: 
+                        {
+                            return 
+                            {
+                                UserDocument instance;
+                                instance = new UserDocument();
+                                instance.<Id>k__BackingField = dataReader.GetGuid(0);
+                                instance.<ArchivedAt>k__BackingField = dataReader.IsDBNull(1) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(1);
+                                instance.<ContentType>k__BackingField = dataReader.GetString(2);
+                                instance.<FileData>k__BackingField = dataReader.IsDBNull(3) ? default(byte[]) : dataReader.GetFieldValue<byte[]>(3);
+                                instance.<FileName>k__BackingField = dataReader.GetString(4);
+                                instance.<IsDeleted>k__BackingField = dataReader.GetBoolean(5);
+                                instance.<ScheduledRearchiveAt>k__BackingField = dataReader.IsDBNull(6) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(6);
+                                instance.<Status>k__BackingField = dataReader.GetString(7);
+                                instance.<TemporarilyUnarchivedAt>k__BackingField = dataReader.IsDBNull(8) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(8);
+                                instance.<UploadedAt>k__BackingField = dataReader.GetDateTime(9);
+                                instance.<UploadedById>k__BackingField = dataReader.GetGuid(10);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: [LIFTABLE Constant: EntityType: UserDocument | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("DSS.Models.UserDocument")]) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(UserDocument)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        return entity;
+    }, 
+    contextType: DSS.Contexts.DssContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-07-29 23:23:52.855 +05:30 [DBG] Creating DbConnection.
+2025-07-29 23:23:52.857 +05:30 [DBG] Created DbConnection. (2ms).
+2025-07-29 23:23:52.859 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:52.941 +05:30 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2025-07-29 23:23:52.944 +05:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-07-29 23:23:52.958 +05:30 [INF] Now listening on: http://localhost:5015
+2025-07-29 23:23:52.959 +05:30 [DBG] Loaded hosting startup assembly Document Sharing System
+2025-07-29 23:23:52.961 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-29 23:23:52.962 +05:30 [INF] Hosting environment: Development
+2025-07-29 23:23:52.963 +05:30 [INF] Content root path: D:\presidio\presidio_training\WebApi_CapstoneProject\Document Sharing System
+2025-07-29 23:23:52.966 +05:30 [DBG] Hosting started
+2025-07-29 23:23:53.029 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.029 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.033 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-29 23:23:53.033 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-29 23:23:53.040 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (4ms).
+2025-07-29 23:23:53.040 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (4ms).
+2025-07-29 23:23:53.043 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (9ms).
+2025-07-29 23:23:53.043 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (10ms).
+2025-07-29 23:23:53.052 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."LastLogin", u."PasswordHash", u."RegisteredAt", u."Role", u."UpdatedAt", u."Username"
+FROM "Users" AS u
+2025-07-29 23:23:53.052 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-29 23:23:53.088 +05:30 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."LastLogin", u."PasswordHash", u."RegisteredAt", u."Role", u."UpdatedAt", u."Username"
+FROM "Users" AS u
+2025-07-29 23:23:53.166 +05:30 [INF] Executed DbCommand (121ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-29 23:23:53.169 +05:30 [DBG] Context 'DssContext' started tracking 'User' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.177 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.219 +05:30 [DBG] Context 'DssContext' started tracking 'User' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.221 +05:30 [DBG] Context 'DssContext' started tracking 'User' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.229 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.237 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.241 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.243 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.262 +05:30 [DBG] Context 'DssContext' started tracking 'UserDocument' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.265 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.283 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 97ms reading results.
+2025-07-29 23:23:53.283 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 163ms reading results.
+2025-07-29 23:23:53.289 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.289 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.295 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (6ms).
+2025-07-29 23:23:53.295 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (6ms).
+2025-07-29 23:23:53.298 +05:30 [INF] Fetched all users. Count: 3
+2025-07-29 23:23:53.299 +05:30 [INF] Fetched all documents Count: 5
+2025-07-29 23:23:53.301 +05:30 [INF] Found 1 inactive users
+2025-07-29 23:23:53.303 +05:30 [INF] No documents to rearchive
+2025-07-29 23:23:53.304 +05:30 [INF] Hourly document rearchive check completed successfully
+2025-07-29 23:23:53.306 +05:30 [DBG] 'DssContext' disposed.
+2025-07-29 23:23:53.307 +05:30 [INF] Creating notification for entity: System, entityId: "80963f3b-8380-43c6-b26a-6a7670ad2aaf"
+2025-07-29 23:23:53.309 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.312 +05:30 [INF] Adding new notification with content: Your account has been inactive for 1 month. Your stored documents will be archived soon. Please log in to keep your account active.
+2025-07-29 23:23:53.313 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (3ms).
+2025-07-29 23:23:53.341 +05:30 [DBG] 'DssContext' generated a value for the property 'Notification.Id'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.367 +05:30 [DBG] Context 'DssContext' started tracking 'Notification' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.373 +05:30 [DBG] SaveChanges starting for 'DssContext'.
+2025-07-29 23:23:53.376 +05:30 [DBG] DetectChanges starting for 'DssContext'.
+2025-07-29 23:23:53.405 +05:30 [DBG] DetectChanges completed for 'DssContext'.
+2025-07-29 23:23:53.459 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.461 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.463 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-29 23:23:53.464 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-07-29 23:23:53.470 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (6ms).
+2025-07-29 23:23:53.478 +05:30 [DBG] Executing DbCommand [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Notifications" ("Id", "Content", "CreatedAt", "EntityId", "EntityName")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 23:23:53.498 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Notifications" ("Id", "Content", "CreatedAt", "EntityId", "EntityName")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 23:23:53.503 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.505 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 3ms reading results.
+2025-07-29 23:23:53.509 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.511 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (1ms).
+2025-07-29 23:23:53.527 +05:30 [DBG] An entity of type 'Notification' tracked by 'DssContext' changed state from '"Added"' to '"Unchanged"'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.532 +05:30 [DBG] SaveChanges completed for 'DssContext' with 1 entities written to the database.
+2025-07-29 23:23:53.534 +05:30 [INF] Notification added successfully with ID: "01985751-c4b9-712a-b743-c312e5c4d6bc"
+2025-07-29 23:23:53.539 +05:30 [INF] Adding new user notification for user: "01981f5f-297a-7e3b-af30-ab0eff5965b1", notification: "01985751-c4b9-712a-b743-c312e5c4d6bc"
+2025-07-29 23:23:53.547 +05:30 [DBG] 'DssContext' generated a value for the property 'UserNotifications.Id'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.568 +05:30 [DBG] The navigation 'UserNotifications.Notification' was detected as changed. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.585 +05:30 [DBG] The navigation 'UserNotifications.User' was detected as changed. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.591 +05:30 [DBG] Context 'DssContext' started tracking 'UserNotifications' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.594 +05:30 [DBG] SaveChanges starting for 'DssContext'.
+2025-07-29 23:23:53.595 +05:30 [DBG] DetectChanges starting for 'DssContext'.
+2025-07-29 23:23:53.601 +05:30 [DBG] DetectChanges completed for 'DssContext'.
+2025-07-29 23:23:53.609 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.610 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.613 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-29 23:23:53.616 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-07-29 23:23:53.619 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+2025-07-29 23:23:53.620 +05:30 [DBG] Executing DbCommand [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserNotifications" ("Id", "IsRead", "NotificationId", "ReadAt", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 23:23:53.636 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserNotifications" ("Id", "IsRead", "NotificationId", "ReadAt", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-29 23:23:53.640 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.643 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 3ms reading results.
+2025-07-29 23:23:53.645 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.647 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (1ms).
+2025-07-29 23:23:53.649 +05:30 [DBG] An entity of type 'UserNotifications' tracked by 'DssContext' changed state from '"Added"' to '"Unchanged"'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-07-29 23:23:53.651 +05:30 [DBG] SaveChanges completed for 'DssContext' with 1 entities written to the database.
+2025-07-29 23:23:53.654 +05:30 [INF] User notification added successfully with ID: "01985751-c58b-7c2a-8f75-dbe1a218754a"
+2025-07-29 23:23:53.656 +05:30 [INF] Real-time notification sent to user: "01981f5f-297a-7e3b-af30-ab0eff5965b1"
+2025-07-29 23:23:53.658 +05:30 [INF] Notification created successfully with ID: "01985751-c4b9-712a-b743-c312e5c4d6bc" for 1 users
+2025-07-29 23:23:53.660 +05:30 [INF] Sent inactivity notifications to 1 users
+2025-07-29 23:23:53.662 +05:30 [INF] Daily inactive user check completed successfully
+2025-07-29 23:23:53.663 +05:30 [DBG] 'DssContext' disposed.
+2025-07-29 23:23:53.664 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-29 23:23:53.666 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (1ms).

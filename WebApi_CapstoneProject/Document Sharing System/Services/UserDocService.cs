@@ -2,6 +2,7 @@ using Azure.Storage.Blobs;
 using DSS.Interfaces;
 using DSS.Intrefaces;
 using DSS.Models;
+using DSS.Models.DTOs;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Azure.Identity;
@@ -15,17 +16,20 @@ namespace DSS.Services
         private readonly IUserService _userService;
         // private readonly IDocumentShareService _documentShareService;
         private readonly ILogger<UserDocService> _logger;
+        private readonly IUserActivityLogService _userActivityLogService;
         // private readonly IAzureBlobStorageService _azureBlobStorageService;
 
         public UserDocService(IRepository<Guid, UserDocument> userDocRepository,
                               IUserService userService,
-                              ILogger<UserDocService> logger)
-                            //   IAzureBlobStorageService azureBlobStorageService)
+                              ILogger<UserDocService> logger,
+                              IUserActivityLogService userActivityLogService)
+        //   IAzureBlobStorageService azureBlobStorageService)
         {
             _userDocRepository = userDocRepository;
             _userService = userService;
             // _documentShareService = documentShareService;
             _logger = logger;
+            _userActivityLogService = userActivityLogService;
             // _azureBlobStorageService = azureBlobStorageService;
         }
 
@@ -45,6 +49,26 @@ namespace DSS.Services
                 // await _azureBlobStorageService.UploadAsync(doc.FileName, doc.FileData);
 
                 _logger.LogInformation("Document {FileName} uploaded by user {UserId}", added.FileName, added.UploadedById);
+
+                // Log user activity
+                try
+                {
+                    var activityDto = new CreateActivityLogDto
+                    {
+                        UserId = added.UploadedById,
+                        ActivityType = "DocumentUpload",
+                        Description = $"Uploaded document: {added.FileName}"
+                    };
+                    await _userActivityLogService.LogActivityAsync(activityDto);
+                    _logger.LogInformation("Activity logged for document upload. UserId: {UserId}, FileName: {FileName}",
+                        added.UploadedById, added.FileName);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to log activity for document upload. UserId: {UserId}, FileName: {FileName}",
+                        added.UploadedById, added.FileName);
+                }
+
                 return added;
             }
             catch (Exception ex)
@@ -60,11 +84,13 @@ namespace DSS.Services
             {
                 var docs = (await _userDocRepository.GetAll()).Where(d => d.UploadedById == userId && !d.IsDeleted)
                                                             .ToList();
-                // if (!docs.Any())
-                // {
-                //     _logger.LogWarning("No documents found for user {UserId}", userId);
-                //     throw new KeyNotFoundException("Documents not found");
-                // }
+
+                // Populate the UploadedByUser navigation property for each document
+                foreach (var doc in docs)
+                {
+                    var user = await _userService.GetUserById(doc.UploadedById);
+                    doc.UploadedByUser = user;
+                }
 
                 _logger.LogInformation("Fetched {Count} documents for user {UserId}", docs.Count, userId);
                 return docs;
@@ -76,7 +102,7 @@ namespace DSS.Services
             }
         }
 
-        public async Task<UserDocument> GetByFileName(string filename,string email)
+        public async Task<UserDocument> GetByFileName(string filename, string email)
         {
             try
             {
@@ -166,30 +192,53 @@ namespace DSS.Services
 
                 Alldoc = (sortBy?.ToLower()) switch
                 {
-                    "username" => ascending 
+                    "username" => ascending
                         ? Alldoc.OrderBy(d => d.UploadedByUser.Username)
                         : Alldoc.OrderByDescending(d => d.UploadedByUser.Username),
-                    "email" => ascending 
+                    "email" => ascending
                         ? Alldoc.OrderBy(d => d.UploadedByUser.Email)
                         : Alldoc.OrderByDescending(d => d.UploadedByUser.Username),
-                    "filename" => ascending 
+                    "filename" => ascending
                         ? Alldoc.OrderBy(d => d.FileName)
                         : Alldoc.OrderByDescending(d => d.FileName),
 
-                    "uploadedat" => ascending 
+                    "uploadedat" => ascending
                         ? Alldoc.OrderBy(d => d.UploadedAt)
                         : Alldoc.OrderByDescending(d => d.UploadedAt),
 
-                    _ => Alldoc 
+                    _ => Alldoc
                 };
 
                 return Alldoc.ToList();
             }
             catch (Exception ex)
             {
-                 _logger.LogError(ex, "Error fetching All documents");
+                _logger.LogError(ex, "Error fetching All documents");
                 throw;
             }
         }
+        
+
+        public async Task ArchiveAllFilesOfUser(Guid userId)
+        {
+            var userDocs = await _userDocRepository.GetAll();
+            var docsToArchive = userDocs.Where(d => d.UploadedById == userId && d.Status!="Archived" && !d.IsDeleted).ToList();
+
+            foreach (var doc in docsToArchive)
+            {
+                doc.Status ="Archived";
+                doc.ArchivedAt = DateTime.UtcNow;
+                await _userDocRepository.Update(doc.Id, doc);
+            }
+        }
+
+        public async Task ArchiveAllFilesOfUsers(List<Guid> userIds)
+        {
+            foreach (var userId in userIds)
+            {
+                await ArchiveAllFilesOfUser(userId);
+            }
+        }
+
     }
 }

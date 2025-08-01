@@ -60,3 +60,30 @@
   bottom: 1rem;
   pointer-events: none;
 }
+
+/* Archived document styles */
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+/* Archive icon styling */
+.bi-archive-fill {
+  color: #6c757d;
+}
+
+/* Disabled button styling */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Archived document preview container */
+.archived-preview {
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+}

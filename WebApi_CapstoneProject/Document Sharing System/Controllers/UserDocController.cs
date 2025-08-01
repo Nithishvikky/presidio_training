@@ -259,7 +259,7 @@ namespace DSS.Controllers
 
         [HttpDelete("DeleteDocumentByAdmin")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> DeleteDocument(string fileName,string uploaderEmail)
+        public async Task<ActionResult> DeleteDocument(string fileName, string uploaderEmail)
         {
             var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(UserId))
@@ -289,5 +289,37 @@ namespace DSS.Controllers
                 Data = "Document Deleted sucessfully"
             });
         }
+        
+
+        [HttpPost("ArchiveUserFiles")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ArchiveUserFiles([FromBody] List<Guid> userIds)
+        {
+            foreach (var userId in userIds)
+            {
+                await _userDocService.ArchiveAllFilesOfUser(userId);
+            }
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Data = "All files archived for specified users."
+            });
+        }
+
+
+        [HttpPost("ArchiveUserFiles/{userId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ArchiveUserFiles(Guid userId)
+        {
+            await _userDocService.ArchiveAllFilesOfUser(userId);
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Data = $"All files archived for user {userId}."
+            });
+        }   
+
+
+
     }
 }

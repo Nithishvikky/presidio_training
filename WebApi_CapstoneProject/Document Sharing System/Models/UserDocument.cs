@@ -8,9 +8,15 @@ namespace DSS.Models
         public Guid Id { get; set; }
         public string FileName { get; set; } = string.Empty;
         public string ContentType { get; set; } = string.Empty;
+        public string Status { get; set; } = "Active"; // Active, Archived, TemporarilyUnarchived
         public byte[]? FileData { get; set; }
-        public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
+        
         public bool IsDeleted { get; set; } = false;
+        
+        public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? ArchivedAt { get; set; }
+        public DateTime? TemporarilyUnarchivedAt { get; set; }
+        public DateTime? ScheduledRearchiveAt { get; set; }
 
         public Guid UploadedById { get; set; }
         public User? UploadedByUser { get; set; }

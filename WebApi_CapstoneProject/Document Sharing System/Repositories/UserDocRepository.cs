@@ -15,6 +15,7 @@ namespace DSS.Repositories
         {
             try
             {
+                _logger.LogInformation("Attempting to fetch document with ID: {DocumentId}", key);
                 var doc = await _dssContext.UserDocuments.SingleOrDefaultAsync(u => u.Id == key);
                 
                 if (doc == null)
@@ -22,6 +23,8 @@ namespace DSS.Repositories
                     _logger.LogWarning("Document not found with ID: {DocumentId}", key);
                     throw new KeyNotFoundException("No document found");
                 }
+                
+                _logger.LogInformation("Document found, fetching user with ID: {UserId}", doc.UploadedById);
                 doc.UploadedByUser = await _dssContext.Users.SingleOrDefaultAsync(u => u.Id == doc.UploadedById);
                 _logger.LogInformation("Fetched document with ID: {DocumentId}",key);
                 return doc;

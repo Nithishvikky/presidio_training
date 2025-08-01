@@ -1,0 +1,1056 @@
+2025-07-18 03:38:12.637 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 03:38:13.433 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 03:38:16.396 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 03:49:18.132 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 03:49:18.748 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 03:49:19.269 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:51:00.970 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 21:51:01.709 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 21:51:04.230 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:53:32.796 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 21:53:33.431 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 21:53:33.476 +05:30 [DBG] Creating DbConnection.
+2025-07-18 21:53:33.551 +05:30 [DBG] Created DbConnection. (73ms).
+2025-07-18 21:53:33.566 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:33.725 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:33.730 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-18 21:53:33.734 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (4ms).
+2025-07-18 21:53:33.736 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (8ms).
+2025-07-18 21:53:33.743 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-18 21:53:33.778 +05:30 [ERR] Failed executing DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-18 21:53:33.783 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:33.793 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (6ms).
+2025-07-18 21:53:33.896 +05:30 [DBG] Migrating using database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:33.923 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:33.927 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.007 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.008 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.012 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (3ms).
+2025-07-18 21:53:34.014 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.015 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.070 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.071 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.073 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.075 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-18 21:53:34.118 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-18 21:53:34.125 +05:30 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-07-18 21:53:34.130 +05:30 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-07-18 21:53:34.133 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-18 21:53:34.135 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.136 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.139 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.141 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-18 21:53:34.144 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-18 21:53:34.148 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-18 21:53:34.150 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-07-18 21:53:34.151 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-07-18 21:53:34.153 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-18 21:53:34.160 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-18 21:53:34.166 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.171 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 6ms reading results.
+2025-07-18 21:53:34.179 +05:30 [INF] Applying migration '20250613083041_init'.
+2025-07-18 21:53:34.206 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.207 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.210 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.212 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "Username" text NOT NULL,
+    "Email" text NOT NULL,
+    "PasswordHash" text NOT NULL,
+    "Role" text NOT NULL,
+    "RegisteredAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2025-07-18 21:53:34.228 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "Username" text NOT NULL,
+    "Email" text NOT NULL,
+    "PasswordHash" text NOT NULL,
+    "Role" text NOT NULL,
+    "RegisteredAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2025-07-18 21:53:34.231 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.233 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.235 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.237 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AuthSessions" (
+    "Id" uuid NOT NULL,
+    "RefreshToken" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "ExpiresAt" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_AuthSessions" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_Auth" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:53:34.254 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AuthSessions" (
+    "Id" uuid NOT NULL,
+    "RefreshToken" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "ExpiresAt" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_AuthSessions" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_Auth" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:53:34.257 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.258 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.261 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-07-18 21:53:34.263 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserDocuments" (
+    "Id" uuid NOT NULL,
+    "FileName" text NOT NULL,
+    "ContentType" text NOT NULL,
+    "FileData" bytea,
+    "UploadedAt" timestamp with time zone NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "UploadedById" uuid NOT NULL,
+    CONSTRAINT "PK_UserDocuments" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_File" FOREIGN KEY ("UploadedById") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:53:34.292 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserDocuments" (
+    "Id" uuid NOT NULL,
+    "FileName" text NOT NULL,
+    "ContentType" text NOT NULL,
+    "FileData" bytea,
+    "UploadedAt" timestamp with time zone NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "UploadedById" uuid NOT NULL,
+    CONSTRAINT "PK_UserDocuments" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_File" FOREIGN KEY ("UploadedById") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:53:34.295 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.297 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.298 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.300 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentShares" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "SharedWithUserId" uuid NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_DocumentShares" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Shared_Document" FOREIGN KEY ("SharedWithUserId") REFERENCES "Users" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Shared_User" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:53:34.312 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentShares" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "SharedWithUserId" uuid NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_DocumentShares" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Shared_Document" FOREIGN KEY ("SharedWithUserId") REFERENCES "Users" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Shared_User" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:53:34.316 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.318 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.320 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.322 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentViews" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "ViewedByUserId" uuid NOT NULL,
+    "ViewedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_DocumentViews" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_View_Document" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_View_User" FOREIGN KEY ("ViewedByUserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:53:34.330 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentViews" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "ViewedByUserId" uuid NOT NULL,
+    "ViewedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_DocumentViews" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_View_Document" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_View_User" FOREIGN KEY ("ViewedByUserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:53:34.332 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.334 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.336 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.338 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AuthSessions_UserId" ON "AuthSessions" ("UserId");
+2025-07-18 21:53:34.343 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AuthSessions_UserId" ON "AuthSessions" ("UserId");
+2025-07-18 21:53:34.346 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.347 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.349 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.362 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_DocumentId" ON "DocumentShares" ("DocumentId");
+2025-07-18 21:53:34.369 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_DocumentId" ON "DocumentShares" ("DocumentId");
+2025-07-18 21:53:34.371 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.372 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.374 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:53:34.376 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_SharedWithUserId" ON "DocumentShares" ("SharedWithUserId");
+2025-07-18 21:53:34.382 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_SharedWithUserId" ON "DocumentShares" ("SharedWithUserId");
+2025-07-18 21:53:34.385 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.387 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.388 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.391 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_DocumentId" ON "DocumentViews" ("DocumentId");
+2025-07-18 21:53:34.396 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_DocumentId" ON "DocumentViews" ("DocumentId");
+2025-07-18 21:53:34.399 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.401 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:53:34.403 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-07-18 21:53:34.404 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_ViewedByUserId" ON "DocumentViews" ("ViewedByUserId");
+2025-07-18 21:53:34.409 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_ViewedByUserId" ON "DocumentViews" ("ViewedByUserId");
+2025-07-18 21:53:34.414 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.415 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.417 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.418 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserDocuments_UploadedById" ON "UserDocuments" ("UploadedById");
+2025-07-18 21:53:34.427 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserDocuments_UploadedById" ON "UserDocuments" ("UploadedById");
+2025-07-18 21:53:34.430 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.431 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.433 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.435 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250613083041_init', '9.0.5');
+2025-07-18 21:53:34.442 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250613083041_init', '9.0.5');
+2025-07-18 21:53:34.445 +05:30 [INF] Applying migration '20250717220816_AddNotificationTables'.
+2025-07-18 21:53:34.462 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.464 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.465 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.467 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Notifications" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "EntityName" text NOT NULL,
+    "EntityId" integer NOT NULL,
+    "Content" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Notifications" PRIMARY KEY ("Id")
+);
+2025-07-18 21:53:34.482 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Notifications" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "EntityName" text NOT NULL,
+    "EntityId" integer NOT NULL,
+    "Content" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Notifications" PRIMARY KEY ("Id")
+);
+2025-07-18 21:53:34.485 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.487 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.489 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.490 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserNotifications" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "IsRead" boolean NOT NULL,
+    "ReadAt" timestamp with time zone,
+    "NotificationId" integer NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_UserNotifications" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserNotification_Notification" FOREIGN KEY ("NotificationId") REFERENCES "Notifications" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserNotification_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:53:34.501 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserNotifications" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "IsRead" boolean NOT NULL,
+    "ReadAt" timestamp with time zone,
+    "NotificationId" integer NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_UserNotifications" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserNotification_Notification" FOREIGN KEY ("NotificationId") REFERENCES "Notifications" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserNotification_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:53:34.505 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.507 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.509 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-07-18 21:53:34.512 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_NotificationId" ON "UserNotifications" ("NotificationId");
+2025-07-18 21:53:34.517 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_NotificationId" ON "UserNotifications" ("NotificationId");
+2025-07-18 21:53:34.521 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.523 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:53:34.524 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:53:34.526 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_UserId" ON "UserNotifications" ("UserId");
+2025-07-18 21:53:34.531 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_UserId" ON "UserNotifications" ("UserId");
+2025-07-18 21:53:34.532 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.535 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:53:34.537 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-07-18 21:53:34.539 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250717220816_AddNotificationTables', '9.0.5');
+2025-07-18 21:53:34.542 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250717220816_AddNotificationTables', '9.0.5');
+2025-07-18 21:53:34.545 +05:30 [INF] Applying migration '20250717221919_AddLastLoginToUser'.
+2025-07-18 21:53:34.562 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.563 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.565 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:53:34.566 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Users" ADD "LastLogin" timestamp with time zone;
+2025-07-18 21:53:34.570 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Users" ADD "LastLogin" timestamp with time zone;
+2025-07-18 21:53:34.573 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.574 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:53:34.576 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:53:34.578 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250717221919_AddLastLoginToUser', '9.0.5');
+2025-07-18 21:53:34.582 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250717221919_AddLastLoginToUser', '9.0.5');
+2025-07-18 21:53:34.585 +05:30 [INF] Applying migration '20250718162104_initial'.
+2025-07-18 21:53:34.620 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:53:34.622 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:53:34.626 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-07-18 21:53:34.628 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "UserNotifications" ALTER COLUMN "NotificationId" TYPE uuid;
+2025-07-18 21:53:34.664 +05:30 [ERR] Failed executing DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "UserNotifications" ALTER COLUMN "NotificationId" TYPE uuid;
+2025-07-18 21:53:34.672 +05:30 [DBG] Disposing transaction.
+2025-07-18 21:53:34.675 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.678 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (2ms).
+2025-07-18 21:53:34.682 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:53:34.685 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:53:34.688 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (2ms).
+2025-07-18 21:55:39.512 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 21:55:40.326 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 21:55:40.336 +05:30 [DBG] Creating DbConnection.
+2025-07-18 21:55:40.378 +05:30 [DBG] Created DbConnection. (36ms).
+2025-07-18 21:55:40.397 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:40.406 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:40.585 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:40.616 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:40.634 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (14ms).
+2025-07-18 21:55:40.689 +05:30 [DBG] Creating DbConnection.
+2025-07-18 21:55:40.690 +05:30 [DBG] Created DbConnection. (1ms).
+2025-07-18 21:55:40.691 +05:30 [DBG] Opening connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:40.860 +05:30 [DBG] Opened connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:40.869 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:55:40.880 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (9ms).
+2025-07-18 21:55:40.882 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (17ms).
+2025-07-18 21:55:40.893 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "DocSS" WITH (FORCE);
+2025-07-18 21:55:41.249 +05:30 [INF] Executed DbCommand (349ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "DocSS" WITH (FORCE);
+2025-07-18 21:55:41.252 +05:30 [DBG] Closing connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:41.257 +05:30 [DBG] Closed connection to database 'postgres' on server 'tcp://localhost:5432' (5ms).
+2025-07-18 21:55:41.261 +05:30 [DBG] Disposing connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:41.293 +05:30 [DBG] Disposed connection to database 'postgres' on server 'tcp://localhost:5432' (31ms).
+2025-07-18 21:55:41.310 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:55:41.315 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:55:41.324 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (8ms).
+2025-07-18 21:56:43.714 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 21:56:44.205 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 21:56:44.661 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:57:07.089 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 21:57:07.585 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 21:57:07.614 +05:30 [DBG] Creating DbConnection.
+2025-07-18 21:57:07.653 +05:30 [DBG] Created DbConnection. (33ms).
+2025-07-18 21:57:07.668 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:07.790 +05:30 [ERR] An error occurred using the connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:07.893 +05:30 [DBG] Migrating using database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:07.896 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:07.898 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:07.952 +05:30 [DBG] An error occurred using the connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:07.962 +05:30 [DBG] Creating DbConnection.
+2025-07-18 21:57:07.963 +05:30 [DBG] Created DbConnection. (1ms).
+2025-07-18 21:57:07.964 +05:30 [DBG] Opening connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.061 +05:30 [DBG] Opened connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.066 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.071 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:08.074 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (8ms).
+2025-07-18 21:57:08.081 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "DocSS";
+2025-07-18 21:57:08.484 +05:30 [INF] Executed DbCommand (400ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "DocSS";
+2025-07-18 21:57:08.488 +05:30 [DBG] Closing connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.493 +05:30 [DBG] Closed connection to database 'postgres' on server 'tcp://localhost:5432' (3ms).
+2025-07-18 21:57:08.495 +05:30 [DBG] Disposing connection to database 'postgres' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.497 +05:30 [DBG] Disposed connection to database 'postgres' on server 'tcp://localhost:5432' (1ms).
+2025-07-18 21:57:08.498 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.500 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.583 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.585 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.586 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (1ms).
+2025-07-18 21:57:08.587 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.662 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.698 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.700 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.701 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:08.702 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-18 21:57:08.713 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-18 21:57:08.720 +05:30 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-07-18 21:57:08.725 +05:30 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-07-18 21:57:08.730 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-18 21:57:08.733 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.734 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.736 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:08.738 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-18 21:57:08.741 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-18 21:57:08.744 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-18 21:57:08.746 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-07-18 21:57:08.748 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-07-18 21:57:08.753 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-18 21:57:08.764 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-18 21:57:08.770 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:08.777 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 6ms reading results.
+2025-07-18 21:57:08.784 +05:30 [INF] Applying migration '20250718162644_initial'.
+2025-07-18 21:57:08.837 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.838 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.840 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:08.843 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Notifications" (
+    "Id" uuid NOT NULL,
+    "EntityName" text NOT NULL,
+    "EntityId" uuid NOT NULL,
+    "Content" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Notifications" PRIMARY KEY ("Id")
+);
+2025-07-18 21:57:08.851 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Notifications" (
+    "Id" uuid NOT NULL,
+    "EntityName" text NOT NULL,
+    "EntityId" uuid NOT NULL,
+    "Content" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Notifications" PRIMARY KEY ("Id")
+);
+2025-07-18 21:57:08.854 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.856 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.859 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-07-18 21:57:08.860 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "Username" text NOT NULL,
+    "Email" text NOT NULL,
+    "PasswordHash" text NOT NULL,
+    "Role" text NOT NULL,
+    "RegisteredAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    "LastLogin" timestamp with time zone,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2025-07-18 21:57:08.871 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "Username" text NOT NULL,
+    "Email" text NOT NULL,
+    "PasswordHash" text NOT NULL,
+    "Role" text NOT NULL,
+    "RegisteredAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    "LastLogin" timestamp with time zone,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2025-07-18 21:57:08.874 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.876 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:08.879 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-07-18 21:57:08.882 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AuthSessions" (
+    "Id" uuid NOT NULL,
+    "RefreshToken" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "ExpiresAt" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_AuthSessions" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_Auth" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:57:08.898 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AuthSessions" (
+    "Id" uuid NOT NULL,
+    "RefreshToken" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "ExpiresAt" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_AuthSessions" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_Auth" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:57:08.901 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.903 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.904 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:08.908 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserActivityLogs" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "ActivityType" text NOT NULL,
+    "Description" text NOT NULL,
+    "Timestamp" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_UserActivityLogs" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserActivityLog_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:08.916 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserActivityLogs" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "ActivityType" text NOT NULL,
+    "Description" text NOT NULL,
+    "Timestamp" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_UserActivityLogs" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserActivityLog_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:08.920 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.922 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.923 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:08.925 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserDocuments" (
+    "Id" uuid NOT NULL,
+    "FileName" text NOT NULL,
+    "ContentType" text NOT NULL,
+    "FileData" bytea,
+    "UploadedAt" timestamp with time zone NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "Status" text NOT NULL,
+    "ArchivedAt" timestamp with time zone,
+    "TemporarilyUnarchivedAt" timestamp with time zone,
+    "ScheduledRearchiveAt" timestamp with time zone,
+    "UploadedById" uuid NOT NULL,
+    CONSTRAINT "PK_UserDocuments" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_File" FOREIGN KEY ("UploadedById") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:57:08.935 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserDocuments" (
+    "Id" uuid NOT NULL,
+    "FileName" text NOT NULL,
+    "ContentType" text NOT NULL,
+    "FileData" bytea,
+    "UploadedAt" timestamp with time zone NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "Status" text NOT NULL,
+    "ArchivedAt" timestamp with time zone,
+    "TemporarilyUnarchivedAt" timestamp with time zone,
+    "ScheduledRearchiveAt" timestamp with time zone,
+    "UploadedById" uuid NOT NULL,
+    CONSTRAINT "PK_UserDocuments" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_User_File" FOREIGN KEY ("UploadedById") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:57:08.938 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.940 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.942 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:08.944 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserNotifications" (
+    "Id" uuid NOT NULL,
+    "IsRead" boolean NOT NULL,
+    "ReadAt" timestamp with time zone,
+    "NotificationId" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_UserNotifications" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserNotification_Notification" FOREIGN KEY ("NotificationId") REFERENCES "Notifications" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserNotification_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:08.952 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserNotifications" (
+    "Id" uuid NOT NULL,
+    "IsRead" boolean NOT NULL,
+    "ReadAt" timestamp with time zone,
+    "NotificationId" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_UserNotifications" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserNotification_Notification" FOREIGN KEY ("NotificationId") REFERENCES "Notifications" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserNotification_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:08.955 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.957 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.959 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:08.961 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentShares" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "SharedWithUserId" uuid NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_DocumentShares" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Shared_Document" FOREIGN KEY ("SharedWithUserId") REFERENCES "Users" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Shared_User" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:08.969 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentShares" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "SharedWithUserId" uuid NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_DocumentShares" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Shared_Document" FOREIGN KEY ("SharedWithUserId") REFERENCES "Users" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Shared_User" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:08.972 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.975 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:08.977 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-07-18 21:57:08.979 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentViews" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "ViewedByUserId" uuid NOT NULL,
+    "ViewedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_DocumentViews" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_View_Document" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_View_User" FOREIGN KEY ("ViewedByUserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:57:08.986 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "DocumentViews" (
+    "Id" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "ViewedByUserId" uuid NOT NULL,
+    "ViewedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_DocumentViews" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_View_Document" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_View_User" FOREIGN KEY ("ViewedByUserId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2025-07-18 21:57:08.989 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:08.990 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:08.991 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:08.993 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserRequests" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "RequestType" text NOT NULL,
+    "Status" text NOT NULL,
+    "Reason" text NOT NULL,
+    "RequestedAt" timestamp with time zone NOT NULL,
+    "ProcessedAt" timestamp with time zone,
+    "AccessGrantedAt" timestamp with time zone,
+    "AccessExpiresAt" timestamp with time zone,
+    "AccessDurationHours" integer,
+    CONSTRAINT "PK_UserRequests" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserRequest_Document" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserRequest_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:09.003 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserRequests" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "DocumentId" uuid NOT NULL,
+    "RequestType" text NOT NULL,
+    "Status" text NOT NULL,
+    "Reason" text NOT NULL,
+    "RequestedAt" timestamp with time zone NOT NULL,
+    "ProcessedAt" timestamp with time zone,
+    "AccessGrantedAt" timestamp with time zone,
+    "AccessExpiresAt" timestamp with time zone,
+    "AccessDurationHours" integer,
+    CONSTRAINT "PK_UserRequests" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_UserRequest_Document" FOREIGN KEY ("DocumentId") REFERENCES "UserDocuments" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserRequest_User" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2025-07-18 21:57:09.005 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.006 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.008 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:09.010 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AuthSessions_UserId" ON "AuthSessions" ("UserId");
+2025-07-18 21:57:09.015 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AuthSessions_UserId" ON "AuthSessions" ("UserId");
+2025-07-18 21:57:09.019 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.021 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:09.025 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (6ms).
+2025-07-18 21:57:09.027 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_DocumentId" ON "DocumentShares" ("DocumentId");
+2025-07-18 21:57:09.033 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_DocumentId" ON "DocumentShares" ("DocumentId");
+2025-07-18 21:57:09.035 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.037 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.039 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-07-18 21:57:09.042 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_SharedWithUserId" ON "DocumentShares" ("SharedWithUserId");
+2025-07-18 21:57:09.047 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentShares_SharedWithUserId" ON "DocumentShares" ("SharedWithUserId");
+2025-07-18 21:57:09.052 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.055 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:09.057 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-07-18 21:57:09.059 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_DocumentId" ON "DocumentViews" ("DocumentId");
+2025-07-18 21:57:09.065 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_DocumentId" ON "DocumentViews" ("DocumentId");
+2025-07-18 21:57:09.069 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.071 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:09.072 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:09.074 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_ViewedByUserId" ON "DocumentViews" ("ViewedByUserId");
+2025-07-18 21:57:09.082 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_DocumentViews_ViewedByUserId" ON "DocumentViews" ("ViewedByUserId");
+2025-07-18 21:57:09.085 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.087 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.089 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:09.092 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserActivityLogs_UserId" ON "UserActivityLogs" ("UserId");
+2025-07-18 21:57:09.098 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserActivityLogs_UserId" ON "UserActivityLogs" ("UserId");
+2025-07-18 21:57:09.101 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.103 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.105 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:09.108 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserDocuments_UploadedById" ON "UserDocuments" ("UploadedById");
+2025-07-18 21:57:09.114 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserDocuments_UploadedById" ON "UserDocuments" ("UploadedById");
+2025-07-18 21:57:09.118 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.119 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.121 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:09.123 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_NotificationId" ON "UserNotifications" ("NotificationId");
+2025-07-18 21:57:09.130 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_NotificationId" ON "UserNotifications" ("NotificationId");
+2025-07-18 21:57:09.132 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.134 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.135 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:09.137 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_UserId" ON "UserNotifications" ("UserId");
+2025-07-18 21:57:09.145 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserNotifications_UserId" ON "UserNotifications" ("UserId");
+2025-07-18 21:57:09.148 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.149 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.151 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:09.155 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserRequests_DocumentId" ON "UserRequests" ("DocumentId");
+2025-07-18 21:57:09.160 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserRequests_DocumentId" ON "UserRequests" ("DocumentId");
+2025-07-18 21:57:09.164 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.166 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-18 21:57:09.170 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (6ms).
+2025-07-18 21:57:09.172 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserRequests_UserId" ON "UserRequests" ("UserId");
+2025-07-18 21:57:09.178 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_UserRequests_UserId" ON "UserRequests" ("UserId");
+2025-07-18 21:57:09.184 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-18 21:57:09.185 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-07-18 21:57:09.187 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (3ms).
+2025-07-18 21:57:09.188 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250718162644_initial', '9.0.5');
+2025-07-18 21:57:09.192 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250718162644_initial', '9.0.5');
+2025-07-18 21:57:09.197 +05:30 [DBG] Committing transaction.
+2025-07-18 21:57:09.203 +05:30 [DBG] Committed transaction.
+2025-07-18 21:57:09.206 +05:30 [DBG] Disposing transaction.
+2025-07-18 21:57:09.207 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:09.210 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (3ms).
+2025-07-18 21:57:09.220 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:57:09.222 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:09.224 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (1ms).
+2025-07-18 21:57:24.383 +05:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-18 21:57:24.499 +05:30 [DBG] Hosting starting
+2025-07-18 21:57:24.520 +05:30 [INF] User profile is available. Using 'C:\Users\imkis\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-07-18 21:57:24.534 +05:30 [DBG] Reading data from file 'C:\Users\imkis\AppData\Local\ASP.NET\DataProtection-Keys\key-7f30fa5b-8eea-4c71-b7f2-f728424c4338.xml'.
+2025-07-18 21:57:24.563 +05:30 [DBG] Found key {7f30fa5b-8eea-4c71-b7f2-f728424c4338}.
+2025-07-18 21:57:24.579 +05:30 [DBG] Considering key {7f30fa5b-8eea-4c71-b7f2-f728424c4338} with expiration date 2025-09-14 13:15:25Z as default key.
+2025-07-18 21:57:24.586 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-07-18 21:57:24.589 +05:30 [DBG] Decrypting secret element using Windows DPAPI.
+2025-07-18 21:57:24.590 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-07-18 21:57:24.598 +05:30 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2025-07-18 21:57:24.600 +05:30 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2025-07-18 21:57:24.603 +05:30 [DBG] Using key {7f30fa5b-8eea-4c71-b7f2-f728424c4338} as the default key.
+2025-07-18 21:57:24.604 +05:30 [DBG] Key ring with default key {7f30fa5b-8eea-4c71-b7f2-f728424c4338} was loaded during application startup.
+2025-07-18 21:57:24.606 +05:30 [INF] Inactive User Notification Background Service started
+2025-07-18 21:57:24.608 +05:30 [INF] Running daily inactive user check at "2025-07-18T16:27:24.6082266Z"
+2025-07-18 21:57:24.749 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-18 21:57:24.794 +05:30 [INF] Starting inactive user notification check
+2025-07-18 21:57:24.798 +05:30 [INF] Fetching users inactive for more than 30 days
+2025-07-18 21:57:25.538 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 21:57:25.562 +05:30 [DBG] Compiling query expression: 
+'DbSet<User>()'
+2025-07-18 21:57:25.751 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<User>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: User.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: User.Email (string) Required, 1], [Property: User.LastLogin (DateTime?), 2], [Property: User.PasswordHash (string) Required, 3], [Property: User.RegisteredAt (DateTime) Required, 4], [Property: User.Role (string) Required, 5], [Property: User.UpdatedAt (DateTime) Required, 6], [Property: User.Username (string) Required, 7] }
+        SELECT u.Id, u.Email, u.LastLogin, u.PasswordHash, u.RegisteredAt, u.Role, u.UpdatedAt, u.Username
+        FROM Users AS u) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: User.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: User.Email (string) Required, 1], [Property: User.LastLogin (DateTime?), 2], [Property: User.PasswordHash (string) Required, 3], [Property: User.RegisteredAt (DateTime) Required, 4], [Property: User.Role (string) Required, 5], [Property: User.UpdatedAt (DateTime) Required, 6], [Property: User.Username (string) Required, 7] }
+        SELECT u.Id, u.Email, u.LastLogin, u.PasswordHash, u.RegisteredAt, u.Role, u.UpdatedAt, u.Username
+        FROM Users AS u, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        User entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            User instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(User);
+            entry1 = queryContext.TryGetEntry(
+                key: [LIFTABLE Constant: Key: User.Id PK | Resolver: c => c.Dependencies.Model.FindEntityType("DSS.Models.User").FindPrimaryKey()], 
+                keyValues: new object[]{ (object)dataReader.GetGuid(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (User)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                entityType1 = [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("DSS.Models.User")];
+                instance1 = switch (entityType1)
+                {
+                    case [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("DSS.Models.User")]: 
+                        {
+                            return 
+                            {
+                                User instance;
+                                instance = new User();
+                                instance.<Id>k__BackingField = dataReader.GetGuid(0);
+                                instance.<Email>k__BackingField = dataReader.GetString(1);
+                                instance.<LastLogin>k__BackingField = dataReader.IsDBNull(2) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(2);
+                                instance.<PasswordHash>k__BackingField = dataReader.GetString(3);
+                                instance.<RegisteredAt>k__BackingField = dataReader.GetDateTime(4);
+                                instance.<Role>k__BackingField = dataReader.GetString(5);
+                                instance.<UpdatedAt>k__BackingField = dataReader.GetDateTime(6);
+                                instance.<Username>k__BackingField = dataReader.GetString(7);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("DSS.Models.User")]) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(User)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        return entity;
+    }, 
+    contextType: DSS.Contexts.DssContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-07-18 21:57:25.773 +05:30 [DBG] Creating DbConnection.
+2025-07-18 21:57:25.793 +05:30 [DBG] Created DbConnection. (18ms).
+2025-07-18 21:57:25.797 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.827 +05:30 [INF] Document Rearchive Background Service started
+2025-07-18 21:57:25.829 +05:30 [INF] Running hourly document rearchive check at "2025-07-18T16:27:25.8296700Z"
+2025-07-18 21:57:25.832 +05:30 [INF] Starting document rearchive check
+2025-07-18 21:57:25.842 +05:30 [DBG] Entity Framework Core 9.0.5 initialized 'DssContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-18 21:57:25.845 +05:30 [DBG] Compiling query expression: 
+'DbSet<UserDocument>()'
+2025-07-18 21:57:25.850 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<UserDocument>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: UserDocument.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: UserDocument.ArchivedAt (DateTime?), 1], [Property: UserDocument.ContentType (string) Required, 2], [Property: UserDocument.FileData (byte[]), 3], [Property: UserDocument.FileName (string) Required, 4], [Property: UserDocument.IsDeleted (bool) Required, 5], [Property: UserDocument.ScheduledRearchiveAt (DateTime?), 6], [Property: UserDocument.Status (string) Required, 7], [Property: UserDocument.TemporarilyUnarchivedAt (DateTime?), 8], [Property: UserDocument.UploadedAt (DateTime) Required, 9], [Property: UserDocument.UploadedById (Guid) Required FK Index, 10] }
+        SELECT u.Id, u.ArchivedAt, u.ContentType, u.FileData, u.FileName, u.IsDeleted, u.ScheduledRearchiveAt, u.Status, u.TemporarilyUnarchivedAt, u.UploadedAt, u.UploadedById
+        FROM UserDocuments AS u) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: UserDocument.Id (Guid) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: UserDocument.ArchivedAt (DateTime?), 1], [Property: UserDocument.ContentType (string) Required, 2], [Property: UserDocument.FileData (byte[]), 3], [Property: UserDocument.FileName (string) Required, 4], [Property: UserDocument.IsDeleted (bool) Required, 5], [Property: UserDocument.ScheduledRearchiveAt (DateTime?), 6], [Property: UserDocument.Status (string) Required, 7], [Property: UserDocument.TemporarilyUnarchivedAt (DateTime?), 8], [Property: UserDocument.UploadedAt (DateTime) Required, 9], [Property: UserDocument.UploadedById (Guid) Required FK Index, 10] }
+        SELECT u.Id, u.ArchivedAt, u.ContentType, u.FileData, u.FileName, u.IsDeleted, u.ScheduledRearchiveAt, u.Status, u.TemporarilyUnarchivedAt, u.UploadedAt, u.UploadedById
+        FROM UserDocuments AS u, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        UserDocument entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            UserDocument instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(UserDocument);
+            entry1 = queryContext.TryGetEntry(
+                key: [LIFTABLE Constant: Key: UserDocument.Id PK | Resolver: c => c.Dependencies.Model.FindEntityType("DSS.Models.UserDocument").FindPrimaryKey()], 
+                keyValues: new object[]{ (object)dataReader.GetGuid(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (UserDocument)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                entityType1 = [LIFTABLE Constant: EntityType: UserDocument | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("DSS.Models.UserDocument")];
+                instance1 = switch (entityType1)
+                {
+                    case [LIFTABLE Constant: EntityType: UserDocument | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("DSS.Models.UserDocument")]: 
+                        {
+                            return 
+                            {
+                                UserDocument instance;
+                                instance = new UserDocument();
+                                instance.<Id>k__BackingField = dataReader.GetGuid(0);
+                                instance.<ArchivedAt>k__BackingField = dataReader.IsDBNull(1) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(1);
+                                instance.<ContentType>k__BackingField = dataReader.GetString(2);
+                                instance.<FileData>k__BackingField = dataReader.IsDBNull(3) ? default(byte[]) : dataReader.GetFieldValue<byte[]>(3);
+                                instance.<FileName>k__BackingField = dataReader.GetString(4);
+                                instance.<IsDeleted>k__BackingField = dataReader.GetBoolean(5);
+                                instance.<ScheduledRearchiveAt>k__BackingField = dataReader.IsDBNull(6) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(6);
+                                instance.<Status>k__BackingField = dataReader.GetString(7);
+                                instance.<TemporarilyUnarchivedAt>k__BackingField = dataReader.IsDBNull(8) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(8);
+                                instance.<UploadedAt>k__BackingField = dataReader.GetDateTime(9);
+                                instance.<UploadedById>k__BackingField = dataReader.GetGuid(10);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: [LIFTABLE Constant: EntityType: UserDocument | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("DSS.Models.UserDocument")]) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(UserDocument)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        return entity;
+    }, 
+    contextType: DSS.Contexts.DssContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-07-18 21:57:25.854 +05:30 [DBG] Creating DbConnection.
+2025-07-18 21:57:25.856 +05:30 [DBG] Created DbConnection. (1ms).
+2025-07-18 21:57:25.856 +05:30 [DBG] Opening connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.909 +05:30 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2025-07-18 21:57:25.909 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.909 +05:30 [DBG] Opened connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.910 +05:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-07-18 21:57:25.912 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-18 21:57:25.912 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-18 21:57:25.917 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (3ms).
+2025-07-18 21:57:25.917 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-07-18 21:57:25.919 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (7ms).
+2025-07-18 21:57:25.919 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (6ms).
+2025-07-18 21:57:25.922 +05:30 [INF] Now listening on: http://localhost:5015
+2025-07-18 21:57:25.923 +05:30 [DBG] Loaded hosting startup assembly Document Sharing System
+2025-07-18 21:57:25.924 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-18 21:57:25.924 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-18 21:57:25.924 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."LastLogin", u."PasswordHash", u."RegisteredAt", u."Role", u."UpdatedAt", u."Username"
+FROM "Users" AS u
+2025-07-18 21:57:25.924 +05:30 [INF] Hosting environment: Development
+2025-07-18 21:57:25.928 +05:30 [INF] Content root path: D:\presidio\presidio_training\WebApi_CapstoneProject\Document Sharing System
+2025-07-18 21:57:25.928 +05:30 [DBG] Hosting started
+2025-07-18 21:57:25.945 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."LastLogin", u."PasswordHash", u."RegisteredAt", u."Role", u."UpdatedAt", u."Username"
+FROM "Users" AS u
+2025-07-18 21:57:25.945 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."ArchivedAt", u."ContentType", u."FileData", u."FileName", u."IsDeleted", u."ScheduledRearchiveAt", u."Status", u."TemporarilyUnarchivedAt", u."UploadedAt", u."UploadedById"
+FROM "UserDocuments" AS u
+2025-07-18 21:57:25.952 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.951 +05:30 [DBG] Closing data reader to 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.959 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 8ms reading results.
+2025-07-18 21:57:25.959 +05:30 [DBG] A data reader for 'DocSS' on server 'tcp://localhost:5432' is being disposed after spending 7ms reading results.
+2025-07-18 21:57:25.963 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.963 +05:30 [DBG] Closing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.966 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (3ms).
+2025-07-18 21:57:25.966 +05:30 [DBG] Closed connection to database 'DocSS' on server 'tcp://localhost:5432' (3ms).
+2025-07-18 21:57:25.968 +05:30 [INF] Fetched all documents Count: 0
+2025-07-18 21:57:25.969 +05:30 [INF] Fetched all users. Count: 0
+2025-07-18 21:57:25.970 +05:30 [INF] No documents to rearchive
+2025-07-18 21:57:25.970 +05:30 [INF] Found 0 inactive users
+2025-07-18 21:57:25.971 +05:30 [INF] Hourly document rearchive check completed successfully
+2025-07-18 21:57:25.971 +05:30 [INF] No inactive users found
+2025-07-18 21:57:25.972 +05:30 [INF] Daily inactive user check completed successfully
+2025-07-18 21:57:25.972 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:57:25.973 +05:30 [DBG] 'DssContext' disposed.
+2025-07-18 21:57:25.975 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.975 +05:30 [DBG] Disposing connection to database 'DocSS' on server 'tcp://localhost:5432'.
+2025-07-18 21:57:25.977 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (1ms).
+2025-07-18 21:57:25.977 +05:30 [DBG] Disposed connection to database 'DocSS' on server 'tcp://localhost:5432' (2ms).
+2025-07-18 22:18:13.518 +05:30 [INF] Application is shutting down...
+2025-07-18 22:18:13.523 +05:30 [DBG] Hosting stopping
+2025-07-18 22:18:13.544 +05:30 [DBG] Hosting stopped

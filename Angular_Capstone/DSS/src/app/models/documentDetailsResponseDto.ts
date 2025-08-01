@@ -7,6 +7,9 @@ export class DocumentDetailsResponseDto{
     public contentType:string="",
     public lastViewerName:string="",
     public uploaderEmail:string ="",
-    public uploaderUsername:string=""
+    public uploaderUsername:string="",
+    public status:string="Active",
+    public archivedAt?:Date,
+    public fileData?:any
   ){}
 }

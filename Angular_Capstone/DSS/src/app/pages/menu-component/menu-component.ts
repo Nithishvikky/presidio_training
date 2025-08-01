@@ -3,16 +3,15 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Collapse, Toast } from 'bootstrap';
 import { UserService } from '../../services/user.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NotificationModalComponent } from "../notification-modal-component/notification-modal-component";
-import { NotificationService } from '../../services/notification.service';
-import { NotificationResponseDto } from '../../models/notificationResponseDto';
+import { NotificationBadgeComponent } from "../notification-badge-component/notification-badge-component";
 import { DocumentService } from '../../services/document.service';
 import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
 import { CommonModule } from '@angular/common';
+import { ConnectionStatusComponent } from '../../components/connection-status-component/connection-status-component';
 
 @Component({
   selector: 'app-menu-component',
-  imports: [RouterModule, NotificationModalComponent,DeleteModalComponent,CommonModule],
+  imports: [RouterModule, NotificationBadgeComponent, DeleteModalComponent, CommonModule, ConnectionStatusComponent],
   templateUrl: './menu-component.html',
   styleUrl: './menu-component.css'
 })
@@ -23,13 +22,10 @@ export class MenuComponent implements OnInit{
   refreshToken:string="";
   isDropdownOpen:boolean = false;
   collapsed:boolean = false;
-  UnseenNotification:number = 0;
-  notification:NotificationResponseDto[] = [];
   showConfirmModal = false;
 
-
   constructor(private userService:UserService,private breakpointObserver: BreakpointObserver,
-    private notifyService:NotificationService,private documentService:DocumentService){}
+    private documentService:DocumentService){}
 
   ngOnInit():void{
     let auth_data = localStorage.getItem("authData");
@@ -52,19 +48,11 @@ export class MenuComponent implements OnInit{
           this.collapsed = false
         }
       })
-    this.notifyService.notification$.subscribe(n =>{
-      if(n) this.notification = n;
-      this.UnseenNotification = this.notification.length;
-      this.notifyService.SeenNotifi$.subscribe(n =>{
-        if(n){
-          this.UnseenNotification = this.notification.length - n;
-        }
-      })
-    });
   }
 
   OnModalNotification(){
-    this.notifyService.seenNotification.next(this.notification.length);
+    // Navigate to notifications page instead of modal
+    this.route.navigate(['/main/notifications']);
   }
 
   collapseNavbar() {
@@ -98,7 +86,6 @@ export class MenuComponent implements OnInit{
         localStorage.clear();
         this.closeDropdown();
         this.userService.clearUserCache();
-        this.notifyService.clearNotification();
         this.documentService.clearDocumentCaches();
         this.showToast(res.data,"success");
         setTimeout(()=>{
