@@ -1,0 +1,61 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Shopping Cart</h2>
+
+  <div *ngIf="cartItems.length === 0 && !isLoading">No items in your cart.</div>
+
+  <table class="table table-bordered" *ngIf="cartItems.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price (₹)</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItems">
+        <td>{{ item.product.productName }}</td>
+        <td>₹ {{ item.product.price | number: '1.0-0' }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>₹ {{ item.quantity * item.product.price | number: '1.0-0' }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="remove(item.product.productId)">
+            Remove
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-end"><strong>Total:</strong></td>
+        <td colspan="2"><strong>₹ {{ totalPrice | number: '1.0-0' }}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form [formGroup]="customerForm" (ngSubmit)="processOrder(false)" *ngIf="cartItems.length > 0">
+    <h4>Customer Information</h4>
+
+    <div class="mb-3">
+      <label>Customer Name</label>
+      <input class="form-control" formControlName="CustomerName" />
+    </div>
+
+    <div class="mb-3">
+      <label>Phone</label>
+      <input class="form-control" formControlName="CustomerPhone" />
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input class="form-control" formControlName="CustomerEmail" />
+    </div>
+
+    <div class="mb-3">
+      <label>Address</label>
+      <input class="form-control" formControlName="CustomerAddress" />
+    </div>
+
+    <button class="btn btn-success me-2" type="submit">Order (Cash on Delivery)</button>
+    <button class="btn btn-primary" type="button" (click)="processOrder(true)">Pay with PayPal</button>
+  </form>
+</div>

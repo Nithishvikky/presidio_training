@@ -1,0 +1,60 @@
+<div class="container-fluid div-container">
+  <!-- Header -->
+  <div class="bg-primary text-white text-center py-3 div-header">
+    <h3>Shopping Online</h3>
+  </div>
+
+  <!-- Top Menu -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light div-topmenu">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/news">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/products">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contact">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/colors">Manage Color</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/news-management">News Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cart">Cart</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/order">Order</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="row mt-3">
+    <!-- Sidebar -->
+    <div class="col-md-3 mx-2 div-left">
+      <h5 class="category-title">Category</h5>
+      <div class="category-list">
+        <app-category-sidebar></app-category-sidebar>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-8 div-main">
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-3 mt-4 div-footer border-top">
+    <p>&copy; {{ currentYear }} by Chien Vu Hoang. All rights reserved.</p>
+    <p>Email: <a href="mailto:chien.vh@gmail.com">ChienVH</a></p>
+    <p>Facebook: <a href="https://facebook.com/chienvh" target="_blank">facebook.com/chienvh</a></p>
+  </footer>
+</div>

@@ -1,0 +1,13 @@
+<div class="category-list">
+  <ul class="list-group">
+    <li class="list-group-item" [class.active]="selectedCategoryId === 0" (click)="selectCategory(0)" style="cursor: pointer;">All</li>
+    <li
+      class="list-group-item"
+      *ngFor="let category of categories"
+      [class.active]="selectedCategoryId === category.categoryId"
+      (click)="selectCategory(category.categoryId)"
+      style="cursor: pointer;">
+      {{ category.name }}
+    </li>
+  </ul>
+</div>
