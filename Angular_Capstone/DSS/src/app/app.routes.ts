@@ -15,6 +15,8 @@ import { ProfileComponent } from './pages/profile-component/profile-component';
 import { SharedDocumentComponent } from './pages/shared-document-component/shared-document-component';
 import { AdminDocumentPreview } from './pages/admin-document-preview/admin-document-preview';
 import { NotificationComponent } from './pages/notification-component/notification-component';
+import { UserRequestsComponent } from './pages/user-requests-component/user-requests-component';
+import { MyRequestsComponent } from './pages/my-requests-component/my-requests-component';
 
 export const routes: Routes = [
   {
@@ -45,7 +47,17 @@ export const routes: Routes = [
       {path:'shareddocument/:filename',component:SharedDocumentComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
       {path:'documentadmin/:filename',component:AdminDocumentPreview,canActivate:[AuthGuard],data:{roles:['Admin']}},
       {path:'notifications',component:NotificationComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
+      {path:'user-requests',component:UserRequestsComponent,canActivate:[AuthGuard],data:{roles:['Admin']}},
+      {path:'my-requests',component:MyRequestsComponent,canActivate:[AuthGuard],data:{roles:['User']}},
     ],
   },
   { path: '**', redirectTo: '' }
 ];
+
+// Alternative: If you want to use hash routing instead of history API,
+// change your app.config.ts to use provideRouter with useHash: true
+// Example:
+// import { provideRouter, withHashLocation } from '@angular/router';
+// providers: [
+//   provideRouter(routes, withHashLocation())
+// ]

@@ -57,9 +57,19 @@ namespace DSS.Controllers
             }
             catch (InvalidOperationException ex)
             {
+                _logger.LogWarning("Invalid operation in CreateRequest: {Message}", ex.Message);
                 return BadRequest(new ErrorObjectDto
                 {
                     ErrorNumber = 400,
+                    ErrorMessage = ex.Message
+                });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                _logger.LogWarning("Resource not found in CreateRequest: {Message}", ex.Message);
+                return NotFound(new ErrorObjectDto
+                {
+                    ErrorNumber = 404,
                     ErrorMessage = ex.Message
                 });
             }
@@ -69,7 +79,7 @@ namespace DSS.Controllers
                 return StatusCode(500, new ErrorObjectDto
                 {
                     ErrorNumber = 500,
-                    ErrorMessage = "Failed to create request"
+                    ErrorMessage = "Failed to create request. Please try again."
                 });
             }
         }

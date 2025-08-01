@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Modal, Toast } from 'bootstrap';
 import { DocumentService } from '../../services/document.service';
 import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponseDto';
+import { UserDocDetailDto } from '../../models/userDocDetailDto';
 import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
 import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
 
@@ -19,9 +20,11 @@ import { DeleteModalComponent } from '../delete-modal-component/delete-modal-com
 export class MydocumentComponent {
   getFileTypeIcon = getFileTypeIcon;
   documents: DocumentDetailsResponseDto[] | null = null;
+  enhancedDocuments: UserDocDetailDto[] | null = null;
   selectedFile: File|null = null;
   fileSizeFlag:boolean = false;
   showDeleteModal = false;
+  selectedStatus = '';
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor(private documentService:DocumentService){}
@@ -30,7 +33,11 @@ export class MydocumentComponent {
     this.documentService.documents$.subscribe(doc =>{
       this.documents = doc;
     })
+    this.documentService.userDocs$.subscribe(docs => {
+      this.enhancedDocuments = docs;
+    })
     this.documentService.GetAllDocuments().subscribe();
+    this.loadEnhancedDocuments();
   }
 
   loadDocuments(){
@@ -43,6 +50,14 @@ export class MydocumentComponent {
         console.log(err);
       },
     })
+  }
+
+  loadEnhancedDocuments(){
+    this.documentService.getUserDocuments(1, 10, this.selectedStatus || undefined).subscribe();
+  }
+
+  onStatusFilterChange(){
+    this.loadEnhancedDocuments();
   }
 
   onFileSelected(e: Event):void{

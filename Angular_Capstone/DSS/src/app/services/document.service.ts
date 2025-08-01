@@ -4,6 +4,8 @@ import { Injectable } from "@angular/core";
 import { UserRegisterDto } from "../models/userRegisterDto";
 import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from "rxjs";
 import { DocumentDetailsResponseDto } from "../models/documentDetailsResponseDto";
+import { UserDocDetailDto } from "../models/userDocDetailDto";
+import { PagedResponseDto } from "../models/pagedResponseDto";
 
 @Injectable()
 export class DocumentService{
@@ -15,6 +17,12 @@ export class DocumentService{
 
   private DocumentDetailSubject = new BehaviorSubject<DocumentDetailsResponseDto|null>(null);
   documentDetail$ = this.DocumentDetailSubject.asObservable();
+
+  private userDocsSubject = new BehaviorSubject<UserDocDetailDto[]|null>(null);
+  userDocs$ = this.userDocsSubject.asObservable();
+
+  private archivedDocsSubject = new BehaviorSubject<UserDocDetailDto[]|null>(null);
+  archivedDocs$ = this.archivedDocsSubject.asObservable();
 
   constructor(private http:HttpClient){}
 
@@ -101,6 +109,8 @@ export class DocumentService{
     this.allDocuments.next([]);
     this.DocumentDetailSubject.next(null);
     this.documentsSubject.next(null);
+    this.userDocsSubject.next(null);
+    this.archivedDocsSubject.next(null);
   }
 
   ArchiveUserFiles(userIds: string[]): Observable<any> {
@@ -109,5 +119,54 @@ export class DocumentService{
 
   ArchiveUserFilesById(userId: string): Observable<any> {
     return this.http.post(`http://localhost:5015/api/v1/UserDoc/ArchiveUserFiles/${userId}`, {});
+  }
+
+
+  getUserDocuments(
+    pageNumber: number = 1,
+    pageSize: number = 10,
+    status?: string
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+    
+    if (status) {
+      params = params.set('status', status);
+    }
+
+    return this.http.get('http://localhost:5015/api/v1/UserDoc/GetAllMyDocumentDetails', { params })
+      .pipe(
+        tap((response: any) => {
+          this.userDocsSubject.next(response.data || []);
+        }),
+        catchError((error) => {
+          console.error('Error fetching user documents:', error);
+          this.userDocsSubject.next([]);
+          return of(null);
+        })
+      );
+  }
+
+  getArchivedDocuments(
+    pageNumber: number = 1,
+    pageSize: number = 10
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get('http://localhost:5015/api/v1/UserDoc/GetAllDocumentDetails', { params })
+      .pipe(
+        tap((response: any) => {
+          const archivedDocs = response.data?.filter((doc: any) => doc.isArchived) || [];
+          this.archivedDocsSubject.next(archivedDocs);
+        }),
+        catchError((error) => {
+          console.error('Error fetching archived documents:', error);
+          this.archivedDocsSubject.next([]);
+          return of(null);
+        })
+      );
   }
 }

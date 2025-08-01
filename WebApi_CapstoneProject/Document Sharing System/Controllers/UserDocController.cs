@@ -291,11 +291,6 @@ namespace DSS.Controllers
         }
         
 
-
-
-
-        // Already injected in your controller
-
         [HttpPost("ArchiveUserFiles")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> ArchiveUserFiles([FromBody] List<Guid> userIds)

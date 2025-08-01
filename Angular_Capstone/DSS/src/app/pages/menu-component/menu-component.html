@@ -12,9 +12,11 @@
       @if(role === 'User'){
         <a class="nav-item nav-link mx-2"  routerLink="/main/mydocuments" routerLinkActive="active" (click)="collapseNavbar()">My Documents</a>
         <a class="nav-item nav-link mx-2"  routerLink="/main/documentsforme" routerLinkActive="active" (click)="collapseNavbar()">Documents Shared</a>
+        <a class="nav-item nav-link mx-2"  routerLink="/main/my-requests" routerLinkActive="active" (click)="collapseNavbar()">My Requests</a>
       }
       @if(role === 'Admin'){
         <a class="nav-item nav-link mx-2"  routerLink="/main/alldocuments" (click)="collapseNavbar()" routerLinkActive="active">All Documents</a>
+        <a class="nav-item nav-link mx-2"  routerLink="/main/user-requests" (click)="collapseNavbar()" routerLinkActive="active">User Requests</a>
       }
       <a class="nav-item nav-link mx-2"  routerLink="/main/community" (click)="collapseNavbar()" routerLinkActive="active">Community</a>
       <app-notification-badge></app-notification-badge>

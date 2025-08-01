@@ -34,8 +34,21 @@ namespace DSS.Services
                 _logger.LogInformation("Creating request for user: {UserId}, document: {DocumentId}", 
                     userId, requestDto.DocumentId);
 
+                // Check if user exists
+                var user = await _userService.GetUserById(userId);
+                if (user == null)
+                {
+                    throw new InvalidOperationException("User not found.");
+                }
+
                 // Check if document exists and is archived
+                _logger.LogInformation("Attempting to fetch document with ID: {DocumentId}", requestDto.DocumentId);
                 var document = await _userDocumentRepository.Get(requestDto.DocumentId);
+                if (document == null)
+                {
+                    throw new InvalidOperationException("Document not found.");
+                }
+                
                 if (document.Status != "Archived")
                 {
                     throw new InvalidOperationException("Document is not archived. Access requests are only for archived documents.");
@@ -62,6 +75,9 @@ namespace DSS.Services
                     AccessDurationHours = requestDto.AccessDurationHours ?? 24
                 };
 
+                _logger.LogInformation("Creating user request with UserId: {UserId}, DocumentId: {DocumentId}, RequestType: {RequestType}", 
+                    userRequest.UserId, userRequest.DocumentId, userRequest.RequestType);
+
                 var result = await _userRequestRepository.Add(userRequest);
 
                 var requestDtoResult = new UserRequestDto
@@ -82,10 +98,20 @@ namespace DSS.Services
                 _logger.LogInformation("Request created successfully with ID: {Id}", result.Id);
                 return requestDtoResult;
             }
+            catch (KeyNotFoundException ex)
+            {
+                _logger.LogError(ex, "Document not found for user: {UserId}, document: {DocumentId}", userId, requestDto.DocumentId);
+                throw new InvalidOperationException("Document not found.");
+            }
+            catch (InvalidOperationException)
+            {
+                // Re-throw InvalidOperationException as-is
+                throw;
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to create request for user: {UserId}", userId);
-                throw;
+                throw new InvalidOperationException("Failed to create request. Please try again.");
             }
         }
 

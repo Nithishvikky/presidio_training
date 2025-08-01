@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace DSS.Models.DTOs
 {
     public class UserRequestDto
@@ -20,9 +22,18 @@ namespace DSS.Models.DTOs
 
     public class CreateUserRequestDto
     {
+        [Required]
         public Guid DocumentId { get; set; }
+        
+        [Required]
+        [StringLength(50)]
         public string RequestType { get; set; } = "DocumentAccess";
+        
+        [Required]
+        [StringLength(500)]
         public string Reason { get; set; } = string.Empty;
+        
+        [Range(1, 168)] // 1 hour to 1 week
         public int? AccessDurationHours { get; set; } = 24;
     }
 

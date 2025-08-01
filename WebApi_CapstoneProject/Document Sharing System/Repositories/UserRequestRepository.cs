@@ -22,6 +22,17 @@ namespace DSS.Repositories
             {
                 _logger.LogInformation("Adding user request for user: {UserId}, document: {DocumentId}", 
                     item.UserId, item.DocumentId);
+                
+                // Validate the entity before adding
+                if (item.UserId == Guid.Empty)
+                {
+                    throw new ArgumentException("UserId cannot be empty");
+                }
+                if (item.DocumentId == Guid.Empty)
+                {
+                    throw new ArgumentException("DocumentId cannot be empty");
+                }
+                
                 var result = await _context.UserRequests.AddAsync(item);
                 await _context.SaveChangesAsync();
                 _logger.LogInformation("User request added successfully with ID: {Id}", result.Entity.Id);
@@ -29,7 +40,8 @@ namespace DSS.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to add user request");
+                _logger.LogError(ex, "Failed to add user request for user: {UserId}, document: {DocumentId}", 
+                    item.UserId, item.DocumentId);
                 throw;
             }
         }

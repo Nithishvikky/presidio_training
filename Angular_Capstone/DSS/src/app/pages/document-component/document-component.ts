@@ -11,6 +11,7 @@ import { DocumentViewersDto } from '../../models/documentViewersDto';
 import { DocumentViewerService } from '../../services/documentView.service';
 import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponseDto';
 import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
+import { UserRequestService } from '../../services/user-request.service';
 
 @Component({
   selector: 'app-document-component',
@@ -35,6 +36,7 @@ export class DocumentComponent implements OnInit{
     private documentService:DocumentService,
     private documentAccesService:DocumentAccessService,
     private documentViewerService:DocumentViewerService,
+    private userRequestService:UserRequestService,
     private sanitizer:DomSanitizer
   ){}
 
@@ -163,5 +165,22 @@ export class DocumentComponent implements OnInit{
 
     const toast = new Toast(toastEl!);
     toast.show();
+  }
+
+  requestUnarchive() {
+    const documentId = this.fileData?.docId;
+    if (!documentId) {
+      this.showToast("Document ID not found", "danger");
+      return;
+    }
+
+    this.userRequestService.requestUnarchive(this.filename, documentId).subscribe({
+      next: (res: any) => {
+        this.showToast("Unarchive request submitted successfully", "success");
+      },
+      error: (err) => {
+        this.showToast(err.error?.error?.errorMessage || "Error submitting unarchive request", "danger");
+      }
+    });
   }
 }

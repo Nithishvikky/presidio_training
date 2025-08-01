@@ -12,7 +12,7 @@ import { PasswordChangeDto } from "../models/passwordChangeDto";
 export class UserService{
   constructor(private http:HttpClient){}
 
-  private userSubject = new BehaviorSubject<PagedResponseDto[]|null>(null);
+  private userSubject = new BehaviorSubject<PagedResponseDto<UserResponseDto>|null>(null);
   users$ = this.userSubject.asObservable();
 
   private curUser = new BehaviorSubject<UserResponseDto|null>(null);
@@ -88,7 +88,7 @@ export class UserService{
         this.userSubject.next(res.data);
       }),
       catchError((err) => {
-        this.userSubject.next([]);
+        this.userSubject.next(null);
         return of(null);
       })
     )
