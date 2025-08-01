@@ -1,0 +1,34 @@
+<h2 class="mb-4">Manage Colors</h2>
+
+<form [formGroup]="colorForm" (ngSubmit)="submit()" class="d-flex align-items-center gap-2">
+
+  <input type="text" style="width: 200px;" formControlName="color1" class="form-control form-control-sm" placeholder="Color" />
+
+  <button type="submit" class="btn btn-primary btn-sm">
+    {{ editingId === null ? 'Create' : 'Update' }}
+  </button>
+
+  <button type="button" class="btn btn-secondary btn-sm" *ngIf="editingId !== null" (click)="cancelEdit()">Cancel</button>
+</form>
+
+<hr />
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let color of colors">
+      <td>{{ color.color1 }}</td>
+      <td>
+        <div class="d-flex gap-2">
+          <button class="btn btn-sm btn-warning" (click)="edit(color)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(color.colorId)">Delete</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,31 @@
+<h1 class="mb-4">News</h1>
+<div class="row">
+  <div class="col-md-4 mb-4" *ngFor="let item of newsList">
+    <div class="card h-100">
+      <img [src]="item.image" class="card-img-top" alt="News Image">
+      <div class="card-body">
+        <h5 class="card-title fw-bold">{{ item.title }}</h5>
+        <h6 class="card-text fw-semibold">{{ item.shortDescription }}</h6>
+        <p class="card-text">{{ item.content }}</p>
+        <!-- <a [routerLink]="['/news', item.newsId]" class="btn btn-primary btn-sm">Read More</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination -->
+<nav *ngIf="totalPages > 1">
+  <ul class="pagination justify-content-center mt-4">
+    <li class="page-item" [class.disabled]="pageNumber === 1">
+      <a class="page-link" (click)="changePage(pageNumber - 1)">Previous</a>
+    </li>
+    <li class="page-item"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="i + 1 === pageNumber">
+      <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="pageNumber === totalPages">
+      <a class="page-link" (click)="changePage(pageNumber + 1)">Next</a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,34 @@
+<div *ngIf="!isLoading; else loading">
+  <h2>Order #{{ order.orderID }}</h2>
+  <p><strong>Date:</strong> {{ order.orderDate | date:'short' }}</p>
+  <p><strong>Payment:</strong> {{ order.paymentType }}</p>
+  <p><strong>Status:</strong> {{ order.status }}</p>
+  <p><strong>Customer:</strong> {{ order.customerName }}</p>
+  <p><strong>Phone:</strong> {{ order.customerPhone }}</p>
+  <p><strong>Email:</strong> {{ order.customerEmail }}</p>
+  <p><strong>Address:</strong> {{ order.customerAddress }}</p>
+
+  <h4 class="mt-4">Order Items</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of order.orderDetails">
+        <td>{{ item.productID }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>₹ {{ item.price | number:'1.0-0' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a routerLink="/order" class="btn btn-primary">Back to Orders</a>
+</div>
+
+<ng-template #loading>
+  <p>Loading order details...</p>
+</ng-template>

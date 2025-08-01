@@ -1,0 +1,38 @@
+<div class="d-flex mb-3 justify-content-between">
+  <h2>Order Listing</h2>
+  <button class="btn btn-success btn-sm" (click)="downloadPdf()">Export as pdf</button>
+</div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Order Date</th>
+      <th>Payment Type</th>
+      <th>Status</th>
+      <th>Customer Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderDate | date:'shortDate' }}</td>
+      <td>{{ order.paymentType }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.customerName }}</td>
+      <td>{{ order.customerPhone }}</td>
+      <td>{{ order.customerEmail }}</td>
+      <td>{{ order.customerAddress }}</td>
+      <td>
+        <a [routerLink]="['/orders', order.orderID]" class="btn btn-sm btn-info">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between mt-3">
+  <button class="btn btn-secondary" (click)="prevPage()" [disabled]="page === 1">Previous</button>
+  <span>Page {{ page }} / {{ totalPages }}</span>
+  <button class="btn btn-secondary" (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+</div>

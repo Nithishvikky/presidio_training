@@ -6,6 +6,6 @@ namespace ShopOnline.Models
         public string Color1 { get; set; }
 
         // Read-only no setter method
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product> Products { get; } = new List<Product>();
     }
 }
