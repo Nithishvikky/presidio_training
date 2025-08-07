@@ -15,6 +15,7 @@ namespace DSS.Controllers
     {
         private readonly IUserDocService _userDocService;
         private readonly IUserService _userService;
+        private readonly INotificationService _notificationService;
         private readonly IDocumentViewService _documentViewService;
         private readonly IDocumentShareService _documentShareService;
         private readonly ILogger<UserDocController> _logger;
@@ -22,13 +23,15 @@ namespace DSS.Controllers
                                 IDocumentViewService documentViewService,
                                 IDocumentShareService documentShareService,
                                 IUserService userService,
-                                ILogger<UserDocController> logger)
+                                ILogger<UserDocController> logger,
+                                INotificationService notificationService)
         {
             _userDocService = userDocService;
             _documentViewService = documentViewService;
             _documentShareService = documentShareService;
             _userService = userService;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         [HttpPost("UploadDocument")]
@@ -280,8 +283,30 @@ namespace DSS.Controllers
             }
 
             var user = await _userService.GetUserByEmail(uploaderEmail);
+            var admin = await _userService.GetUserById(Guid.Parse(UserId));
 
             var userDocument = await _userDocService.DeleteByFileName(fileName, user.Id);
+
+            // Create notification for admin deleted document
+            try
+            {
+                var notificationDto = new CreateNotificationDto
+                {
+                    EntityName = "UserDocument",
+                    EntityId = userDocument.Id,
+                    Content = $"{userDocument.FileName} has been deleted by Admin ({admin.Username}))",
+                    UserIds = new List<Guid> { user.Id }
+                };
+
+                await _notificationService.CreateNotification(notificationDto);
+                _logger.LogInformation("Notification created for document delete. DocumentId: {DocumentId}, UserId: {UserId}", 
+                    userDocument.Id, user.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to create notification for document delete. DocumentId: {DocumentId}, UserId: {UserId}", 
+                    userDocument.Id, user.Id);
+            }
 
             return Ok(new ApiResponse<string>
             {
@@ -289,7 +314,44 @@ namespace DSS.Controllers
                 Data = "Document Deleted sucessfully"
             });
         }
-        
+
+        [HttpGet("document-upload-trend")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> DocumentCountOnLast7Days()
+        {
+            var userDocuments = await _userDocService.DocumentCountLast7Days();
+
+            return Ok(new ApiResponse<ICollection<DocumentDateCountDto>>
+            {
+                Success = true,
+                Data = userDocuments
+            });
+        }
+
+        [HttpGet("document-type-distribution")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetDocumentTypeDistribution()
+        {
+            try
+            {
+                var data = await _userDocService.GetDocumentTypeCountsAsync();
+                return Ok(new ApiResponse<ICollection<DocumentTypeCountDto>>
+                {
+                    Success = true,
+                    Data = data
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to get document type distribution.");
+                return StatusCode(500, new ErrorObjectDto
+                {
+                    ErrorNumber = 500,
+                    ErrorMessage = "Internal Server Error"
+                });
+            }
+        }
+
 
         [HttpPost("ArchiveUserFiles")]
         [Authorize(Roles = "Admin")]
@@ -299,6 +361,26 @@ namespace DSS.Controllers
             {
                 await _userDocService.ArchiveAllFilesOfUser(userId);
             }
+            
+            // Create notification for all inactive users
+            try
+            {
+                var notificationDto = new CreateNotificationDto
+                {
+                    EntityName = "System",
+                    EntityId = Guid.NewGuid(),
+                    Content = "Your account has been inactive for 1 month. Your stored documents archived. Please log in to keep your account active.",
+                    UserIds = userIds
+                };
+
+                await _notificationService.CreateNotification(notificationDto);
+                _logger.LogInformation("Sent notifications to {Count} users about files", userIds.Count);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while notifying inactive users");
+            }
+
             return Ok(new ApiResponse<string>
             {
                 Success = true,
@@ -312,6 +394,25 @@ namespace DSS.Controllers
         public async Task<ActionResult> ArchiveUserFiles(Guid userId)
         {
             await _userDocService.ArchiveAllFilesOfUser(userId);
+
+            // Create notification for all inactive users
+            try
+            {
+                var notificationDto = new CreateNotificationDto
+                {
+                    EntityName = "System",
+                    EntityId = Guid.NewGuid(),
+                    Content = "Your account has been inactive for 1 month. Your stored documents archived. Please log in to keep your account active.",
+                    UserIds = new List<Guid> { userId }
+                };
+
+                await _notificationService.CreateNotification(notificationDto);
+                _logger.LogInformation("Sent notifications to {Count} users about files", userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while notifying inactive users");
+            }
             return Ok(new ApiResponse<string>
             {
                 Success = true,

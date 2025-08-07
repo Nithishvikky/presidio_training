@@ -1,0 +1,123 @@
+<div class="container-fluid mt-4 mb-5">
+  <div class="row">
+
+    <!-- LEFT SIDEBAR - CARDS -->
+    <div class="col-12 col-lg-3 mb-4">
+      <div class="d-flex flex-column gap-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total People</h6>
+            <h4 class="fw-bold">{{ data?.totalUsers }}</h4>
+          </div>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Admins</h6>
+            <h4 class="fw-bold text-primary">{{ data?.totalAdmin }}</h4>
+          </div>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Users</h6>
+            <h4 class="fw-bold text-success">{{ data?.totalUserRole }}</h4>
+          </div>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total Documents</h6>
+            <h4 class="fw-bold">{{ data?.totalDocuments }}</h4>
+          </div>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total Shares</h6>
+            <h4 class="fw-bold text-warning">{{ data?.totalShared }}</h4>
+          </div>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total Views</h6>
+            <h4 class="fw-bold text-danger">{{ data?.totalViews }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT MAIN CONTENT - CHARTS -->
+    <div class="col-12 col-lg-9">
+
+      <!-- ROW 1 -->
+      <div class="row mb-4">
+        <div class="col-12 col-md-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h6 class="card-title">Document Uploads in Last 7 Days</h6>
+              <div style="height: 300px; width: 100%;">
+                <canvas baseChart
+                  [type]="barChartType"
+                  [data]="barChartData"
+                  [options]="barChartOptions">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h6 class="card-title">Top 5 Shared Documents</h6>
+              <div style="height: 300px; width: 100%;">
+                <canvas baseChart
+                  [type]="'bar'"
+                  [data]="sharedDocChartData"
+                  [options]="sharedDocChartOptions">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 2 -->
+      <div class="row mb-4">
+        <div class="col-12 col-md-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h6 class="card-title">Active vs Inactive Users</h6>
+              <div style="height: 300px; width: 100%;">
+                <canvas baseChart
+                  [data]="pieChartData"
+                  [options]="pieChartOptions"
+                  [type]="pieChartType">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h6 class="card-title">Document Type Distribution</h6>
+              <div style="height: 300px; width: 100%;">
+                <canvas baseChart
+                  [type]="'bar'"
+                  [data]="docTypeChartData"
+                  [options]="docTypeChartOptions">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -15,5 +15,6 @@ namespace DSS.Interfaces
         public Task<ICollection<UserDocDetailDto>> GetFilesSharedWithUser(Guid userId);
 
         public Task<DashboardDto> GetDashboard();
+        public Task<ICollection<TopSharedDocumentDto>> GetTopSharedDocumentsAsync(int top);
     }
 }

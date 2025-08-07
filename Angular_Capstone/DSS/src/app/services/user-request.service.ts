@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
-import { 
-  CreateUserRequestDto, 
-  UserRequestDto, 
-  ApproveUserRequestDto, 
-  RejectUserRequestDto 
+import {
+  CreateUserRequestDto,
+  UserRequestDto,
+  ApproveUserRequestDto,
+  RejectUserRequestDto
 } from '../models/userRequestDto';
 
 @Injectable({
@@ -108,6 +108,7 @@ export class UserRequestService {
 
   // Process request (Approve/Reject) - Admin only
   processRequest(processDto: any): Observable<UserRequestDto> {
+    console.log(`Data sent to be${processDto}`);
     return this.http.put<UserRequestDto>('http://localhost:5015/api/v1/UserRequest/ProcessRequest', processDto)
       .pipe(
         tap(() => {
@@ -166,16 +167,27 @@ export class UserRequestService {
   }
 
   // Request unarchive for a document
-  requestUnarchive(filename: string, documentId?: string): Observable<any> {
+  requestTemporaryAccess(filename: string, documentId?: string): Observable<any> {
     const request: CreateUserRequestDto = {
       documentId: documentId || '', // We need the document ID from the document service
-      requestType: 'DocumentAccess',
-      reason: `Request to unarchive document: ${filename}`,
+      requestType: 'Temporary',
+      reason: `Request to temporary access for my document: ${filename}`,
       accessDurationHours: 24 // Default 24 hours access
     };
 
     return this.createUserRequest(request);
   }
+  // Request unarchive for a document
+  requestUnArchive(filename: string, documentId?: string): Observable<any> {
+    const request: CreateUserRequestDto = {
+      documentId: documentId || '', // We need the document ID from the document service
+      requestType: 'UnArchive',
+      reason: `Request to Unarchive my document: ${filename}`,
+    };
+
+    return this.createUserRequest(request);
+  }
+
 
   private refreshUserRequests(): void {
     this.getUserRequests().subscribe();
@@ -189,4 +201,4 @@ export class UserRequestService {
     this.userRequestsSubject.next(null);
     this.allRequestsSubject.next(null);
   }
-}     
+}

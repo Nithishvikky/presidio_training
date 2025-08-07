@@ -60,9 +60,16 @@
             <div>
               <h6 class="card-title mb-1">{{ document.fileName }}</h6>
               <p class="mb-0 text-muted small">
+                <span class="badge"  [ngClass]="{
+                'bg-success mb-1': document.status && document.status.includes('Active'),
+                'bg-warning mb-1': document.status && document.status.includes('Archived'),
+                'bg-info mb-1': document.status && document.status.includes('TemporarilyUnarchived')
+              }">
+                {{ document.status }}
+              </span><br/>
                 <strong>{{ document.uploaderUsername }}</strong><br />
                 <span>{{ document.uploaderEmail }}</span><br />
-                <span>{{ document.uploadedAt | date: 'yyyy-MM-dd HH:mm' }}</span>
+                <span>{{ document.uploadedAt | date: 'yyyy-MM-dd HH:mm' }}</span><br/>
               </p>
               <div class="mt-1 text-primary details fw-semibold" (click)="onDetails(document)">Details</div>
               <div class="mt-1 text-danger details fw-semibold" (click)="onDelete(document)">Remove</div>

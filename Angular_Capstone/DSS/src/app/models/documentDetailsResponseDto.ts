@@ -10,6 +10,7 @@ export class DocumentDetailsResponseDto{
     public uploaderUsername:string="",
     public status:string="Active",
     public archivedAt?:Date,
-    public fileData?:any
+    public fileData?:any,
+    public scheduledRearchiveAt:string=""
   ){}
 }

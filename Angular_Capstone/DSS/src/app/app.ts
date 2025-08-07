@@ -15,7 +15,12 @@ import { NotificationSharedResponseDto } from './models/notificationSharedRespon
 export class App {
   protected title = 'DSS';
 
-  showToast(message: string, type: 'success' | 'danger') {
+  ngOnInit(): void {
+    // Make this component accessible globally
+    (window as any).appComponentRef = this;
+  }
+
+  public showToast(message: string, type: 'success' | 'danger') {
     const toastEl = document.getElementById('liveToast');
     const toastBody = document.querySelector('.toast-body');
 

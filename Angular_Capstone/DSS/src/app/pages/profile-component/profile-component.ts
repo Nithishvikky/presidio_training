@@ -11,6 +11,7 @@ import { DocumentService } from '../../services/document.service';
 import { DocumentAccessService } from '../../services/documentAccess.service';
 import { UserModalComponent } from "../user-modal-component/user-modal-component";
 import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
+import { SignalRService } from '../../services/signalr.service';
 
 @Component({
   selector: 'app-profile-component',
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit{
 
   @ViewChild('PasswordInput') PasswordInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private userService:UserService,private route:Router,private notifyService:NotificationService,
+  constructor(private userService:UserService,private route:Router,private notifyService:NotificationService,private signalR:SignalRService,
     private documentService:DocumentService,private documentAccessService:DocumentAccessService){
     this.passwordChangeForm = new FormGroup({
       OldPassword:new FormControl(null,[Validators.required,Validators.minLength(8)]),
@@ -74,6 +75,7 @@ export class ProfileComponent implements OnInit{
     this.userService.LogoutUser(this.refreshToken).subscribe({
       next:(res:any)=>{
         localStorage.clear();
+        this.signalR.stopConnection();
         this.userService.clearUserCache();
         this.documentService.clearDocumentCaches();
         this.showToast(res.data,"success");

@@ -64,7 +64,7 @@ import { UserActivityLogService } from '../../services/user-activity-log.service
         </div>
       </div>
 
-      
+
 
       <!-- Loading State -->
       <div class="loading-state" *ngIf="loading">
@@ -435,7 +435,7 @@ import { UserActivityLogService } from '../../services/user-activity-log.service
   `]
 })
 export class UserActivitySummaryComponent implements OnInit {
-  @Input() activitySummary: UserActivitySummaryDto | null = null;
+  activitySummary: UserActivitySummaryDto | null = null;
   recentActivities: UserActivityLogDto[] = [];
   loading = false;
 
@@ -443,6 +443,26 @@ export class UserActivitySummaryComponent implements OnInit {
 
   ngOnInit() {
     this.loadRecentActivities();
+    this.loadUserActivityData();
+  }
+
+  private loadUserActivityData() {
+    this.loading = true;
+
+    // Load activity summary
+    this.userActivityLogService.getUserDashboardActivity().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.activitySummary = response.data;
+          console.log(this.activitySummary);
+        }
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading activity summary:', error);
+        this.loading = false;
+      }
+    });
   }
 
   private loadRecentActivities() {
@@ -463,15 +483,16 @@ export class UserActivitySummaryComponent implements OnInit {
   }
 
   getFormattedLastActivity(): string {
-    if (!this.activitySummary?.lastActivityDate) {
+    if (!this.activitySummary?.lastActivity) {
       return 'Never';
     }
 
-    const lastActivity = new Date(this.activitySummary.lastActivityDate);
+    const lastActivity = new Date(this.activitySummary.lastActivity);
     const now = new Date();
     const diffInDays = Math.floor((now.getTime() - lastActivity.getTime()) / (1000 * 60 * 60 * 24));
 
     if (diffInDays === 0) {
+      this.activitySummary.isActive = true;
       return 'Today';
     } else if (diffInDays === 1) {
       return 'Yesterday';
@@ -541,4 +562,4 @@ export class UserActivitySummaryComponent implements OnInit {
     // Navigate to full activity log page or show modal
     console.log('View all activities clicked');
   }
-} 
+}

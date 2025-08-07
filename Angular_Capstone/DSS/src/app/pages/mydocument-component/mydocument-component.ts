@@ -20,6 +20,7 @@ import { DeleteModalComponent } from '../delete-modal-component/delete-modal-com
 export class MydocumentComponent {
   getFileTypeIcon = getFileTypeIcon;
   documents: DocumentDetailsResponseDto[] | null = null;
+  SelectedDocuments:  DocumentDetailsResponseDto[] | null = null;
   enhancedDocuments: UserDocDetailDto[] | null = null;
   selectedFile: File|null = null;
   fileSizeFlag:boolean = false;
@@ -53,7 +54,14 @@ export class MydocumentComponent {
   }
 
   loadEnhancedDocuments(){
-    this.documentService.getUserDocuments(1, 10, this.selectedStatus || undefined).subscribe();
+    console.log(this.documents);
+    if (this.selectedStatus?.trim() !== "" && this.documents?.length) {
+      this.SelectedDocuments = this.documents.filter(
+        doc => doc.status === this.selectedStatus
+      );
+
+      console.log(this.SelectedDocuments);
+    }
   }
 
   onStatusFilterChange(){
@@ -77,7 +85,7 @@ export class MydocumentComponent {
   openDeleteConfirm(){
     this.showDeleteModal = true;
   }
-  
+
   handleDeleteConfirm(result: boolean,filename:string) {
     this.showDeleteModal = false;
     if (result) {

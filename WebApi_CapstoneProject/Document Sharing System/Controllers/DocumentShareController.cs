@@ -138,7 +138,7 @@ namespace DSS.Controllers
 
         [HttpGet("GetSharedUsersForAdmin")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ICollection<SharedResponseeDto>>> FilesSharedUserView(string fileName,string UploaderEmail)
+        public async Task<ActionResult<ICollection<SharedResponseeDto>>> FilesSharedUserView(string fileName, string UploaderEmail)
         {
             var UserEmail = User.FindFirst(ClaimTypes.Email)?.Value;
             if (string.IsNullOrEmpty(UserEmail))
@@ -156,8 +156,9 @@ namespace DSS.Controllers
                 Data = shares
             });
         }
-        
+
         [HttpGet("GetDashboard")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<DashboardDto>> GetDashBoard()
         {
 
@@ -169,5 +170,29 @@ namespace DSS.Controllers
                 Data = data
             });
         }
+
+        [HttpGet("top-shared-documents")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetTopSharedDocuments()
+        {
+            try
+            {
+                var topDocuments = await _documentShareService.GetTopSharedDocumentsAsync(5);
+                return Ok(new ApiResponse<ICollection<TopSharedDocumentDto>>
+                {
+                    Success = true,
+                    Data = topDocuments
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ErrorObjectDto
+                {
+                    ErrorNumber = 500,
+                    ErrorMessage = "Internal Server Error"
+                });
+            }
+        }
+
     }
 }

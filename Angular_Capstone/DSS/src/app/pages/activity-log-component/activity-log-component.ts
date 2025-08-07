@@ -28,10 +28,10 @@ import { UserActivityLogService } from '../../services/user-activity-log.service
       </div>
 
       <div class="activity-list" *ngIf="!loading">
-        <div *ngFor="let activity of activities; trackBy: trackByActivity" 
+        <div *ngFor="let activity of activities; trackBy: trackByActivity"
              class="activity-item"
              [class]="getActivityClass(activity.activityType)">
-          
+
           <div class="activity-icon">
             <i [class]="getActivityIcon(activity.activityType)"></i>
           </div>
@@ -46,11 +46,11 @@ import { UserActivityLogService } from '../../services/user-activity-log.service
             </div>
           </div>
 
-          <div class="activity-actions">
+          <!-- <div class="activity-actions">
             <button class="action-btn" (click)="onActivityClick(activity)">
               <i class="bi bi-eye"></i>
             </button>
-          </div>
+          </div> -->
         </div>
 
         <div *ngIf="activities.length === 0" class="no-activities">
@@ -387,4 +387,4 @@ export class ActivityLogComponent implements OnInit {
   onActivityClick(activity: UserActivityLogDto) {
     this.activityClick.emit(activity);
   }
-} 
+}

@@ -17,6 +17,7 @@ import { AdminDocumentPreview } from './pages/admin-document-preview/admin-docum
 import { NotificationComponent } from './pages/notification-component/notification-component';
 import { UserRequestsComponent } from './pages/user-requests-component/user-requests-component';
 import { MyRequestsComponent } from './pages/my-requests-component/my-requests-component';
+import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 
 export const routes: Routes = [
   {
@@ -49,6 +50,7 @@ export const routes: Routes = [
       {path:'notifications',component:NotificationComponent,canActivate:[AuthGuard],data:{roles:['Admin','User']}},
       {path:'user-requests',component:UserRequestsComponent,canActivate:[AuthGuard],data:{roles:['Admin']}},
       {path:'my-requests',component:MyRequestsComponent,canActivate:[AuthGuard],data:{roles:['User']}},
+      {path:'dashboard',component:AdminDashboard,canActivate:[AuthGuard],data:{roles:['Admin']}},
     ],
   },
   { path: '**', redirectTo: '' }

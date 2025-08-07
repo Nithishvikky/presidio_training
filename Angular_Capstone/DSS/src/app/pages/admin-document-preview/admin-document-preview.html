@@ -7,10 +7,10 @@
         {{ filename }}
         <span class="badge bg-info ms-3">Admin View</span>
       </h4>
-      <div class="d-flex align-items-center justify-content-between" style="width: 30%;">
-        <button class="btn btn-success" (click)="onDownload()">
+      <div class="d-flex align-items-center justify-content-between flex-row-reverse" style="width: 30%;">
+        <!-- <button class="btn btn-success" (click)="onDownload()">
           <i class="bi bi-download"></i> Download
-        </button>
+        </button> -->
          <button class="btn btn-danger" (click)="onDelete()">
           <i class="bi bi-trash"></i> Delete
         </button>
@@ -73,7 +73,7 @@
 
     <!-- Right section -->
     <div class="col-lg-4">
-      <div class="border mb-3 shadow-sm bg-light p-3 text-center" style="width: 100%; aspect-ratio: 1 / 1;">
+      <!-- <div class="border mb-3 shadow-sm bg-light p-3 text-center" style="width: 100%; aspect-ratio: 1 / 1;">
         @if(fileData.contentType.includes("image")){
           <img *ngIf="iframeSrc" [src]="iframeSrc" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;"/>
         }
@@ -81,7 +81,7 @@
           <iframe *ngIf="iframeSrc" [src]="iframeSrc" style="width: 100%; height: 100%; border: none;"></iframe>
         }
         <div *ngIf="!iframeSrc" class="text-muted h5 fw-semibold mt-4">No Preview Available</div>
-      </div>
+      </div> -->
 
       <div class="bg-white p-3 border shadow-sm">
         <h6 class="fw-semibold">Metadata</h6>
@@ -90,7 +90,7 @@
         <div class="text-secondary small">Uploaded at</div>
         <div class="mb-2">{{ fileData.uploadedAt | date: 'yyyy-MM-dd HH:mm' }}</div>
         <div class="text-secondary small">Size</div>
-        <div class="mb-2">{{ fileData.size }} KB</div>
+        <div class="mb-2">{{ fileData.size}} Bytes</div>
         <div class="text-secondary small">Type</div>
         <div class="mb-2">{{ fileData.contentType }}</div>
       </div>

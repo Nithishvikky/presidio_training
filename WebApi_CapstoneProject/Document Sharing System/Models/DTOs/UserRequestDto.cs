@@ -27,7 +27,7 @@ namespace DSS.Models.DTOs
         
         [Required]
         [StringLength(50)]
-        public string RequestType { get; set; } = "DocumentAccess";
+        public string RequestType { get; set; } = "Temporary";
         
         [Required]
         [StringLength(500)]

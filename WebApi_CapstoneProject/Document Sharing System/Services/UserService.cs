@@ -76,7 +76,7 @@ namespace DSS.Services
                 {
                     allUsers = allUsers.Where(d => d.Email.Contains(searchByEmail));
                 }
-                
+
                 if (!string.IsNullOrEmpty(searchByUsername))
                 {
                     allUsers = allUsers.Where(d => d.Username.Contains(searchByUsername));
@@ -136,7 +136,7 @@ namespace DSS.Services
 
         public async Task<IEnumerable<User>> GetAllUsersOnly()
         {
-           try
+            try
             {
                 var allUsers = await _userRepository.GetAll();
                 if (!allUsers.Any())
@@ -255,7 +255,7 @@ namespace DSS.Services
                 var allUsers = await _userRepository.GetAll();
                 var cutoffDate = DateTime.UtcNow.Subtract(inactivityThreshold);
 
-                var inactiveUsers = allUsers.Where(u => 
+                var inactiveUsers = allUsers.Where(u =>
                     u.LastLogin == null || u.LastLogin < cutoffDate).ToList();
 
                 _logger.LogInformation("Found {Count} inactive users", inactiveUsers.Count);
@@ -267,5 +267,7 @@ namespace DSS.Services
                 throw;
             }
         }
+        
+        
     }
 }

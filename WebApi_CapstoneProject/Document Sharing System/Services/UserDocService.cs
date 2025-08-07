@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Azure.Identity;
 using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.SignalR;
+using DSS.Misc;
 
 namespace DSS.Services
 {
@@ -17,12 +19,14 @@ namespace DSS.Services
         // private readonly IDocumentShareService _documentShareService;
         private readonly ILogger<UserDocService> _logger;
         private readonly IUserActivityLogService _userActivityLogService;
+        private readonly IHubContext<NotificationHub> _hub;
         // private readonly IAzureBlobStorageService _azureBlobStorageService;
 
         public UserDocService(IRepository<Guid, UserDocument> userDocRepository,
                               IUserService userService,
                               ILogger<UserDocService> logger,
-                              IUserActivityLogService userActivityLogService)
+                              IUserActivityLogService userActivityLogService,
+                              IHubContext<NotificationHub> hub)
         //   IAzureBlobStorageService azureBlobStorageService)
         {
             _userDocRepository = userDocRepository;
@@ -31,6 +35,7 @@ namespace DSS.Services
             _logger = logger;
             _userActivityLogService = userActivityLogService;
             // _azureBlobStorageService = azureBlobStorageService;
+            _hub = hub;
         }
 
         public async Task<UserDocument> UploadDoc(UserDocument doc)
@@ -153,6 +158,8 @@ namespace DSS.Services
                 // Azure
                 // await _azureBlobStorageService.DeleteAsync(filename);
 
+                await _hub.Clients.Group(user.Email).SendAsync("DocumentDeleted", "Your document has been deleted..Check notifications");
+
                 _logger.LogInformation("Document {FileName} soft-deleted by user {UserId}", filename, userId);
                 return updated;
             }
@@ -217,16 +224,16 @@ namespace DSS.Services
                 throw;
             }
         }
-        
+
 
         public async Task ArchiveAllFilesOfUser(Guid userId)
         {
             var userDocs = await _userDocRepository.GetAll();
-            var docsToArchive = userDocs.Where(d => d.UploadedById == userId && d.Status!="Archived" && !d.IsDeleted).ToList();
+            var docsToArchive = userDocs.Where(d => d.UploadedById == userId && d.Status != "Archived" && !d.IsDeleted).ToList();
 
             foreach (var doc in docsToArchive)
             {
-                doc.Status ="Archived";
+                doc.Status = "Archived";
                 doc.ArchivedAt = DateTime.UtcNow;
                 await _userDocRepository.Update(doc.Id, doc);
             }
@@ -240,5 +247,60 @@ namespace DSS.Services
             }
         }
 
+        public async Task<ICollection<DocumentDateCountDto>> DocumentCountLast7Days()
+        {
+            var today = DateTime.UtcNow.Date;
+            var startDate = today.AddDays(-6); // last 7 days including today
+
+            // Generate all 7 dates (even if no documents exist on that date)
+            var last7Days = Enumerable.Range(0, 7)
+                .Select(offset => startDate.AddDays(offset))
+                .ToDictionary(date => date, date => 0); // default count = 0
+
+            var userDocs = await _userDocRepository.GetAll();
+
+            var recentDocs = userDocs
+                .Where(doc => doc.UploadedAt.Date >= startDate)
+                .GroupBy(doc => doc.UploadedAt.Date)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            // Merge actual counts into the last7Days dictionary
+            foreach (var kvp in recentDocs)
+            {
+                if (last7Days.ContainsKey(kvp.Key))
+                {
+                    last7Days[kvp.Key] = kvp.Value;
+                }
+            }
+
+            var result = last7Days
+                .OrderBy(kvp => kvp.Key)
+                .Select(kvp => new DocumentDateCountDto
+                {
+                    Date = kvp.Key,
+                    Count = kvp.Value
+                })
+                .ToList();
+
+            return result;
+        }
+
+        public async Task<ICollection<DocumentTypeCountDto>> GetDocumentTypeCountsAsync()
+        {
+            var documents = await _userDocRepository.GetAll();
+
+            var result = documents
+                .Where(d => !d.IsDeleted)
+                .GroupBy(d => d.ContentType)
+                .Select(g => new DocumentTypeCountDto
+                {
+                    ContentType = g.Key,
+                    Count = g.Count()
+                })
+                .OrderByDescending(x => x.Count)
+                .ToList();
+
+            return result;
+        }
     }
 }

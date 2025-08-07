@@ -6,6 +6,7 @@ import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from "rxj
 import { DocumentDetailsResponseDto } from "../models/documentDetailsResponseDto";
 import { UserDocDetailDto } from "../models/userDocDetailDto";
 import { PagedResponseDto } from "../models/pagedResponseDto";
+import { ApiResponse, DocumentDateCountDto, DocumentTypeCountDto, TopSharedDocumentDto, UserCountDto } from "../models/dashboardResponseDto";
 
 @Injectable()
 export class DocumentService{
@@ -24,6 +25,16 @@ export class DocumentService{
   private archivedDocsSubject = new BehaviorSubject<UserDocDetailDto[]|null>(null);
   archivedDocs$ = this.archivedDocsSubject.asObservable();
 
+  private dashBoardData = new BehaviorSubject<ApiResponse<DocumentDateCountDto>|null>(null);
+  dashBoardData$ = this.dashBoardData.asObservable();
+
+  private userRatioCountData = new BehaviorSubject<UserCountDto|null>(null);
+  userRatioCountData$ = this.userRatioCountData.asObservable();
+
+  private docTypeSubject = new BehaviorSubject<DocumentTypeCountDto[]|null>(null);
+  docTypeCount$ = this.docTypeSubject.asObservable();
+
+
   constructor(private http:HttpClient){}
 
   GetAllDocuments(): Observable<any>{
@@ -39,6 +50,42 @@ export class DocumentService{
       })
     )
   }
+
+  GetDashboardData():Observable<any>{
+    return this.http.get<ApiResponse<DocumentDateCountDto>>('http://localhost:5015/api/v1/UserDoc/document-upload-trend')
+    .pipe(
+      tap((res) =>{
+        console.log(res);
+        this.dashBoardData.next(res);
+      })
+    )
+  }
+
+  GetUserRatio():Observable<any>{
+    return this.http.get<UserCountDto>('http://localhost:5015/api/v1/User/GetUserRatio')
+    .pipe(
+      tap((res:any) =>{
+        console.log(res.data);
+        this.userRatioCountData.next(res.data);
+      })
+    )
+  }
+
+  getDocumentTypeDistribution(): Observable<DocumentTypeCountDto[]> {
+    return this.http.get<DocumentTypeCountDto[]>('http://localhost:5015/api/v1/UserDoc/document-type-distribution')
+      .pipe(
+        tap((res: any) => {
+          const data = res.data?.$values;
+          this.docTypeSubject.next(data);
+        }),
+        catchError((err) => {
+          console.error('Error loading document type distribution', err);
+          this.docTypeSubject.next([]);
+          return of([]);
+        })
+      );
+  }
+
 
   PostDocument(file:FormData){
     return this.http.post(`http://localhost:5015/api/v1/UserDoc/UploadDocument`,file)
@@ -130,7 +177,7 @@ export class DocumentService{
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString());
-    
+
     if (status) {
       params = params.set('status', status);
     }

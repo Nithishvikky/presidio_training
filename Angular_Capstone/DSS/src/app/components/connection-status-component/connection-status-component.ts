@@ -110,18 +110,18 @@ import { Subscription } from 'rxjs';
         padding: 2px 6px;
         font-size: 10px;
       }
-      
+
       .status-text {
         font-size: 10px;
       }
-      
+
       .connection-details {
         display: none;
       }
     }
   `]
 })
-export class ConnectionStatusComponent implements OnInit, OnDestroy {
+export class ConnectionStatusComponent {
   connectionState = 'Disconnected';
   connectionId?: string;
   showDetails = false;
@@ -129,28 +129,28 @@ export class ConnectionStatusComponent implements OnInit, OnDestroy {
 
   constructor(private signalRService: SignalRService) {}
 
-  ngOnInit() {
-    this.connectionSubscription = this.signalRService.connectionState$.subscribe(
-      (state: string) => {
-        this.connectionState = state;
-        this.updateConnectionInfo();
-      }
-    );
-    
-    // Initial connection info
-    this.updateConnectionInfo();
-  }
+  // ngOnInit() {
+  //   this.connectionSubscription = this.signalRService.connectionState$.subscribe(
+  //     (state: string) => {
+  //       this.connectionState = state;
+  //       this.updateConnectionInfo();
+  //     }
+  //   );
 
-  ngOnDestroy() {
-    if (this.connectionSubscription) {
-      this.connectionSubscription.unsubscribe();
-    }
-  }
+  //   // Initial connection info
+  //   this.updateConnectionInfo();
+  // }
 
-  private updateConnectionInfo() {
-    const info = this.signalRService.getConnectionInfo();
-    this.connectionId = info.connectionId;
-  }
+  // ngOnDestroy() {
+  //   if (this.connectionSubscription) {
+  //     this.connectionSubscription.unsubscribe();
+  //   }
+  // }
+
+  // private updateConnectionInfo() {
+  //   const info = this.signalRService.getConnectionInfo();
+  //   this.connectionId = info.connectionId;
+  // }
 
   getStatusIcon(): string {
     switch (this.connectionState.toLowerCase()) {
@@ -166,4 +166,4 @@ export class ConnectionStatusComponent implements OnInit, OnDestroy {
         return 'bi bi-question-circle';
     }
   }
-} 
+}

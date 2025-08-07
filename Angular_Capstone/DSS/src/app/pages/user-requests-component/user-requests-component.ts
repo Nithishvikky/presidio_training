@@ -20,7 +20,7 @@ export class UserRequestsComponent implements OnInit, OnDestroy {
   showRejectModal = false;
   selectedRequest: UserRequestDto | null = null;
   rejectionReason = '';
-  
+
   private subscriptions = new Subscription();
 
   constructor(private userRequestService: UserRequestService) {}
@@ -30,6 +30,7 @@ export class UserRequestsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.userRequestService.allRequests$.subscribe(requests => {
         if (requests) {
+          console.log(requests);
           this.requests = requests;
         }
       })
@@ -47,6 +48,7 @@ export class UserRequestsComponent implements OnInit, OnDestroy {
       this.pageSize
     ).subscribe({
       next: (response) => {
+        console.log(response);
         this.loading = false;
       },
       error: (error) => {
@@ -96,21 +98,23 @@ export class UserRequestsComponent implements OnInit, OnDestroy {
     this.rejectionReason = '';
   }
 
-  rejectRequest(): void {
-    if (!this.selectedRequest || !this.rejectionReason.trim()) {
+  rejectRequest(request:UserRequestDto): void {
+    this.selectedRequest = request;
+    console.log("called");
+    if (!this.selectedRequest) {
       return;
     }
 
     this.loading = true;
     const processDto = {
       requestId: this.selectedRequest.id,
-      action: 'Reject',
-      reason: this.rejectionReason.trim()
+      status: 'Rejected',
     };
 
     this.userRequestService.processRequest(processDto).subscribe({
       next: (response) => {
         if (response) {
+          console.log(`Data recieved from${response}`);
           console.log('Request rejected successfully');
           this.closeRejectModal();
           this.loadRequests();
@@ -144,4 +148,4 @@ export class UserRequestsComponent implements OnInit, OnDestroy {
   formatDateTime(dateString: string): string {
     return new Date(dateString).toLocaleString();
   }
-} 
+}

@@ -25,6 +25,7 @@
   </div>
   </div>
 
+  <!-- @if(role == "Admin"){
   <div class="row g-4">
     <div class="col-md-7">
       <div class="row g-3">
@@ -81,7 +82,7 @@
       </div>
     </div>
 
-    <!-- Pie Chart -->
+    Pie Chart
     <div class="col-md-5 mt-4 mt-md-0">
       <div class="card shadow-sm h-100">
         <div class="card-body">
@@ -99,17 +100,17 @@
       </div>
     </div>
   </div>
+  } -->
 
   <!-- Activity Log Section -->
   <div class="row g-4 mt-4">
-    <div class="col-12">
+    <!-- <div class="col-12">
       <h3 class="mb-4">Your Activity Dashboard</h3>
-    </div>
-    
+    </div> -->
+
     <!-- Activity Summary -->
     <div class="col-lg-4 col-md-6">
-      <app-user-activity-summary 
-        [activitySummary]="activitySummary">
+      <app-user-activity-summary>
       </app-user-activity-summary>
     </div>
 

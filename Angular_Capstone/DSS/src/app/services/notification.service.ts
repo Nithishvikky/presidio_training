@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { NotificationDto, NotificationResponse, UnreadCountDto, ApiResponseModel } from '../models/notificationDto';
 
 @Injectable({
@@ -8,6 +8,9 @@ import { NotificationDto, NotificationResponse, UnreadCountDto, ApiResponseModel
 })
 export class NotificationService {
   private baseUrl = 'http://localhost:5015/api/v1/notifications';
+
+  private unreadCount = new BehaviorSubject<number|0>(0);
+  unreadCount$ = this.unreadCount.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -27,8 +30,14 @@ export class NotificationService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
-  getUnreadCount(): Observable<UnreadCountDto> {
-    return this.http.get<UnreadCountDto>(`${this.baseUrl}/user/unread-count`);
+  getUnreadCount(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/user/unread-count`)
+    .pipe(
+      tap((res:any) =>{
+        console.log(res.data);
+        this.unreadCount.next(res.data);
+      })
+    );
   }
 
   NotifyInactiveUsers(): Observable<any> {

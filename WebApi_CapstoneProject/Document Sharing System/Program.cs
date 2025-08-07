@@ -119,7 +119,7 @@ builder.Services.AddRateLimiter(options =>
 
         return RateLimitPartition.GetFixedWindowLimiter(userId, _ => new FixedWindowRateLimiterOptions
         {
-            PermitLimit = 10,
+            PermitLimit = 100,
             Window = TimeSpan.FromSeconds(10),
             QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
             QueueLimit = 0

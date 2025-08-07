@@ -167,16 +167,33 @@ export class DocumentComponent implements OnInit{
     toast.show();
   }
 
-  requestUnarchive() {
+  requestUnarchive(){
     const documentId = this.fileData?.docId;
     if (!documentId) {
       this.showToast("Document ID not found", "danger");
       return;
     }
 
-    this.userRequestService.requestUnarchive(this.filename, documentId).subscribe({
+    this.userRequestService. requestUnArchive(this.filename, documentId).subscribe({
       next: (res: any) => {
         this.showToast("Unarchive request submitted successfully", "success");
+      },
+      error: (err) => {
+        this.showToast(err.error?.error?.errorMessage || "Error submitting unarchive request", "danger");
+      }
+    });
+  }
+
+  requestTemporaryAccess() {
+    const documentId = this.fileData?.docId;
+    if (!documentId) {
+      this.showToast("Document ID not found", "danger");
+      return;
+    }
+
+    this.userRequestService.requestTemporaryAccess(this.filename, documentId).subscribe({
+      next: (res: any) => {
+        this.showToast("Temporary Access request submitted successfully", "success");
       },
       error: (err) => {
         this.showToast(err.error?.error?.errorMessage || "Error submitting unarchive request", "danger");

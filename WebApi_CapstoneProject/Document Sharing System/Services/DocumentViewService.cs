@@ -15,18 +15,21 @@ namespace DSS.Services
         private readonly IRepository<Guid, UserDocument> _userDocRepo;
         private readonly IUserService _userService;
         private readonly ILogger<DocumentViewService> _logger;
+        private readonly INotificationService _notificationService;
 
         public DocumentViewService(IRepository<Guid, DocumentView> documentViewRepo,
                                     IHubContext<NotificationHub> hub,
                                     IRepository<Guid, UserDocument> userDocRepo,
                                     IUserService userService,
-                                    ILogger<DocumentViewService> logger)
+                                    ILogger<DocumentViewService> logger,
+                                    INotificationService notificationService)
         {
             _documentViewRepo = documentViewRepo;
             _hub = hub;
             _userDocRepo = userDocRepo;
             _userService = userService;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         public async Task<DocumentView> LogDocumentView(Guid documentId, Guid userId)
@@ -55,7 +58,29 @@ namespace DSS.Services
                     FileName = document.FileName,
                     ViewedAt = documentView.ViewedAt
                 };
-                await _hub.Clients.Group(uploader.Email).SendAsync("DocumentViewed",viewerResponse);
+                
+                // Create notification for the user who received the document
+                try
+                {
+                    var notificationDto = new CreateNotificationDto
+                    {
+                        EntityName = "DocumentView",
+                        EntityId = documentView.Id,
+                        Content = $"{viewer.Username} has viewed the document '{document.FileName}'",
+                        UserIds = new List<Guid> { uploader.Id }
+                    };
+
+                    await _notificationService.CreateNotification(notificationDto);
+                    _logger.LogInformation("Notification created for document view. ViewId: {ViewId}, UserId: {UserId}", 
+                        documentView.Id, uploader.Id);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to create notification for document view. ViewId: {ViewId}, UserId: {UserId}", 
+                        documentView.Id, uploader.Id);
+                }
+
+                await _hub.Clients.Group(uploader.Email).SendAsync("DocumentViewed", "Document viewed");
 
                 return documentView;
             }

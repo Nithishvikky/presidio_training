@@ -12,7 +12,7 @@ export interface UserActivitySummaryDto {
   userId: string;
   userEmail: string;
   totalActivities: number;
-  lastActivityDate: string;
+  lastActivity: string;
   isActive: boolean; // Based on 30-day activity
   recentActivities: UserActivityLogDto[];
   activityTypeBreakdown: ActivityTypeBreakdown[];
@@ -39,4 +39,4 @@ export interface ApiResponse<T> {
 export interface ErrorObjectDto {
   errorNumber: number;
   errorMessage: string;
-} 
+}

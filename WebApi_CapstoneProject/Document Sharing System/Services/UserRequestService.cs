@@ -49,7 +49,7 @@ namespace DSS.Services
                     throw new InvalidOperationException("Document not found.");
                 }
                 
-                if (document.Status != "Archived")
+                if (document.Status == "Active")
                 {
                     throw new InvalidOperationException("Document is not archived. Access requests are only for archived documents.");
                 }
@@ -72,7 +72,7 @@ namespace DSS.Services
                     Reason = requestDto.Reason,
                     Status = "Pending",
                     RequestedAt = DateTime.UtcNow,
-                    AccessDurationHours = requestDto.AccessDurationHours ?? 24
+                    AccessDurationHours = requestDto.RequestType == "Temporary" ? requestDto.AccessDurationHours ?? 24 : null
                 };
 
                 _logger.LogInformation("Creating user request with UserId: {UserId}, DocumentId: {DocumentId}, RequestType: {RequestType}", 
@@ -133,20 +133,35 @@ namespace DSS.Services
 
                 if (processDto.Status == "Approved")
                 {
-                    // Temporarily unarchive the document
-                    var document = await _userDocumentRepository.Get(userRequest.DocumentId);
-                    document.Status = "TemporarilyUnarchived";
-                    document.TemporarilyUnarchivedAt = DateTime.UtcNow;
-                    document.ScheduledRearchiveAt = DateTime.UtcNow.AddHours(processDto.AccessDurationHours ?? 24);
-                    
-                    await _userDocumentRepository.Update(document.Id, document);
+                    if (userRequest.RequestType == "Temporary")
+                    {
+                        // Temporarily unarchive the document
+                        var document = await _userDocumentRepository.Get(userRequest.DocumentId);
+                        document.Status = "TemporarilyUnarchived";
+                        document.TemporarilyUnarchivedAt = DateTime.UtcNow;
+                        document.ScheduledRearchiveAt = DateTime.UtcNow.AddHours(processDto.AccessDurationHours ?? 24);
 
-                    userRequest.AccessGrantedAt = DateTime.UtcNow;
-                    userRequest.AccessExpiresAt = document.ScheduledRearchiveAt;
-                    userRequest.AccessDurationHours = processDto.AccessDurationHours ?? 24;
+                        await _userDocumentRepository.Update(document.Id, document);
 
-                    _logger.LogInformation("Document {DocumentId} temporarily unarchived until {ExpiresAt}", 
-                        document.Id, document.ScheduledRearchiveAt);
+                        userRequest.AccessGrantedAt = DateTime.UtcNow;
+                        userRequest.AccessExpiresAt = document.ScheduledRearchiveAt;
+                        userRequest.AccessDurationHours = processDto.AccessDurationHours ?? 24;
+
+                        _logger.LogInformation("Document {DocumentId} temporarily unarchived until {ExpiresAt}",
+                            document.Id, document.ScheduledRearchiveAt);
+                    }
+                    else if (userRequest.RequestType == "UnArchive") {
+                        // unarchive the document
+                        var document = await _userDocumentRepository.Get(userRequest.DocumentId);
+                        document.Status = "Active";
+                        document.TemporarilyUnarchivedAt = null;
+                        document.ScheduledRearchiveAt = null;
+
+                        await _userDocumentRepository.Update(document.Id, document);
+
+                        _logger.LogInformation("Document {DocumentId} unarchived",
+                            document.Id);
+                    }
                 }
 
                 var updatedRequest = await _userRequestRepository.Update(userRequest.Id, userRequest);

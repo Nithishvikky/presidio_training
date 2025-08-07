@@ -119,7 +119,25 @@ namespace DSS.Controllers
                 Data = users
             });
         }
-
         
+        [HttpGet("GetUserRatio")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<IEnumerable<User>>> GetUserRatio()
+        {
+            var threshold = TimeSpan.FromDays(30);
+            var users = (await _userService.GetInactiveUsers(threshold)).Count();
+            var allUsers = (await _userService.GetAllUsersOnly()).Count();
+
+            return Ok(new ApiResponse<userCountRatioDto>
+            {
+                Success = true,
+                Data = new userCountRatioDto
+                {
+                    ActiveCount = allUsers-users,
+                    InactiveCount = users
+                }
+            });
+        }
+
     }
 }

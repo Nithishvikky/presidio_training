@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from "rxjs";
 import { DocumentSharedUsersDto } from "../models/documentSharedUsersDto";
 import { DocumentDetailsResponseDto } from "../models/documentDetailsResponseDto";
-import { DashBoardResponseDto } from "../models/dashboardResponseDto";
+import { DashBoardResponseDto, TopSharedDocumentDto } from "../models/dashboardResponseDto";
 
 @Injectable()
 export class DocumentAccessService{
@@ -15,6 +15,10 @@ export class DocumentAccessService{
 
   private dashboardSubject = new BehaviorSubject<DashBoardResponseDto|null>(null);
   dashboard$ = this.dashboardSubject.asObservable();
+
+  private topSharedSubject = new BehaviorSubject<TopSharedDocumentDto[] | null>(null);
+  topShared$ = this.topSharedSubject.asObservable();
+
 
   constructor(private http:HttpClient){}
 
@@ -91,5 +95,19 @@ export class DocumentAccessService{
           return of(null);
         })
       )
+  }
+  getTopSharedDocuments(): Observable<TopSharedDocumentDto[]> {
+    return this.http.get<TopSharedDocumentDto[]>('http://localhost:5015/api/v1/DocumentShare/top-shared-documents')
+      .pipe(
+        tap((res: any) => {
+          console.log('Top shared docs:', res);
+          this.topSharedSubject.next(res.data?.$values);
+        }),
+        catchError((err) => {
+          console.error('Error fetching top shared documents:', err);
+          this.topSharedSubject.next(null);
+          return of([]);
+        })
+      );
   }
 }

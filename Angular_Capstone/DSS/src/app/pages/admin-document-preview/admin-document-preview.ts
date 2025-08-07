@@ -47,7 +47,8 @@ getFileTypeIcon = getFileTypeIcon;
 
     this.documentService.documentDetail$.subscribe({
       next:(res:any)=>{
-        this.loadPreview(res);
+        this.fileData = res;
+        // this.loadPreview(res);
         console.log(res);
       }
     })
@@ -62,42 +63,42 @@ getFileTypeIcon = getFileTypeIcon;
     })
   }
 
-  loadPreview(res:any){
-    console.log(res);
-    this.fileData = res;
-    const byteCharacters = atob(res.fileData);
-    const byteNumbers = new Array(byteCharacters.length);
-    for(let i=0;i<byteCharacters.length;i++){
-      byteNumbers[i]=byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray],{type: res.contentType});
-    this.file = blob;
-    const fileURL = URL.createObjectURL(blob);
-    this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
-    console.log(`${this.filename}:${this.iframeSrc}`);
-  }
+  // loadPreview(res:any){
+  //   console.log(res);
+  //   this.fileData = res;
+  //   const byteCharacters = atob(res.fileData);
+  //   const byteNumbers = new Array(byteCharacters.length);
+  //   for(let i=0;i<byteCharacters.length;i++){
+  //     byteNumbers[i]=byteCharacters.charCodeAt(i);
+  //   }
+  //   const byteArray = new Uint8Array(byteNumbers);
+  //   const blob = new Blob([byteArray],{type: res.contentType});
+  //   this.file = blob;
+  //   const fileURL = URL.createObjectURL(blob);
+  //   this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+  //   console.log(`${this.filename}:${this.iframeSrc}`);
+  // }
 
-  onDownload(){
-    if(!this.file){
-      this.showToast("Can't load the file","danger");
-      return;
-    }
+  // onDownload(){
+  //   if(!this.file){
+  //     this.showToast("Can't load the file","danger");
+  //     return;
+  //   }
 
-    const url = URL.createObjectURL(this.file);
-    const a = document.createElement('a');
-    a.href = url;
+  //   const url = URL.createObjectURL(this.file);
+  //   const a = document.createElement('a');
+  //   a.href = url;
 
-    if(!this.fileData) return;
+  //   if(!this.fileData) return;
 
-    a.download = this.fileData?.fileName;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
+  //   a.download = this.fileData?.fileName;
+  //   document.body.appendChild(a);
+  //   a.click();
+  //   a.remove();
+  //   URL.revokeObjectURL(url);
 
-    this.showToast("File downloaded sucessfully!","success");
-  }
+  //   this.showToast("File downloaded sucessfully!","success");
+  // }
 
   onDelete(){
     if(this.fileData){

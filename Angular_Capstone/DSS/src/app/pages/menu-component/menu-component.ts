@@ -8,6 +8,8 @@ import { DocumentService } from '../../services/document.service';
 import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
 import { CommonModule } from '@angular/common';
 import { ConnectionStatusComponent } from '../../components/connection-status-component/connection-status-component';
+import { NotificationService } from '../../services/notification.service';
+import { SignalRService } from '../../services/signalr.service';
 
 @Component({
   selector: 'app-menu-component',
@@ -25,7 +27,7 @@ export class MenuComponent implements OnInit{
   showConfirmModal = false;
 
   constructor(private userService:UserService,private breakpointObserver: BreakpointObserver,
-    private documentService:DocumentService){}
+    private documentService:DocumentService,private notificationService:NotificationService,private signalR:SignalRService){}
 
   ngOnInit():void{
     let auth_data = localStorage.getItem("authData");
@@ -48,6 +50,8 @@ export class MenuComponent implements OnInit{
           this.collapsed = false
         }
       })
+    this.notificationService.getUnreadCount().subscribe();
+    this.signalR.startConnection();
   }
 
   OnModalNotification(){
@@ -85,6 +89,7 @@ export class MenuComponent implements OnInit{
       next:(res:any)=>{
         localStorage.clear();
         this.closeDropdown();
+        this.signalR.stopConnection();
         this.userService.clearUserCache();
         this.documentService.clearDocumentCaches();
         this.showToast(res.data,"success");

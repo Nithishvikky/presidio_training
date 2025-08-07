@@ -32,9 +32,10 @@ export class PeopleComponent {
   showUserModal: boolean = false;
   showInactiveUsers: boolean = false;
   inactiveUserIds: string[] = [];
+  role:string = "";
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private userService: UserService,
     private notificationService: NotificationService,
     private documentService: DocumentService,
@@ -42,6 +43,11 @@ export class PeopleComponent {
   ) {}
 
   ngOnInit(): void {
+    let auth_data = localStorage.getItem("authData");
+    if(auth_data){
+      this.role = JSON.parse(auth_data).role;
+    }
+
     this.filterForm = this.fb.group({
       userEmail: [''],
       userName: [''],
@@ -137,7 +143,7 @@ export class PeopleComponent {
       if (res && res.data && res.data.$values) {
         console.log('Processing inactive users data...');
         // Map the response to UserResponseDto objects
-        this.inactiveUsers = res.data.$values.map((user: any) => 
+        this.inactiveUsers = res.data.$values.map((user: any) =>
           new UserResponseDto(
             user.id,
             user.email,
@@ -184,6 +190,20 @@ export class PeopleComponent {
         if (res) {
           console.log('Files archived for inactive users:', res);
           alert('Files archived for inactive users successfully!');
+        }
+        this.loading = false;
+      });
+    }
+  }
+
+  archiveParticularUserFiles(user : UserResponseDto) :void{
+
+    if (confirm(`Are you sure you want to archive files of ${user.username}?`)) {
+      this.loading = true;
+      this.documentService.ArchiveUserFilesById(user.userId).subscribe((res: any) => {
+        if (res) {
+          console.log('Files archived for inactive users:', res);
+          alert('Files archived for inactive user successfully!');
         }
         this.loading = false;
       });

@@ -39,13 +39,13 @@ import { NotificationTileComponent } from '../notification-tile-component/notifi
       </div>
 
       <div class="pagination" *ngIf="pagedResult && pagedResult.totalPages > 1">
-        <button 
+        <button
           [disabled]="!pagedResult.hasPreviousPage"
           (click)="loadPage(pagedResult.pageNumber - 1)">
           Previous
         </button>
         <span>Page {{ pagedResult.pageNumber }} of {{ pagedResult.totalPages }}</span>
-        <button 
+        <button
           [disabled]="!pagedResult.hasNextPage"
           (click)="loadPage(pagedResult.pageNumber + 1)">
           Next
@@ -173,7 +173,7 @@ import { NotificationTileComponent } from '../notification-tile-component/notifi
     }
   `]
 })
-export class NotificationComponent implements OnInit, OnDestroy {
+export class NotificationComponent implements OnInit{
   notifications: NotificationDto[] = [];
   pagedResult: any = null;
   hasUnread = false;
@@ -184,48 +184,50 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private signalRService: SignalRService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.loadNotifications();
-    
+    this.signalRService.startConnection();
+
     // Start SignalR connection for real-time updates
-    try {
-      await this.signalRService.startConnection();
-      this.setupSignalRSubscription();
-    } catch (error) {
-      console.error('Failed to connect to SignalR, falling back to polling:', error);
-      // Fallback to polling if SignalR fails
-      this.setupFallbackPolling();
-    }
+    // try {
+    //   await this.signalRService.startConnection();
+    //   this.setupSignalRSubscription();
+    // } catch (error) {
+    //   console.error('Failed to connect to SignalR, falling back to polling:', error);
+    //   // Fallback to polling if SignalR fails
+    //   this.setupFallbackPolling();
+    // }
   }
 
-  ngOnDestroy() {
-    if (this.signalRSubscription) {
-      this.signalRSubscription.unsubscribe();
-    }
-    this.signalRService.stopConnection();
-  }
+  // ngOnDestroy() {
+  //   if (this.signalRSubscription) {
+  //     this.signalRSubscription.unsubscribe();
+  //   }
+  //   this.signalRService.stopConnection();
+  // }
 
-  private setupSignalRSubscription() {
-    // Subscribe to unread count updates and refresh notifications when count changes
-    this.signalRSubscription = this.signalRService.unreadCount$.subscribe(
-      (count: number) => {
-        // Refresh notifications when unread count changes
-        this.loadNotifications();
-      }
-    );
-  }
+  // private setupSignalRSubscription() {
+  //   // Subscribe to unread count updates and refresh notifications when count changes
+  //   this.signalRSubscription = this.signalRService.unreadCount$.subscribe(
+  //     (count: number) => {
+  //       // Refresh notifications when unread count changes
+  //       this.loadNotifications();
+  //     }
+  //   );
+  // }
 
-  private setupFallbackPolling() {
-    // Fallback to polling every 30 seconds if SignalR fails
-    setInterval(() => {
-      this.loadNotifications();
-    }, 30000);
-  }
+  // private setupFallbackPolling() {
+  //   // Fallback to polling every 30 seconds if SignalR fails
+  //   setInterval(() => {
+  //     this.loadNotifications();
+  //   }, 30000);
+  // }
 
   loadNotifications(pageNumber: number = 1) {
     this.notificationService.getUserNotifications(pageNumber).subscribe((result: NotificationResponse) => {
       if (result.success && result.data) {
         this.notifications = result.data.$values || [];
+        console.log(this.notifications);
         this.pagedResult = result.data;
         this.checkUnreadStatus();
       }
@@ -250,6 +252,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.notificationService.markAllAsRead().subscribe(() => {
       this.notifications.forEach(n => n.isRead = true);
       this.hasUnread = false;
+      this.checkUnreadStatus();
     });
   }
 
@@ -263,14 +266,17 @@ export class NotificationComponent implements OnInit, OnDestroy {
   onNotificationClick(notification: NotificationDto) {
     // Handle notification click - could navigate to related content
     console.log('Notification clicked:', notification);
-    
+
     // Mark as read if not already read
     if (!notification.isRead) {
       this.markAsRead(notification.id);
     }
+    this.notificationService.getUnreadCount().subscribe();
   }
 
   private checkUnreadStatus() {
+    this.notificationService.getUnreadCount().subscribe();
     this.hasUnread = this.notifications.some(n => !n.isRead);
+    console.log(this.hasUnread);
   }
-} 
+}

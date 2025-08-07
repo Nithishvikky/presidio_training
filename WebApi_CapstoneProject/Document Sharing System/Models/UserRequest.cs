@@ -13,7 +13,7 @@ namespace DSS.Models
         public Guid DocumentId { get; set; }
         public UserDocument Document { get; set; } = null!;
         
-        public string RequestType { get; set; } = string.Empty; // DocumentAccess, etc.
+        public string RequestType { get; set; } = string.Empty; // Temporary, UnArchieve
         public string Status { get; set; } = "Pending"; // Pending, Approved, Rejected
         public string Reason { get; set; } = string.Empty;
         

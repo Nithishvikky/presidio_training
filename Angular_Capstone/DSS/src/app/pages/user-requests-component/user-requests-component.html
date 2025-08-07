@@ -50,7 +50,7 @@
                 </span>
               </td>
               <td>
-                <div class="text-truncate" style="max-width: 200px;" title="{{request.reason}}">
+                <div class="text-wrap" style="max-width: 200px; word-wrap: break-word; white-space: normal;">
                   {{request.reason}}
                 </div>
               </td>
@@ -60,15 +60,15 @@
               <td>
                 @if(request.status === 'Pending'){
                   <div class="btn-group" role="group">
-                    <button 
-                      class="btn btn-success btn-sm" 
+                    <button
+                      class="btn btn-success btn-sm"
                       (click)="approveRequest(request)"
                       [disabled]="loading">
                       <i class="bi bi-check-lg"></i> Approve
                     </button>
-                    <button 
-                      class="btn btn-danger btn-sm" 
-                      (click)="openRejectModal(request)"
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="rejectRequest(request)"
                       [disabled]="loading">
                       <i class="bi bi-x-lg"></i> Reject
                     </button>
@@ -94,7 +94,7 @@
           <span class="page-link">{{currentPage}}</span>
         </li>
         <li class="page-item">
-          <a class="page-link" (click)="onPageChange(currentPage + 1)" style="cursor: pointer;">Next</a>
+          <a class="page-link" (click)="onPageChange(currentPage + 1)" [class.disabled]="requests.length < pageSize" style="cursor: pointer;">Next</a>
         </li>
       </ul>
     </nav>
@@ -110,7 +110,7 @@
   }
 </div>
 
-<!-- Reject Modal -->
+<!-- Reject Modal
 @if(showRejectModal){
   <div class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);" tabindex="-1">
     <div class="modal-dialog">
@@ -122,10 +122,10 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="rejectionReason" class="form-label">Reason for Rejection *</label>
-            <textarea 
-              id="rejectionReason" 
-              class="form-control" 
-              rows="3" 
+            <textarea
+              id="rejectionReason"
+              class="form-control"
+              rows="3"
               [(ngModel)]="rejectionReason"
               placeholder="Please provide a reason for rejecting this request..."
               required></textarea>
@@ -133,9 +133,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="closeRejectModal()">Cancel</button>
-          <button 
-            type="button" 
-            class="btn btn-danger" 
+          <button
+            type="button"
+            class="btn btn-danger"
             (click)="rejectRequest()"
             [disabled]="!rejectionReason.trim() || loading">
             <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
@@ -145,4 +145,4 @@
       </div>
     </div>
   </div>
-} 
+} -->

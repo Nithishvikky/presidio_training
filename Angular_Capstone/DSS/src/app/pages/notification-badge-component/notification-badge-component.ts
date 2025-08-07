@@ -57,7 +57,7 @@ import { Subscription } from 'rxjs';
       font-size: 10px;
       font-weight: bold;
       min-width: 16px;
-      height: 16px;
+      height: 20px;
       text-align: center;
       line-height: 12px;
       border: 2px solid white;
@@ -82,7 +82,7 @@ import { Subscription } from 'rxjs';
       .bell-container i {
         font-size: 18px;
       }
-      
+
       .badge {
         font-size: 9px;
         min-width: 14px;
@@ -92,7 +92,7 @@ import { Subscription } from 'rxjs';
     }
   `]
 })
-export class NotificationBadgeComponent implements OnInit, OnDestroy {
+export class NotificationBadgeComponent implements OnInit{
   unreadCount = 0;
   private signalRSubscription?: Subscription;
 
@@ -102,53 +102,53 @@ export class NotificationBadgeComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     // Load initial unread count
-    await this.loadUnreadCount();
-    
+    this.loadUnreadCount();
+    // this.signalRService.startConnection();
+
+
     // Start SignalR connection and subscribe to real-time updates
-    try {
-      await this.signalRService.startConnection();
-      this.setupSignalRSubscription();
-    } catch (error) {
-      console.error('Failed to connect to SignalR, falling back to polling:', error);
-      // Fallback to polling if SignalR fails
-      this.setupFallbackPolling();
-    }
+    // try {
+    //   await this.signalRService.startConnection();
+    //   this.setupSignalRSubscription();
+    // } catch (error) {
+    //   console.error('Failed to connect to SignalR, falling back to polling:', error);
+    //   // Fallback to polling if SignalR fails
+    //   this.setupFallbackPolling();
+    // }
   }
 
-  ngOnDestroy() {
-    if (this.signalRSubscription) {
-      this.signalRSubscription.unsubscribe();
-    }
-    this.signalRService.stopConnection();
-  }
+  // ngOnDestroy() {
+  //   if (this.signalRSubscription) {
+  //     this.signalRSubscription.unsubscribe();
+  //   }
+  //   this.signalRService.stopConnection();
+  // }
 
-  private setupSignalRSubscription() {
-    this.signalRSubscription = this.signalRService.unreadCount$.subscribe(
-      (count: number) => {
-        this.unreadCount = count;
-      }
-    );
-  }
+  // private setupSignalRSubscription() {
+  //   this.signalRSubscription = this.signalRService.unreadCount$.subscribe(
+  //     (count: number) => {
+  //       this.unreadCount = count;
+  //     }
+  //   );
+  // }
 
-  private setupFallbackPolling() {
-    // Fallback to polling every 30 seconds if SignalR fails
-    setInterval(() => {
-      this.loadUnreadCount();
-    }, 30000);
-  }
+  // private setupFallbackPolling() {
+  //   // Fallback to polling every 30 seconds if SignalR fails
+  //   setInterval(() => {
+  //     this.loadUnreadCount();
+  //   }, 30000);
+  // }
 
-  private async loadUnreadCount() {
-    try {
-      const result = await this.notificationService.getUnreadCount().toPromise();
-      this.unreadCount = result?.count || 0;
-    } catch (error) {
-      console.error('Error loading unread count:', error);
-    }
+  loadUnreadCount() {
+    this.notificationService.unreadCount$.subscribe((res)=>{
+      this.unreadCount = res;
+      console.log(this.unreadCount);
+    })
   }
 
   navigateToNotifications() {
     this.router.navigate(['/main/notifications']);
   }
-} 
+}

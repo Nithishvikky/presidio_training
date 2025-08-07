@@ -4,12 +4,12 @@
   </div>
 
   <!-- Debug Info -->
-  <div class="alert alert-info mb-3">
+  <!-- <div class="alert alert-info mb-3">
     <strong>Debug Info:</strong><br>
     Loading: {{loading}}<br>
     Requests Length: {{requests?.length || 0}}<br>
     Requests: {{requests | json}}
-  </div>
+  </div> -->
 
   @if(loading){
     <div class="text-center">
@@ -50,7 +50,7 @@
                 </span>
               </td>
               <td>
-                <div class="text-truncate" style="max-width: 200px;" title="{{request.reason}}">
+                <div class="text-wrap" style="max-width: 200px; word-wrap: break-word; white-space: normal;">
                   {{request.reason}}
                 </div>
               </td>
@@ -81,7 +81,7 @@
           <span class="page-link">{{currentPage}}</span>
         </li>
         <li class="page-item">
-          <a class="page-link" (click)="onPageChange(currentPage + 1)" style="cursor: pointer;">Next</a>
+          <a class="page-link" (click)="onPageChange(currentPage + 1)" [class.disabled]="requests.length < pageSize" style="cursor: pointer;">Next</a>
         </li>
       </ul>
     </nav>
@@ -95,4 +95,4 @@
       </div>
     </div>
   }
-</div> 
+</div>

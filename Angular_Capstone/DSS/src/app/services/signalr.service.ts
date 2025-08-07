@@ -1,101 +1,68 @@
 import { Injectable } from '@angular/core';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
-  private hubConnection?: HubConnection;
-  private unreadCountSubject = new BehaviorSubject<number>(0);
-  private connectionStateSubject = new BehaviorSubject<string>('Disconnected');
-  
-  public unreadCount$ = this.unreadCountSubject.asObservable();
-  public connectionState$ = this.connectionStateSubject.asObservable();
+  private hubConnection!: signalR.HubConnection
+  // private unreadCountSubject = new BehaviorSubject<number>(0);
+  // private connectionStateSubject = new BehaviorSubject<string>('Disconnected');
 
-  constructor() {}
+  // public unreadCount$ = this.unreadCountSubject.asObservable();
+  // public connectionState$ = this.connectionStateSubject.asObservable();
 
-  public startConnection(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.hubConnection = new HubConnectionBuilder()
-        .withUrl(environment.signalRUrl)
+  constructor(private notificationService:NotificationService){}
+
+  startConnection(): void {
+      const authdata = localStorage.getItem("authData");
+      var accessToken:string = "";
+      if(authdata) accessToken = JSON.parse(authdata).accessToken;
+      console.log(accessToken);
+      this.hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl('http://localhost:5015/notificationhub', {
+          accessTokenFactory: () => accessToken
+        })  // 🔁 adjust your backend URL
         .withAutomaticReconnect()
-        .configureLogging(LogLevel.Information)
         .build();
 
-      this.hubConnection.start()
-        .then(() => {
-          console.log('SignalR Connected!');
-          this.connectionStateSubject.next('Connected');
-          this.registerHandlers();
-          resolve();
-        })
-        .catch(err => {
-          console.error('Error while establishing connection: ', err);
-          this.connectionStateSubject.next('Failed');
-          reject(err);
-        });
-    });
-  }
+      this.hubConnection
+        .start()
+        .then(() => console.log('SignalR connected'))
+        .catch(err => console.log('SignalR error:', err));
 
-  private registerHandlers() {
-    if (!this.hubConnection) return;
-
-    // Handle unread count updates
-    this.hubConnection.on('UpdateUnreadCount', (count: number) => {
-      console.log('Received unread count update:', count);
-      this.unreadCountSubject.next(count);
-    });
-
-    // Handle new notification
-    this.hubConnection.on('NewNotification', (notification: any) => {
-      console.log('Received new notification:', notification);
-      // You can emit this to other components if needed
-    });
-
-    // Handle connection events
-    this.hubConnection.onreconnecting((error) => {
-      console.log('SignalR reconnecting...', error);
-      this.connectionStateSubject.next('Reconnecting');
-    });
-
-    this.hubConnection.onreconnected((connectionId) => {
-      console.log('SignalR reconnected. ConnectionId: ', connectionId);
-      this.connectionStateSubject.next('Connected');
-    });
-
-    this.hubConnection.onclose((error) => {
-      console.log('SignalR connection closed: ', error);
-      this.connectionStateSubject.next('Disconnected');
-    });
-  }
-
-  public stopConnection(): Promise<void> {
-    if (this.hubConnection) {
-      this.connectionStateSubject.next('Disconnected');
-      return this.hubConnection.stop();
+      this.hubConnection.on('DocumentViewed', (messageResponse) => {
+        console.log(messageResponse);
+        this.notificationService.getUnreadCount().subscribe();
+         (window as any).appComponentRef?.showToast(messageResponse,'success');
+      });
+      this.hubConnection.on('DocumentGiven', (messageResponse) => {
+        console.log(messageResponse);
+        this.notificationService.getUnreadCount().subscribe();
+        (window as any).appComponentRef?.showToast(messageResponse,'success');
+      });
+      this.hubConnection.on('DocumentDeleted', (messageResponse) => {
+        console.log(messageResponse);
+        this.notificationService.getUnreadCount().subscribe();
+        (window as any).appComponentRef?.showToast(messageResponse,'danger');
+      });
     }
-    return Promise.resolve();
-  }
 
-  public getConnectionState(): string {
-    return this.hubConnection?.state || 'Disconnected';
-  }
-
-  public isConnected(): boolean {
-    return this.hubConnection?.state === 'Connected';
-  }
-
-  public getConnectionId(): string | undefined {
-    return this.hubConnection?.connectionId || undefined;
-  }
-
-  public getConnectionInfo(): { state: string; connectionId?: string; isConnected: boolean } {
-    return {
-      state: this.hubConnection?.state || 'Disconnected',
-      connectionId: this.hubConnection?.connectionId || undefined,
-      isConnected: this.hubConnection?.state === 'Connected'
-    };
-  }
-} 
+    stopConnection(): void {
+      if (this.hubConnection) {
+        this.hubConnection.stop()
+          .then(() => {
+            console.log('SignalR disconnected');
+            // Optionally remove all handlers to prevent memory leaks
+            this.hubConnection.off('DocumentViewed');
+            this.hubConnection.off('DocumentGiven');
+            this.hubConnection.off('DocumentDeleted');
+            this.hubConnection = undefined!;
+          })
+          .catch(err => console.error('SignalR disconnection error:', err));
+      }
+    }
+}
