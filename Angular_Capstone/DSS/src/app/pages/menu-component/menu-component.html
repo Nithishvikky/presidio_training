@@ -3,13 +3,8 @@
   aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <span class="navbar-brand mb-0 h1 position-relative" data-bs-toggle="modal" data-bs-target="#notificationModal" style="cursor: pointer;" (click)="OnModalNotification()">
+  <span class="navbar-brand mb-0 h1">
     <i class="bi bi-folder-symlink-fill mx-1"></i>DSS
-    @if(UnseenNotification > 0){
-      <span  class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">
-        {{ UnseenNotification }}
-      </span>
-    }
   </span>
   <div #navbarCollapse class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
     <div class="navbar-nav">
@@ -17,11 +12,16 @@
       @if(role === 'User'){
         <a class="nav-item nav-link mx-2"  routerLink="/main/mydocuments" routerLinkActive="active" (click)="collapseNavbar()">My Documents</a>
         <a class="nav-item nav-link mx-2"  routerLink="/main/documentsforme" routerLinkActive="active" (click)="collapseNavbar()">Documents Shared</a>
+        <a class="nav-item nav-link mx-2"  routerLink="/main/my-requests" routerLinkActive="active" (click)="collapseNavbar()">My Requests</a>
       }
       @if(role === 'Admin'){
+        <a class="nav-item nav-link mx-2"  routerLink="/main/dashboard" (click)="collapseNavbar()" routerLinkActive="active">Dashboard</a>
         <a class="nav-item nav-link mx-2"  routerLink="/main/alldocuments" (click)="collapseNavbar()" routerLinkActive="active">All Documents</a>
+        <a class="nav-item nav-link mx-2"  routerLink="/main/user-requests" (click)="collapseNavbar()" routerLinkActive="active">User Requests</a>
       }
       <a class="nav-item nav-link mx-2"  routerLink="/main/community" (click)="collapseNavbar()" routerLinkActive="active">Community</a>
+      <app-notification-badge></app-notification-badge>
+      <!-- <app-connection-status></app-connection-status> -->
       @if(!collapsed){
       <div class="nav-item dropdown mx-2 position-relative" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()" style="cursor: pointer;">
         <div class="d-flex align-items-center">
@@ -48,7 +48,6 @@
   </div>
 </nav>
 
-<app-notification-modal-component></app-notification-modal-component>
 <app-delete-modal-component
   *ngIf="showConfirmModal"
   [message]="'Are you sure you want to sign out?'"

@@ -1,33 +1,58 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-between align-items-center mt-4">
     <h1 class="fw-semibold">My Documents</h1>
-    <button
-      class="btn btn-primary border px-3 py-1 fw-medium"
-      data-bs-toggle="modal"
-      data-bs-target="#uploadModal"
-      id="upload-btn"
-      >
-      <i class="bi bi-upload me-2"></i>Upload
-    </button>
+    <div class="d-flex gap-2">
+      <select
+        class="form-select"
+        style="width: auto;"
+        [(ngModel)]="selectedStatus"
+        (change)="onStatusFilterChange()">
+        <option value="">All Documents</option>
+        <option value="Active">Active</option>
+        <option value="Archived">Archived</option>
+        <option value="TemporarilyUnarchived">Temporary Access</option>
+      </select>
+      <button
+        class="btn btn-primary border px-3 py-1 fw-medium"
+        data-bs-toggle="modal"
+        data-bs-target="#uploadModal"
+        id="upload-btn"
+        >
+        <i class="bi bi-upload me-2"></i>Upload
+      </button>
+    </div>
   </div>
-  @if(documents && documents.length>0){
+  @if((selectedStatus == "" && documents && documents.length>0)||(selectedStatus != "" && SelectedDocuments && SelectedDocuments.length > 0)){
     <table class="table table-hover mt-3 shadow-sm custom-bordered-table">
       <caption>List of Documents</caption>
       <thead class="thead-light">
         <tr>
           <th scope="col" class="ps-4 py-4">File Name</th>
+          <th scope="col" class="py-4">Status</th>
           <th scope="col" class="py-4">Uploaded at</th>
           <th scope="col" class="py-4">Last viewer</th>
+          <th scope="col" class="py-4">Access Expires</th>
           <th scope="col" class="py-4">Delete</th>
           <th scope="col" class="py-4">Details</th>
         </tr>
       </thead>
       <tbody>
-        @for(document of documents; track document.docId){
+        @for(document of selectedStatus=="" ? documents : SelectedDocuments; track document.docId){
           <tr >
             <td scope="row" class="ps-4 py-4"><img [src]="getFileTypeIcon(document.contentType)" alt="file icon" width="24" height="24" class="me-2" />{{document.fileName}}</td>
+            <td class="py-4">
+              <span class="badge" [ngClass]="{
+                'bg-success': document.status && document.status.includes('Active'),
+                'bg-warning': document.status && document.status.includes('Archived'),
+                'bg-info': document.status && document.status.includes('TemporarilyUnarchived')
+              }">
+                {{ document.status.includes('Archived') ? 'Archived' :
+                   document.status.includes('TemporarilyUnarchived') ? 'Temporary' : 'Active' }}
+              </span>
+            </td>
             <td class="py-4" style="color: #637387;">{{document.uploadedAt | date: 'yyyy-MM-dd HH:mm'}}</td>
             <td class="py-4">{{document.lastViewerName || '-'}}</td>
+            <td class="py-4" style="color: #637387;">{{(document.scheduledRearchiveAt | date: 'yyyy-MM-dd HH:mm') || '-'}}</td>
             <td class="py-4 remove fw-semibold" (click)="openDeleteConfirm()">Remove</td>
             <app-delete-modal-component *ngIf="showDeleteModal"
               [message]="'Are you sure you want to delete this document?'"

@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
@@ -6,6 +6,8 @@ import { UserService } from '../../services/user.service';
 import { UserResponseDto } from '../../models/userResponseDto';
 import { FormsModule } from '@angular/forms';
 import { UserModalComponent } from '../user-modal-component/user-modal-component';
+import { NotificationService } from '../../services/notification.service';
+import { DocumentService } from '../../services/document.service';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -17,6 +19,7 @@ import { UserModalComponent } from '../user-modal-component/user-modal-component
 })
 export class PeopleComponent {
   users: UserResponseDto[] = [];
+  inactiveUsers: UserResponseDto[] = [];
   filterForm!: FormGroup;
   ascending = true;
   pageNumber = 1;
@@ -27,10 +30,24 @@ export class PeopleComponent {
   showSidebar = false;
   selectedUser!: UserResponseDto;
   showUserModal: boolean = false;
+  showInactiveUsers: boolean = false;
+  inactiveUserIds: string[] = [];
+  role:string = "";
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private notificationService: NotificationService,
+    private documentService: DocumentService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
+    let auth_data = localStorage.getItem("authData");
+    if(auth_data){
+      this.role = JSON.parse(auth_data).role;
+    }
+
     this.filterForm = this.fb.group({
       userEmail: [''],
       userName: [''],
@@ -116,6 +133,87 @@ export class PeopleComponent {
       }
     })
     this.showUserModal = true;
+  }
+
+  getInactiveUsers(): void {
+    this.loading = true;
+    console.log('Getting inactive users...');
+    this.userService.GetInactiveUsers(30).subscribe((res: any) => {
+      console.log('Response received:', res);
+      if (res && res.data && res.data.$values) {
+        console.log('Processing inactive users data...');
+        // Map the response to UserResponseDto objects
+        this.inactiveUsers = res.data.$values.map((user: any) =>
+          new UserResponseDto(
+            user.id,
+            user.email,
+            user.username,
+            user.role,
+            user.registeredAt,
+            user.updatedAt,
+            user.uploadedDocuments ? user.uploadedDocuments.$values?.length || 0 : 0
+          )
+        );
+        this.inactiveUserIds = this.inactiveUsers.map(user => user.userId);
+        this.showInactiveUsers = true;
+        console.log('Inactive users mapped:', this.inactiveUsers);
+        console.log('Inactive user IDs:', this.inactiveUserIds);
+        console.log('showInactiveUsers set to:', this.showInactiveUsers);
+        this.cdr.detectChanges(); // Force change detection
+      } else {
+        console.log('No inactive users data found in response');
+      }
+      this.loading = false;
+    });
+  }
+
+  notifyInactiveUsers(): void {
+    this.loading = true;
+    this.notificationService.NotifyInactiveUsers().subscribe((res: any) => {
+      if (res) {
+        console.log('Notifications sent to inactive users:', res);
+        alert('Notifications sent to inactive users successfully!');
+      }
+      this.loading = false;
+    });
+  }
+
+  archiveInactiveUserFiles(): void {
+    if (this.inactiveUserIds.length === 0) {
+      alert('No inactive users to archive files for.');
+      return;
+    }
+
+    if (confirm(`Are you sure you want to archive files for ${this.inactiveUserIds.length} inactive users?`)) {
+      this.loading = true;
+      this.documentService.ArchiveUserFiles(this.inactiveUserIds).subscribe((res: any) => {
+        if (res) {
+          console.log('Files archived for inactive users:', res);
+          alert('Files archived for inactive users successfully!');
+        }
+        this.loading = false;
+      });
+    }
+  }
+
+  archiveParticularUserFiles(user : UserResponseDto) :void{
+
+    if (confirm(`Are you sure you want to archive files of ${user.username}?`)) {
+      this.loading = true;
+      this.documentService.ArchiveUserFilesById(user.userId).subscribe((res: any) => {
+        if (res) {
+          console.log('Files archived for inactive users:', res);
+          alert('Files archived for inactive user successfully!');
+        }
+        this.loading = false;
+      });
+    }
+  }
+
+  backToAllUsers(): void {
+    this.showInactiveUsers = false;
+    this.inactiveUsers = [];
+    this.inactiveUserIds = [];
   }
 
 }

@@ -42,6 +42,7 @@ export class AllDocumentsComponent {
 
     this.documentService.allDocuments$.subscribe(doc => {
       this.documents = doc;
+      console.log(doc);
     });
 
     const values = this.filterForm.value;

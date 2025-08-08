@@ -8,6 +8,7 @@ export class UserResponseDto{
     public registeredAt?:Date,
     public updatedAt?:Date,
     public documentCount:number = 0,
+    public lastLogin?:Date,
   ){}
 }
 

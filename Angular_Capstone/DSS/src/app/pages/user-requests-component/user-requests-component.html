@@ -1,0 +1,148 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-semibold">User Requests</h1>
+  </div>
+
+  @if(loading){
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+  @else if(requests && requests.length > 0){
+    <div class="table-responsive">
+      <table class="table table-hover shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th>User</th>
+            <th>Document</th>
+            <th>Request Type</th>
+            <th>Status</th>
+            <th>Reason</th>
+            <th>Requested At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(request of requests; track request.id){
+            <tr>
+              <td>
+                <div>
+                  <strong>{{request.userUsername}}</strong>
+                  <br>
+                  <small class="text-muted">{{request.userEmail}}</small>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <strong>{{request.documentFileName}}</strong>
+                  <br>
+                  <small class="text-muted">ID: {{request.documentId}}</small>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-info">{{request.requestType}}</span>
+              </td>
+              <td>
+                <span class="badge" [ngClass]="getStatusClass(request.status)">
+                  {{request.status}}
+                </span>
+              </td>
+              <td>
+                <div class="text-wrap" style="max-width: 200px; word-wrap: break-word; white-space: normal;">
+                  {{request.reason}}
+                </div>
+              </td>
+              <td>
+                <small>{{formatDateTime(request.requestedAt)}}</small>
+              </td>
+              <td>
+                @if(request.status === 'Pending'){
+                  <div class="btn-group" role="group">
+                    <button
+                      class="btn btn-success btn-sm"
+                      (click)="approveRequest(request)"
+                      [disabled]="loading">
+                      <i class="bi bi-check-lg"></i> Approve
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="rejectRequest(request)"
+                      [disabled]="loading">
+                      <i class="bi bi-x-lg"></i> Reject
+                    </button>
+                  </div>
+                }
+                @else{
+                  <span class="text-muted">Processed</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="onPageChange(currentPage - 1)" style="cursor: pointer;">Previous</a>
+        </li>
+        <li class="page-item active">
+          <span class="page-link">{{currentPage}}</span>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="onPageChange(currentPage + 1)" [class.disabled]="requests.length < pageSize" style="cursor: pointer;">Next</a>
+        </li>
+      </ul>
+    </nav>
+  }
+  @else{
+    <div class="text-center mt-5">
+      <div class="text-muted">
+        <i class="bi bi-inbox fs-1 mb-3"></i>
+        <h4>No Requests Found</h4>
+        <p>There are no pending document access requests.</p>
+      </div>
+    </div>
+  }
+</div>
+
+<!-- Reject Modal
+@if(showRejectModal){
+  <div class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Reject Request</h5>
+          <button type="button" class="btn-close" (click)="closeRejectModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="rejectionReason" class="form-label">Reason for Rejection *</label>
+            <textarea
+              id="rejectionReason"
+              class="form-control"
+              rows="3"
+              [(ngModel)]="rejectionReason"
+              placeholder="Please provide a reason for rejecting this request..."
+              required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeRejectModal()">Cancel</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="rejectRequest()"
+            [disabled]="!rejectionReason.trim() || loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+            Reject Request
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+} -->

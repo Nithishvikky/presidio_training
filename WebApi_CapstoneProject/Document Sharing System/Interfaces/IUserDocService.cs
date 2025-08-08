@@ -16,6 +16,12 @@ namespace DSS.Interfaces
             string? sortBy,
             bool ascending
         );
+
+        public Task<ICollection<DocumentDateCountDto>> DocumentCountLast7Days();
+        public Task<ICollection<DocumentTypeCountDto>> GetDocumentTypeCountsAsync();
+
+        Task ArchiveAllFilesOfUser(Guid userId);
+        Task ArchiveAllFilesOfUsers(List<Guid> userIds);
         
     }
 }

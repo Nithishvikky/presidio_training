@@ -14,6 +14,8 @@ namespace DSS.Services
         private readonly ILogger<DocumentShareService> _logger;
         private readonly IUserService _userService;
         private readonly IUserDocService _userDocService;
+        private readonly INotificationService _notificationService;
+        private readonly IUserActivityLogService _userActivityLogService;
 
         private readonly IRepository<Guid, DocumentView> _documentViewRepository;
         private IRepository<Guid, UserDocument> _userDocRepository;
@@ -26,7 +28,9 @@ namespace DSS.Services
                                     IRepository<Guid, UserDocument> userDocRepository,
                                     IRepository<Guid, User> userRepository,
                                     IRepository<Guid, DocumentView> documentViewRepository,
-                                    IHubContext<NotificationHub> hub)
+                                    IHubContext<NotificationHub> hub,
+                                    INotificationService notificationService,
+                                    IUserActivityLogService userActivityLogService)
         {
             _shareRepo = shareRepo;
             _logger = logger;
@@ -36,6 +40,8 @@ namespace DSS.Services
             _userRepository = userRepository;
             _documentViewRepository = documentViewRepository;
             _hub = hub;
+            _notificationService = notificationService;
+            _userActivityLogService = userActivityLogService;
         }
 
         public async Task<DocumentShare> GrantPermission(string fileName, string UploaderEmail, string SharedWithUserEmail)
@@ -54,7 +60,7 @@ namespace DSS.Services
             {
                 throw new Exception("Already gave permission");
             }
-            
+
             if (fileOwner.Id == user.Id)
             {
                 throw new Exception("It's your document");
@@ -66,6 +72,48 @@ namespace DSS.Services
                 SharedWithUserId = user.Id
             };
 
+            var createdShare = await _shareRepo.Add(share);
+
+            // Create notification for the user who received the document
+            try
+            {
+                var notificationDto = new CreateNotificationDto
+                {
+                    EntityName = "DocumentShare",
+                    EntityId = createdShare.Id,
+                    Content = $"{fileOwner.Username} has shared the document '{document.FileName}' with you.",
+                    UserIds = new List<Guid> { user.Id }
+                };
+
+                await _notificationService.CreateNotification(notificationDto);
+                _logger.LogInformation("Notification created for document share. ShareId: {ShareId}, UserId: {UserId}",
+                    createdShare.Id, user.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to create notification for document share. ShareId: {ShareId}, UserId: {UserId}",
+                    createdShare.Id, user.Id);
+            }
+
+            // Log user activity for document sharing
+            try
+            {
+                var activityDto = new CreateActivityLogDto
+                {
+                    UserId = fileOwner.Id,
+                    ActivityType = "DocumentShare",
+                    Description = $"Shared document '{document.FileName}' with {user.Username} ({user.Email})"
+                };
+                await _userActivityLogService.LogActivityAsync(activityDto);
+                _logger.LogInformation("Activity logged for document share. SharerId: {SharerId}, RecipientId: {RecipientId}, FileName: {FileName}",
+                    fileOwner.Id, user.Id, document.FileName);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to log activity for document share. SharerId: {SharerId}, RecipientId: {RecipientId}, FileName: {FileName}",
+                    fileOwner.Id, user.Id, document.FileName);
+            }
+
             var sharedRespose = new SharedResponseeDto
             {
                 FileName = document.FileName,
@@ -74,14 +122,15 @@ namespace DSS.Services
                 GrantedAt = DateTime.Now
             };
 
-            await _hub.Clients.Group(SharedWithUserEmail).SendAsync("DocumentGiven",sharedRespose);
+            await _hub.Clients.Group(SharedWithUserEmail).SendAsync("DocumentGiven", "Document provided");
 
-            return await _shareRepo.Add(share);
+            return createdShare;
         }
 
         public async Task<ICollection<DocumentShare>> GrantAllPermission(string fileName, string UploaderEmail)
         {
             var document = await _userDocService.GetByFileName(fileName, UploaderEmail); // to check user has this file and also get file
+            var fileOwner = await _userService.GetUserByEmail(UploaderEmail);
             var users = await _userService.GetAllUsersOnly();
 
             var grantedShares = new List<DocumentShare>();
@@ -92,7 +141,7 @@ namespace DSS.Services
                 {
                     continue;
                 }
-                
+
                 var existingShares = await _shareRepo.GetAll();
                 var existing = existingShares.SingleOrDefault(s =>
                     s.DocumentId == document.Id &&
@@ -107,13 +156,55 @@ namespace DSS.Services
                         SharedWithUserId = user.Id,
                     };
 
-                    grantedShares.Add(await _shareRepo.Add(newShare));
+                    var createdShare = await _shareRepo.Add(newShare);
+                    grantedShares.Add(createdShare);
+
+                    // Create notification for the user who received the document
+                    try
+                    {
+                        var notificationDto = new CreateNotificationDto
+                        {
+                            EntityName = "DocumentShare",
+                            EntityId = createdShare.Id,
+                            Content = $"{fileOwner.Username} has shared the document '{document.FileName}' with you.",
+                            UserIds = new List<Guid> { user.Id }
+                        };
+
+                        await _notificationService.CreateNotification(notificationDto);
+                        _logger.LogInformation("Notification created for document share (all users). ShareId: {ShareId}, UserId: {UserId}",
+                            createdShare.Id, user.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning(ex, "Failed to create notification for document share (all users). ShareId: {ShareId}, UserId: {UserId}",
+                            createdShare.Id, user.Id);
+                    }
                 }
             }
             if (grantedShares == null || grantedShares.Count == 0)
             {
                 throw new Exception("All users already granted");
             }
+
+            // Log user activity for sharing with all users
+            try
+            {
+                var activityDto = new CreateActivityLogDto
+                {
+                    UserId = fileOwner.Id,
+                    ActivityType = "DocumentShare",
+                    Description = $"Shared document '{document.FileName}' with all users ({grantedShares.Count} users)"
+                };
+                await _userActivityLogService.LogActivityAsync(activityDto);
+                _logger.LogInformation("Activity logged for document share (all users). SharerId: {SharerId}, FileName: {FileName}, Count: {Count}",
+                    fileOwner.Id, document.FileName, grantedShares.Count);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to log activity for document share (all users). SharerId: {SharerId}, FileName: {FileName}",
+                    fileOwner.Id, document.FileName);
+            }
+
             return grantedShares;
         }
 
@@ -173,11 +264,6 @@ namespace DSS.Services
             var document = await _userDocService.GetByFileName(fileName, UploaderEmail); // to check user has this file and also get file
             var shares = (await _shareRepo.GetAll()).Where(s => s.DocumentId == document.Id && !s.IsRevoked);
 
-            if (shares == null)
-            {
-                _logger.LogInformation("Permission not found or already revoked.{documentId}", document.Id);
-                throw new ArgumentNullException("No users has been granted for this file");
-            }
             var sharedUsers = new List<SharedResponseeDto>();
 
             foreach (var share in shares)
@@ -191,10 +277,6 @@ namespace DSS.Services
                 });
             }
 
-            if (sharedUsers == null || sharedUsers.Count == 0)
-            {
-                throw new ArgumentNullException("No Users have permission for this file");
-            }
             return sharedUsers;
         }
 
@@ -202,17 +284,12 @@ namespace DSS.Services
         {
             var user = await _userService.GetUserById(userId);
             var shares = (await _shareRepo.GetAll()).Where(s => s.SharedWithUserId == userId && !s.IsRevoked);
-            if (shares == null)
-            {
-                _logger.LogInformation("Permission not found or already revoked.{userId}", userId);
-                throw new ArgumentNullException("No files has been granted for this user");
-            }
 
             var sharedFiles = new List<UserDocDetailDto>();
             foreach (var share in shares)
             {
                 var document = await _userDocRepository.Get(share.DocumentId);
-                if (!document.IsDeleted)
+                if (!document.IsDeleted && (document.Status == "Active" || document.Status == "TemporarilyUnarchived"))
                 {
                     var mapper = new UserDocMapper();
                     var documentDetails = mapper.MapUserDoc(document);
@@ -221,10 +298,7 @@ namespace DSS.Services
                     sharedFiles.Add(documentDetails);
                 }
             }
-            if (sharedFiles == null || sharedFiles.Count == 0)
-            {
-                throw new ArgumentNullException("User has no permission for any files");
-            }
+
             sharedFiles = sharedFiles.OrderByDescending(d => d.UploadedAt).ToList();
             return sharedFiles;
         }
@@ -257,6 +331,40 @@ namespace DSS.Services
 
             return data;
         }
+        
+        public async Task<ICollection<TopSharedDocumentDto>> GetTopSharedDocumentsAsync(int top = 5)
+        {
+            var shares = await _shareRepo.GetAll();
+
+            var validShares = shares
+                .Where(s => !s.IsRevoked)
+                .GroupBy(s => s.DocumentId)
+                .Select(g => new
+                {
+                    DocumentId = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+
+            var documentIds = validShares.Select(x => x.DocumentId).ToList();
+            var documents = (await _userDocRepository.GetAll()).Where(d => !d.IsDeleted);
+
+            var topDocuments = (from s in validShares
+                                join d in documents on s.DocumentId equals d.Id
+                                select new TopSharedDocumentDto
+                                {
+                                    DocumentId = s.DocumentId,
+                                    FileName = d.FileName,
+                                    Owner = d.UploadedByUser?.Username ?? "Unknown",
+                                    ShareCount = s.Count
+                                })
+                                .OrderByDescending(d => d.ShareCount)
+                                .Take(top)
+                                .ToList();
+
+            return topDocuments;
+        }
+
 
     }
 }

@@ -20,6 +20,8 @@ namespace DSS.Interfaces
             int pageSize = 10
         );
         public Task<User> UpdateUserPassword(Guid Id, ChangePasswordDto passwordDto);
+        public Task<User> UpdateUserLastLogin(Guid Id, DateTime lastLogin);
+        public Task<IEnumerable<User>> GetInactiveUsers(TimeSpan inactivityThreshold);
 
     }
 }

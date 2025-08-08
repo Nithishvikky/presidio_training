@@ -76,7 +76,7 @@ namespace DSS.Services
                 {
                     allUsers = allUsers.Where(d => d.Email.Contains(searchByEmail));
                 }
-                
+
                 if (!string.IsNullOrEmpty(searchByUsername))
                 {
                     allUsers = allUsers.Where(d => d.Username.Contains(searchByUsername));
@@ -136,7 +136,7 @@ namespace DSS.Services
 
         public async Task<IEnumerable<User>> GetAllUsersOnly()
         {
-           try
+            try
             {
                 var allUsers = await _userRepository.GetAll();
                 if (!allUsers.Any())
@@ -223,5 +223,51 @@ namespace DSS.Services
                 throw;
             }
         }
+
+        public async Task<User> UpdateUserLastLogin(Guid Id, DateTime lastLogin)
+        {
+            try
+            {
+                _logger.LogInformation("Updating last login for user ID: {UserId} to {LastLogin}", Id, lastLogin);
+
+                var user = await _userRepository.Get(Id);
+                user.LastLogin = lastLogin;
+                user.UpdatedAt = DateTime.UtcNow;
+
+                var updatedUser = await _userRepository.Update(Id, user);
+
+                _logger.LogInformation("Last login updated successfully for user ID: {UserId}", Id);
+                return updatedUser;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating last login for user ID: {UserId}", Id);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<User>> GetInactiveUsers(TimeSpan inactivityThreshold)
+        {
+            try
+            {
+                _logger.LogInformation("Fetching users inactive for more than {InactivityThreshold} days", inactivityThreshold.TotalDays);
+
+                var allUsers = await _userRepository.GetAll();
+                var cutoffDate = DateTime.UtcNow.Subtract(inactivityThreshold);
+
+                var inactiveUsers = allUsers.Where(u =>
+                    u.LastLogin == null || u.LastLogin < cutoffDate).ToList();
+
+                _logger.LogInformation("Found {Count} inactive users", inactiveUsers.Count);
+                return inactiveUsers;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching inactive users");
+                throw;
+            }
+        }
+        
+        
     }
 }

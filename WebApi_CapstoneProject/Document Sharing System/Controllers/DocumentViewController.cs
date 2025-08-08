@@ -55,13 +55,24 @@ namespace DSS.Controllers
 
             var userId = Guid.Parse(userIdStr);
 
-            var views = await _documentViewService.GetViewerHistoryByFileName(userId, FileName);
-
-            return Ok(new ApiResponse<IEnumerable<ViewerResponseDto>>
+            try
             {
-                Success = true,
-                Data = views
-            });
+                var views = await _documentViewService.GetViewerHistoryByFileName(userId, FileName);
+
+                return Ok(new ApiResponse<IEnumerable<ViewerResponseDto>>
+                {
+                    Success = true,
+                    Data = views
+                });
+            }
+            catch (ArgumentNullException ex) when (ex.Message.Contains("No views for the"))
+            {
+                return Ok(new ApiResponse<IEnumerable<ViewerResponseDto>>
+                {
+                    Success = true,
+                    Data = new List<ViewerResponseDto>()
+                });
+            }
         }
 
         [HttpGet("FileViewersForAdmin")]

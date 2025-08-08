@@ -1,91 +1,46 @@
-import { inject, Injectable } from '@angular/core';
-import * as signalR from '@microsoft/signalr';
-import { BehaviorSubject } from 'rxjs';
-import { NotificationResponseDto } from '../models/notificationResponseDto';
-import { UserService } from './user.service';
-import { DocumentService } from './document.service';
-import { DocumentAccessService } from './documentAccess.service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { NotificationDto, NotificationResponse, UnreadCountDto, ApiResponseModel } from '../models/notificationDto';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class NotificationService {
-  private hubConnection!: signalR.HubConnection;
-  private documentService = inject(DocumentService);
+  private baseUrl = 'http://localhost:5015/api/v1/notifications';
 
-  private documentAccessService = inject(DocumentAccessService);
+  private unreadCount = new BehaviorSubject<number|0>(0);
+  unreadCount$ = this.unreadCount.asObservable();
 
-  private notifications:any[] = [];
-  private messageSubject = new BehaviorSubject<any[]|null>(null);
-  notification$ = this.messageSubject.asObservable();
+  constructor(private http: HttpClient) { }
 
-  seenNoitify:number = 0;
-  public seenNotification = new BehaviorSubject<number|null>(0);
-  SeenNotifi$ = this.seenNotification.asObservable();
-
-
-  startConnection(): void {
-    const authdata = localStorage.getItem("authData");
-    var accessToken:string = "";
-    if(authdata) accessToken = JSON.parse(authdata).accessToken;
-    console.log(accessToken);
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5015/notificationhub', {
-        accessTokenFactory: () => accessToken
-      })  // 🔁 adjust your backend URL
-      .withAutomaticReconnect()
-      .build();
-
-    this.hubConnection
-      .start()
-      .then(() => console.log('SignalR connected'))
-      .catch(err => console.log('SignalR error:', err));
+  getUserNotifications(pageNumber: number = 1, pageSize: number = 10): Observable<NotificationResponse> {
+    return this.http.get<NotificationResponse>(`${this.baseUrl}/user?pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
 
-  addNotification(){
-    console.log("Notification trigger");
-    // this.startConnection();
-    this.hubConnection.on('DocumentViewed', (messageResponse) => {
-      console.log('DocumentViewed received:', messageResponse);
-      const viewNotification = { ...messageResponse, type: 'view' };
-      this.notifications.unshift(viewNotification);
-      if(this.notifications.length == 1) {
-        this.seenNotification.next(0);
-      }
-      this.messageSubject.next(this.notifications);
-      this.documentService.GetAllDocuments().subscribe();
-    });
+  markAsRead(id: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}/read`, {});
   }
 
-  addUserNotification(){
-    console.log("Notification trigger");
-    // this.startConnection();
-    this.hubConnection.on('DocumentGiven',(messageResponse)=>{
-      console.log(messageResponse);
-       const sharedNotification = { ...messageResponse, type: 'shared' };
-      this.notifications.unshift(sharedNotification);
-      if(this.notifications.length == 1){
-        this.seenNotification.next(0);
-      }
-      this.messageSubject.next(this.notifications);
-      this.documentAccessService.GetDocumentShared().subscribe();
-    });
+  markAllAsRead(): Observable<any> {
+    return this.http.put(`${this.baseUrl}/user/read-all`, {});
   }
 
-  disconnect(){
-    if(this.hubConnection){
-      this.hubConnection.stop();
-      this.hubConnection.off('DocumentViewed');
-      this.hubConnection.off('DocumentGiven');
-    }
+  deleteNotification(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
-  clearCurrentNotification(){
-    this.notifications = [];
-    this.messageSubject.next([]);
-    this.seenNotification.next(0);
+  getUnreadCount(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/user/unread-count`)
+    .pipe(
+      tap((res:any) =>{
+        console.log(res.data);
+        this.unreadCount.next(res.data);
+      })
+    );
   }
 
-  clearNotification(){
-    this.clearCurrentNotification();
-    this.disconnect();
+  NotifyInactiveUsers(): Observable<any> {
+    return this.http.post(`${this.baseUrl}/NotifyInactiveUsers`, {});
   }
 }

@@ -3,18 +3,55 @@
     <h4 class="fw-bold mb-4">
       <img *ngIf="fileData" [src]="getFileTypeIcon(fileData.contentType)" alt="file icon" width="30" height="30" />
       {{filename}}
+      @if(fileData?.status === 'Archived'){
+        <span class="badge bg-warning ms-2">Archived</span>
+      }
     </h4>
+
+    <!-- Archived Document Notice -->
+    @if(fileData?.status === 'Archived'){
+      <div class="alert alert-warning" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        This document is archived and cannot be accessed. You can request to unarchive this document.
+      </div>
+    }
+
     <!-- Left section -->
     <div class="col-lg-8">
       <div class="mb-4">
-        <button class="btn btn-success me-2" (click)="onDownload()">Download<i class="bi bi-download mx-2"></i></button>
-        <button class="btn btn-primary me-2" (click)="GrantPermissionForAll()">Grant Access for All</button>
-        <button class="btn btn-danger me-2" (click)="RevokePermissionForAll()">Revoke Access for All</button>
+        @if(fileData?.status !== 'Archived'){
+          <button *ngIf="fileData?.status === 'TemporarilyUnarchived'" class="btn btn-warning me-2" (click)="requestUnarchive()">
+              <i class="bi bi-arrow-clockwise me-2"></i>Request UnArchive
+          </button>
+          <button class="btn btn-success me-2" (click)="onDownload()">Download<i class="bi bi-download mx-2"></i></button>
+          <button class="btn btn-primary me-2" (click)="GrantPermissionForAll()">Grant Access for All</button>
+          <button class="btn btn-danger me-2" (click)="RevokePermissionForAll()">Revoke Access for All</button>
+        }
+        @else{
+            <button class="btn btn-warning me-2" (click)="requestTemporaryAccess()">
+              <i class="bi bi-arrow-clockwise me-2"></i>Request Temporary
+            </button>
+            <button class="btn btn-warning me-2" (click)="requestUnarchive()">
+              <i class="bi bi-arrow-clockwise me-2"></i>Request UnArchive
+            </button>
+            <button class="btn btn-secondary me-2" disabled>Grant Access for All</button>
+            <button class="btn btn-secondary me-2" disabled>Revoke Access for All</button>
+        }
       </div>
+
+      @if(fileData?.status !== 'Archived'){
         <div class="input-group mb-4">
           <input type="email" class="form-control" placeholder="Enter email to grant access" [(ngModel)]="userEmailForGrant">
           <button class="btn btn-primary" (click)="GrantPermissionToUser()">Grant</button>
         </div>
+      }
+      @else{
+        <div class="input-group mb-4">
+          <input type="email" class="form-control" placeholder="Enter email to grant access" disabled>
+          <button class="btn btn-secondary" disabled>Grant</button>
+        </div>
+      }
+
       <h5 class="fw-semibold mt-5">Users with Access</h5>
       <div class="table-wrapper">
       @if(fileSharedUsers && fileSharedUsers.length > 0){
@@ -32,7 +69,17 @@
               <tr>
                 <td class="ps-3 py-3">{{users.userName}}</td>
                 <td class="text-primary py-3">{{users.email}}</td>
-                <td class="revoke fw-semibold py-3" (click)="RevokePermissionToUser(users.email)">Revoke</td>
+                <td class="revoke fw-semibold py-3"
+                    [class.text-muted]="fileData?.status === 'Archived'"
+                    [class.disabled]="fileData?.status === 'Archived'"
+                    (click)="fileData?.status !== 'Archived' ? RevokePermissionToUser(users.email) : null">
+                  @if(fileData?.status !== 'Archived'){
+                    Revoke
+                  }
+                  @else{
+                    <span class="text-muted">Revoke</span>
+                  }
+                </td>
               </tr>
             }
           </tbody>
@@ -42,6 +89,7 @@
         <div class="text-secondary text-center small mt-3">No user have the Access for this document</div>
       }
       </div>
+
       <h5 class="fw-semibold mt-5">View Logs</h5>
       <div class="table-wrapper">
       @if(fileViewers && fileViewers.length > 0){
@@ -73,23 +121,53 @@
     <!-- Right section -->
   @if(fileData){
     <div class="col-lg-4">
-      <div class="border mb-3 shadow" style="width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;">
-        @if(fileData.contentType.includes("image")){
-          <img *ngIf="iframeSrc" [src]="iframeSrc" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;"/>
-        }
-        @else{
-          <iframe *ngIf="iframeSrc" [src]="iframeSrc" style="width: 90%; height: 90%; border: none;"></iframe>
-        }
-        <div *ngIf="!iframeSrc" class="text-center text-muted h5 fw-semibold">No Preview Available</div>
-      </div>
+      @if(fileData.status !== 'Archived'){
+        <div class="border mb-3 shadow" style="width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;">
+          @if(fileData.contentType.includes("image")){
+            <img *ngIf="iframeSrc" [src]="iframeSrc" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;"/>
+          }
+          @else{
+            <iframe *ngIf="iframeSrc" [src]="iframeSrc" style="width: 90%; height: 90%; border: none;"></iframe>
+          }
+          <div *ngIf="!iframeSrc" class="text-center text-muted h5 fw-semibold">No Preview Available</div>
+        </div>
+      }
+      @else{
+        <div class="border mb-3 shadow" style="width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;">
+          <div class="text-center text-muted h5 fw-semibold">
+            <i class="bi bi-archive-fill mb-3" style="font-size: 3rem; color: #6c757d;"></i>
+            <br>
+            Document Archived
+            <br>
+            <small class="text-muted">Preview not available</small>
+          </div>
+        </div>
+      }
+
       <div class="container">
         <h5 class="fw-semibold">Metadata</h5>
         <div class="text-secondary small">Uploaded at</div>
         <div class="mt-1 mb-2">{{fileData.uploadedAt | date: 'yyyy-MM-dd'}}</div>
+
+        @if(fileData.status === 'Archived' && fileData.archivedAt){
+          <div class="text-secondary small">Archived at</div>
+          <div class="mt-1 mb-2">{{fileData.archivedAt | date: 'yyyy-MM-dd'}}</div>
+        }
+
         <div class="text-secondary small">Size</div>
-        <div>{{fileData.size}} KB</div>
+        <div>{{fileData.size}} Bytes</div>
         <div class="text-secondary small">Type</div>
         <div class="mt-1 mb-2">{{fileData.contentType}}</div>
+        <div class="text-secondary small">Status</div>
+        <div class="mt-1 mb-2">
+          <span class="badge" [ngClass]="{
+            'bg-success': fileData.status === 'Active',
+            'bg-warning': fileData.status === 'Archived',
+            'bg-info': fileData.status === 'TemporarilyUnarchived'
+          }">
+            {{fileData.status}}
+          </span>
+        </div>
       </div>
     </div>
   }

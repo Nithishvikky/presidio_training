@@ -2,6 +2,8 @@ using DSS.Interfaces;
 using DSS.Intrefaces;
 using DSS.Models;
 using DSS.Models.DTOs;
+using DSS.Services;
+using Microsoft.AspNetCore.Http;
 
 public class AuthService : IAuthService
 {
@@ -10,19 +12,25 @@ public class AuthService : IAuthService
     private readonly IAuthSessionService _authSessionService;
     private readonly IRepository<Guid, AuthSession> _authSessionRepository;
     private readonly IBcryptionService _bcryptionService;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IUserActivityLogService _userActivityLogService;
 
     public AuthService(
         IUserService userService,
         ITokenService tokenService,
         IAuthSessionService authSessionService,
         IRepository<Guid, AuthSession> authSessionRepository,
-        IBcryptionService bcryptionService)
+        IBcryptionService bcryptionService,
+        IHttpContextAccessor httpContextAccessor,
+        IUserActivityLogService userActivityLogService)
     {
         _userService = userService;
         _tokenService = tokenService;
         _authSessionService = authSessionService;
         _authSessionRepository = authSessionRepository;
         _bcryptionService = bcryptionService;
+        _httpContextAccessor = httpContextAccessor;
+        _userActivityLogService = userActivityLogService;
     }
 
     public async Task<AuthResponse> LoginAsync(LoginRequestDto dto)
@@ -30,6 +38,27 @@ public class AuthService : IAuthService
         var user = await _userService.GetUserByEmail(dto.Email);
         if (user == null || !_bcryptionService.VerifyPassword(dto.Password, user.PasswordHash))
             throw new UnauthorizedAccessException("Invalid credentials");
+
+        // Update last login time
+        user.LastLogin = DateTime.UtcNow;
+        await _userService.UpdateUserLastLogin(user.Id, user.LastLogin.Value);
+
+        // Log user activity for login
+        try
+        {
+            var activityDto = new CreateActivityLogDto
+            {
+                UserId = user.Id,
+                ActivityType = "Login",
+                Description = $"User logged in successfully on {DateTime.UtcNow}"
+            };
+            await _userActivityLogService.LogActivityAsync(activityDto);
+        }
+        catch (Exception ex)
+        {
+            // Log warning but don't fail the login process
+            Console.WriteLine($"Failed to log login activity for user {user.Id}: {ex.Message}");
+        }
 
         return await GenerateSessionTokensAsync(user);
     }
@@ -71,6 +100,23 @@ public class AuthService : IAuthService
         {
             session.IsRevoked = true;
             await _authSessionRepository.Update(session.Id,session);
+
+            // Log user activity for logout
+            try
+            {
+                var activityDto = new CreateActivityLogDto
+                {
+                    UserId = session.UserId,
+                    ActivityType = "Logout",
+                    Description = $"User logged out successfully on {DateTime.UtcNow}"
+                };
+                await _userActivityLogService.LogActivityAsync(activityDto);
+            }
+            catch (Exception ex)
+            {
+                // Log warning but don't fail the logout process
+                Console.WriteLine($"Failed to log logout activity for user {session.UserId}: {ex.Message}");
+            }
         }
     }
 
@@ -93,11 +139,13 @@ public class AuthService : IAuthService
             UserId = user.Id,
             RefreshToken = tokens.RefreshToken,
             CreatedAt = DateTime.UtcNow,
-            ExpiresAt = DateTime.UtcNow.AddDays(7), // 7 days for refresh token
+            ExpiresAt = DateTime.UtcNow.AddDays(7),
             IsRevoked = false
         };
 
         await _authSessionRepository.Add(session);
         return tokens;
     }
+
+    
 }

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Modal, Toast } from 'bootstrap';
 import { DocumentService } from '../../services/document.service';
 import { DocumentDetailsResponseDto } from '../../models/documentDetailsResponseDto';
+import { UserDocDetailDto } from '../../models/userDocDetailDto';
 import { getFileTypeIcon } from '../../utility/getFileTypeIcon';
 import { DeleteModalComponent } from '../delete-modal-component/delete-modal-component';
 
@@ -19,9 +20,12 @@ import { DeleteModalComponent } from '../delete-modal-component/delete-modal-com
 export class MydocumentComponent {
   getFileTypeIcon = getFileTypeIcon;
   documents: DocumentDetailsResponseDto[] | null = null;
+  SelectedDocuments:  DocumentDetailsResponseDto[] | null = null;
+  enhancedDocuments: UserDocDetailDto[] | null = null;
   selectedFile: File|null = null;
   fileSizeFlag:boolean = false;
   showDeleteModal = false;
+  selectedStatus = '';
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor(private documentService:DocumentService){}
@@ -30,7 +34,11 @@ export class MydocumentComponent {
     this.documentService.documents$.subscribe(doc =>{
       this.documents = doc;
     })
+    this.documentService.userDocs$.subscribe(docs => {
+      this.enhancedDocuments = docs;
+    })
     this.documentService.GetAllDocuments().subscribe();
+    this.loadEnhancedDocuments();
   }
 
   loadDocuments(){
@@ -43,6 +51,21 @@ export class MydocumentComponent {
         console.log(err);
       },
     })
+  }
+
+  loadEnhancedDocuments(){
+    console.log(this.documents);
+    if (this.selectedStatus?.trim() !== "" && this.documents?.length) {
+      this.SelectedDocuments = this.documents.filter(
+        doc => doc.status === this.selectedStatus
+      );
+
+      console.log(this.SelectedDocuments);
+    }
+  }
+
+  onStatusFilterChange(){
+    this.loadEnhancedDocuments();
   }
 
   onFileSelected(e: Event):void{
@@ -62,7 +85,7 @@ export class MydocumentComponent {
   openDeleteConfirm(){
     this.showDeleteModal = true;
   }
-  
+
   handleDeleteConfirm(result: boolean,filename:string) {
     this.showDeleteModal = false;
     if (result) {

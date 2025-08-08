@@ -1,0 +1,98 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-semibold">My Requests</h1>
+  </div>
+
+  <!-- Debug Info -->
+  <!-- <div class="alert alert-info mb-3">
+    <strong>Debug Info:</strong><br>
+    Loading: {{loading}}<br>
+    Requests Length: {{requests?.length || 0}}<br>
+    Requests: {{requests | json}}
+  </div> -->
+
+  @if(loading){
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+  @else if(requests && requests.length > 0){
+    <div class="table-responsive">
+      <table class="table table-hover shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th>Document</th>
+            <th>Request Type</th>
+            <th>Status</th>
+            <th>Reason</th>
+            <th>Requested At</th>
+            <th>Access Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(request of requests; track request.id){
+            <tr>
+              <td>
+                <div>
+                  <strong>{{request.documentFileName}}</strong>
+                  <br>
+                  <small class="text-muted">ID: {{request.documentId}}</small>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-info">{{request.requestType}}</span>
+              </td>
+              <td>
+                <span class="badge" [ngClass]="getStatusClass(request.status)">
+                  {{request.status}}
+                </span>
+              </td>
+              <td>
+                <div class="text-wrap" style="max-width: 200px; word-wrap: break-word; white-space: normal;">
+                  {{request.reason}}
+                </div>
+              </td>
+              <td>
+                <small>{{formatDateTime(request.requestedAt)}}</small>
+              </td>
+              <td>
+                @if(request.accessDurationHours){
+                  <span>{{request.accessDurationHours}} hours</span>
+                }
+                @else{
+                  <span class="text-muted">-</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="onPageChange(currentPage - 1)" style="cursor: pointer;">Previous</a>
+        </li>
+        <li class="page-item active">
+          <span class="page-link">{{currentPage}}</span>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="onPageChange(currentPage + 1)" [class.disabled]="requests.length < pageSize" style="cursor: pointer;">Next</a>
+        </li>
+      </ul>
+    </nav>
+  }
+  @else{
+    <div class="text-center mt-5">
+      <div class="text-muted">
+        <i class="bi bi-inbox fs-1 mb-3"></i>
+        <h4>No Requests Found</h4>
+        <p>You haven't made any document access requests yet.</p>
+      </div>
+    </div>
+  }
+</div>

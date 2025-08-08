@@ -61,23 +61,9 @@ export class SignInComponent {
   }
 
   EnableNotification(){
-    this.notifyService.startConnection();
-    this.notifyService.addUserNotification();
-    this.notifyService.addNotification();
-
-    this.notifyService.notification$.subscribe(msgList => {
-    if (!msgList) return;
-     const msg = msgList[0];
-        if (msg.type === 'view') {
-          this.notificationMessage.unshift(msg);
-          this.showToast(`${msg.viewerName} viewed ${msg.fileName}`, "success");
-        } else if (msg.type === 'shared') {
-          this.notificationSharedMessage.unshift(msg);
-          this.showToast(`${msg.userName} granted access for ${msg.fileName}`, "success");
-        }
-    });
-
-    console.log("Notification enabling");
+    // The new notification system is handled automatically by the notification service
+    // No need to manually start connections or add notifications
+    console.log("Notification system enabled");
   }
 
   togglePasswordVisibility(){
